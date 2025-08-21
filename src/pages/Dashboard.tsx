@@ -2,21 +2,20 @@
 
 //import { useAuth0 } from '@auth0/auth0-react';
 //import { useEffect } from 'react';
-//import useLogin from '@/pages/account/Login/useLogin';
-import { useAuthContext } from '@/common';
+//import useAuth from '@/pages/account/Login/useAuth';
+ 
 import { Bienvenido, RecoverPassword } from './storeSotf';
 import { Col, Row } from 'react-bootstrap';
-import useLogin from './account/Login/useLogin';
+ 
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
+import { useAuth } from './account/Login/useLogin';
  
 const Dashboard = () => {
 	sessionStorage.removeItem('logoutRedirectPath');
-	const {datosUser} = useAuthContext();
-	const { 
-		isAuthenticated,
-		setLoading
-		  } = useLogin();
+	const { isAuthenticated} = useAuth();
+	console.log('isAuthenticated',isAuthenticated);
+		    /*
 	const navigate = useNavigate();
 		useEffect(() => {
 			const handleBeforeUnload = (event:any) => {
@@ -32,7 +31,7 @@ const Dashboard = () => {
 	
 		  const auth = JSON.parse(sessionStorage.getItem('_AUTH') || '{}');
 		  const idUsuario = auth?.Idsuario ? parseInt(auth.Idsuario, 10) : NaN;
-		  
+		
 		  useEffect(() => {
 			if (!isNaN(idUsuario)) {
 			  setLoading(true);
@@ -41,39 +40,21 @@ const Dashboard = () => {
 			 
 			}
 		  }, [idUsuario, setLoading]);
-	  
+	  */ /*
 		  const hasRedirected = useRef(false);
-		 
+		
 		  useEffect(() => {
 			if (isAuthenticated.isAuthenticated && !hasRedirected.current) {
 			  hasRedirected.current = true;
 			  navigate('/account/logout', { replace: true });
 			}
 		  }, [isAuthenticated, navigate]);
+		  console.log(auth);
+		  */
+
 	return  (
         <>
-          {(() => {
-            switch (auth.status) {
-              case 'Inactivo':
-                return  <> 
-				<Row>
-				<Col lg={12} >
-                <RecoverPassword/>
-				</Col>
-				</Row> </> 
-				case 'Activo':
-					return (
-						<>
-						<Bienvenido datosUser={datosUser}/>
-						</>)
-				default:
-                return (
-                  <>
-                { navigate('/account/logout', { replace: true })};
-                  </>
-                );
-            }
-          })()}
+          {'xxxxxxxxxxxx'}
         </>
       );
 };

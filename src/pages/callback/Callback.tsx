@@ -1,10 +1,10 @@
 //import { useEffect, useState } from 'react';
 //import { useAuth0 } from '@auth0/auth0-react';
-//import useLogin from '@/pages/account/Login/useLogin';
+//import useAuth from '@/pages/account/Login/useAuth';
 const Callback = () => {
 
 	/*
-		const {login } = useLogin();
+		const {login } = useAuth();
 	//const { user, isAuthenticated, getAccessTokenSilently, isLoading, error } = useAuth0();
 	const [permissions] = useState([]);
 	useEffect(() => {

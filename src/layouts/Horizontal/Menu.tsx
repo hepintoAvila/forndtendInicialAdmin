@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { MenuItemType } from '@/common/menu-items';
 import classNames from 'classnames';
 import { findAllParent, findMenuItem } from '../utils/menu';
+import { useAuth } from '@/pages/account/Login/useLogin';
 
 /**
  * Renders the application menu
@@ -130,16 +131,22 @@ const MenuItemLink = ({ item, className }: MenuItems) => {
 	);
 };
 
-type AppMenuProps = {
-	menuItems: Array<MenuItemType>; 
-};
+ 
+const AppMenu = () => {
+	  const [menuItems, setActiveMenu] = useState<any[]>([]);
+	  const { MENU_ITEMS_CONTEXT,isAuthenticated  } = useAuth();
+	  
+ useEffect(() => {
+		if (isAuthenticated) {
+			setActiveMenu(MENU_ITEMS_CONTEXT as any);
+		}
+	}, [isAuthenticated,MENU_ITEMS_CONTEXT]);
 
-const AppMenu = ({ menuItems }: AppMenuProps) => {
-	 
+
 	const [activeMenuItems, setActiveMenuItems] = useState<string[]>([]);
 
 	let location = useLocation();
-
+ 
 	/*
 	 * toggle the menus
 	 */

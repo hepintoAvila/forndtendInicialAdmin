@@ -1,4 +1,4 @@
-import { useAuthContext, useNotificationContext } from '@/common/context';
+import { useNotificationContext } from '@/common/context';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { config,sendData } from '@/common/helpers/';
@@ -13,6 +13,7 @@ import * as XLSX from 'xlsx';
 import { toast } from 'react-toastify';
 import { Column } from 'react-table';
 import { useToggle } from '@/hooks';
+import { useAuth } from '@/pages/account/Login/useLogin';
  
 
 export default function useUsuario(locacion: string): UseUsuarioProps {
@@ -32,7 +33,7 @@ export default function useUsuario(locacion: string): UseUsuarioProps {
     const navigate = useNavigate();
 
     const { showNotification } = useNotificationContext();
-    const { isAuthenticatedUser } = useAuthContext();
+    const { isAuthenticated } = useAuth();
     const redirectUrl = useMemo(() => location.state?.from?.pathname || `${locacion}`, [location.state]);
     const sendDatos = useCallback(
             async (values: any, option: string, accion: string) => {
@@ -111,10 +112,10 @@ export default function useUsuario(locacion: string): UseUsuarioProps {
         tipo: 'null',
     };
     useEffect(() => {
-        if (isAuthenticatedUser) {
+        if (isAuthenticated) {
             navigate(redirectUrl);
         }
-    }, [isAuthenticatedUser, navigate, redirectUrl]);
+    }, [isAuthenticated, navigate, redirectUrl]);
 
     useEffect(() => {
         sendDatos(initialUsuarios as respUsuarios, config.API_OPCION_CONSULTA_USUARIOS, config.API_ACCION_USUARIOS);

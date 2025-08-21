@@ -6,11 +6,10 @@ import AppMenu from './Menu';
 // assets
 import profileImg from '@/assets/images/users/avatar-1.jpg';
 import logo from '@/assets/images/logo.png';
-import logoDark from '@/assets/images/logo-dark.png';
+import logoDark from '@/assets/images/logo-dark.jpg';
 import logoSm from '@/assets/images/logo-sm.png';
 import logoDarkSm from '@/assets/images/logo-dark-sm.png';
-import { getHorizontalMenuItems } from './utils/menu';
-import { ThemeSettings } from '@/common';
+
 
 const UserBox = () => {
 	return (
@@ -32,7 +31,7 @@ const SideBarContent = () => {
 	return (
 		<>
 			<UserBox />
-			<AppMenu menuItems={getHorizontalMenuItems(ThemeSettings.menu)} />
+			<AppMenu/>
 			<div className="clearfix" />
 		</>
 	);

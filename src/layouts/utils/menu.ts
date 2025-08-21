@@ -1,16 +1,4 @@
-import { useAuthContext } from '@/common';
 import { MenuItemType } from '@/common/menu-items';
- 
-import { Menu } from '@/types';
-
- 
- 
-
-const getHorizontalMenuItems = (menu: Menu) => {
-	const { MENU_ITEMS_CONTEXT } = useAuthContext();
-	return menu? menu:MENU_ITEMS_CONTEXT;
-};
-
 const findAllParent = (menuItems: MenuItemType[], menuItem: MenuItemType): string[] => {
 	let parents: string[] = [];
 	const parent = findMenuItem(menuItems, menuItem['parentKey']);
@@ -38,4 +26,4 @@ const findMenuItem = (
 	return null;
 };
 
-export {getHorizontalMenuItems, findAllParent, findMenuItem };
+export {findAllParent, findMenuItem };

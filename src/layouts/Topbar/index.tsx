@@ -10,28 +10,29 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 // assets
 import logo from '@/assets/images/logo.png';
 import avata1 from '@/assets/images/users/avatar-1.jpg';
-import logoDark from '@/assets/images/logo-dark.png';
+import logoDark from '@/assets/images/logo-dark.jpg';
 import logoSm from '@/assets/images/logo-sm.png';
 import logoDarkSm from '@/assets/images/logo-dark-sm.png';
-import { ThemeSettings, useAuthContext, useThemeContext } from '@/common';
+import { ThemeSettings, useThemeContext } from '@/common';
 import useThemeCustomizer from '@/components/ThemeCustomizer/useThemeCustomizer';
 import { useViewport } from '@/hooks';
-import { Auth } from '@/types';
+//import { Auth } from '@/types';
 import { useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+//import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from '@/pages/account/Login/useLogin';
 
 
 type TopbarProps = {
 	topbarDark?: boolean;
 	toggleMenu?: () => void;
 	navOpen?: boolean;
-	user?: Auth;
+	user?: any;
 };
 
 
 const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 	const { settings, updateSettings, updateSidebar,updateMenu } = useThemeContext();
-	const { datosUser } = useAuthContext();
+	const { user,isAuthenticated } = useAuth();
 	//const { reset } = useThemeCustomizer();
 	const { sideBarType } = useThemeCustomizer();
 
@@ -110,16 +111,17 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 			updateMenu()
 		}
 	  }, [ThemeSettings]);
+	  /*
 	  const {
 		user,
 		isAuthenticated,
 		 } = useAuth0();
- 
+ 	*/
 
-		const imag= user?.picture ? user?.picture:avata1;
-		const username= user?.nickname ? user?.nickname:datosUser?.Nom;
-		const rolUser= user?.Rol ? user?.Rol:datosUser?.Rol;
-	
+		//const imag= user?.picture ? user?.picture:avata1;
+		const username= user?.Nom ? user?.Nom:'Invitado';
+		const rolUser= user?.Rol ? user?.Rol:'';
+
 	return (
 		<div className={'navbar-custom'}>
 			<div className="topbar container-fluid">
@@ -187,7 +189,7 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 
 					<li className="dropdown">
 						<ProfileDropdown
-							picture={imag}
+							picture={avata1}
 							menuItems={profileMenus}
 							username={username}
 							userTitle={rolUser}

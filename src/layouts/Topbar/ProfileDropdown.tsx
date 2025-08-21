@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import { ProfileOption } from './types';
 import { useToggle } from '@/hooks';
 import usernavrow from '@/assets/images/user-nav-row.png';
+import Logout from '@/pages/account/Logout';
+import useLogout from '@/pages/account/Logout/useLogout';
 //import { useAuth0 } from '@auth0/auth0-react';
 
 type ProfileDropdownProps = {
@@ -15,6 +17,11 @@ type ProfileDropdownProps = {
 
 const ProfileDropdown = ({ userTitle, username, menuItems, picture }: ProfileDropdownProps) => {
 	const [isOpen, toggleDropdown] = useToggle();
+	const logout = useLogout();
+
+	const handleLogout = async () => {
+		await logout();
+	};
 /*
 	//const {logout} = useAuth0();
 	const logoutWithRedirect = () =>{
@@ -29,6 +36,7 @@ const ProfileDropdown = ({ userTitle, username, menuItems, picture }: ProfileDro
 const logoutWithRedirect = (redirectUrl = window.location.origin) => {
 	sessionStorage.removeItem('_AUTH');
 	sessionStorage.removeItem('_MENU');
+ 
 	window.location.href = redirectUrl;
   };	
 	return (
@@ -66,7 +74,7 @@ const logoutWithRedirect = (redirectUrl = window.location.origin) => {
 							
 							<Link
 								to={item.redirectTo}
-								onClick={(item.id===2)?() => logoutWithRedirect():()=>{}}
+								onClick={(item.id===2)?() => handleLogout():()=>{}}
 								className="dropdown-item notify-item"
 								key={i + '-profile-menu'}
 							>

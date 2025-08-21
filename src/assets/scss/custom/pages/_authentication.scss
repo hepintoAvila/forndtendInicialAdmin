@@ -54,14 +54,16 @@ body.auth-fluid-pages[data-sidenav-size="condensed"] {
 .auth-fluid {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
     min-height: 100vh;
-    
     flex-direction: row;
     align-items:stretch;
-    background: url("../images/bg-auth.jpg") right;
+   // background: url("../images/bg-auth.jpg") right;
     padding: 0.2px;
-    background-size:contain;
-    background-repeat: no-repeat;
+   // background-size:contain;
+    //background-repeat: no-repeat;
     border: auto solid white;
      background-size: cover; // Asegura que la imagen cubra el contenedor
 

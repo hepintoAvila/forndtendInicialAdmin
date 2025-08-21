@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Collapse } from 'react-bootstrap';
 import { MenuItemType, ThemeSettings, useThemeContext } from '@/common';
 import { findAllParent, findMenuItem } from './utils/menu';
+import { useAuth } from '@/pages/account/Login/useLogin';
 
 export type SubMenus = {
 	item: MenuItemType;
@@ -149,11 +150,17 @@ const MenuItemLink = ({ item, className }: SubMenus) => {
 	);
 };
 
-type AppMenuProps = {
-	menuItems: Array<MenuItemType>;
-};
+ 
 
-const AppMenu = ({ menuItems }: AppMenuProps) => {
+const AppMenu = () => { 
+		  const [menuItems, setActiveMenu] = useState<any[]>([]);
+		  const { MENU_ITEMS_CONTEXT,isAuthenticated  } = useAuth();
+		  
+	 useEffect(() => {
+			if (isAuthenticated) {
+				setActiveMenu(MENU_ITEMS_CONTEXT as any);
+			}
+		}, [isAuthenticated,MENU_ITEMS_CONTEXT]);
 	const location = useLocation();
 
 	const menuRef = useRef<HTMLUListElement>(null);

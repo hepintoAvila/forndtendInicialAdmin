@@ -1,11 +1,20 @@
-import { useAuthContext } from '@/common/context';
-import { useEffect } from 'react';
 
-export default function useLogout() {
-	const { removeSession } = useAuthContext();
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Login/useLogin';
+export default function useLogout(){
+	const { logout } = useAuth();
+	const navigate = useNavigate();
 
-	useEffect(() => {
-		
-		removeSession();
-	}, [removeSession]);
-}
+	const performLogout = async () => {
+		try {
+			await logout();
+			navigate('/account/login', { replace: true });
+			return true;
+		} catch (error) {
+			console.error('Error durante logout:', error);
+			return false;
+		}
+	};
+
+	return performLogout;
+};

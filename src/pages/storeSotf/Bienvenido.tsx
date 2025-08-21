@@ -1,5 +1,5 @@
 
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import iconsaludo from '@/assets/images/icon-saludo.png';
 import PageBreadcrumbBienvenido from '@/components/PageBreadcrumbBienvenido';
 type BienvenidoProps = {
@@ -16,15 +16,6 @@ const Bienvenido = ({ datosUser }: BienvenidoProps) => {
 					<PageBreadcrumbBienvenido title={`Bienvenido, ${datosUser?.Nom}`} subName="Dashboard" icon={iconsaludo} />
 				</Col>
 			</Row>
-			<div className="account-pages pt-8 pt-sm-8 pb-8 pb-sm-8">
-				<Container>
-					<Row className="justify-content-center">
-						<Col lg={12}>
-						 {'Te damos la bienvenida a la plataforma..'}	
-						</Col>
-					</Row>
-				</Container>
-			</div>
 		</>
 	);
 };

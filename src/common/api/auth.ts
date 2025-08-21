@@ -1,65 +1,102 @@
-//import { LoginFormFields } from '@/pages/account/Login/useLogin';
-import { config } from '../helpers';
-type UserProps = {
-  login?: string ;
-  password?: string;
-  mode?: string;
-};
+import { ApiResponse, AuthData, AuthServiceInterface, AuthServiceResponse, UserProps } from "@/pages/account/Login/type";
 
-interface AuthServiceInterface {
-	Autentications: (values: UserProps) => Promise<Response>;
-}
-
-interface ErrorCodeMessages {
-  [key: number]: string;
-}
-
-const ErrorCodeMessages: ErrorCodeMessages = {
-  401: 'Invalid credentials',
-  403: 'Access Forbidden',
-  404: 'Resource or page not found',
-};
-
-const AuthService = (url: string): AuthServiceInterface => {
-
-  const Autentications = async (values: UserProps) => {
+ 
+ 
+const AuthService = (urlObjet: any): AuthServiceInterface => {
+  const Autentications = async (values: UserProps): Promise<AuthServiceResponse> => {
     const credentials = {
       var_login: values.login,
       password: values.password,
     };
-    const mode = values.mode? values.mode:'uselocal';
-     const headers = {
-	   method: 'GET',
-      'Content-Type': 'application/json',
-      Authorization: `Basic ${btoa(`${credentials.var_login}:${credentials.password}`)}`,
-	    'x-sices-api-user': btoa(`${credentials.var_login}`),
-	    'x-sices-api-apikey': btoa(`${config.X_SICES_API_APIKEY}`),
-	    'x-sices-api-apitoken': btoa(`${config.X_SICES_API_APITOKEN}`),
-	    'x-sices-api-mode': btoa(`${mode}`),
-    }; 
+
+    const params = new URLSearchParams({
+      exec: 'admin_login',
+      _SPIP_PAGE: 'admin_login',
+      action: 'true',
+      var_ajax: 'form',
+      bonjour: 'oui',
+      accion: urlObjet.accion,
+      opcion: urlObjet.opcion
+    });
 
     try {
-      const response = await fetch(`${config.API_URL}${url}`, { headers });
+      const response = await fetch(`/api2025/?${params.toString()}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${btoa(`${credentials.var_login}:${credentials.password}`)}`,
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'application/json',
+        },
+        credentials: 'include'
+      });
 
-	    if (!response.ok) {
-        throw new Error(ErrorCodeMessages[response.status] || 'Unknown error');
+      // Verificar si la respuesta está vacía
+      if (response.status === 204) {
+        return {
+          status: 'success',
+          data: {
+            auth: {} as AuthData,
+            permisos: [],
+            menu: [],
+            metadata: {
+              statusCode: 204,
+              type: 'success',
+              message: 'No content'
+            }
+          }
+        };
       }
-	 
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-      
-         return response.json();
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Obtener el texto de la respuesta primero para debuggear
+      const responseText = await response.text();
+     // console.log('Raw response:', responseText);
+
+      // Intentar parsear como JSON
+      let result: ApiResponse;
+      try {
+        result = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('JSON parse error:', parseError, 'Response text:', responseText);
+        throw new Error('La respuesta no es un JSON válido');
+      }
+
+      // Verificar la estructura de la respuesta
+      if (result.status === 200 && result.type === 'success') {
+        // Retornar los datos estructurados
+        return {
+          status: 'success',
+          data: {
+            auth: result.data?.Auth || {} as AuthData,
+            permisos: result.data?.Permisos || [],
+            menu: result.data?.Menu || [],
+            metadata: {
+              statusCode: result.status,
+              type: result.type,
+              message: result.message
+            }
+          }
+        };
       } else {
-        const text = await response.text();
-        throw new Error(`La respuesta no es JSON válida: ${text}`);
+        throw new Error(result.message || 'Error en la autenticación');
       }
+
     } catch (error) {
-      console.error(error);
-      throw error;
+      console.error('Auth error:', error);
+      return {
+        status: 'error',
+        error: error instanceof Error ? error.message : 'Error de autenticación desconocido'
+      };
     }
   };
 
-  return { Autentications };
+  return {
+    Autentications
+  };
 };
 
 export default AuthService;

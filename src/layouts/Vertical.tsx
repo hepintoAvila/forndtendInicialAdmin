@@ -5,7 +5,7 @@ import { useToggle, useViewport } from '@/hooks';
 import { changeHTMLAttribute } from '@/utils';
 
 import { PageLoader } from '@/components';
-import { ThemeSettings, useAuthContext, useThemeContext } from '@/common/context';
+import { ThemeSettings, useThemeContext } from '@/common/context';
 
 const Topbar = lazy(() => import('./Topbar'));
 const LeftSidebar = lazy(() => import('./LeftSidebar'));
@@ -17,7 +17,7 @@ export default function VerticalLayout() {
 
 	const { width } = useViewport();
 	const [isMenuOpened, toggleMenu] = useToggle();
-	const { user } = useAuthContext();
+ 
 	/*
 	 * layout defaults
 	 */

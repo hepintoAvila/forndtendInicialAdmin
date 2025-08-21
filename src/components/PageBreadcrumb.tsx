@@ -6,7 +6,7 @@ import { useAccountLayout } from '@/components/BGCircles';
 
 // images
  
-import LogoDark from '@/assets/images/logo-dark.png';
+import LogoDark from '@/assets/images/logo-dark.jpg';
 import { config } from '@/common';
  
 type AccountLayoutProps = {

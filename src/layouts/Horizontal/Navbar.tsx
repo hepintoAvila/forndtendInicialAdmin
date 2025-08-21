@@ -1,15 +1,17 @@
  
-import { getHorizontalMenuItems } from '../utils/menu';
+ 
+ 
 import AppMenu from './Menu';
 import { Collapse, Container } from 'react-bootstrap';
  
 
 type NavbarProps = {
-	menu?: any;
 	navOpen?: boolean;
 };
 
-const Navbar = ({menu,navOpen }: NavbarProps) => {
+const Navbar = ({navOpen }: NavbarProps) => {
+	
+ 
 	return (
 		<div className="topnav navbar-border">
 
@@ -17,7 +19,7 @@ const Navbar = ({menu,navOpen }: NavbarProps) => {
 				<nav className="navbar navbar-expand-lg">
 					<Collapse in={navOpen}>
 						<div className="navbar-collapse active">
-							<AppMenu menuItems={getHorizontalMenuItems(menu)} />
+							<AppMenu/>
 						</div>
 					</Collapse>
 				</nav>

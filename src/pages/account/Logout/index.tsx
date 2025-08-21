@@ -1,16 +1,15 @@
-import { Link } from 'react-router-dom';
-//import useLogout from './useLogout';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import AccountWrapper from '@/pages/storeSotf/RecoverPassword/AccountWrapper';
+import { useAuth } from '../Login/useLogin';
 
 
 const BottomLink = () => {
-	 
 	return (
 		<footer className="footer footer-alt">
 			<p className="text-muted">
-				
 				<Link to="/account/login" className="text-muted ms-1">
-					<b>{'Regresar'}</b>
+					<b>{'Iniciar Sesión'}</b>
 				</Link>
 			</p>
 		</footer>
@@ -18,20 +17,36 @@ const BottomLink = () => {
 };
 
 const Logout = () => {
-	 
-	
-	//const navigate = useNavigate();
-	//const { setAspirante, sendInscripcion } = useLogin();
-	//const logout = useLogout();
-	
+	const { logout, isAuthenticated } = useAuth();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		// Ejecutar logout automáticamente al montar el componente
+		const performLogout = async () => {
+			await logout();
+			
+			// Redirigir después de un breve delay para que el usuario vea el mensaje
+			setTimeout(() => {
+				navigate('/account/login', { replace: true });
+			}, 2000);
+		};
+
+		if (isAuthenticated) {
+			performLogout();
+		} else {
+			// Si ya no está autenticado, redirigir inmediatamente
+			navigate('/account/login', { replace: true });
+		}
+	}, [logout, navigate, isAuthenticated]);
 
 	return (
 		<>
 			<AccountWrapper bottomLinks={<BottomLink />}>
 				<div className="my-auto">
 					<div className="text-center">
-						<h4 className="mt-0">{'Hasta pronto !'}</h4>
-						<p className="text-muted mb-4">{'Gracias por participar en nuestro'}</p>
+						<h4 className="mt-0">{'Hasta pronto!'}</h4>
+						<p className="text-muted mb-4">{'Cerrando sesión...'}</p>
+						<p className="text-muted">{'Gracias por usar nuestro sistema'}</p>
 					</div>
 					<div className="logout-icon m-auto">
 						<svg
@@ -44,6 +59,7 @@ const Logout = () => {
 							viewBox="0 0 161.2 161.2"
 							enableBackground="new 0 0 161.2 161.2"
 							xmlSpace="preserve"
+							style={{ width: '100px', height: '100px' }}
 						>
 							<path
 								className="path"

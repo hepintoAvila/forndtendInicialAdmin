@@ -1,4 +1,4 @@
-import { useAuthContext, useNotificationContext } from '@/common/context';
+import { useNotificationContext } from '@/common/context';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { config, sendData } from '@/common/helpers/';
@@ -6,6 +6,7 @@ import { config, sendData } from '@/common/helpers/';
 import { atom, useAtom } from 'jotai';
 import { respRoles, Rol, UseRolProps } from '../Roles/type';
 import Swal from 'sweetalert2';
+import { useAuth } from '@/pages/account/Login/useLogin';
 export const RolesAtoms = atom<respRoles[]>([]);
 
  
@@ -20,7 +21,7 @@ export default function useRoles(locacion: string): UseRolProps {
     const navigate = useNavigate();
 
     const { showNotification } = useNotificationContext();
-    const { isAuthenticatedUser } = useAuthContext();
+    const { isAuthenticated } = useAuth();
     const redirectUrl = useMemo(() => location.state?.from?.pathname || `${locacion}`, [location.state]);
 
 const sendDatos = useCallback(
@@ -86,10 +87,10 @@ const sendDatos = useCallback(
         rol: 'null',
     } as respRoles;
     useEffect(() => {
-        if (isAuthenticatedUser) {
+        if (isAuthenticated) {
             navigate(redirectUrl);
         }
-    }, [isAuthenticatedUser, navigate, redirectUrl]);
+    }, [isAuthenticated, navigate, redirectUrl]);
 
     useEffect(() => {
         sendDatos(initialRoles as respRoles, config.API_OPCION_CONSULTA_ROLES, config.API_ACCION_ROLES);

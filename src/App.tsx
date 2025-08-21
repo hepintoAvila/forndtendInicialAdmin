@@ -1,5 +1,5 @@
 import AppRoutes from '@/routes';
-import { AuthProvider, NotificationProvider, ThemeProvider } from '@/common/context';
+import { NotificationProvider, ThemeProvider } from '@/common/context';
 //import { useLocation, useNavigate } from 'react-router-dom';
 import { Suspense} from 'react';
 //import LandingPage from './pages/Landing';
@@ -53,13 +53,10 @@ const App = () => {
 */
   return (
     <>
-      
       <Suspense fallback={<PageLoader />}>
         <ThemeProvider>
           <NotificationProvider>
-            <AuthProvider>
                 <AppRoutes />
-            </AuthProvider>
           </NotificationProvider>
         </ThemeProvider>
 

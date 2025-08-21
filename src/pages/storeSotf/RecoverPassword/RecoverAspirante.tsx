@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 
-import useLogin from '@/pages/account/Login/useLogin';
+import useAuth from '@/pages/account/Login/useAuth';
  
 import { useState } from 'react';
 import PaisNacimiento from './PaisNacimiento/PaisNacimiento';
@@ -56,7 +56,7 @@ interface Option {
   }
 const RecoverAspirante = () => {
  
-	const { loading, recoverPassword } = useLogin();
+	const { loading, recoverPassword } = useAuth();
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 	const [departamentoSeleccionado, setDepartamentoSeleccionado] = useState<Option | null>(null);
 	const [municipioSeleccionado, setMunicipioSeleccionado] = useState<Option | null>(null);

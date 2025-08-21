@@ -1,7 +1,7 @@
 const config = {
 	 
     API_URL_WEB: "https://www.lacasadelbarbero.com.co/",
-    API_URL: "https://www.lacasadelbarbero.com.co/api2024/apiv1/?",
+    API_URL: "https://www.lacasadelbarbero.com.co/api2025/",
    // API_URL: "https://www.lacasadelbarbero.com.co/api2024/plugins-dist/api2025/?",
 	API_URL_AUTH : '/dashboard/tarjetas', 
 	API_ACCION_AUTH  :  'auteur', 
