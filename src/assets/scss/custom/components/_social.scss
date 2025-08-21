@@ -1,0 +1,128 @@
+/* social.scss */
+.social-list-item {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;     
+    height: 2.5rem;
+    width: 100lh; 
+    max-width: 25.1rem;
+    line-height: calc(2.5rem - 2px);
+    border: 0.028rem solid #0D99FF !important;
+    border-radius: 0.3rem ;
+    margin: -0.1rem auto; 
+    margin-right: 0.2rem;
+    color: var(--#{$prefix}black);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    text-decoration: none;
+
+    &:hover {
+        color: var(--#{$prefix}gray-600);
+        border-color: var(--#{$prefix}gray-600);
+    }
+}
+
+.social-list-item .whatsapp-icon,
+.social-list-item .google-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 5px;
+}
+
+.social-list-item .whatsapp-icon-text,
+.social-list-item .google-icon-text {
+    flex: 1;
+    text-align: center;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+}
+
+.social-list-item-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    text-decoration: none;
+    background-color: #fff;
+    
+    &.line {
+        width: 8rem;
+        height: auto;
+        margin: 0 0rem;
+    }
+    
+    &.text-line {
+        flex-grow: 1;
+        text-align: center;
+        padding: 0 2rem;
+    }
+}
+
+.social-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.text-bold {
+    color: black;
+    font-weight: bold;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .social-list-item {
+        max-width: 20rem;
+    }
+
+    .social-list-item .whatsapp-icon,
+    .social-list-item .google-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    .social-list-item .whatsapp-icon-text,
+    .social-list-item .google-icon-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .social-list-item {
+        max-width: 18rem;
+    }
+
+    .social-list-item .whatsapp-icon,
+    .social-list-item .google-icon {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .social-list-item .whatsapp-icon-text,
+    .social-list-item .google-icon-text {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-list-item {
+        max-width: 15rem;
+        height: 2rem;
+        line-height: calc(2rem - 2px);
+    }
+
+    .social-list-item .whatsapp-icon,
+    .social-list-item .google-icon {
+        width: 0.9rem;
+        height: 0.9rem;
+    }
+
+    .social-list-item .whatsapp-icon-text,
+    .social-list-item .google-icon-text {
+        font-size: 0.8rem;
+    }
+}

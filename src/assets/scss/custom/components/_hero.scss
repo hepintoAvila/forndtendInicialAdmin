@@ -1,0 +1,68 @@
+//
+// _hero.scss
+//
+
+.hero-section {
+    position: relative;
+    padding: 0px 0 0px 0;
+
+    &:after {
+        content: " ";
+        background-image: $hero-bg;
+        position: absolute;
+        top: -400px;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        width: 100%;
+        border-radius: 0;
+        transform: skewY(-3deg);
+    }
+}
+.modal-agenda-fecha{
+    margin-left: 0rem;
+    margin-top: 1rem;
+    background: darkseagreen;
+    color: cornsilk;
+    padding: 0.2rem;
+    margin-bottom: 0.5rem;
+}
+.modal-agenda-cliente{
+    margin-left: -1.5rem;
+    margin-top: -0.5rem;
+    background: darkseagreen;
+    color: cornsilk;
+    padding: 0.2rem;
+    margin-bottom: 0.5rem;
+}
+.modal-agenda-estado{
+    margin-left: 0rem;
+    margin-top: 1rem;
+    background: darkseagreen;
+    color: cornsilk;
+    padding: 0.2rem;
+    margin-bottom: 0.5rem;
+}
+.listado{
+    color: rgb(255, 255, 255); 
+    padding: 0.2rem;
+}
+.listado-novedades{
+    margin-top: 1rem;
+}
+.label-profesionales{
+    background: rgba(112, 193, 36, 0.12) !important;
+    padding: 0.2rem;
+    font-weight: 600; 
+    margin-top: 0.5rem !important;
+    text-align: left;
+}
+.total-circle-outline{
+    position: relative;
+    padding: 0.8rem 1rem 0.5rem 0.5rem;
+    margin-left: -1.5rem;
+    margin-top: -3rem;
+}
+.previus-liquidacion{
+    margin-top: -1.3rem;
+}

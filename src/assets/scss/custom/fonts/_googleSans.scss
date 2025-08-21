@@ -1,0 +1,37 @@
+//
+// Nunito fonts
+//
+
+@font-face {
+    font-family: 'Google Sans';
+    src: url('../fonts/_googleSans.scss');
+    src: local('GoogleSans-Bold'), local('GoogleSans-Light'), url('../fonts/GoogleSans-Bold.eot?#iefi') format('embedded-opentype'), url('../fonts/GoogleSans-Bold.woff') format('woff'), url('../fonts/GoogleSans-Bold.ttf') format('truetype'), url('../fonts/GoogleSans-Bold.svg#Roboto') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Google Sans';
+    src: url('../fonts/GoogleSans-Regular.eot');
+    src: local('GoogleSans Regular'), local('GoogleSans-Regular'), url('../fonts/GoogleSans-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/GoogleSans-Regular.woff') format('woff'), url('../fonts/GoogleSans-Regular.ttf') format('truetype'), url('../fonts/GoogleSans-Regular.svg#Roboto') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Google Sans';
+    src: url('../fonts/GoogleSans-Medium.eot');
+    src: local('GoogleSans Medium'), local('GoogleSans-Medium'), url('../fonts/GoogleSans-Medium.eot?#iefix') format('embedded-opentype'), url('../fonts/GoogleSans-Medium.woff') format('woff'), url('../fonts/GoogleSans-Medium.ttf') format('truetype'), url('../fonts/GoogleSans-Medium.svg#Roboto') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+ 
+
+@font-face {
+    font-family: 'Google Sans';
+    src: url('../fonts/GoogleSans-Bold.eot');
+    src: local('GoogleSans Bold'), local('GoogleSans-Bold'), url('../fonts/GoogleSans-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/GoogleSans-Bold.woff') format('woff'), url('../fonts/GoogleSans-Bold.ttf') format('truetype'), url('../fonts/GoogleSans-Bold.svg#Roboto') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}

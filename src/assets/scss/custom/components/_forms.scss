@@ -1,0 +1,256 @@
+//
+// forms.scss
+//
+
+// Form-control light
+.input-container-login {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    height: 2.5rem;
+    width: 100%; 
+    max-width: 24rem; 
+    line-height: calc(2.5rem - 2px);
+    border: 0.025rem solid #0D99FF !important;
+    margin: 0.8rem auto; 
+}
+.input-container-edit {
+    font-family: Google Sans;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20.02px;
+    letter-spacing: 0.17000000178813934px;
+    text-align: left;
+    margin-right: 8rem;
+    border: 0.025rem solid transparent !important;
+    margin-left: -0.9rem !important;
+
+    select {
+        text-align: center;
+        /* Eliminar la flecha hacia abajo y cualquier imagen de fondo */
+        -webkit-appearance: none !important; /* Safari y Chrome */
+        -moz-appearance: none !important;    /* Firefox */
+        appearance: none !important;         /* Estándar */
+        background: none !important;        /* Quitar el fondo de la flecha */
+
+        /* Si se aplica la clase .form-select */
+        &.form-select {
+            background-image: none !important;
+            padding-right: 0.9rem;  /* Ajuste del padding si es necesario */
+        }
+    }
+}
+.form-label{
+    margin-right: 7rem !important;
+    margin-bottom: 1rem !important;
+    margin-top: 0.5rem !important;
+    width: 100%;
+    background: rgba(117, 192, 46, 0.259)!important;
+    text-align: left;
+    padding: 0.2rem; 
+}
+
+.form-label-test{
+    width: 98% !important;
+    background-color: rgba(117, 192, 46, 0.259) !important;
+    border: 0.4rem solid rgba(117, 192, 46, 0.259) !important;
+    padding: 0 !important;
+    margin-left: 20px !important;
+
+}
+.input-hora-inicial{
+    //styleName: Light/headline/small;
+font-family: Google Sans;
+font-size: 24px;
+font-weight: 400;
+line-height: 32px;
+text-align: left;
+
+}
+
+
+
+.input-container-citas-Confirmada,input-container-citas-Confirmada {
+    font-family: Google Sans;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.1599999964px;
+    text-align: center;
+    width: 52%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 0px;
+    padding-right: 0px;
+    white-space: nowrap;
+    background-color: #ffffff;
+    color: #56A51A;
+  /* Aplica el mismo fondo a las opciones del select */
+    select {
+        background: rgba(112, 193, 36, 0.12);
+        border-radius: 1.25rem;
+        text-align: center;
+    }
+
+    /* Estilo para cada opción en la lista */
+    option {
+        background: rgba(112, 193, 36, 0.12) !important; /* Importante para asegurar que se aplique el color */
+        color:#70C124; /* Color del texto de las opciones, puedes cambiarlo si lo prefieres */
+    }
+}
+.input-container-citas-cancelada {
+    select {
+        background: rgba(193, 36, 167, 0.12);
+        border-radius: 1.25rem;
+        text-align: center;
+    }
+}
+.form-check-input[type=radio]{
+    border-color: #5ec003 !important;
+}
+
+.form-check-label{
+    padding:0 5px !important;
+   text-align: justify !important;
+}
+.input-container-password {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;     
+    height: 2.5rem;
+    width: 80%; 
+    max-width: 23.5rem;
+    line-height: calc(2.5rem - 2px);
+    border: 0.028rem solid #0D99FF !important;
+    margin: 0.5rem auto; 
+    margin-right: 0.2rem;
+}
+
+.input-group-text {
+    border: 0.025rem solid #0D99FF !important;
+    margin: 25px; 
+    padding: 0.5rem;
+    display: flex;
+    margin-right: 4rem;
+    align-items: center; 
+    cursor: pointer; 
+    margin-top: 0.5rem;
+}
+
+// Ajustes específicos para pantallas más pequeñas 
+@media (max-width: 768px) {
+    .input-container-login, .input-container-password {
+        max-width: 100%; 
+        margin: 0.5rem auto; 
+        padding: 0 1rem;
+        justify-content: center; /* Centra horizontalmente en pantallas pequeñas */
+    }
+
+    .input-group-text {
+        margin: 0.5rem auto; /* Ajuste de margen para móviles */
+    }
+}
+
+// Ajustes para pantallas medianas (tablet y pantallas pequeñas) 
+@media (min-width: 769px) and (max-width: 1024px) {
+    .input-container-login, .input-container-password {
+        max-width: 90%; 
+        margin: 2rem auto;
+    }
+
+    .input-group-text {
+        margin-right: 3rem; /* Ajusta el margen derecho para pantallas medianas */
+    }
+}
+
+// Ajustes para pantallas grandes (escritorio) 
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .input-container-login, .input-container-password {
+        max-width: 90%;
+        margin: 0.7rem auto;
+    }
+
+    .input-group-text {
+        margin-right: 3.5rem; 
+    }
+}
+
+// Ajustes para pantallas muy grandes (pantallas anchas) 
+@media (min-width: 1367px) {
+    .input-container-login, .input-container-password {
+        max-width: 25rem;
+        margin-left: 6em;
+        margin-bottom: 1.5em;
+    }
+    .input-group-text {
+        margin-right: 0rem; 
+    }
+}
+
+.form-control-light {
+    background-color: var(--#{$prefix}light) !important;
+    border-color: var(--#{$prefix}border-color) !important;
+    border-width: $card-border-width;
+    border-style: solid;
+    border-color: $card-border-color;
+}
+
+// Form elements (Color and Range)
+
+input.form-control[type="color"],
+input.form-control[type="range"] {
+    min-height: 39px;
+}
+
+
+
+// Custom select
+
+.custom-select.is-invalid,
+.form-control.is-invalid,
+.custom-select:invalid,
+.form-control:invalid,
+.custom-select.is-valid,
+.form-control.is-valid,
+.custom-select:valid,
+.form-control:valid {
+    &:focus {
+        box-shadow: none !important;
+    }
+}
+
+select.form-control {
+    &:not([size]):not([multiple]) {
+        height: $input-height;
+    }
+}
+
+select.form-control-sm {
+    &:not([size]):not([multiple]) {
+        height: $input-height-sm;
+    }
+}
+
+// Show/Hide Password
+.password-eye {
+    cursor: pointer;
+
+    &:before {
+        font-family: "Material Design Icons";
+        content: "\F06D0";
+        font-style: normal;
+        font-weight: 400;
+        font-variant: normal;
+        vertical-align: middle;
+        line-height: 1.2;
+        font-size: 16px;
+    }
+}
+
+.show-password {
+    .password-eye {
+        &:before {
+            content: "\F06D1";
+        }
+    }
+}

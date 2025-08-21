@@ -1,0 +1,902 @@
+{
+	"info": {
+		"_postman_id": "80c0d882-ca9d-4c7b-908c-1538e91c9e92",
+		"name": "evaluaSoft",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16600079"
+	},
+	"item": [
+		{
+			"name": "Evaluaciones",
+			"item": [
+				{
+					"name": "consulta Evaluaciones",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "jotat007@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "jotat007",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-sices-api-apikey",
+								"value": "ZmxadGFpV01pZXhNVjRrYWR4TVd2UT09OjpIV1Y2WE9nUk5wb2dDWnJmSHVSMlRBPT0=",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-apitoken",
+								"value": "YjI2ZWRkZjE0M2Q0MDk5ZDExNTJmM2MzYmZlNGYzZWYwNmRmNTdkNTRjMTM1YmEwYWJmNzlhN2VmZjgzYmIzYQ==",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-user",
+								"value": "am90YXQwMDdAZ21haWwuY29t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"ids\":{\"id_pregunta\":0,\"id_evaluacion\":0},\r\n\"tipo_cuestionario\":\"Aspirante\",\r\n\"option\":\"consulta_evaluaciones\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://www.lacasadelbarbero.com.co/api2024/apiv1/?opcion=Y29uc3VsdGFfZXZhbHVhY2lvbmVz&accion=RXZhbHVhY2lvbmVz&bonjour=oui&exec=apis",
+							"protocol": "https",
+							"host": [
+								"www",
+								"lacasadelbarbero",
+								"com",
+								"co"
+							],
+							"path": [
+								"api2024",
+								"apiv1",
+								""
+							],
+							"query": [
+								{
+									"key": "opcion",
+									"value": "Y29uc3VsdGFfZXZhbHVhY2lvbmVz"
+								},
+								{
+									"key": "accion",
+									"value": "RXZhbHVhY2lvbmVz"
+								},
+								{
+									"key": "bonjour",
+									"value": "oui"
+								},
+								{
+									"key": "exec",
+									"value": "apis"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Evaluaciones",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "jotat007@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "jotat007",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-sices-api-apikey",
+								"value": "ZmxadGFpV01pZXhNVjRrYWR4TVd2UT09OjpIV1Y2WE9nUk5wb2dDWnJmSHVSMlRBPT0=",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-apitoken",
+								"value": "YjI2ZWRkZjE0M2Q0MDk5ZDExNTJmM2MzYmZlNGYzZWYwNmRmNTdkNTRjMTM1YmEwYWJmNzlhN2VmZjgzYmIzYQ==",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-user",
+								"value": "am90YXQwMDdAZ21haWwuY29t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"chartic\":{\r\n  \"titulo\": \"Cuestionario para prueba de Lectura\",\r\n  \"fecha_inicial\": \"2025-07-12T06:24:40.229Z\",\r\n  \"fecha_final\": \"2025-07-12T06:24:40.229Z\",\r\n  \"tiempo_permitido\": \"59\",\r\n  \"tiempo_permitido_discapacitado\": \"179\",\r\n  \"oportunidades\": \"15\",\r\n  \"status\": \"Evaluaciones\",\r\n  \"sesion\": \"2\",\r\n  \"area\": \"OSO\",\r\n  \"num_preguntas\": \"40\",\r\n  \"statut\": \"Activa\"\r\n},\r\n\"ids\":{\"id_evaluacion\": 9, \"id_pregunta\": 0},\r\n\"option\":\"update_evaluacion\",\r\n\"tipo_cuestionario\":\"Evaluaciones\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://www.lacasadelbarbero.com.co/api2024/apiv1/?accion=RXZhbHVhY2lvbmVz&opcion=dXBkYXRlX2V2YWx1YWNpb24=&bonjour=oui",
+							"protocol": "https",
+							"host": [
+								"www",
+								"lacasadelbarbero",
+								"com",
+								"co"
+							],
+							"path": [
+								"api2024",
+								"apiv1",
+								""
+							],
+							"query": [
+								{
+									"key": "accion",
+									"value": "RXZhbHVhY2lvbmVz"
+								},
+								{
+									"key": "opcion",
+									"value": "dXBkYXRlX2V2YWx1YWNpb24="
+								},
+								{
+									"key": "bonjour",
+									"value": "oui"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Evaluaciones",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "jotat007@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "jotat007",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-sices-api-apikey",
+								"value": "ZmxadGFpV01pZXhNVjRrYWR4TVd2UT09OjpIV1Y2WE9nUk5wb2dDWnJmSHVSMlRBPT0=",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-apitoken",
+								"value": "YjI2ZWRkZjE0M2Q0MDk5ZDExNTJmM2MzYmZlNGYzZWYwNmRmNTdkNTRjMTM1YmEwYWJmNzlhN2VmZjgzYmIzYQ==",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-user",
+								"value": "am90YXQwMDdAZ21haWwuY29t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"tipo_cuestionario\":\"Evaluaciones\",\"chartic\":{\"titulo\":\"Cuestionario No.1:prueba para postman\",\"fecha_inicial\":\"2025-07-12T12:00:00.000Z\",\"fecha_final\":\"2025-07-12T14:00:00.000Z\",\"tiempo_permitido\":\"30\",\"tiempo_permitido_discapacitado\":\"79\",\"oportunidades\":\"50\",\"status\":\"Aspirante\",\"sesion\":\"2\",\"area\":\"OSO\",\"num_preguntas\":\"48\",\"statut\":\"Inactiva\"},\"ids\":{\"id_evaluacion\":3,\"id_pregunta\":0},\"option\":\"add_evaluacion\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://www.lacasadelbarbero.com.co/api2024/apiv1/?accion=RXZhbHVhY2lvbmVz&opcion=dXBkYXRlX2V2YWx1YWNpb24=&bonjour=oui",
+							"protocol": "https",
+							"host": [
+								"www",
+								"lacasadelbarbero",
+								"com",
+								"co"
+							],
+							"path": [
+								"api2024",
+								"apiv1",
+								""
+							],
+							"query": [
+								{
+									"key": "accion",
+									"value": "RXZhbHVhY2lvbmVz"
+								},
+								{
+									"key": "opcion",
+									"value": "dXBkYXRlX2V2YWx1YWNpb24="
+								},
+								{
+									"key": "bonjour",
+									"value": "oui"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Preguntas",
+			"item": [
+				{
+					"name": "Consulta Preguntas",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "jotat007@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "jotat007",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-sices-api-apikey",
+								"value": "ZmxadGFpV01pZXhNVjRrYWR4TVd2UT09OjpIV1Y2WE9nUk5wb2dDWnJmSHVSMlRBPT0=",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-apitoken",
+								"value": "YjI2ZWRkZjE0M2Q0MDk5ZDExNTJmM2MzYmZlNGYzZWYwNmRmNTdkNTRjMTM1YmEwYWJmNzlhN2VmZjgzYmIzYQ==",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-user",
+								"value": "am90YXQwMDdAZ21haWwuY29t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo_cuestionario\": \"Preguntas\",\r\n    \"ids\": {\r\n        \"id_pregunta\": 0,\r\n        \"id_evaluacion\": 23\r\n    },\r\n    \"option\": \"consulta_id_pregunta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://www.lacasadelbarbero.com.co/api2024/apiv1/?accion=RXZhbHVhY2lvbmVz&opcion=Y29uc3VsdGFfaWRfcHJlZ3VudGE=&bonjour=oui&exec=apis",
+							"protocol": "https",
+							"host": [
+								"www",
+								"lacasadelbarbero",
+								"com",
+								"co"
+							],
+							"path": [
+								"api2024",
+								"apiv1",
+								""
+							],
+							"query": [
+								{
+									"key": "accion",
+									"value": "RXZhbHVhY2lvbmVz"
+								},
+								{
+									"key": "opcion",
+									"value": "Y29uc3VsdGFfaWRfcHJlZ3VudGE="
+								},
+								{
+									"key": "bonjour",
+									"value": "oui"
+								},
+								{
+									"key": "exec",
+									"value": "apis"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Preguntas",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "jotat007@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "jotat007",
+									"type": "string"
+								}
+							]
+						},
+						"method": "OPTIONS",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n    \"preguntas\": {\r\n        \"id_evaluacion\": \"1\",\r\n        \"codarea\": \"LC\",\r\n        \"area\": \"Lectura Crítica\",\r\n        \"nivel\": 4,\r\n        \"codigopregunta\": \"LC1\",\r\n        \"texto_pregunta\": \"Pregunta No.1\",\r\n        \"tipo\": 2,\r\n        \"tipo_pregunta\": \"Opcion Multiple\",\r\n        \"solucion\": \"C\",\r\n        \"orden\": \"1\",\r\n        \"sesion\": \"LC\",\r\n        \"grupo\": \"1\"\r\n    },\r\n    \"opciones\": [\r\n        {\r\n            \"opcion\": \"un ensayo sobre el rol de los Diálogos en la historia de la filosofía.\",\r\n            \"tipo\": \"texto\",\r\n            \"ponderacion\": 25\r\n        },\r\n        {\r\n            \"opcion\": \"una columna de opinión acerca de los orígenes de la filología platónica.\",\r\n            \"tipo\": \"texto\",\r\n            \"ponderacion\": 25\r\n        },\r\n        {\r\n            \"opcion\": \"un estudio comparativo sobre el desarrollo de la filología y el darwinismo.\",\r\n            \"tipo\": \"texto\",\r\n            \"ponderacion\": 25\r\n        },\r\n        {\r\n            \"opcion\": \"una conferencia acerca de la influencia de Platón en la biología y la filología.\",\r\n            \"tipo\": \"texto\",\r\n            \"ponderacion\": 25\r\n        }\r\n    ],\r\n    \"contexto_pregunta\": {\r\n        \"nivelpregunta\": 4,\r\n        \"areapregunta\": \"LC\",\r\n        \"id_contexto_grupo\": \"1\",\r\n        \"descripcion_contexto_grupo\": \"Es un «milagro» que la obra de Platón haya sobrevivido y que nosotros podamos leerla en cualquier versión. Todos los textos de sus Diálogos estuvieron perdidos durante cerca de mil años. Cuando volvieron a aparecer, bajo la forma de varias copias de copias de copias, se puso en marcha durante quinientos años una cuidadosa investigación de esas copias. Es de suponer que los originales se convirtieron en polvo hace ya mucho tiempo. La tarea con la que se enfrentaron los eruditos era intimidadora. Obviamente, se encontraron muchas «corrupciones» en las diferentes copias supervivientes (denominadas «testigos»), y estas corrupciones o errores tenían que ser solucionadas sin que fuera posible preguntarle al autor.\\r\\n¿Cómo podían distinguirse apropiadamente los errores? En los tiempos de Darwin, los filólogos que dedicaban su vida profesional a recrear el origen de sus «testigos» habían tenido éxito al descubrir la totalidad de los linajes de copias de copias, y pudieron deducir muchos hechos curiosos acerca de las circunstancias históricas de su nacimiento, de su reproducción y, eventualmente, de su muerte. A veces, la arriesgada deducción que nace de sus trabajos es similar a la de Darwin: un grupo concreto de errores en los manuscritos, no corregidos y vueltos a copiar en todos los manuscritos descendientes de un particular linaje, se debía casi siempre al hecho de que el escriba que transcribía el dictado no pronunciaba el griego de la misma forma en que lo hacía el lector del texto y, en consecuencia, entendía incorrectamente un determinado fonema. Estas claves, junto con la evidencia procedente de otras fuentes de la historia de la lengua griega, pudieron incluso haber sugerido a los eruditos en qué monasterio, en qué isla griega, en qué montaña o en qué siglo debió haber tenido lugar la escena en la que se produjo este conjunto de copias.\\r\\nTomado y adaptado de: Dennett D. (1999). La peligrosa idea de Darwin. Barcelona: Círculo de Lectores.\",\r\n        \"recurso_tipo_contexto_grupo\": \"texto\",\r\n        \"recurso_contexto_grupo\": \"SD\",\r\n        \"contexto_enunciado_individual\": \"SD\",\r\n        \"enunciado_individual\": \"Teniendo en cuenta la forma, el contenido y el estilo del texto anterior, se puede afirmar que este es\",\r\n        \"recurso_pregunta\": \"SD\",\r\n        \"recurso_tipo_pregunta\": \"texto\"\r\n    }\r\n}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://www.lacasadelbarbero.com.co/api2024/apiv1/?accion=RXZhbHVhY2lvbmVz&opcion=Z3VhcmRhcl9ldmFsdWFjaW9uX21vZGVsb18y&bonjour=oui",
+							"protocol": "https",
+							"host": [
+								"www",
+								"lacasadelbarbero",
+								"com",
+								"co"
+							],
+							"path": [
+								"api2024",
+								"apiv1",
+								""
+							],
+							"query": [
+								{
+									"key": "accion",
+									"value": "RXZhbHVhY2lvbmVz"
+								},
+								{
+									"key": "opcion",
+									"value": "Z3VhcmRhcl9ldmFsdWFjaW9uX21vZGVsb18y",
+									"description": "esta es para importar desde postman: Z3VhcmRhcl9ldmFsdWFjaW9uX21vZGVsb18yX3Bvc3RtYW4="
+								},
+								{
+									"key": "bonjour",
+									"value": "oui"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Preguntas",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "jotat007@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "jotat007",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-sices-api-apikey",
+								"value": "ZmxadGFpV01pZXhNVjRrYWR4TVd2UT09OjpIV1Y2WE9nUk5wb2dDWnJmSHVSMlRBPT0=",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-apitoken",
+								"value": "YjI2ZWRkZjE0M2Q0MDk5ZDExNTJmM2MzYmZlNGYzZWYwNmRmNTdkNTRjMTM1YmEwYWJmNzlhN2VmZjgzYmIzYQ==",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-user",
+								"value": "am90YXQwMDdAZ21haWwuY29t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo_cuestionario\": \"Preguntas\",\r\n    \"chartic\": {\r\n        \"codarea\": \"LC\",\r\n        \"area\": \"Lectura Crítica\",\r\n        \"nivel\": \"2\",\r\n        \"codigo\": \"LC3\",\r\n        \"pregunta\": \"Pregunta No.3\",\r\n        \"id_tipo\": \"2\",\r\n        \"tipo\": \"Opcion Multiple\",\r\n        \"solucion\": \"D\",\r\n        \"orden\": \"3\",\r\n        \"sesion\": \"1\",\r\n        \"grupo\": \"1\",\r\n        \"statut\": \"Activo\"\r\n    },\r\n    \"ids\": {\r\n        \"id_evaluacion\": 24,\r\n        \"id_pregunta\": 762\r\n    },\r\n    \"option\": \"update_evaluacion_pregunta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://www.lacasadelbarbero.com.co/api2024/apiv1/?accion=RXZhbHVhY2lvbmVz&opcion=Y29uc3VsdGFfaWRfcHJlZ3VudGE=&bonjour=oui&exec=apis",
+							"protocol": "https",
+							"host": [
+								"www",
+								"lacasadelbarbero",
+								"com",
+								"co"
+							],
+							"path": [
+								"api2024",
+								"apiv1",
+								""
+							],
+							"query": [
+								{
+									"key": "accion",
+									"value": "RXZhbHVhY2lvbmVz"
+								},
+								{
+									"key": "opcion",
+									"value": "Y29uc3VsdGFfaWRfcHJlZ3VudGE="
+								},
+								{
+									"key": "bonjour",
+									"value": "oui"
+								},
+								{
+									"key": "exec",
+									"value": "apis"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Respuestas",
+			"item": [
+				{
+					"name": "Consulta Contextos y Respuestas",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "jotat007@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "jotat007",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-sices-api-apikey",
+								"value": "ZmxadGFpV01pZXhNVjRrYWR4TVd2UT09OjpIV1Y2WE9nUk5wb2dDWnJmSHVSMlRBPT0=",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-apitoken",
+								"value": "YjI2ZWRkZjE0M2Q0MDk5ZDExNTJmM2MzYmZlNGYzZWYwNmRmNTdkNTRjMTM1YmEwYWJmNzlhN2VmZjgzYmIzYQ==",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-user",
+								"value": "am90YXQwMDdAZ21haWwuY29t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo_cuestionario\": \"Preguntas\",\r\n    \"ids\": {\r\n        \"id_evaluacion\": 24,\r\n        \"id_pregunta\": 760\r\n    },\r\n    \"option\": \"consulta_id_respuestas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://www.lacasadelbarbero.com.co/api2024/apiv1/?accion=RXZhbHVhY2lvbmVz&opcion=Y29uc3VsdGFfaWRfcmVzcHVlc3Rhcw==&bonjour=oui&exec=apis",
+							"protocol": "https",
+							"host": [
+								"www",
+								"lacasadelbarbero",
+								"com",
+								"co"
+							],
+							"path": [
+								"api2024",
+								"apiv1",
+								""
+							],
+							"query": [
+								{
+									"key": "accion",
+									"value": "RXZhbHVhY2lvbmVz"
+								},
+								{
+									"key": "opcion",
+									"value": "Y29uc3VsdGFfaWRfcmVzcHVlc3Rhcw=="
+								},
+								{
+									"key": "bonjour",
+									"value": "oui"
+								},
+								{
+									"key": "exec",
+									"value": "apis"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Contextos",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "jotat007@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "jotat007",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-sices-api-apikey",
+								"value": "ZmxadGFpV01pZXhNVjRrYWR4TVd2UT09OjpIV1Y2WE9nUk5wb2dDWnJmSHVSMlRBPT0=",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-apitoken",
+								"value": "YjI2ZWRkZjE0M2Q0MDk5ZDExNTJmM2MzYmZlNGYzZWYwNmRmNTdkNTRjMTM1YmEwYWJmNzlhN2VmZjgzYmIzYQ==",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-user",
+								"value": "am90YXQwMDdAZ21haWwuY29t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"chartic\": {\r\n        \"id_contexto_grupo\": \"1\",\r\n        \"descripcion_contexto_grupo\": \"\",\r\n        \"recurso_tipo_contexto_grupo\": \"Texto\",\r\n        \"recurso_contexto_grupo\": \"<p>SD</p>\",\r\n        \"contexto_enunciado_individual\": \"SD\",\r\n        \"enunciado_individual\": \"Teniendo en cuenta la forma, el contenido y el estilo del texto anterior, se puede afirmar que este es\",\r\n        \"recurso_pregunta\": \"xx\",\r\n        \"recurso_tipo_pregunta\": \"texto\"\r\n    },\r\n    \"option\": \"update_contexto_pregunta\",\r\n    \"ids\": {\r\n        \"id_pregunta\": \"760\",\r\n        \"id_contexto\": \"60\",\r\n        \"id_evaluacion\": 24\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://www.lacasadelbarbero.com.co/api2024/apiv1/?accion=RXZhbHVhY2lvbmVz&opcion=ZWRpdGFyX3ByZWd1bnRh&bonjour=oui&exec=apis",
+							"protocol": "https",
+							"host": [
+								"www",
+								"lacasadelbarbero",
+								"com",
+								"co"
+							],
+							"path": [
+								"api2024",
+								"apiv1",
+								""
+							],
+							"query": [
+								{
+									"key": "accion",
+									"value": "RXZhbHVhY2lvbmVz"
+								},
+								{
+									"key": "opcion",
+									"value": "ZWRpdGFyX3ByZWd1bnRh"
+								},
+								{
+									"key": "bonjour",
+									"value": "oui"
+								},
+								{
+									"key": "exec",
+									"value": "apis"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Respuestas",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "jotat007@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "jotat007",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-sices-api-apikey",
+								"value": "ZmxadGFpV01pZXhNVjRrYWR4TVd2UT09OjpIV1Y2WE9nUk5wb2dDWnJmSHVSMlRBPT0=",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-apitoken",
+								"value": "YjI2ZWRkZjE0M2Q0MDk5ZDExNTJmM2MzYmZlNGYzZWYwNmRmNTdkNTRjMTM1YmEwYWJmNzlhN2VmZjgzYmIzYQ==",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-user",
+								"value": "am90YXQwMDdAZ21haWwuY29t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"chartic\": {\r\n        \"0\": {\r\n            \"id_opcion\": \"2392\",\r\n            \"id_pregunta\": \"760\",\r\n            \"id_evaluacion\": \"24\",\r\n            \"texto_opcion\": \"<p>un ensayo sobre el rol de los Di&aacute;logos en la historia de la filosof&iacute;a.</p>\",\r\n            \"ponderacion\": \"5.00\",\r\n            \"opcion\": \"\"\r\n        },\r\n        \"1\": {\r\n            \"id_opcion\": \"2393\",\r\n            \"id_pregunta\": \"760\",\r\n            \"id_evaluacion\": \"24\",\r\n            \"texto_opcion\": \"<p>una columna de opini&oacute;n acerca de los or&iacute;genes de la filolog&iacute;a plat&oacute;nica.</p>\",\r\n            \"ponderacion\": \"25.00\",\r\n            \"opcion\": \"\"\r\n        },\r\n        \"2\": {\r\n            \"id_opcion\": \"2394\",\r\n            \"id_pregunta\": \"760\",\r\n            \"id_evaluacion\": \"24\",\r\n            \"texto_opcion\": \"<p>un estudio comparativo sobre el desarrollo de la filolog&iacute;a y el darwinismo.</p>\",\r\n            \"ponderacion\": \"25.00\",\r\n            \"opcion\": \"\"\r\n        },\r\n        \"3\": {\r\n            \"id_opcion\": \"2395\",\r\n            \"id_pregunta\": \"760\",\r\n            \"id_evaluacion\": \"24\",\r\n            \"texto_opcion\": \"<p>una conferencia acerca de la influencia de Plat&oacute;n en la biolog&iacute;a y la filolog&iacute;a.</p>\",\r\n            \"ponderacion\": \"25.00\",\r\n            \"opcion\": \"\"\r\n        }\r\n    },\r\n    \"option\": \"update_respuestas\",\r\n    \"ids\": {\r\n        \"id_pregunta\": 760,\r\n        \"id_evaluacion\": 24\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://www.lacasadelbarbero.com.co/api2024/apiv1/?accion=RXZhbHVhY2lvbmVz&opcion=ZWRpdGFyX3ByZWd1bnRh&bonjour=oui&exec=apis",
+							"protocol": "https",
+							"host": [
+								"www",
+								"lacasadelbarbero",
+								"com",
+								"co"
+							],
+							"path": [
+								"api2024",
+								"apiv1",
+								""
+							],
+							"query": [
+								{
+									"key": "accion",
+									"value": "RXZhbHVhY2lvbmVz"
+								},
+								{
+									"key": "opcion",
+									"value": "ZWRpdGFyX3ByZWd1bnRh"
+								},
+								{
+									"key": "bonjour",
+									"value": "oui"
+								},
+								{
+									"key": "exec",
+									"value": "apis"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Importar Evaluaciones",
+			"item": [
+				{
+					"name": "Importar Evaluacion",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "jotat007@gmail.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "jotat007",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-sices-api-apikey",
+								"value": "ZmxadGFpV01pZXhNVjRrYWR4TVd2UT09OjpIV1Y2WE9nUk5wb2dDWnJmSHVSMlRBPT0=",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-apitoken",
+								"value": "YjI2ZWRkZjE0M2Q0MDk5ZDExNTJmM2MzYmZlNGYzZWYwNmRmNTdkNTRjMTM1YmEwYWJmNzlhN2VmZjgzYmIzYQ==",
+								"type": "text"
+							},
+							{
+								"key": "x-sices-api-user",
+								"value": "am90YXQwMDdAZ21haWwuY29t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "File",
+									"type": "file",
+									"src": "plantilla_preguntas_prueba_entrada (3).csv"
+								},
+								{
+									"key": "head",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "delim",
+									"value": ",",
+									"type": "text"
+								},
+								{
+									"key": "enclos",
+									"value": "\"",
+									"type": "text"
+								},
+								{
+									"key": "len",
+									"value": "48",
+									"type": "text"
+								},
+								{
+									"key": "charset_source",
+									"value": "utf-8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://www.lacasadelbarbero.com.co/api2024/apiv1/?accion=RXZhbHVhY2lvbmVz&opcion=Z3VhcmRhcl9ldmFsdWFjaW9uX21vZGVsb18yX3Bvc3RtYW4=&bonjour=oui&id_evaluacion=34&tipo_evaluacion=Aspirantes",
+							"protocol": "https",
+							"host": [
+								"www",
+								"lacasadelbarbero",
+								"com",
+								"co"
+							],
+							"path": [
+								"api2024",
+								"apiv1",
+								""
+							],
+							"query": [
+								{
+									"key": "accion",
+									"value": "RXZhbHVhY2lvbmVz"
+								},
+								{
+									"key": "opcion",
+									"value": "Z3VhcmRhcl9ldmFsdWFjaW9uX21vZGVsb18yX3Bvc3RtYW4="
+								},
+								{
+									"key": "bonjour",
+									"value": "oui"
+								},
+								{
+									"key": "id_evaluacion",
+									"value": "34"
+								},
+								{
+									"key": "tipo_evaluacion",
+									"value": "Aspirantes"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "jotat007",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "jotat007@gmail.com",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "x-sices-api-apikey",
+			"value": "ZmxadGFpV01pZXhNVjRrYWR4TVd2UT09OjpIV1Y2WE9nUk5wb2dDWnJmSHVSMlRBPT0=",
+			"type": "string"
+		},
+		{
+			"key": "x-sices-api-apitoken",
+			"value": "YjI2ZWRkZjE0M2Q0MDk5ZDExNTJmM2MzYmZlNGYzZWYwNmRmNTdkNTRjMTM1YmEwYWJmNzlhN2VmZjgzYmIzYQ==",
+			"type": "string"
+		},
+		{
+			"key": "x-sices-api-user",
+			"value": "am90YXQwMDdAZ21haWwuY29t",
+			"type": "string"
+		},
+		{
+			"key": "{url}",
+			"value": "https://www.lacasadelbarbero.com.co/api2024/apiv1/?",
+			"type": "string"
+		}
+	]
+}

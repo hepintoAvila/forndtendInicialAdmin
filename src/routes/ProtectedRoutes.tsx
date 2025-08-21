@@ -1,0 +1,48 @@
+import { ThemeSettings, useThemeContext } from '@/common';
+import { lazy } from 'react';
+import { Navigate, Route, Routes as ReactRoutes } from 'react-router-dom';
+import VerticalLayout from '@/layouts/Vertical';
+import HorizontalLayout from '@/layouts/Horizontal';
+import Root from './Root';
+//import { useAuth0 } from '@auth0/auth0-react';
+import useLogin from '@/pages/account/Login/useLogin';
+
+
+ 
+const Error404Alt = lazy(() => import('../pages/otherpages/Error404Alt'));
+/**
+ * routes import
+ */
+ 
+const Administrador = lazy(() => import('../pages/Administrador/Administrador'));
+const Dashboard =lazy(() => import('../pages/Dashboard'));
+
+export default function ProtectedRoutes() {
+	const { settings } = useThemeContext();
+	const Layout =
+		settings.layout.type == ThemeSettings.layout.type.vertical
+			? VerticalLayout
+			: HorizontalLayout;
+	 
+			//const { isAuthenticated, isLoading } = useAuth0();
+			const {isAuthenticated } = useLogin();
+
+	 	
+	if (!(isAuthenticated)) {
+        return <Navigate to="/account/login/" replace />;
+    }
+  
+	return (
+		<ReactRoutes>
+				<Route path="/*" element={<Layout/>}>
+				<Route index element={<Root/>}/>
+				<Route path="administrador/*" element={<Administrador/>}/>
+				<Route path="dashboard/*" element={<Dashboard/>}/>
+				<Route path="*" element={<Error404Alt/>} />
+				 
+			</Route>
+		</ReactRoutes>
+	)
+}
+ 
+
