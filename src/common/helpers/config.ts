@@ -9,6 +9,10 @@ const config = {
 	API_URL_USUARIOS: '/administrador/usuarios', 
     API_URL_ROLES: '/administrador/Roles', 
 	 
+	API_ACCION_PCS: 'admin_pcs', 
+	API_OPCION_PCS: 'consulta_pcs',  
+	API_ADMIN_PCS: 'admin_pcs',  
+
 	API_OPCION_CONSULTA_ROLES:'consulta_roles',
 	API_OPCION_EDITAR_ROLES:'editar_roles',
 	API_OPCION_ADD_ROLES:'add_roles',

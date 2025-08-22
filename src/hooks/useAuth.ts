@@ -1,10 +1,18 @@
 import { config, encodeBasicUrl } from '@/common';
 import AuthService from '@/common/api/auth';
-import { useEffect,useState } from 'react';
+import { useContext, useEffect,useState } from 'react';
 import { AuthData, Menu, MenuItem, Permiso } from '../pages/account/Login/type';
+import { AuthContext } from '@/common/context/AuthContext';
 
 export default function useAuth(){
 
+ const authContext = useContext(AuthContext);
+
+  if (!authContext) {
+    throw new Error('AuthContext no está disponible');
+  }
+
+  const {setCredentials, clearCredentials } = authContext;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<AuthData | null>(null);
@@ -12,6 +20,7 @@ export default function useAuth(){
   const [MENU_ITEMS_CONTEXT, setMenu] = useState<Menu[]>([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [menu, setMenup] = useState<MenuItem[]>([]);
+  
   // Verificar autenticación al inicializar
   useEffect(() => {
     checkAuthStatus();   
@@ -43,7 +52,7 @@ export default function useAuth(){
   };
 
  
-  const login = async (credentials: any) => {
+  const login = async (credentialsAuth: any) => {
     setLoading(true);
     setError(null);
        const urlObjet = {
@@ -52,13 +61,16 @@ export default function useAuth(){
       };  
   try {
       const authService = AuthService(urlObjet);
-      const result = await authService.Autentications(credentials);
+      const result = await authService.Autentications(credentialsAuth);
 
       if (result.status === 'success' && result.data) {
         setUser(result.data.auth);
         setPermisos(result.data.permisos);
         setMenu(result.data.menu);
          setIsAuthenticated(true);
+         setCredentials({
+          login: credentialsAuth.login,
+          password: credentialsAuth.password})
         // Guardar en localStorage
         if (result.data.auth.AppKey) {
           localStorage.setItem('authToken', result.data.auth.AppKey);
@@ -85,6 +97,8 @@ const logout = async () => {
 		setUser(null);
 		setPermisos([]);
 		setIsAuthenticated(false);
+    clearCredentials();
+    setMenu([]);
 		localStorage.removeItem('authToken');
 		localStorage.removeItem('userData');
 		localStorage.removeItem('userPermisos');

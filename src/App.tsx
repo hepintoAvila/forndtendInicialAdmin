@@ -4,6 +4,7 @@ import { NotificationProvider, ThemeProvider } from '@/common/context';
 import { Suspense} from 'react';
 //import LandingPage from './pages/Landing';
 import { PageLoader } from './components';
+import { AuthProvider  } from './common/context/AuthContext';
 //import { useAuth0 } from '@auth0/auth0-react';
 
  
@@ -54,11 +55,15 @@ const App = () => {
   return (
     <>
       <Suspense fallback={<PageLoader />}>
+        
         <ThemeProvider>
+          <AuthProvider >
           <NotificationProvider>
                 <AppRoutes />
           </NotificationProvider>
+          </AuthProvider >
         </ThemeProvider>
+         
 
         </Suspense>
     </>

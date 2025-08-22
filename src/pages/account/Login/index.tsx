@@ -16,7 +16,7 @@ const Login = () => {
   const { isAuthenticated, login, loading} = useAuth();
   const navigate = useNavigate();
  
-console.log('', isAuthenticated, 'isAuthenticated en Login');
+   //console.log('', isAuthenticated, 'isAuthenticated en Login');
   // Redirigir solo si está autenticado y no estamos ya en la página de dashboard
   useEffect(() => {
     if (isAuthenticated) {
