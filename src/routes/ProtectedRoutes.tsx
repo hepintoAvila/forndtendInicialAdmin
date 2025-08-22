@@ -10,6 +10,7 @@ import { useAuth } from '@/hooks';
  
 const Error404Alt = lazy(() => import('../pages/otherpages/Error404Alt'));
 const Administrador = lazy(() => import('../pages/Administrador/Administrador'));
+const Aula = lazy(() => import('../pages/Aula/'));
 const Dashboard = lazy(() => import('../pages/Dashboard'));
 
 export default function ProtectedRoutes() {
@@ -27,6 +28,7 @@ export default function ProtectedRoutes() {
       <Route path="/*" element={<Layout />}>
         <Route index element={<Root />} />
         <Route path="administrador/*" element={<Administrador />} />
+        <Route path="aula/*" element={<Aula />} />
         <Route path="dashboard/*" element={<Dashboard />} />
         <Route path="*" element={<Error404Alt />} />
       </Route>

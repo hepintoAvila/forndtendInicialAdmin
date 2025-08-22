@@ -57,6 +57,7 @@ export type Menu = {
 	isTitle?: boolean;
 	icon?: string;
 	className?: string;
+	entidad?: string;
 	url?: string;
 	badge?: {
 		variant: string;
@@ -73,6 +74,7 @@ export interface MenuItem {
   label: string;
   isTitle: boolean;
   icon: string;
+  entidad: string;
   badge: {
     variant: string;
     text: number;
