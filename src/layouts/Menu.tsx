@@ -4,7 +4,9 @@ import classNames from 'classnames';
 import { Collapse } from 'react-bootstrap';
 import { MenuItemType, ThemeSettings, useThemeContext } from '@/common';
 import { findAllParent, findMenuItem } from './utils/menu';
-import { useAuth } from '@/pages/account/Login/useLogin';
+import { useAuth } from '@/hooks';
+ 
+ 
 
 export type SubMenus = {
 	item: MenuItemType;

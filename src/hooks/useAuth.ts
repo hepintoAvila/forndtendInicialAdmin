@@ -1,26 +1,17 @@
 import { config, encodeBasicUrl } from '@/common';
 import AuthService from '@/common/api/auth';
-import { useCallback, useEffect,useState } from 'react';
-import { AuthData, Menu, Permiso } from './type';
+import { useEffect,useState } from 'react';
+import { AuthData, Menu, MenuItem, Permiso } from '../pages/account/Login/type';
 
+export default function useAuth(){
 
-export const hasPermission = (permisos: Permiso[], menu: string, submenu: string, action: 'query' | 'add' | 'update' | 'delete'): boolean => {
-  const permiso = permisos.find(p => p.menu === menu && p.submenu === submenu);
-  return permiso?.[action] === 'S';
-};
-
-export const canAccess = (permisos: Permiso[], menu: string, submenu: string = ''): boolean => {
-  return permisos.some(p => p.menu === menu && p.submenu === submenu && p.query === 'S');
-};
-
-export const useAuth = () => {
-    const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<AuthData | null>(null);
   const [permisos, setPermisos] = useState<Permiso[]>([]);
   const [MENU_ITEMS_CONTEXT, setMenu] = useState<Menu[]>([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
- 
+  const [menu, setMenup] = useState<MenuItem[]>([]);
   // Verificar autenticación al inicializar
   useEffect(() => {
     checkAuthStatus();   
@@ -33,8 +24,6 @@ export const useAuth = () => {
     if (token && userData) {
       try {
         setUser(JSON.parse(userData));
-        
-        
         const savedPermisos = localStorage.getItem('userPermisos');
         if (savedPermisos) {
           setPermisos(JSON.parse(savedPermisos));
@@ -42,6 +31,7 @@ export const useAuth = () => {
       const savedMenu = localStorage.getItem('userMenu');
         if (savedMenu) {
           setMenu(JSON.parse(savedMenu));
+          setMenup(JSON.parse(savedMenu));
         }
         setIsAuthenticated(true);
       } catch (error) {
@@ -102,7 +92,44 @@ const logout = async () => {
 		// Aquí puedes agregar llamadas a API de logout si es necesario
 		// await api.post('/logout');
 	};
+ // Función para verificar permisos
+  const hasPermission = (menuKey: string, submenu: string = '', action: 'query' | 'add' | 'update' | 'delete'): boolean => {
+    const permiso = permisos.find(p => p.menu === menuKey && p.submenu === submenu);
+    return permiso?.[action] === 'S';
+  };
 
+  // Función para verificar acceso a un módulo
+  const canAccess = (menuKey: string, submenu: string = ''): boolean => {
+    return permisos.some(p => p.menu === menuKey && p.submenu === submenu && p.query === 'S');
+  };
+
+  // Función para obtener menú filtrado por permisos
+  const getFilteredMenu = (): MenuItem[] => {
+    return menu.filter((menuItem: MenuItem) => {
+      // Verificar si el usuario tiene acceso al menú principal
+      const canAccessMenu = canAccess(menuItem.key);
+      
+      // Si tiene hijos, filtrarlos también por permisos
+      if (menuItem.children && menuItem.children.length > 0) {
+        // Crear una copia para no mutar el estado directamente
+        const filteredChildren = menuItem.children.filter(child => 
+          canAccess(menuItem.key, child.key)
+        );
+        
+        // Retornar un nuevo objeto con los hijos filtrados
+        return {
+          ...menuItem,
+          children: filteredChildren
+        };
+      }
+      
+      return canAccessMenu;
+    }).filter(menuItem => 
+      // Filtrar items que no tienen acceso y no tienen hijos con acceso
+      canAccess(menuItem.key) || 
+      (menuItem.children && menuItem.children.length > 0)
+    );
+  };
   return {
     loading,
     error,
@@ -112,6 +139,10 @@ const logout = async () => {
     login,
     logout,
     checkAuthStatus,
-    MENU_ITEMS_CONTEXT
+    MENU_ITEMS_CONTEXT,
+    hasPermission,
+    canAccess,
+    getFilteredMenu,
+    menu
   };
 };

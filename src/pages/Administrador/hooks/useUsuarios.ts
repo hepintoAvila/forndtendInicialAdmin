@@ -12,8 +12,8 @@ export const UsuariosAtoms = atom<respUsuarios[]>([]);
 import * as XLSX from 'xlsx';
 import { toast } from 'react-toastify';
 import { Column } from 'react-table';
-import { useToggle } from '@/hooks';
-import { useAuth } from '@/pages/account/Login/useLogin';
+import { useAuth, useToggle } from '@/hooks';
+ 
  
 
 export default function useUsuario(locacion: string): UseUsuarioProps {

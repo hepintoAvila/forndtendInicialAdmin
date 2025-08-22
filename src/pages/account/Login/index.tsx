@@ -7,8 +7,9 @@ import SocialLogin from '../SocialLogin';
 import TextInputSinOnchange from '@/components/Form/TextInputSinOnchange';
 import LogoDark from '@/assets/images/logo-dark.jpg';
 import AccountWrapper from '@/pages/account/Login/AccountWrapper';
-import { useAuth } from './useLogin';
+ 
 import { useEffect } from 'react';
+import { useAuth } from '@/hooks';
 
 const Login = () => {
 	const { t } = useTranslation();

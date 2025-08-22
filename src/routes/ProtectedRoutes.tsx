@@ -4,8 +4,9 @@ import { Route, Routes as ReactRoutes } from 'react-router-dom';
 import VerticalLayout from '@/layouts/Vertical';
 import HorizontalLayout from '@/layouts/Horizontal';
 import Root from './Root';
-import { useAuth } from '@/pages/account/Login/useLogin';
+ 
 import LoadingSpinner from '@/components/LoadingSpinner';
+import { useAuth } from '@/hooks';
  
 const Error404Alt = lazy(() => import('../pages/otherpages/Error404Alt'));
 const Administrador = lazy(() => import('../pages/Administrador/Administrador'));

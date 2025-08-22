@@ -91,7 +91,7 @@ export default function VerticalLayout() {
 		<>
 			<div className="wrapper">
 				<Suspense fallback={<PageLoader />}>
-					<Topbar toggleMenu={openMenu} topbarDark={topbarDark} user={user}/>
+					<Topbar toggleMenu={openMenu} topbarDark={topbarDark} user={''}/>
 				</Suspense>
 
 				<Suspense fallback={<PageLoader />}>

@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 
-import useAuth from '@/pages/account/Login/useAuth';
+ 
  
 import { useState } from 'react';
 import PaisNacimiento from './PaisNacimiento/PaisNacimiento';
@@ -185,14 +185,13 @@ const RecoverAspirante = () => {
 				<div className="mb-3">
 				<label>Fecha de Nacimiento</label> <br />				
 				<CustomDatePicker
-								key="fecha_nacimiento"
-								hideAddon={true}
-								dateFormat="yyyy-MM-dd"
-								value={selectedDate}
-								onChange={(date) => {
-									setSelectedDate(date);
-								}}
-								/>
+											key="fecha_nacimiento"
+											hideAddon={true}
+											dateFormat="yyyy-MM-dd"
+											value={selectedDate}
+											onChange={(date) => {
+												setSelectedDate(date);
+											} } name={undefined}								/>
 					</div>
 					</Col>
 					<Col lg={6}>

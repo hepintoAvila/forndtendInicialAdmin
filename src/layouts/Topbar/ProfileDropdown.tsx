@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import { Dropdown } from 'react-bootstrap';
 import classNames from 'classnames';
 import { ProfileOption } from './types';
-import { useToggle } from '@/hooks';
+import { useLogout, useToggle } from '@/hooks';
 import usernavrow from '@/assets/images/user-nav-row.png';
-import Logout from '@/pages/account/Logout';
-import useLogout from '@/pages/account/Logout/useLogout';
+ 
+ 
 //import { useAuth0 } from '@auth0/auth0-react';
 
 type ProfileDropdownProps = {

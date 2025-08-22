@@ -15,11 +15,11 @@ import logoSm from '@/assets/images/logo-sm.png';
 import logoDarkSm from '@/assets/images/logo-dark-sm.png';
 import { ThemeSettings, useThemeContext } from '@/common';
 import useThemeCustomizer from '@/components/ThemeCustomizer/useThemeCustomizer';
-import { useViewport } from '@/hooks';
+import { useAuth, useViewport } from '@/hooks';
 //import { Auth } from '@/types';
 import { useEffect } from 'react';
 //import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from '@/pages/account/Login/useLogin';
+ 
 
 
 type TopbarProps = {

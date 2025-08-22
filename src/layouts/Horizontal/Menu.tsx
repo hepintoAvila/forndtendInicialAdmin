@@ -3,7 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { MenuItemType } from '@/common/menu-items';
 import classNames from 'classnames';
 import { findAllParent, findMenuItem } from '../utils/menu';
-import { useAuth } from '@/pages/account/Login/useLogin';
+import { useAuth } from '@/hooks';
+ 
 
 /**
  * Renders the application menu

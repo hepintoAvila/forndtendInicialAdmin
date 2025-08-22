@@ -66,8 +66,24 @@ export type Menu = {
 	target?: string;
 	children?: Menu[];
 
-} ;
+} ; 
 
+export interface MenuItem {
+  key: string;
+  label: string;
+  isTitle: boolean;
+  icon: string;
+  badge: {
+    variant: string;
+    text: number;
+  };
+  children: MenuItemChild[];
+}
+export interface MenuItemChild {
+  key: string;
+  label: string;
+  // agregar otras propiedades que tengan los hijos del menú
+}
 // Uso:
 // if (hasPermission(permisos, 'Administracion', 'Usuarios', 'add')) {
 //   // Mostrar botón de agregar usuario

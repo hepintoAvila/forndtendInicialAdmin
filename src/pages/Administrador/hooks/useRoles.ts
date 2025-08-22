@@ -6,7 +6,8 @@ import { config, sendData } from '@/common/helpers/';
 import { atom, useAtom } from 'jotai';
 import { respRoles, Rol, UseRolProps } from '../Roles/type';
 import Swal from 'sweetalert2';
-import { useAuth } from '@/pages/account/Login/useLogin';
+import { useAuth } from '@/hooks';
+ 
 export const RolesAtoms = atom<respRoles[]>([]);
 
  

@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import AccountWrapper from '@/pages/storeSotf/RecoverPassword/AccountWrapper';
-import { useAuth } from '../Login/useLogin';
+import { useAuth } from '@/hooks';
+ 
 
 
 const BottomLink = () => {
