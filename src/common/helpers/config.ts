@@ -11,7 +11,16 @@ const config = {
 	 
 	API_ACCION_PCS: 'admin_pcs', 
 	API_OPCION_PCS: 'consulta_pcs',  
-	API_ADMIN_PCS: 'admin_pcs',  
+	API_ADMIN_PCS: 'admin_pcs', 
+	
+	API_ACCION_TURNOS: 'admin_turnos', 
+	API_OPCION_ADD_TURNOS: 'add_turno',  
+	_SPIP_PAGE: 'admin_turnos',  
+
+	API_ACCION_USUARIOS: 'admin_usuarios', 
+	API_OPCION_USUARIOS: 'consultar_estudiantes',  
+	API_ADMIN_USUARIOS: 'admin_usuarios',  
+
 
 	API_OPCION_CONSULTA_ROLES:'consulta_roles',
 	API_OPCION_EDITAR_ROLES:'editar_roles',
@@ -19,7 +28,7 @@ const config = {
 	API_OPCION_DELETE_ROLES:'delete_roles',
 	API_ACCION_ROLES:'roles',
 
-	API_ACCION_USUARIOS:'usuarios',
+
 	API_OPCION_CONSULTA_USUARIOS:'consulta',
 	API_OPCION_ADD_USUARIOS:'guardar',
 	API_OPCION_EDITAR_USUARIOS:'update',

@@ -110,7 +110,7 @@ const Pagination = ({ tableProps, sizePerPageList }: PaginationProps) => {
 					{pageIndex + 1} of {tableProps.pageOptions.length}
 				</strong>
 			</span>
-
+			{/*}
 			<span className="d-inline-block align-items-center text-sm-start text-center my-sm-0 my-2">
 				<label>Go to page : </label>
 				<input
@@ -125,7 +125,7 @@ const Pagination = ({ tableProps, sizePerPageList }: PaginationProps) => {
 					className="form-control w-25 ms-1 d-inline-block"
 				/>
 			</span>
-
+					*/}
 			<ul className="pagination pagination-rounded d-inline-flex ms-auto align-item-center mb-0">
 				<li
 					key="prevpage"

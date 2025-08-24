@@ -8,16 +8,16 @@ export type Credentials = {
   password?: string;
 };
 export interface Pc {
-  id_pc: string;
-  numero: string;
+  id_pc: string | undefined,
+  numero?: number;
   ip: string;
   estado: 'Libre' | 'Ocupado';
 }
 
 export type PcList = Pc[];
 export interface PcsData {
-  id_pc: number;
-  numero?: number;
+  id_pc: string | undefined,
+   numero?: number;
   ip: string;
   estado: 'Libre' | 'Ocupado';
   status: 'Activo' | 'Inactivo';
@@ -46,6 +46,7 @@ export interface PcsServiceResponse {
   };
   error?: string;
 }
+
 export interface PcsServiceInterface {
   Autentications: (values: UserProps) => Promise<PcsServiceResponse>;
 }

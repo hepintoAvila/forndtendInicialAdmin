@@ -1,30 +1,16 @@
-import { ApiResponse,PcsServiceInterface, PcsServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/type";
+import { ApiEstudianteResponse, EstudianteServiceInterface, EstudianteServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/typeEstudiante";
 
-interface BodyData {
-  documento?: number | undefined ;
-  id_pc?: number | undefined ;
-}
-const PcsService = (urlObjet: any): PcsServiceInterface => {
+const EstudianteService = (urlObjet : any): EstudianteServiceInterface => {
 
-
-const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, id_pc: number | undefined } }): BodyData => {
-  const bodyData: BodyData = {};
-  if (urlObjet.datos) {
-    bodyData.documento = urlObjet.datos.documento;
-    bodyData.id_pc = urlObjet.datos.id_pc;
-  }
-  return bodyData;
-};
-  const Autentications = async (values: UserProps): Promise<PcsServiceResponse> => {
-   
-    const credentials = {
+const Autentications = async (values: UserProps): Promise<EstudianteServiceResponse> => {
+const credentials = {
       var_login: values.login,
       password: values.password,
     };
     const token = localStorage.getItem('authToken');
     const params = new URLSearchParams({
-      exec: urlObjet.accion || 'admin_pcs',
-      _SPIP_PAGE: urlObjet._SPIP_PAGE || 'admin_login',
+      exec: urlObjet._SPIP_PAGE || 'admin_usuarios',
+      _SPIP_PAGE: urlObjet._SPIP_PAGE || 'admin_usuarios',
       action: urlObjet.action || 'true',
       var_ajax:  urlObjet.var_ajax || 'form',
       bonjour: urlObjet.bonjour || 'oui',
@@ -33,7 +19,6 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
     });
 
     try {
-     const bodyData = generateBodyData(urlObjet);
       const response = await fetch(`/api2025/?${params.toString()}`, {
         method: 'POST',
         headers: {
@@ -43,7 +28,9 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
           'Accept': 'application/json',
           'x-sices-api-apikey': token ? token : '',
         },
-         body: JSON.stringify(bodyData),
+        body: JSON.stringify({
+         documento: urlObjet.documento,
+      }),
         credentials: 'include'
       });
 
@@ -52,7 +39,7 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
         return {
           status: 'success',
           data: {
-            pcs: [],
+            estudiantes: [],
             metadata: {
               statusCode: 204,
               type: 'success',
@@ -71,7 +58,7 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
      // console.log('Raw response:', responseText);
 
       // Intentar parsear como JSON
-      let result: ApiResponse;
+      let result: ApiEstudianteResponse;
       try {
         result = JSON.parse(responseText);
       } catch (parseError) {
@@ -86,7 +73,7 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
           status: 'success',
           data: {
             //auth: result.data?.Auth || {} as AuthData,
-            pcs: result.data?.Pcs || [],
+            estudiantes: result.data?.Estudiantes || [],
             metadata: {
               statusCode: result.status,
               type: result.type,
@@ -99,15 +86,15 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
       }
 
     } catch (error) {
-      if (error instanceof Error && error.message.includes('No existen registros de Pcs')) {
+      if (error instanceof Error && error.message.includes('No existen registros de Estudiantes')) {
         return {
           status: 'success',
           data: {
-            pcs: [],
+            estudiantes: [],
             metadata: {
               statusCode: 200,
               type: 'success',
-              message: 'No existen registros de Pcs'
+              message: 'No existen registros de Estudiantes'
             }
           }
         };
@@ -125,4 +112,4 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
   };
 };
 
-export default PcsService;
+export default EstudianteService;

@@ -23,12 +23,12 @@
 }
 
 .avatar-xl {
-    height: 7.5rem;
-    width: 7.5rem;
+    height: 8.5rem;
+    width: 8.5rem;
 }
 
 .avatar-title {
-    align-items: center;
+    align-items:flex-start;
     background-color: var(--#{$prefix}primary);
     color: $white;
     display: flex;

@@ -1,21 +1,35 @@
-import { ApiResponse,PcsServiceInterface, PcsServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/type";
+import { ApiTurnoResponse, TurnoRequest, TurnoServiceInterface, TurnoServiceResponse, UserProps } from "../type/type._turnos";
 
 interface BodyData {
-  documento?: number | undefined ;
-  id_pc?: number | undefined ;
+    documento: number;
+    pc: number;
+    fecha_inicial: Date;
+    fecha_final: Date;
 }
-const PcsService = (urlObjet: any): PcsServiceInterface => {
+const generateBodyData = (urlObjet: { datos?: { documento: number | any, pc: number | any , fecha_final: Date | any , fecha_inicial: Date | any } }): BodyData => {
+  
+  const fechaInicial = new Date();
+  const bodyData: BodyData = {
+    documento: 0,
+    pc: 0,
+    fecha_inicial: fechaInicial,
+    fecha_final: fechaInicial,
+  };
 
-
-const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, id_pc: number | undefined } }): BodyData => {
-  const bodyData: BodyData = {};
   if (urlObjet.datos) {
     bodyData.documento = urlObjet.datos.documento;
-    bodyData.id_pc = urlObjet.datos.id_pc;
+    bodyData.pc = urlObjet.datos.pc;
+    bodyData.fecha_inicial = urlObjet.datos.fecha_inicial;
+    bodyData.fecha_inicial = urlObjet.datos.fecha_inicial;
   }
   return bodyData;
 };
-  const Autentications = async (values: UserProps): Promise<PcsServiceResponse> => {
+ 
+const TurnosService = (urlObjet: TurnoRequest): TurnoServiceInterface => {
+
+  
+
+const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> => {
    
     const credentials = {
       var_login: values.login,
@@ -23,11 +37,11 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
     };
     const token = localStorage.getItem('authToken');
     const params = new URLSearchParams({
-      exec: urlObjet.accion || 'admin_pcs',
-      _SPIP_PAGE: urlObjet._SPIP_PAGE || 'admin_login',
-      action: urlObjet.action || 'true',
-      var_ajax:  urlObjet.var_ajax || 'form',
-      bonjour: urlObjet.bonjour || 'oui',
+      exec: 'admin_turnos',
+      _SPIP_PAGE: 'admin_turnos',
+      action: 'true',
+      var_ajax:'form',
+      bonjour:'oui',
       accion: urlObjet.accion,
       opcion: urlObjet.opcion
     });
@@ -52,7 +66,7 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
         return {
           status: 'success',
           data: {
-            pcs: [],
+            turno: [],
             metadata: {
               statusCode: 204,
               type: 'success',
@@ -71,7 +85,7 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
      // console.log('Raw response:', responseText);
 
       // Intentar parsear como JSON
-      let result: ApiResponse;
+      let result: ApiTurnoResponse;
       try {
         result = JSON.parse(responseText);
       } catch (parseError) {
@@ -86,7 +100,7 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
           status: 'success',
           data: {
             //auth: result.data?.Auth || {} as AuthData,
-            pcs: result.data?.Pcs || [],
+            turno: result.data?.Turno || [],
             metadata: {
               statusCode: result.status,
               type: result.type,
@@ -99,15 +113,15 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
       }
 
     } catch (error) {
-      if (error instanceof Error && error.message.includes('No existen registros de Pcs')) {
+      if (error instanceof Error && error.message.includes('No existen registros de Turno')) {
         return {
           status: 'success',
           data: {
-            pcs: [],
+            turno: [],
             metadata: {
               statusCode: 200,
               type: 'success',
-              message: 'No existen registros de Pcs'
+              message: 'No existen registros de Turno'
             }
           }
         };
@@ -119,10 +133,9 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
     };
   }
   };
-
   return {
-    Autentications
+    Autentications,
   };
 };
 
-export default PcsService;
+export default TurnosService;
