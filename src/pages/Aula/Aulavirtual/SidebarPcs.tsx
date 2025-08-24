@@ -1,15 +1,14 @@
 
 
-import { Button, Modal, Row, Form, Col } from "react-bootstrap";
+import {Button,Modal, Row} from "react-bootstrap";
 import { Pc } from "./type";
 import { ApiTurnoResponseData } from "@/common/type/type._turnos";
-
-import { Link } from "react-router-dom";
 import ComputadorCard from "./ComputadorCard";
 import EstudianteTable from "./EstudianteTable";
 import TurnoTable from "./TurnoTable";
 import EmptyTable from "./EmptyTable";
 import PrestamoForm from "./PrestamoForm";
+
 const SidebarPcs = ({
   turnos,
   computadores,
@@ -20,7 +19,8 @@ const SidebarPcs = ({
   handleSubmit,
   showModal,
   selectedComputador,
-  handleDocumentoChange
+  handleDocumentoChange,
+  changeState
 }: {
   turnos: ApiTurnoResponseData;
   computadores: Pc[];
@@ -28,13 +28,14 @@ const SidebarPcs = ({
   estudiantes: any;
   handleShowModal: (computador: Pc) => void;
   handleDocumentoChange: (arg: string) => void;
+  changeState: (arg: number) => void;
   handleCloseModal: () => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   showModal: boolean;
   selectedComputador: Pc;
 }) => {
 
-  const computadoresOrdenados = computadores.sort((a, b) => parseInt(a.id_pc || '0') - parseInt(b.id_pc || '0'));
+  const computadoresOrdenados = computadores?.sort((a, b) => parseInt(a.id_pc || '0') - parseInt(b.id_pc || '0'));
 
   const columnas = [];
   for (let i = 0; i < computadoresOrdenados.length; i += 5) {
@@ -46,9 +47,6 @@ const SidebarPcs = ({
   const onChangeDocumento = (e: any) => {
     handleDocumentoChange(e.target.value);
   };
-
-
-  //console.log('turnos',turnos);
   return (
     <nav className="d-flex flex-wrap justify-content-around ">
       <Row>
@@ -89,11 +87,22 @@ const SidebarPcs = ({
                     <th>PC No.</th>
                     <th>IP</th>
                     <th>Estado</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="w-100 my-1" style={{ height: '5px' }}>
-                    <td>{selectedComputador.numero}</td><td>{selectedComputador.ip}</td><td>{selectedComputador.estado}</td>
+                    <td>{selectedComputador.numero}</td><td>{selectedComputador.ip}</td><td  ><span className={`${selectedComputador.estado==='Ocupado'? 'text-danger':'text-black'}`}>{selectedComputador.estado}</span></td><td>
+                        {selectedComputador.estado==='Ocupado' && (
+                        <Button
+                        className={'position-relative mt-0 mb-4 button-rounded'}
+                          type="submit"
+                          onClick={()=>changeState(selectedComputador.numero as number)}
+                        >
+                          <i className="ri-link-unlink-m"></i>
+                        </Button>
+                          )}
+                   </td>
                   </tr>
                 </tbody>
               </table>
@@ -103,9 +112,9 @@ const SidebarPcs = ({
             <EstudianteTable estudiantes={estudiantes} />
           ) : (<EmptyTable mensaje="El Usuario no esta registrado" />)}
           <p></p>
-
           <p></p>
           <PrestamoForm
+            estado ={selectedComputador.estado}
             handleSubmit={handleSubmit}
             onChangeDocumento={onChangeDocumento}
             documentoAnterior={documentoAnterior}

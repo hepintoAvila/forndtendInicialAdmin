@@ -12,10 +12,12 @@ const config = {
 	API_ACCION_PCS: 'admin_pcs', 
 	API_OPCION_PCS: 'consulta_pcs',  
 	API_ADMIN_PCS: 'admin_pcs', 
+	API_OPCION_UPDATE_PCS: 'update_pcs', 
 	
 	API_ACCION_TURNOS: 'admin_turnos', 
 	API_OPCION_ADD_TURNOS: 'add_turno',  
 	_SPIP_PAGE: 'admin_turnos',  
+	API_OPCION_QUERY_TURNOS: 'consulta_turnos_documento',  
 
 	API_ACCION_USUARIOS: 'admin_usuarios', 
 	API_OPCION_USUARIOS: 'consultar_estudiantes',  

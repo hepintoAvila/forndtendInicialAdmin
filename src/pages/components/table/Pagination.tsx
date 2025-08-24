@@ -85,7 +85,6 @@ const Pagination = ({ tableProps, sizePerPageList }: PaginationProps) => {
 		<div className="d-lg-flex align-items-center text-center pb-1">
 			{sizePerPageList.length > 0 && (
 				<div className="d-inline-block me-3">
-					<label className="me-1">Display :</label>
 					<select
 						value={tableProps.state.pageSize}
 						onChange={(e) => {
@@ -105,7 +104,6 @@ const Pagination = ({ tableProps, sizePerPageList }: PaginationProps) => {
 			)}
 
 			<span className="me-3">
-				Page
 				<strong>
 					{pageIndex + 1} of {tableProps.pageOptions.length}
 				</strong>

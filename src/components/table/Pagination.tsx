@@ -85,7 +85,6 @@ const Pagination = ({ tableProps, sizePerPageList }: PaginationProps) => {
 		<div className="d-lg-flex align-items-center text-center pb-1">
 			{sizePerPageList.length > 0 && (
 				<div className="d-inline-block me-3">
-					<label className="me-1">Display :</label>
 					<select
 						value={tableProps.state.pageSize}
 						onChange={(e) => {
@@ -105,27 +104,10 @@ const Pagination = ({ tableProps, sizePerPageList }: PaginationProps) => {
 			)}
 
 			<span className="me-3">
-				Page
-				<strong>
-					{pageIndex + 1} of {tableProps.pageOptions.length}
+				<strong className="font-10">
+					{pageIndex + 1}/{tableProps.pageOptions.length}
 				</strong>
 			</span>
-			{/*}
-			<span className="d-inline-block align-items-center text-sm-start text-center my-sm-0 my-2">
-				<label>Go to page : </label>
-				<input
-					type="number"
-					value={pageIndex + 1}
-					min="1"
-					onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-						const page = e.target.value ? Number(e.target.value) - 1 : 0;
-						tableProps.gotoPage(page);
-						setPageIndex(tableProps.state.pageIndex);
-					}}
-					className="form-control w-25 ms-1 d-inline-block"
-				/>
-			</span>
-					*/}
 			<ul className="pagination pagination-rounded d-inline-flex ms-auto align-item-center mb-0">
 				<li
 					key="prevpage"

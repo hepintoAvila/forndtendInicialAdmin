@@ -16,6 +16,7 @@ export interface Pc {
 
 export type PcList = Pc[];
 export interface PcsData {
+  map(arg0: (computador: any) => any): Pc[];
   id_pc: string | undefined,
    numero?: number;
   ip: string;

@@ -1,20 +1,9 @@
 import { ApiResponse,PcsServiceInterface, PcsServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/type";
 
-interface BodyData {
-  documento?: number | undefined ;
-  id_pc?: number | undefined ;
-}
-const PcsService = (urlObjet: any): PcsServiceInterface => {
+
+const PcsService = (urlObjet: any,bodyData:any): PcsServiceInterface => {
 
 
-const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, id_pc: number | undefined } }): BodyData => {
-  const bodyData: BodyData = {};
-  if (urlObjet.datos) {
-    bodyData.documento = urlObjet.datos.documento;
-    bodyData.id_pc = urlObjet.datos.id_pc;
-  }
-  return bodyData;
-};
   const Autentications = async (values: UserProps): Promise<PcsServiceResponse> => {
    
     const credentials = {
@@ -24,7 +13,7 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
     const token = localStorage.getItem('authToken');
     const params = new URLSearchParams({
       exec: urlObjet.accion || 'admin_pcs',
-      _SPIP_PAGE: urlObjet._SPIP_PAGE || 'admin_login',
+      _SPIP_PAGE: urlObjet._SPIP_PAGE || 'admin_pcs',
       action: urlObjet.action || 'true',
       var_ajax:  urlObjet.var_ajax || 'form',
       bonjour: urlObjet.bonjour || 'oui',
@@ -33,7 +22,7 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
     });
 
     try {
-     const bodyData = generateBodyData(urlObjet);
+
       const response = await fetch(`/api2025/?${params.toString()}`, {
         method: 'POST',
         headers: {
@@ -69,7 +58,11 @@ const generateBodyData = (urlObjet: { datos?: { documento: number | undefined, i
       // Obtener el texto de la respuesta primero para debuggear
       const responseText = await response.text();
      // console.log('Raw response:', responseText);
-
+     if (!responseText) {
+        console.log('La respuesta está vacía');
+        // Puedes manejar este caso según tus necesidades
+        throw new Error('La respuesta está vacía');
+      }
       // Intentar parsear como JSON
       let result: ApiResponse;
       try {

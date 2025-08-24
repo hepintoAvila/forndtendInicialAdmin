@@ -31,9 +31,6 @@ const TurnoTable = ({ turnos }: TurnoTableProps) => {
           defaultCanSort: false,
           Cell: ({ row }: { row: any }) => (
             <>
-              <Link to="" className="action-icon">
-                <i className="mdi mdi-square-edit-outline"></i>
-              </Link>
               <Link to="" className="action-icon" >
                 <i className="mdi mdi-delete"></i>
               </Link>

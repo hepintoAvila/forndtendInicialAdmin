@@ -8,6 +8,7 @@ interface PrestamoFormProps {
   documentoAnterior: string;
   selectedComputador: any;
   estudiantes: any[];
+  estado?: string;
 }
 
 const PrestamoForm = ({
@@ -16,6 +17,7 @@ const PrestamoForm = ({
   documentoAnterior,
   selectedComputador,
   estudiantes,
+  estado,
 }: PrestamoFormProps) => {
   return (
     <div className="d-flex flex-wrap justify-content-around ">
@@ -60,18 +62,18 @@ const PrestamoForm = ({
             </Form.Group>
           </Col>
         </Row>
-
         <Row>
           <Col lg={8}></Col>
-          <Col lg={4}>
-            <Button
-              className={'position-relative mt-0 ms-2 mb-4'}
+          <Col lg={3} className={'button-position ms-5'}>
+            {estado==='Libre' ? <Button
+             className={'position-relative mt-0 mb-4 button-rounded'}
               type="submit"
               disabled={estudiantes?.length < 1}
             >
-              Prestar equipo
-            </Button>
+              <i className="ri-calendar-check-line"></i>
+            </Button>:''}
           </Col>
+          <Col lg={1}></Col>
         </Row>
       </Form>
     </div>

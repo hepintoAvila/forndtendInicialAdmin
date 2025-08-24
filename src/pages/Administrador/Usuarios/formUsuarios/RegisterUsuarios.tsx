@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Modal, Form } from 'react-bootstrap';
-import Usuarios from '../Usuarios';
  
 
 interface EditarUsuarioProps {

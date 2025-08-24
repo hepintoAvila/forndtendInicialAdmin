@@ -34,7 +34,7 @@ export interface AuthData {
   AppKey: string;
 }
 
-type TurnoRequestDatos = {
+export type TurnoRequestDatos = {
   documento: any;
   pc: any;
   fecha_final: Date;
@@ -44,7 +44,6 @@ type TurnoRequestDatos = {
 export type TurnoRequest = {
   accion: string;
   opcion: string;
-  datos: TurnoRequestDatos;
 };
 export interface BodyData {
     documento: number;
@@ -54,6 +53,7 @@ export interface BodyData {
 }
 
 export interface TurnoServiceResponse {
+  message(message: any): unknown;
   status: 'success' | 'error';
   data?: {
     turno: TurnoData[];
@@ -87,5 +87,5 @@ export interface ApiTurnoResponseData {
   status: number;
   type: string;
   data: TurnoResponseData;
-  message: string;
+  message?: string;
 }

@@ -1,31 +1,7 @@
 import { ApiTurnoResponse, TurnoRequest, TurnoServiceInterface, TurnoServiceResponse, UserProps } from "../type/type._turnos";
 
-interface BodyData {
-    documento: number;
-    pc: number;
-    fecha_inicial: Date;
-    fecha_final: Date;
-}
-const generateBodyData = (urlObjet: { datos?: { documento: number | any, pc: number | any , fecha_final: Date | any , fecha_inicial: Date | any } }): BodyData => {
-  
-  const fechaInicial = new Date();
-  const bodyData: BodyData = {
-    documento: 0,
-    pc: 0,
-    fecha_inicial: fechaInicial,
-    fecha_final: fechaInicial,
-  };
 
-  if (urlObjet.datos) {
-    bodyData.documento = urlObjet.datos.documento;
-    bodyData.pc = urlObjet.datos.pc;
-    bodyData.fecha_inicial = urlObjet.datos.fecha_inicial;
-    bodyData.fecha_inicial = urlObjet.datos.fecha_inicial;
-  }
-  return bodyData;
-};
- 
-const TurnosService = (urlObjet: TurnoRequest): TurnoServiceInterface => {
+const TurnosService = (urlObjet: TurnoRequest,bodyData:any): TurnoServiceInterface => {
 
   
 
@@ -47,7 +23,7 @@ const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> 
     });
 
     try {
-     const bodyData = generateBodyData(urlObjet);
+     
       const response = await fetch(`/api2025/?${params.toString()}`, {
         method: 'POST',
         headers: {
@@ -83,7 +59,11 @@ const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> 
       // Obtener el texto de la respuesta primero para debuggear
       const responseText = await response.text();
      // console.log('Raw response:', responseText);
-
+      if (!responseText) {
+        console.log('La respuesta está vacía');
+        // Puedes manejar este caso según tus necesidades
+        throw new Error('La respuesta está vacía');
+      }
       // Intentar parsear como JSON
       let result: ApiTurnoResponse;
       try {

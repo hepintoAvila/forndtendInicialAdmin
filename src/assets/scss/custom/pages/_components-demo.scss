@@ -9,7 +9,19 @@
     margin-top: 0.5rem;
     overflow: auto;
 }
+.button-rounded {
+  position: relative;
+  border-radius: 50px;
+  padding: 5px 10px ;
+}
+.button-position {
+  display:grid;   
+  align-content: stretch;
+  justify-content: end;
+  align-items: stretch;
+  justify-items: stretch;
 
+}
 // Grid
 .grid-structure {
     .grid-container {
