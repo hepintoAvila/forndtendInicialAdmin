@@ -13,13 +13,12 @@ import useTurnos from "@/hooks/useTurnos";
  
 const Aulavirtual = () => {
 
-const {sendComputadores, computadores,sendComputadorRequest} = usePcs();
-const { resetEstudiantes,handleDocumentoChange,documentoAnterior,estudiantes}  = useEstudiantes();
-const {generateBodyData,turnos,setTurno,handleSubmit} = useTurnos();
+  const {sendComputadores, computadores,sendComputadorRequest} = usePcs();
+  const { resetEstudiantes,handleDocumentoChange,documentoAnterior,estudiantes}  = useEstudiantes();
+  const {generateBodyData,turnos,setTurno,handleSubmit} = useTurnos();
+  
   const [showModal, setShowModal] = useState(false);
   const [selectedComputador , setDocumento] = useState<Pc>({} as Pc);
- 
-
   const handleShowModal = (computador: Pc) => {
       setDocumento(computador);
       setShowModal(true);
@@ -43,8 +42,6 @@ const {generateBodyData,turnos,setTurno,handleSubmit} = useTurnos();
        sendComputadorRequest(); 
 
   };
-
-
 const changeState = (id_pc: any) => {
    const credentialsUrl = {
     accion: encodeBasicUrl(config.API_ACCION_PCS),
@@ -58,8 +55,6 @@ const changeState = (id_pc: any) => {
     sendComputadores(credentialsUrl,BodyData);
 }
   
-
-
   useEffect(() => {
       const credentialsUrl = {
         accion: encodeBasicUrl(config.API_ACCION_PCS),

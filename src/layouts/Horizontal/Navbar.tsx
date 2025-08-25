@@ -11,7 +11,7 @@ type NavbarProps = {
 
 const Navbar = ({navOpen }: NavbarProps) => {
 	
- 
+ console.log(navOpen)
 	return (
 		<div className="topnav navbar-border">
 

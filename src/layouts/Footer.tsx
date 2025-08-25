@@ -5,8 +5,11 @@ export default function Footer() {
         <footer className="footer">
             <div className="container-fluid">
                 <Row> 
-                    <Col md={6}>
-                        <div className="text-md-end footer-links d-none d-md-block"></div>
+                    <Col md={12}>
+                        <div className="text-md-end footer-links d-none d-md-block">
+                            <span>PrestaSoft - Universidad Popular del Cesar  
+                              - Desarrollado por: Ing. Holmes Elias Pinto Avila @2025</span>
+                        </div>
                     </Col>
                 </Row>
             </div>

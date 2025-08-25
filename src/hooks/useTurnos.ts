@@ -20,6 +20,7 @@ interface PrestamoResponse {
 
 const ApiTurnoAtom = atom<ApiTurnoResponseData>([] as unknown as ApiTurnoResponseData);
 const calcularFechaFinal = (prestamo: Prestamo): PrestamoResponse => {
+  
   const tiempoPrestamo = Number(prestamo.tiempo_prestamo);
   const fechaInicial = new Date(prestamo.fecha_inicial);
 
@@ -120,12 +121,12 @@ const authContext = useContext(AuthContext);
   }
   const generateBodyDataAsigTurno = (urlObjet: { datos?: { documento: number | any, pc: number | any , fecha_final: Date | any , fecha_inicial: Date | any } }): BodyDataTurno => {
     
-    const fechaInicial = new Date();
+  
     const bodyData: BodyDataTurno = {
       documento: 0,
       pc: 0,
-      fecha_inicial: fechaInicial,
-      fecha_final: fechaInicial,
+      fecha_inicial: new Date(),
+      fecha_final: new Date(),
       ubicacion: 2,
     };
   
@@ -133,7 +134,7 @@ const authContext = useContext(AuthContext);
       bodyData.documento = urlObjet.datos.documento;
       bodyData.pc = urlObjet.datos.pc;
       bodyData.fecha_inicial = urlObjet.datos.fecha_inicial;
-      bodyData.fecha_inicial = urlObjet.datos.fecha_inicial;
+      bodyData.fecha_final = urlObjet.datos.fecha_final;
     }
     return bodyData;
   };
@@ -160,10 +161,11 @@ const authContext = useContext(AuthContext);
             datos: {
                 documento,
                 pc,
-                fecha_final: resultado.fecha_final,
-                fecha_inicial: resultado.fecha_inicial,
+                fecha_final: resultado.fecha_final.toISOString(),
+                fecha_inicial: resultado.fecha_inicial.toISOString(),
               }
           }
+           console.log('urlObjet',urlObjet);
           const bodyData = generateBodyDataAsigTurno(urlObjet);
           sendTurno(credentialsUrl, bodyData);
     };

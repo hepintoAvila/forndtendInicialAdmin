@@ -59,7 +59,7 @@ const HorizontalLayout = () => {
 
 
 
-	const cuMenu = JSON.parse(sessionStorage.getItem('_MENU') || '{}')
+	//const cuMenu = JSON.parse(sessionStorage.getItem('_MENU') || '{}')
  
  	return (
 		<div className="wrapper">
@@ -73,7 +73,7 @@ const HorizontalLayout = () => {
 						/>
 						</Suspense>
 						<Suspense fallback={loading()}>
-						<Navbar menu={cuMenu} navOpen={horizontalDropdownOpen}/>
+						<Navbar navOpen={horizontalDropdownOpen}/>
 						</Suspense>
 					</>
 					)}
