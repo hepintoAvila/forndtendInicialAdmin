@@ -8,7 +8,7 @@ import { Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
  // Componente que usa el hook de permisos
- 
+
 
 const Sidebar = () => {
   const { getFilteredMenu} = usePermissions();

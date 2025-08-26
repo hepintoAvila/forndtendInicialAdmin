@@ -51,12 +51,13 @@ const PrestamoForm = ({
           </Col>
           <Col sm={6}>
             <Form.Group className="position-relative mb-3" controlId="validation">
-              <Form.Label>Tiempo del préstamo</Form.Label>
-              <Form.Select required name="tiempo_prestamo">
-                <option value="1">Una Hora</option>
-                <option value="2">Dos Horas</option>
-                <option value="3">Tres horas</option>
-                <option value="4">Cuatro Horas</option>
+              <Form.Label>Tipo del préstamo</Form.Label>
+              <Form.Select required name="tipo_prestamo">
+                <option value="1">Consulta bases de datos</option>
+                <option value="2">Investigación</option>
+                <option value="3">Estudio</option>
+                <option value="4">Capacitación</option>
+                <option value="5">Otros</option>
               </Form.Select>
               <Form.Control.Feedback type="invalid">Por favor, seleccione el tiempo préstamo</Form.Control.Feedback>
             </Form.Group>

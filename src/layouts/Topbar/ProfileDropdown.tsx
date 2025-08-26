@@ -79,8 +79,7 @@ const logoutWithRedirect = (redirectUrl = window.location.origin) => {
 								className="dropdown-item notify-item"
 								key={i + '-profile-menu'}
 							>
-								<i className={classNames(item.icon, 'me-1')}></i>
-								<span>{item.label}</span>
+								<i className={classNames(item.icon, 'me-4')}></i><span>{item.label}</span>
 							</Link>
 						);
 					})}

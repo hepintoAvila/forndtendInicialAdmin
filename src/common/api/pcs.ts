@@ -1,9 +1,11 @@
 import { ApiResponse,PcsServiceInterface, PcsServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/type";
 const PcsService = (urlObjet: any,bodyData:any): PcsServiceInterface => {
 
-
   const Autentications = async (values: UserProps): Promise<PcsServiceResponse> => {
-   
+     if (!values) {
+     throw new Error('AuthContext no está disponible');
+    }
+
     const credentials = {
       var_login: values.login,
       password: values.password,
@@ -117,3 +119,5 @@ const PcsService = (urlObjet: any,bodyData:any): PcsServiceInterface => {
 };
 
 export default PcsService;
+
+ 

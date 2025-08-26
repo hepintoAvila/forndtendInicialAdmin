@@ -1,4 +1,3 @@
-import config from "../helpers/config";
 import { ApiTurnoResponse, TurnoRequest, TurnoServiceInterface, TurnoServiceResponse, UserProps } from "../type/type._turnos";
 
 
@@ -8,6 +7,10 @@ const TurnosService = (urlObjet: TurnoRequest,bodyData:any): TurnoServiceInterfa
 
 const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> => {
    
+    if (!values) {
+     throw new Error('AuthContext no está disponible');
+    }
+
     const credentials = {
       var_login: values.login,
       password: values.password,

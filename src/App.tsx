@@ -52,6 +52,7 @@ const App = () => {
     navigate('Account/login/');
   };
 */
+
   return (
     <>
       <Suspense fallback={<PageLoader />}>

@@ -24,6 +24,10 @@ const TurnoTable = ({ turnos }: TurnoTableProps) => {
           Header: 'fecha_final',
           accessor: 'fecha_final',
           defaultCanSort: true,
+        },{
+          Header: 'Prestamo',
+          accessor: 'tipo_prestamo',
+          defaultCanSort: true,
         },
         {
           Header: 'Action',

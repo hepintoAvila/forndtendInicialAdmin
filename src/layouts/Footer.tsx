@@ -7,7 +7,7 @@ export default function Footer() {
                 <Row> 
                     <Col md={12}>
                         <div className="text-md-end footer-links d-none d-md-block">
-                            <span>PrestaSoft - Universidad Popular del Cesar  
+                            <span>LiviSoft - Universidad Popular del Cesar  
                               - Desarrollado por: Ing. Holmes Elias Pinto Avila @2025</span>
                         </div>
                     </Col>

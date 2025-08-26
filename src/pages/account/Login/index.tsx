@@ -43,7 +43,7 @@ const Login = () => {
 					<span>
 						<img src={LogoDark} alt="" height={100} />
 					</span>
-				<h4 className="mt-3 text-center text-bold" >{t('PrestaSoft')}</h4>
+				<h4 className="mt-3 text-center text-bold" >{t('LiviSoft')}</h4>
 				<h4 className="mt-0 text-center text-bold" >{t('Universidad Popular del Cesar')}</h4>
 				 
 	      		 <Form

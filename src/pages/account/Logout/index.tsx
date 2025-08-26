@@ -23,23 +23,6 @@ import AccountWrapper from '../Login/AccountWrapper';
 				const navigate = useNavigate();
 
 useEffect(() => {
-  const performLogout = async () => {
-    await logout();
-    toast.info('Cerrando sesión...', {
-      position: "top-center",
-      autoClose: 4000,
-    });
-    setRedirect(true);
-  };
-
-  if (isAuthenticated) {
-    performLogout();
-  } else {
-    navigate('/account/login', { replace: true });
-  }
-}, [logout, navigate, isAuthenticated]);
-
-useEffect(() => {
   if (redirect) {
     setTimeout(() => {
       navigate('/account/login', { replace: true });

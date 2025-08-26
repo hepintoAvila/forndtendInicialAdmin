@@ -12,6 +12,7 @@ export interface Turno {
   pc: number;
   fecha_inicial: string;
   fecha_final: string;
+  tipo_prestamo: string;
 }
 
 export type TurnoList = Turno[];
@@ -20,7 +21,8 @@ export interface TurnoData {
     documento?: number;
     pc: number;
     fecha_inicial: string;
-    fecha_final: string; 
+    fecha_final: string;
+    tipo_prestamo: string;     
 }
 export interface ApiTurnoResponse {
   status: number;
@@ -39,6 +41,7 @@ export type TurnoRequestDatos = {
   pc: any;
   fecha_final: Date;
   fecha_inicial: Date;
+  tipo_prestamo: string;
 };
 
 export type TurnoRequest = {
@@ -50,6 +53,7 @@ export interface BodyData {
     pc: number;
     fecha_inicial: Date;
     fecha_final: Date;
+    tipo_prestamo: string;
 }
 
 export interface TurnoServiceResponse {
@@ -76,6 +80,7 @@ interface TurnoResp {
   nombre_estudiante: string;
   fecha_inicial?: Date;
   fecha_final?: Date;
+  tipo_prestamo: string;
   sala: string;
   statut: string;
 }

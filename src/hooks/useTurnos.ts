@@ -115,8 +115,9 @@ const authContext = useContext(AuthContext);
       fecha_inicial: Date;
       fecha_final: Date;
       ubicacion: number;
+      tipo_prestamo: string;
   }
-  const generateBodyDataAsigTurno = (urlObjet: { datos?: { documento: number | any, pc: number | any , fecha_final: Date | any , fecha_inicial: Date | any } }): BodyDataTurno => {
+  const generateBodyDataAsigTurno = (urlObjet: { datos?: { documento: number | any, pc: number | any , fecha_final: Date | any , fecha_inicial: Date | any, tipo_prestamo: string | any } }): BodyDataTurno => {
     
   
     const bodyData: BodyDataTurno = {
@@ -125,11 +126,13 @@ const authContext = useContext(AuthContext);
       fecha_inicial: new Date(),
       fecha_final: new Date(),
       ubicacion: 2,
+      tipo_prestamo: '',
     };
   
     if (urlObjet.datos) {
       bodyData.documento = urlObjet.datos.documento;
       bodyData.pc = urlObjet.datos.pc;
+      bodyData.tipo_prestamo = urlObjet.datos.tipo_prestamo;
       bodyData.fecha_inicial = urlObjet.datos.fecha_inicial;
       bodyData.fecha_final = urlObjet.datos.fecha_final;
     }
@@ -141,15 +144,17 @@ const authContext = useContext(AuthContext);
       const formData = new FormData(event.currentTarget);
       const documento = formData.get('documento');
       const pc = formData.get('pc');
-      const tiempo_prestamo = formData.get('tiempo_prestamo'); //1,2,3,4
+      const tipo_prestamo = formData.get('tipo_prestamo'); //1,2,3,4
+     
       const fechaInicial = new Date();
 
       const prestamo = {
-        tiempo_prestamo: tiempo_prestamo,
+        tiempo_prestamo: 1,
         fecha_inicial: fechaInicial,
       };
 
       const resultado = calcularFechaFinal(prestamo as Prestamo);
+      
       const credentialsUrl: TurnoRequest = {
           accion: encodeBasicUrl(config.API_ACCION_TURNOS),
           opcion: encodeBasicUrl(config.API_OPCION_ADD_TURNOS),
@@ -158,6 +163,7 @@ const authContext = useContext(AuthContext);
             datos: {
                 documento,
                 pc,
+                tipo_prestamo,
                 fecha_final: resultado.fecha_final.toISOString(),
                 fecha_inicial: resultado.fecha_inicial.toISOString(),
               }

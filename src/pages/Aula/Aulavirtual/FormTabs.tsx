@@ -37,7 +37,7 @@ const FormTabs = ({
   const tabContents = [
     {
       id: '1',
-      title: 'Préstamo',
+      title: 'Prestamo',
       icon: 'mdi mdi-home-variant',
       text: '',
     },

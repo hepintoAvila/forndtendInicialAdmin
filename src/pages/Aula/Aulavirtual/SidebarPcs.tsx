@@ -4,15 +4,9 @@ import {Modal, Row} from "react-bootstrap";
 import { Pc } from "./type";
 import { ApiTurnoResponseData } from "@/common/type/type._turnos";
 import ComputadorCard from "./ComputadorCard";
-import EstudianteTable from "./EstudianteTable";
-import TurnoTable from "./TurnoTable";
-import EmptyTable from "./EmptyTable";
-import PrestamoForm from "./PrestamoForm";
-import ComputadorTable from "./ComputadorTable";
-import EstudianteForm from "./EstudianteForm";
-import { useState } from "react";
 import { ProgramaList } from "@/common/type/type._programas";
 import FormTabs from "./FormTabs";
+import ComputadorTable from "./ComputadorTable";
 
 const SidebarPcs = ({
   turnos,
@@ -57,8 +51,6 @@ const SidebarPcs = ({
     handleDocumentoChange(e.target.value);
   };
 
-
-  console.log('programas',programas);
   return (
     <nav className="d-flex flex-wrap justify-content-around ">
       <Row>
@@ -92,15 +84,16 @@ const SidebarPcs = ({
         </Modal.Header>
         <Modal.Body>
           <FormTabs
-              selectedComputador={selectedComputador}
-              handleSubmit={handleSubmit}
-              onChangeDocumento={onChangeDocumento}
-              documentoAnterior={documentoAnterior}
-              estudiantes={estudiantes}
-              handleSubmitEstudent={handleSubmitEstudent}
-              programas={programas}
-              turnos={turnos}
-            />
+            selectedComputador={selectedComputador}
+            handleSubmit={handleSubmit}
+            onChangeDocumento={onChangeDocumento}
+            documentoAnterior={documentoAnterior}
+            estudiantes={estudiantes}
+            handleSubmitEstudent={handleSubmitEstudent}
+            programas={programas}
+            turnos={turnos} 
+            changeState={changeState} 
+                      />
         </Modal.Body>
       </Modal>
 

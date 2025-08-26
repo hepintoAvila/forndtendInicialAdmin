@@ -58,13 +58,13 @@ const notifications: NotificationItem[] = [
 const profileMenus: ProfileOption[] = [
 	{
 		id: 1,
-		label: 'My Account',
+		label: 'Mi Cuenta',
 		icon: 'mdi mdi-account-circle',
 		redirectTo: '#',
 	},
 	{
 		id: 2,
-		label: 'Logout',
+		label: 'Salir',
 		icon: 'mdi mdi-logout',
 		redirectTo: '/account/logout',
 	},
