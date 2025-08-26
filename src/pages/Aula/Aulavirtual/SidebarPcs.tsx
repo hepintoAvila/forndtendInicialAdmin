@@ -1,6 +1,6 @@
 
 
-import {Button,Modal, Row} from "react-bootstrap";
+import {Modal, Row} from "react-bootstrap";
 import { Pc } from "./type";
 import { ApiTurnoResponseData } from "@/common/type/type._turnos";
 import ComputadorCard from "./ComputadorCard";
@@ -8,6 +8,11 @@ import EstudianteTable from "./EstudianteTable";
 import TurnoTable from "./TurnoTable";
 import EmptyTable from "./EmptyTable";
 import PrestamoForm from "./PrestamoForm";
+import ComputadorTable from "./ComputadorTable";
+import EstudianteForm from "./EstudianteForm";
+import { useState } from "react";
+import { ProgramaList } from "@/common/type/type._programas";
+import FormTabs from "./FormTabs";
 
 const SidebarPcs = ({
   turnos,
@@ -17,22 +22,26 @@ const SidebarPcs = ({
   handleShowModal,
   handleCloseModal,
   handleSubmit,
+  handleSubmitEstudent,
   showModal,
   selectedComputador,
   handleDocumentoChange,
-  changeState
+  changeState,
+  programas
 }: {
   turnos: ApiTurnoResponseData;
   computadores: Pc[];
   documentoAnterior: any;
   estudiantes: any;
   handleShowModal: (computador: Pc) => void;
-  handleDocumentoChange: (arg: string) => void;
+  handleDocumentoChange: (arg1: string) => void;
   changeState: (arg: number) => void;
   handleCloseModal: () => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleSubmitEstudent: (event: React.FormEvent<HTMLFormElement>) => void;
   showModal: boolean;
   selectedComputador: Pc;
+  programas:ProgramaList[];
 }) => {
 
   const computadoresOrdenados = computadores?.sort((a, b) => parseInt(a.id_pc || '0') - parseInt(b.id_pc || '0'));
@@ -47,6 +56,9 @@ const SidebarPcs = ({
   const onChangeDocumento = (e: any) => {
     handleDocumentoChange(e.target.value);
   };
+
+
+  console.log('programas',programas);
   return (
     <nav className="d-flex flex-wrap justify-content-around ">
       <Row>
@@ -74,59 +86,21 @@ const SidebarPcs = ({
           </div>
         ))}
       </Row>
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal show={showModal} onHide={handleCloseModal} >
         <Modal.Header closeButton>
           <Modal.Title>Asignar PC </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {selectedComputador && (
-            <div className="table-responsive">
-              <table className="table table-bordered table-striped">
-                <thead>
-                  <tr className="bg-success" style={{ height: '5px' }}>
-                    <th>PC No.</th>
-                    <th>IP</th>
-                    <th>Estado</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="w-100 my-1" style={{ height: '5px' }}>
-                    <td>{selectedComputador.numero}</td><td>{selectedComputador.ip}</td><td  ><span className={`${selectedComputador.estado==='Ocupado'? 'text-danger':'text-black'}`}>{selectedComputador.estado}</span></td><td>
-                        {selectedComputador.estado==='Ocupado' && (
-                        <Button
-                        className={'position-relative mt-0 mb-4 button-rounded'}
-                          type="submit"
-                          onClick={()=>changeState(selectedComputador.numero as number)}
-                        >
-                          <i className="ri-link-unlink-m"></i>
-                        </Button>
-                          )}
-                   </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          )}
-          {Array.isArray(estudiantes) && estudiantes.length > 0 ? (
-            <EstudianteTable estudiantes={estudiantes} />
-          ) : (<EmptyTable mensaje="El Usuario no esta registrado" />)}
-          <p></p>
-          <p></p>
-          <PrestamoForm
-            estado ={selectedComputador.estado}
-            handleSubmit={handleSubmit}
-            onChangeDocumento={onChangeDocumento}
-            documentoAnterior={documentoAnterior}
-            selectedComputador={selectedComputador}
-            estudiantes={estudiantes}
-          />
-          {Array.isArray(turnos) && turnos?.length > 0 ? (
-            <TurnoTable turnos={turnos} />
-
-          ) : (<>
-            <EmptyTable mensaje="No existen Turnos asignados" />
-          </>)}
+          <FormTabs
+              selectedComputador={selectedComputador}
+              handleSubmit={handleSubmit}
+              onChangeDocumento={onChangeDocumento}
+              documentoAnterior={documentoAnterior}
+              estudiantes={estudiantes}
+              handleSubmitEstudent={handleSubmitEstudent}
+              programas={programas}
+              turnos={turnos}
+            />
         </Modal.Body>
       </Modal>
 

@@ -1,6 +1,4 @@
 import { ApiResponse,PcsServiceInterface, PcsServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/type";
-
-
 const PcsService = (urlObjet: any,bodyData:any): PcsServiceInterface => {
 
 
@@ -12,7 +10,7 @@ const PcsService = (urlObjet: any,bodyData:any): PcsServiceInterface => {
     };
     const token = localStorage.getItem('authToken');
     const params = new URLSearchParams({
-      exec: urlObjet.accion || 'admin_pcs',
+      exec: 'admin_pcs',
       _SPIP_PAGE: urlObjet._SPIP_PAGE || 'admin_pcs',
       action: urlObjet.action || 'true',
       var_ajax:  urlObjet.var_ajax || 'form',

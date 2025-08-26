@@ -32,13 +32,14 @@ const ProfileDropdown = ({ userTitle, username, menuItems, picture }: ProfileDro
 			  returnTo: window.location.origin,
 			
 		});
-}*/
+}
 const logoutWithRedirect = (redirectUrl = window.location.origin) => {
 	sessionStorage.removeItem('_AUTH');
 	sessionStorage.removeItem('_MENU');
  
 	window.location.href = redirectUrl;
-  };	
+  };
+  */	
 	return (
 		<Dropdown show={isOpen} onToggle={toggleDropdown}>
 

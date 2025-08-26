@@ -3,13 +3,10 @@
 //import { useAuth0 } from '@auth0/auth0-react';
 //import { useEffect } from 'react';
 //import useAuth from '@/pages/account/Login/useAuth';
- 
-import { Bienvenido, RecoverPassword } from './storeSotf';
-import { Col, Row } from 'react-bootstrap';
- 
-import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
-import { useAuth,usePermissions } from '@/hooks';
+import { usePermissions } from '@/hooks';
+import { Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
  // Componente que usa el hook de permisos
  
 

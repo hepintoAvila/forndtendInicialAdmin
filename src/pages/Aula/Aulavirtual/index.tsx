@@ -6,6 +6,8 @@ import { Pc} from "./type";
 import useEstudiantes from "@/hooks/useEstudiantes";
 import SidebarPcs from "./SidebarPcs";
 import useTurnos from "@/hooks/useTurnos";
+import useProgramas from "@/hooks/useProgramas";
+import { ProgramaList } from "@/common/type/type._programas";
 
 
  
@@ -14,20 +16,21 @@ import useTurnos from "@/hooks/useTurnos";
 const Aulavirtual = () => {
 
   const {sendComputadores, computadores,sendComputadorRequest} = usePcs();
-  const { resetEstudiantes,handleDocumentoChange,documentoAnterior,estudiantes}  = useEstudiantes();
+  const { resetEstudiantes,handleDocumentoChange,documentoAnterior,estudiantes,handleSubmitEstudent}  = useEstudiantes();
   const {generateBodyData,turnos,setTurno,handleSubmit} = useTurnos();
+  const {sendProgramasRequest,programas} = useProgramas();
   
   const [showModal, setShowModal] = useState(false);
   const [selectedComputador , setDocumento] = useState<Pc>({} as Pc);
   const handleShowModal = (computador: Pc) => {
       setDocumento(computador);
       setShowModal(true);
-      handleDocumentoChange('');
+      handleDocumentoChange('','');
   };
   const handleCloseModal = () => {
        setShowModal(false);
        resetEstudiantes();
-       handleDocumentoChange(''); 
+       handleDocumentoChange('',''); 
           setTurno(
         {
         fecha_final:"",
@@ -68,12 +71,18 @@ const changeState = (id_pc: any) => {
         const BodyData = generateBodyData(ObjetBodys);
         sendComputadores(credentialsUrl,BodyData);
   }, []);
+
+  useEffect(() => {
+        sendProgramasRequest();
+  }, []);
+  
 //console.log('computadores',computadores);
  return (
      <>
       {computadores && (
         <SidebarPcs
           changeState={changeState}
+          programas={programas as any}
           turnos={turnos}
           estudiantes={estudiantes}
           computadores={computadores?.map((computador:any) => ({ ...computador, id_pc: String(computador.id_pc) }))}
@@ -81,7 +90,8 @@ const changeState = (id_pc: any) => {
           handleShowModal={handleShowModal}
           handleCloseModal={handleCloseModal}
           handleSubmit={handleSubmit}
-          handleDocumentoChange={handleDocumentoChange}
+          handleSubmitEstudent={handleSubmitEstudent}
+          handleDocumentoChange={handleDocumentoChange as any}
           showModal={showModal}
           selectedComputador={selectedComputador}
         />

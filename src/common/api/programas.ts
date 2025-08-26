@@ -1,12 +1,11 @@
-import config from "../helpers/config";
-import { ApiTurnoResponse, TurnoRequest, TurnoServiceInterface, TurnoServiceResponse, UserProps } from "../type/type._turnos";
+import { ApiProgramaResponse, ProgramaRequest, ProgramaServiceInterface, ProgramaServiceResponse, UserProps } from "../type/type._programas";
 
 
-const TurnosService = (urlObjet: TurnoRequest,bodyData:any): TurnoServiceInterface => {
+const ProgramaService = (urlObjet: ProgramaRequest,bodyData:any): ProgramaServiceInterface => {
 
   
 
-const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> => {
+const Autentications = async (values: UserProps): Promise<ProgramaServiceResponse> => {
    
     const credentials = {
       var_login: values.login,
@@ -14,8 +13,8 @@ const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> 
     };
     const token = localStorage.getItem('authToken');
     const params = new URLSearchParams({
-      exec: 'admin_turnos',
-      _SPIP_PAGE: 'admin_turnos',
+      exec: 'admin_programas',
+      _SPIP_PAGE: 'admin_programas',
       action: 'true',
       var_ajax:'form',
       bonjour:'oui',
@@ -43,7 +42,7 @@ const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> 
         return {
           status: 'success',
           data: {
-            turno: [],
+            programas: [],
             metadata: {
               statusCode: 204,
               type: 'success',
@@ -66,7 +65,7 @@ const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> 
         throw new Error('La respuesta está vacía');
       }
       // Intentar parsear como JSON
-      let result: ApiTurnoResponse;
+      let result: ApiProgramaResponse;
       try {
         result = JSON.parse(responseText);
       } catch (parseError) {
@@ -81,7 +80,7 @@ const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> 
           status: 'success',
           data: {
             //auth: result.data?.Auth || {} as AuthData,
-            turno: result.data?.Turno || [],
+            programas: result.data?.Programas || [],
             metadata: {
               statusCode: result.status,
               type: result.type,
@@ -98,7 +97,7 @@ const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> 
         return {
           status: 'success',
           data: {
-            turno: [],
+            programas: [],
             metadata: {
               statusCode: 200,
               type: 'success',
@@ -119,4 +118,4 @@ const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> 
   };
 };
 
-export default TurnosService;
+export default ProgramaService;

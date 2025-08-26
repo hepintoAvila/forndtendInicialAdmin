@@ -53,8 +53,9 @@ export interface BodyData {
 }
 
 export interface TurnoServiceResponse {
-  message(message: any): unknown;
+  message?: string; 
   status: 'success' | 'error';
+  error?: string;
   data?: {
     turno: TurnoData[];
     metadata: {
@@ -63,7 +64,7 @@ export interface TurnoServiceResponse {
       message: string;
     };
   };
-  error?: string;
+  
 }
 
 export interface TurnoServiceInterface {

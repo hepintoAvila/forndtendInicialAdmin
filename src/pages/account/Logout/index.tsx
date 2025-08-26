@@ -1,44 +1,51 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import AccountWrapper from '@/pages/storeSotf/RecoverPassword/AccountWrapper';
+import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks';
- 
+import AccountWrapper from '../Login/AccountWrapper';
+ import { toast } from 'react-toastify';
 
 
-const BottomLink = () => {
-	return (
-		<footer className="footer footer-alt">
-			<p className="text-muted">
-				<Link to="/account/login" className="text-muted ms-1">
-					<b>{'Iniciar Sesión'}</b>
-				</Link>
-			</p>
-		</footer>
-	);
-};
+			const BottomLink = () => {
+				return (
+					<footer className="footer footer-alt">
+						<p className="text-muted">
+							<Link to="/account/login" className="text-muted ms-1">
+								<b>{'Iniciar Sesión'}</b>
+							</Link>
+						</p>
+					</footer>
+				);
+			};
 
-const Logout = () => {
-	const { logout, isAuthenticated } = useAuth();
-	const navigate = useNavigate();
+			const Logout = () => {
+				const { logout, isAuthenticated } = useAuth();
+				const [redirect, setRedirect] = useState(false);
+				const navigate = useNavigate();
 
-	useEffect(() => {
-		// Ejecutar logout automáticamente al montar el componente
-		const performLogout = async () => {
-			await logout();
-			
-			// Redirigir después de un breve delay para que el usuario vea el mensaje
-			setTimeout(() => {
-				navigate('/account/login', { replace: true });
-			}, 2000);
-		};
+useEffect(() => {
+  const performLogout = async () => {
+    await logout();
+    toast.info('Cerrando sesión...', {
+      position: "top-center",
+      autoClose: 4000,
+    });
+    setRedirect(true);
+  };
 
-		if (isAuthenticated) {
-			performLogout();
-		} else {
-			// Si ya no está autenticado, redirigir inmediatamente
-			navigate('/account/login', { replace: true });
-		}
-	}, [logout, navigate, isAuthenticated]);
+  if (isAuthenticated) {
+    performLogout();
+  } else {
+    navigate('/account/login', { replace: true });
+  }
+}, [logout, navigate, isAuthenticated]);
+
+useEffect(() => {
+  if (redirect) {
+    setTimeout(() => {
+      navigate('/account/login', { replace: true });
+    }, 2000); // 2 segundos después de mostrar el mensaje
+  }
+}, [redirect, navigate]);
 
 	return (
 		<>
@@ -51,17 +58,17 @@ const Logout = () => {
 					</div>
 					<div className="logout-icon m-auto">
 						<svg
-							version="1.1"
-							id="Layer_1"
-							xmlns="http://www.w3.org/2000/svg"
-							xmlnsXlink="http://www.w3.org/1999/xlink"
-							x="0px"
-							y="0px"
-							viewBox="0 0 161.2 161.2"
-							enableBackground="new 0 0 161.2 161.2"
-							xmlSpace="preserve"
-							style={{ width: '100px', height: '100px' }}
-						>
+								version="1.1"
+								id="Layer_1"
+								xmlns="http://www.w3.org/2000/svg"
+								xmlnsXlink="http://www.w3.org/1999/xlink"
+								x="0px"
+								y="0px"
+								viewBox="0 0 161.2 161.2"
+								enableBackground="new 0 0 161.2 161.2"
+								xmlSpace="preserve"
+								style={{ width: '100px', height: '100px' }}
+								>
 							<path
 								className="path"
 								fill="none"

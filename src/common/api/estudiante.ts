@@ -1,5 +1,7 @@
 import { ApiEstudianteResponse, EstudianteServiceInterface, EstudianteServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/typeEstudiante";
 
+
+
 const EstudianteService = (urlObjet : any): EstudianteServiceInterface => {
 
 const Autentications = async (values: UserProps): Promise<EstudianteServiceResponse> => {
@@ -29,7 +31,8 @@ const credentials = {
           'x-sices-api-apikey': token ? token : '',
         },
         body: JSON.stringify({
-         documento: urlObjet.documento,
+         documento: urlObjet.datos.documento,
+         programa: urlObjet.datos.programa ?urlObjet.datos.programa:'PROGRAMAS',
       }),
         credentials: 'include'
       });

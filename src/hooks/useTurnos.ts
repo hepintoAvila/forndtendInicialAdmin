@@ -5,9 +5,6 @@ import { Credentials} from '@/pages/Aula/Aulavirtual/type';
 import { useContext, useState } from 'react';
  import { atom, useAtom } from 'jotai';
 import { config, encodeBasicUrl, useNotificationContext } from '@/common';
-import usePcs from './usePcs';
- 
-
   interface Prestamo {
   tiempo_prestamo: string | number;
   fecha_inicial: Date;

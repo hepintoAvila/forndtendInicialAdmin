@@ -1,14 +1,18 @@
 const config = {
 	 
-    API_URL_WEB: "https://www.lacasadelbarbero.com.co/",
-    API_URL: "https://www.lacasadelbarbero.com.co/api2025/",
-   // API_URL: "https://www.lacasadelbarbero.com.co/api2024/plugins-dist/api2025/?",
+    API_URL_WEB: "https://lacasadelbarbero.com.co",
+    API_URL: "https://lacasadelbarbero.com.co/api2025/",
+   // API_URL: "https://biblioteca.unicesar.edu.co/plugins-dist/api2025/?",
 	API_URL_AUTH : '/dashboard/tarjetas', 
 	API_ACCION_AUTH  :  'auteur', 
 	API_OPCION_AUTH  : 'login', 
 	API_URL_USUARIOS: '/administrador/usuarios', 
     API_URL_ROLES: '/administrador/Roles', 
 	 
+	API_ACCION_PROGRAMAS: 'admin_programas', 
+	API_OPCION_QUERY_PROGRAMAS: 'consultar_programas', 
+	API_OPCION_ADD_PROGRAMAS: 'add_programas', 
+	
 	API_ACCION_PCS: 'admin_pcs', 
 	API_OPCION_PCS: 'consulta_pcs',  
 	API_ADMIN_PCS: 'admin_pcs', 
@@ -21,6 +25,7 @@ const config = {
 
 	API_ACCION_USUARIOS: 'admin_usuarios', 
 	API_OPCION_USUARIOS: 'consultar_estudiantes',  
+	API_OPCION_ADD_ESTUDIANTE: 'add_estudiante',  
 	API_ADMIN_USUARIOS: 'admin_usuarios',  
 
 
@@ -32,7 +37,7 @@ const config = {
 
 
 	API_OPCION_CONSULTA_USUARIOS:'consulta',
-	API_OPCION_ADD_USUARIOS:'guardar',
+	API_OPCION_ADD_USUARIOS:'add_usuario',
 	API_OPCION_EDITAR_USUARIOS:'update',
 	API_OPCION_DELETE_USUARIOS:'delete',
 	
@@ -81,14 +86,14 @@ const config = {
 	API_OPCION_CONSULTA_ID  : 'consultaId', 
 	API_OPCION_DELETE  : 'delete', 
 	API_OPCION_ADD  : 'delete', 
-	API_OPCION_UPDATE  : 'update', 
-	X_SICES_API_APIKEY:'zHqroBk5BILvT9Bdajol1A==::snR8ET+DxazKVH5Ywxx1Fg==',
-	X_SICES_API_APITOKEN:'f37ef65fbc641054a3b508af0b52220916ff40eefa9a0a722b4d69cda96ef064',
+	//API_OPCION_UPDATE  : 'update', 
+	//X_SICES_API_APIKEY:'zHqroBk5BILvT9Bdajol1A==::snR8ET+DxazKVH5Ywxx1Fg==',
+	//X_SICES_API_APITOKEN:'f37ef65fbc641054a3b508af0b52220916ff40eefa9a0a722b4d69cda96ef064',
 
-	X_SICES_API_APIKEY_USER:'U9YbCFRmbhm9GjlHTAuKvgipgvku1ljhR9YbTkpMNtXmhMa/tsvlZS2eCOtGqe94vNJ+QDtM23pRQxRytrZR3TtXyPbozsxT4q0E/z/hY5o=::1hFXGPLErNPJxf8FuXdeLA==',
-	X_SICES_API_APITOKEN_USER:'1eddeff45f94f4ab39b8c1f0ee840ed296b606608c3af799787f2dafa9e64320',
-	X_SICES_API_USER:'C07B51296CED3DCA0356FB4F36B19B07696B8041D2E64A561F0E68F67C77F237',
-	X_SICES_API_PASS:'51793c7af7043d16ae275694ce39c9070b878f8651211aa2197f06cc1fa86680',
+	//X_SICES_API_APIKEY_USER:'U9YbCFRmbhm9GjlHTAuKvgipgvku1ljhR9YbTkpMNtXmhMa/tsvlZS2eCOtGqe94vNJ+QDtM23pRQxRytrZR3TtXyPbozsxT4q0E/z/hY5o=::1hFXGPLErNPJxf8FuXdeLA==',
+	//X_SICES_API_APITOKEN_USER:'1eddeff45f94f4ab39b8c1f0ee840ed296b606608c3af799787f2dafa9e64320',
+	//X_SICES_API_USER:'C07B51296CED3DCA0356FB4F36B19B07696B8041D2E64A561F0E68F67C77F237',
+	///X_SICES_API_PASS:'51793c7af7043d16ae275694ce39c9070b878f8651211aa2197f06cc1fa86680',
 };
 
 export default config;
