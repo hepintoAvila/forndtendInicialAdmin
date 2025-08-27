@@ -75,7 +75,7 @@ const authContext = useContext(AuthContext);
       setLoading(false);
     }
   };
- const handleDocumentoChange = debounce(async (value: string,programa: string) => {
+ const handleDocumentoChange = debounce(async (value: string) => {
   
     if (value.length >= 6) {
 
@@ -87,7 +87,6 @@ const authContext = useContext(AuthContext);
               opcion: encodeBasicUrl(config.API_OPCION_USUARIOS),
               datos:{
                 documento: value,
-                programa: programa,
               }
             };
             await getEstudiantes(credentialsUrl);
@@ -102,14 +101,37 @@ const authContext = useContext(AuthContext);
                 documento:value
               }
               const dataBodyturno = generateBodyDataTurno($bodyDataTurno);
-              sendTurno(prestamosUrl,dataBodyturno);           
+              sendTurno(prestamosUrl,dataBodyturno);  
+              
+              
         } catch (error) {
           console.error(error);
         }
       } 
     } 
   }, 500); 
+ const getDatosEstudiantesVisitas = debounce(async (value: string) => {
   
+    if (value.length >= 6) {
+
+      if (value !== documentoAnterior) {
+        
+        try {
+          const credentialsUrl = {
+              accion: encodeBasicUrl(config.API_ACCION_USUARIOS),
+              opcion: encodeBasicUrl(config.API_OPCION_USUARIOS),
+              datos:{
+                documento: value,
+              }
+            };
+            await getEstudiantes(credentialsUrl);
+            setDocumentoAnterior(value);
+        } catch (error) {
+          console.error(error);
+        }
+      } 
+    } 
+  }, 500);
   const addUsuario = debounce(async (value: string,programa: string) => {
   
     if (value.length >= 6) {
@@ -171,6 +193,7 @@ const authContext = useContext(AuthContext);
               sendTurno(prestamosUrl,dataBodyturno);    
       };
 
+console.log('return',estudiantes);
   return {
     loading,
     error,
@@ -181,6 +204,7 @@ const authContext = useContext(AuthContext);
     handleDocumentoChange,
     documentoAnterior,
     handleSubmitEstudent,
-    addUsuario
+    addUsuario,
+    getDatosEstudiantesVisitas
   };
 };

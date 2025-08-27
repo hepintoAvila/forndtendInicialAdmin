@@ -28,6 +28,15 @@ const config = {
 	API_OPCION_ADD_ESTUDIANTE: 'add_estudiante',  
 	API_ADMIN_USUARIOS: 'admin_usuarios',  
 
+	API_ACCION_VISITAS: 'admin_visitas', 
+	API_OPCION_QUERY_VISITAS: 'consulta_visitas',  
+	API_ADMIN_VISITAS: 'admin_visitas', 
+	API_OPCION_UPDATE_VISITAS: 'update_visitas', 
+	API_OPCION_ADD_VISITAS: 'add_visitas', 
+	
+
+
+
 
 	API_OPCION_CONSULTA_ROLES:'consulta_roles',
 	API_OPCION_EDITAR_ROLES:'editar_roles',

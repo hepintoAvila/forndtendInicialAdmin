@@ -6,7 +6,6 @@ import { ApiTurnoResponseData } from "@/common/type/type._turnos";
 import ComputadorCard from "./ComputadorCard";
 import { ProgramaList } from "@/common/type/type._programas";
 import FormTabs from "./FormTabs";
-import ComputadorTable from "./ComputadorTable";
 
 const SidebarPcs = ({
   turnos,

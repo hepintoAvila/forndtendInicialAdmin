@@ -7,11 +7,6 @@ import useEstudiantes from "@/hooks/useEstudiantes";
 import SidebarPcs from "./SidebarPcs";
 import useTurnos from "@/hooks/useTurnos";
 import useProgramas from "@/hooks/useProgramas";
-import { ProgramaList } from "@/common/type/type._programas";
-
-
- 
-
  
 const Aulavirtual = () => {
 
@@ -28,10 +23,11 @@ const Aulavirtual = () => {
       handleDocumentoChange('','');
   };
   const handleCloseModal = () => {
+
        setShowModal(false);
        resetEstudiantes();
        handleDocumentoChange('',''); 
-          setTurno(
+       setTurno(
         {
         fecha_final:"",
         fecha_inicial:"",
