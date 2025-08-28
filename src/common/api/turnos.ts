@@ -1,3 +1,4 @@
+import config from "../helpers/config";
 import { ApiTurnoResponse, TurnoRequest, TurnoServiceInterface, TurnoServiceResponse, UserProps } from "../type/type._turnos";
 
 

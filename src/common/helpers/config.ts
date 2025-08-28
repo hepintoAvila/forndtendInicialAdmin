@@ -1,7 +1,7 @@
 const config = {
 	 
-    API_URL_WEB: "https://lacasadelbarbero.com.co",
-    API_URL: "https://lacasadelbarbero.com.co/api2025/",
+    API_URL_WEB: "https://biblioteca.unicesar.edu.co/",
+    API_URL: "https://biblioteca.unicesar.edu.co/api2025/",
    // API_URL: "https://biblioteca.unicesar.edu.co/plugins-dist/api2025/?",
 	API_URL_AUTH : '/dashboard/tarjetas', 
 	API_ACCION_AUTH  :  'auteur', 

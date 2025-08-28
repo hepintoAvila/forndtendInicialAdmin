@@ -1,4 +1,4 @@
-import { config, encodeBasicUrl } from '@/common';
+import { config, encodeBasicUrl, useThemeContext } from '@/common';
 import AuthService from '@/common/api/auth';
 import { useContext, useEffect,useState } from 'react';
 import { AuthData, Menu, MenuItem, Permiso } from '../pages/account/Login/type';
@@ -13,6 +13,7 @@ export default function useAuth(){
   }
 
   const {setCredentials, clearCredentials } = authContext;
+  const { updateMenu } = useThemeContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<AuthData | null>(null);
@@ -39,7 +40,7 @@ export default function useAuth(){
         }
       const savedMenu = localStorage.getItem('userMenu');
         if (savedMenu) {
-          setMenu(JSON.parse(savedMenu));
+          updateMenu(menu);
           setMenup(JSON.parse(savedMenu));
         }
         setIsAuthenticated(true);
@@ -67,10 +68,12 @@ export default function useAuth(){
         setUser(result.data.auth);
         setPermisos(result.data.permisos);
         setMenu(result.data.menu);
+        updateMenu(result.data.menu);
          setIsAuthenticated(true);
          setCredentials({
           login: credentialsAuth.login,
           password: credentialsAuth.password})
+          
         // Guardar en localStorage
         if (result.data.auth.AppKey) {
           localStorage.setItem('authToken', result.data.auth.AppKey);

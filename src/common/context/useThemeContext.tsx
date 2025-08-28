@@ -2,9 +2,11 @@ import { ReactNode, createContext, useCallback, useContext, useState } from 'rea
 import i18n, { isValidLanguage, Languages } from '@/common/languages/i18n';
 import { menuAtoms } from '@/Atoms/menu';
 import { useAtom } from 'jotai';
+import { MenuItem } from '@/pages/account/Login/type';
  
 const ThemeContext = createContext<any>({});
 const objMenu = JSON.parse(sessionStorage.getItem('_MENU') || '{}');
+
 export const ThemeSettings = {
 	layout: {
 		type: { vertical: 'vertical', horizontal: 'horizontal' },
@@ -30,7 +32,44 @@ export const ThemeSettings = {
 	},
 	rightSidebar: { show: true, hidden: false,hiddenCarrito:false },
 	carrito: { show: true, hidden: false},
-	menu:objMenu
+	menu: [
+    {
+      key: 'Hemeroteca',
+      label: 'Hemeroteca',
+      isTitle: false,
+      icon: 'mdi mdi mdi-library',
+      entidad: '/aula/hemeroteca',
+      badge: {
+        variant: 'error',
+        text: 0,
+      },
+      children: [],
+    },
+    {
+      key: 'AluaVirtual',
+      label: 'AluaVirtual',
+      isTitle: false,
+      icon: 'mdi mdi-table-account',
+      entidad: '/aula/aulavirtual',
+      badge: {
+        variant: 'error',
+        text: 0,
+      },
+      children: [],
+    },
+    {
+      key: 'Administracion',
+      label: 'Administracion',
+      isTitle: false,
+      icon: 'mdi mdi-database-cog',
+      entidad: '/administrador/admin',
+      badge: {
+        variant: 'error',
+        text: 0,
+      },
+      children: [],
+    },
+  ],
 };
 
 export function useThemeContext() {
@@ -43,7 +82,7 @@ export function useThemeContext() {
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
 	const [currentLanguage, setCurrentLanguage] = useState(Languages.ES);
-	const [currentMenu, setCurrentMenu] = useAtom(menuAtoms);
+	//const [currentMenu, setCurrentMenu] = useAtom(menuAtoms);
 
 	const [settings, setSettings] = useState({
 		layout: {
@@ -63,7 +102,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 		},
 		rightSidebar: ThemeSettings.rightSidebar.hidden,
 		carrito: ThemeSettings.carrito.hidden,
-		menu: currentMenu
+		menu: ThemeSettings.menu
 	});
 
 	const changeLanguage = useCallback((lang: string) => {
@@ -110,11 +149,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 		[setSettings]
 	);
 	const updateMenu = useCallback(
-		(newSidebar: any) => {
-			setCurrentMenu(JSON.parse(sessionStorage.getItem('_MENU') || '{}'));
+		(newMenu: MenuItem) => {
+			///setCurrentMenu(JSON.parse(sessionStorage.getItem('_MENU') || '{}'));
 			setSettings((prev) => ({
 				...(prev ?? {}),
-				sidebar: { ...(prev ?? {}).sidebar, ...(newSidebar ?? {}) },
+				menu: { ...(prev ?? {}).menu, ...(newMenu ?? {}) },
 			}));
 		
 	},

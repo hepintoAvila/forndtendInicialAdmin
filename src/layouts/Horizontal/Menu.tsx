@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { MenuItemType } from '@/common/menu-items';
 import classNames from 'classnames';
 import { findAllParent, findMenuItem } from '../utils/menu';
-import { useAuth } from '@/hooks';
+import { useThemeContext } from '@/common/context';
  
 
 /**
@@ -134,14 +134,12 @@ const MenuItemLink = ({ item, className }: MenuItems) => {
 
  
 const AppMenu = () => {
+	  const { settings } = useThemeContext();
 	  const [menuItems, setActiveMenu] = useState<any[]>([]);
-	  const { MENU_ITEMS_CONTEXT,isAuthenticated  } = useAuth();
 	  
  useEffect(() => {
-		if (isAuthenticated) {
-			setActiveMenu(MENU_ITEMS_CONTEXT as any);
-		}
-	}, [isAuthenticated,MENU_ITEMS_CONTEXT]);
+			setActiveMenu(settings.menu as any);
+	}, [settings.menu]);
 
 
 	const [activeMenuItems, setActiveMenuItems] = useState<string[]>([]);
@@ -186,9 +184,10 @@ const AppMenu = () => {
 		if (menuItems && menuItems.length > 0) activeMenu();
 	}, [activeMenu, menuItems]);
 
-	return (
+		return (
 		<ul className="navbar-nav w-100" id="main-side-menu">
-			{menuItems?.length > 0 && menuItems?.map((item, index) => {
+			{Object.entries(menuItems).map(([key, item], index) => {
+				
 				return (
 					<React.Fragment key={index.toString()}>
 						{item.children ? (

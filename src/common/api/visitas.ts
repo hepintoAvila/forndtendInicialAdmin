@@ -1,3 +1,4 @@
+import config from "../helpers/config";
 import { ApiVisitaResponse, UserProps, VisitaServiceInterface, VisitaServiceResponse } from "../type/type._visitas";
 
 

@@ -1,9 +1,9 @@
 import { ThemeSettings, useThemeContext } from '@/common/context';
 
 export default function useThemeCustomizer() {
-	const { settings, updateSettings, updateLayout, updateTopbar, updateSidebar } =
+	const { settings, updateSettings, updateLayout, updateTopbar, updateSidebar,updateMenu } =
 		useThemeContext();
-
+ 
 	const layoutType = settings.layout.type;
 	const layoutTheme = settings.theme;
 	const layoutWidth = settings.layout.mode;
@@ -20,9 +20,11 @@ export default function useThemeCustomizer() {
 		switch (type) {
 			case 'horizontal':
 				updateLayout({ type: ThemeSettings.layout.type.horizontal });
+				updateMenu({ size: settings.menu });
 				break;
 			default:
 				updateLayout({ type: ThemeSettings.layout.type.vertical });
+				updateMenu({ size: settings.menu });
 				break;
 		}
 	};
@@ -34,9 +36,11 @@ export default function useThemeCustomizer() {
 		switch (theme) {
 			case 'dark':
 				updateSettings({ theme: ThemeSettings.theme.dark });
+				updateMenu({ size: settings.menu });
 				break;
 			default:
 				updateSettings({ theme: ThemeSettings.theme.light });
+				updateMenu({ size: settings.menu });
 				break;
 		}
 	};
@@ -48,12 +52,15 @@ export default function useThemeCustomizer() {
 		switch (width) {
 			case 'boxed':
 				updateLayout({ mode: ThemeSettings.layout.mode.boxed });
+				updateMenu({ size: settings.menu });
 				break;
 			case 'detached':
 				updateLayout({ mode: ThemeSettings.layout.mode.detached });
+				updateMenu({ size: settings.menu });
 				break;
 			default:
 				updateLayout({ mode: ThemeSettings.layout.mode.fluid });
+				updateMenu({ size: settings.menu });
 				break;
 		}
 	};
@@ -65,12 +72,15 @@ export default function useThemeCustomizer() {
 		switch (value) {
 			case 'dark':
 				updateTopbar({ theme: ThemeSettings.topbar.theme.dark });
+				updateMenu({ size: settings.menu });
 				break;
 			case 'brand':
 				updateTopbar({ theme: ThemeSettings.topbar.theme.brand });
+				updateMenu({ size: settings.menu });
 				break;
 			default:
 				updateTopbar({ theme: ThemeSettings.topbar.theme.light });
+				updateMenu({ size: settings.menu });
 				break;
 		}
 	};
@@ -82,12 +92,15 @@ export default function useThemeCustomizer() {
 		switch (theme) {
 			case 'light':
 				updateSidebar({ theme: ThemeSettings.sidebar.theme.light });
+				updateMenu({ size: settings.menu });
 				break;
 			case 'brand':
 				updateSidebar({ theme: ThemeSettings.sidebar.theme.brand });
+				updateMenu({ size: settings.menu });
 				break;
 			default:
 				updateSidebar({ theme: ThemeSettings.sidebar.theme.dark });
+				updateMenu({ size: settings.menu });
 				break;
 		}
 	};
@@ -99,21 +112,27 @@ export default function useThemeCustomizer() {
 		switch (type) {
 			case 'fullscreen':
 				updateSidebar({ size: ThemeSettings.sidebar.size.fullscreen });
+				updateMenu({ size: settings.menu });
 				break;
 			case 'full':
 				updateSidebar({ size: ThemeSettings.sidebar.size.full });
+				updateMenu({ size: settings.menu });
 				break;
 			case 'sm-hover':
 				updateSidebar({ size: ThemeSettings.sidebar.size.showOnHover });
+				updateMenu({ size: settings.menu });
 				break;
 			case 'condensed':
 				updateSidebar({ size: ThemeSettings.sidebar.size.condensed });
+				updateMenu({ size: settings.menu });
 				break;
 			case 'compact':
 				updateSidebar({ size: ThemeSettings.sidebar.size.compact });
+				updateMenu({ size: settings.menu });
 				break;
 			default:
 				updateSidebar({ size: ThemeSettings.sidebar.size.default });
+				updateMenu({ size: settings.menu });
 				break;
 		}
 	};
@@ -141,6 +160,7 @@ export default function useThemeCustomizer() {
 		updateSidebar({
 			user: visible ? ThemeSettings.sidebar.user.show : ThemeSettings.sidebar.user.hidden,
 		});
+		updateMenu({ size: settings.menu });
 	};
 
 	/**
@@ -165,6 +185,7 @@ export default function useThemeCustomizer() {
 			},
 			rightSidebar: ThemeSettings.rightSidebar.show,
 			carrito: ThemeSettings.carrito.hidden,
+			menu: [],
 		});
 	};
 	/**
@@ -210,6 +231,7 @@ export default function useThemeCustomizer() {
 			},
 			rightSidebar: ThemeSettings.rightSidebar.hidden,
 			carrito: ThemeSettings.carrito.hidden,
+			menu: ThemeSettings.carrito.hidden,
 		});
 	};
 	return {

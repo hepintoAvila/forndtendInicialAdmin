@@ -13,7 +13,7 @@ const Footer = lazy(() => import('./Footer'));
 const RightSidebar = lazy(() => import('./RightSidebar'));
 
 export default function VerticalLayout() {
-	const { settings, updateSidebar } = useThemeContext();
+	const { settings, updateSidebar,updateMenu } = useThemeContext();
 
 	const { width } = useViewport();
 	const [isMenuOpened, toggleMenu] = useToggle();
@@ -75,10 +75,13 @@ export default function VerticalLayout() {
 	useEffect(() => {
 		if (width < 768) {
 			updateSidebar({ size: ThemeSettings.sidebar.size.full });
+			updateMenu({ size: settings.menu });
 		} else if (width < 1140) {
 			updateSidebar({ size: ThemeSettings.sidebar.size.condensed });
+			updateMenu({ size: settings.menu });
 		} else if (width >= 1140) {
 			updateSidebar({ size: ThemeSettings.sidebar.size.default });
+			updateMenu({ size: settings.menu });
 		}
 	}, [width]);
 

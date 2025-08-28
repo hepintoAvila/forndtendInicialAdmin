@@ -1,4 +1,5 @@
 import { ApiEstudianteResponse, EstudianteServiceInterface, EstudianteServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/typeEstudiante";
+import config from "../helpers/config";
 
 
 
@@ -59,7 +60,12 @@ const credentials = {
       // Obtener el texto de la respuesta primero para debuggear
       const responseText = await response.text();
      // console.log('Raw response:', responseText);
-
+ 
+     if (!responseText) {
+        console.log('La respuesta está vacía');
+        // Puedes manejar este caso según tus necesidades
+        throw new Error('La respuesta está vacía');
+      }
       // Intentar parsear como JSON
       let result: ApiEstudianteResponse;
       try {

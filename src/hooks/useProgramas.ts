@@ -1,4 +1,3 @@
-import TurnosService from '@/common/api/turnos';
 import { AuthContext } from '@/common/context/AuthContext';
 import { Credentials} from '@/pages/Aula/Aulavirtual/type';
 import { useContext, useState } from 'react';

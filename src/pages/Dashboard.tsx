@@ -4,15 +4,24 @@
 //import { useEffect } from 'react';
 //import useAuth from '@/pages/account/Login/useAuth';
 import { usePermissions } from '@/hooks';
+import { useEffect } from 'react';
 import { Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
  // Componente que usa el hook de permisos
 
-
+function getUserFromSession(){
+    const userData = localStorage.getItem('userData');
+    return userData;
+  };
+  
 const Sidebar = () => {
   const { getFilteredMenu} = usePermissions();
   const filteredMenu = getFilteredMenu();
+  
+
+  
+
   return (
     <nav className="d-flex flex-wrap justify-content-around " >
 		<Row>
@@ -46,6 +55,11 @@ const Sidebar = () => {
     </nav>
   );
 };
+
+
+
+const userData = getUserFromSession();
+console.log('userData',userData);
 const Dashboard = () => {
 	return  (
         <>

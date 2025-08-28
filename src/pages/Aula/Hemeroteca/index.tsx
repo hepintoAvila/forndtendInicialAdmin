@@ -26,7 +26,7 @@ const Hemeroteca = () => {
         sendProgramasRequest();
   }, []);
    const onChangeDocumento = (e: any) => {
- 	getDatosEstudiantesVisitas(e.target.value as any);
+ 	    getDatosEstudiantesVisitas(e.target.value as any);
   	};
 
  return (

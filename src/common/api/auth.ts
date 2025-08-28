@@ -1,8 +1,4 @@
 import { ApiResponse, AuthData, AuthServiceInterface, AuthServiceResponse, UserProps } from "@/pages/account/Login/type";
-import config from "../helpers/config";
-
- 
- 
 const AuthService = (urlObjet: any): AuthServiceInterface => {
   const Autentications = async (values: UserProps): Promise<AuthServiceResponse> => {
     const credentials = {
@@ -56,7 +52,12 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
       // Obtener el texto de la respuesta primero para debuggear
       const responseText = await response.text();
      // console.log('Raw response:', responseText);
-
+     // console.log('Raw response:', responseText);
+     if (!responseText) {
+        console.log('La respuesta está vacía');
+        // Puedes manejar este caso según tus necesidades
+        throw new Error('La respuesta está vacía');
+      }
       // Intentar parsear como JSON
       let result: ApiResponse;
       try {

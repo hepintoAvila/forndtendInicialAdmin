@@ -5,8 +5,6 @@ import { ProgramaList } from '@/common/type/type._programas';
 import classnames from 'classnames';
 import EstudianteTable from '../Aulavirtual/EstudianteTable';
 import EmptyTable from '../Aulavirtual/EmptyTable';
-import PrestamoForm from '../Aulavirtual/PrestamoForm';
-import TurnoTable from '../Aulavirtual/TurnoTable';
 import EstudianteForm from '../Aulavirtual/EstudianteForm';
 import { ApiVisitaResponseData } from '@/common/type/type._visitas';
 import VisitasTable from './VisitasTable';

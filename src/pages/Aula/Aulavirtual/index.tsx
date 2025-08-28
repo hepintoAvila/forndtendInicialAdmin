@@ -20,13 +20,13 @@ const Aulavirtual = () => {
   const handleShowModal = (computador: Pc) => {
       setDocumento(computador);
       setShowModal(true);
-      handleDocumentoChange('','');
+      handleDocumentoChange('');
   };
   const handleCloseModal = () => {
 
        setShowModal(false);
        resetEstudiantes();
-       handleDocumentoChange('',''); 
+       handleDocumentoChange(''); 
        setTurno(
         {
         fecha_final:"",

@@ -1,5 +1,5 @@
-import AdministradorService from "../api/administrador";
-import encodeBasicUrl from "./encodeBasicUrl";
+
+//import encodeBasicUrl from "./encodeBasicUrl";
 
 type SendDataParams<T> = {
     values?: any;
@@ -22,7 +22,7 @@ const sendData = async <T>({
     redirectUrl,
     showNotification,
 }: SendDataParams<T>) => {
-
+/*
     const ErrorCodeMessages: { [key: number]: string } = {
     401: 'Invalid credentials',
     403: 'Access Forbidden',
@@ -54,6 +54,7 @@ const sendData = async <T>({
     } finally {
         setLoading(false);
     }
+    */
 };
 
 export default sendData;

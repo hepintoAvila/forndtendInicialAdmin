@@ -1,4 +1,5 @@
 import { ApiResponse,PcsServiceInterface, PcsServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/type";
+import config from "../helpers/config";
 const PcsService = (urlObjet: any,bodyData:any): PcsServiceInterface => {
 
   const Autentications = async (values: UserProps): Promise<PcsServiceResponse> => {

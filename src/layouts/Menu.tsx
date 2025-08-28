@@ -152,17 +152,20 @@ const MenuItemLink = ({ item, className }: SubMenus) => {
 	);
 };
 
- 
+
 
 const AppMenu = () => { 
+		
+		  const { settings } = useThemeContext();	
 		  const [menuItems, setActiveMenu] = useState<any[]>([]);
-		  const { MENU_ITEMS_CONTEXT,isAuthenticated  } = useAuth();
+		  const { isAuthenticated  } = useAuth();
+		  settings
 		  
 	 useEffect(() => {
 			if (isAuthenticated) {
-				setActiveMenu(MENU_ITEMS_CONTEXT as any);
+				setActiveMenu(settings.menu as any);
 			}
-		}, [isAuthenticated,MENU_ITEMS_CONTEXT]);
+		}, [isAuthenticated,settings]);
 	const location = useLocation();
 
 	const menuRef = useRef<HTMLUListElement>(null);
@@ -207,7 +210,7 @@ const AppMenu = () => {
 	useEffect(() => {
 		activeMenu();
 	}, [activeMenu]);
-
+ 
 	return (
 		<ul className="side-nav" ref={menuRef} id="main-side-menu">
 			{menuItems?.map((item, index) => {

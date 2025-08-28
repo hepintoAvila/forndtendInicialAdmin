@@ -1,8 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAuth } from '@/hooks';
 import AccountWrapper from '../Login/AccountWrapper';
- import { toast } from 'react-toastify';
 
 
 			const BottomLink = () => {
@@ -18,8 +16,8 @@ import AccountWrapper from '../Login/AccountWrapper';
 			};
 
 			const Logout = () => {
-				const { logout, isAuthenticated } = useAuth();
-				const [redirect, setRedirect] = useState(false);
+				//const { logout, isAuthenticated } = useAuth();
+				const [redirect] = useState(false);
 				const navigate = useNavigate();
 
 useEffect(() => {

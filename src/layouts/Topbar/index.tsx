@@ -35,7 +35,6 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 	const { user,isAuthenticated } = useAuth();
 	//const { reset } = useThemeCustomizer();
 	const { sideBarType } = useThemeCustomizer();
-
 	const { width } = useViewport();
 
 	/**
@@ -49,16 +48,20 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 				document.getElementsByTagName('html')[0].classList.add('sidebar-enable');
 			} else if (sideBarType === 'condensed' || sideBarType === 'fullscreen') {
 				updateSidebar({ size: ThemeSettings.sidebar.size.default });
+				updateMenu({ size: settings.menu });
 			} else {
 				updateSidebar({ size: ThemeSettings.sidebar.size.condensed });
+				updateMenu({ size: settings.menu });
 			}
 		} else if (sideBarType === 'condensed') {
 			updateSidebar({ size: ThemeSettings.sidebar.size.default });
+			updateMenu({ size: settings.menu });
 		} else if (sideBarType === 'full' || sideBarType === 'fullscreen') {
 			showLeftSideBarBackdrop();
 			document.getElementsByTagName('html')[0].classList.add('sidebar-enable');
 		} else {
 			updateSidebar({ size: ThemeSettings.sidebar.size.condensed });
+			updateMenu({ size: settings.menu });
 		}
 	};
 
