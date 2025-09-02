@@ -1,8 +1,10 @@
 const config = {
 	 
-    API_URL_WEB: "https://biblioteca.unicesar.edu.co/",
-    API_URL: "https://biblioteca.unicesar.edu.co/api2025/",
-   // API_URL: "https://biblioteca.unicesar.edu.co/plugins-dist/api2025/?",
+    API_URL_WEB: "https://lacasadelbarbero.com.co",
+   // API_URL_WEB: "https://biblioteca.unicesar.edu.co",
+    API_URL: "https://lacasadelbarbero.com.co/api2025/",
+   //API_URL: "https://biblioteca.unicesar.edu.co/api2025/",
+   // API_URL: "https://biblioteca.unicesar.edu.co/plugins-dist${/api2025/}?",
 	API_URL_AUTH : '/dashboard/tarjetas', 
 	API_ACCION_AUTH  :  'auteur', 
 	API_OPCION_AUTH  : 'login', 
@@ -34,16 +36,11 @@ const config = {
 	API_OPCION_UPDATE_VISITAS: 'update_visitas', 
 	API_OPCION_ADD_VISITAS: 'add_visitas', 
 	
-
-
-
-
 	API_OPCION_CONSULTA_ROLES:'consulta_roles',
 	API_OPCION_EDITAR_ROLES:'editar_roles',
 	API_OPCION_ADD_ROLES:'add_roles',
 	API_OPCION_DELETE_ROLES:'delete_roles',
 	API_ACCION_ROLES:'roles',
-
 
 	API_OPCION_CONSULTA_USUARIOS:'consulta',
 	API_OPCION_ADD_USUARIOS:'add_usuario',

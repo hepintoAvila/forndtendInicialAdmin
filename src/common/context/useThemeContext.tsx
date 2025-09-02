@@ -1,11 +1,8 @@
 import { ReactNode, createContext, useCallback, useContext, useState } from 'react';
 import i18n, { isValidLanguage, Languages } from '@/common/languages/i18n';
-import { menuAtoms } from '@/Atoms/menu';
-import { useAtom } from 'jotai';
 import { MenuItem } from '@/pages/account/Login/type';
  
 const ThemeContext = createContext<any>({});
-const objMenu = JSON.parse(sessionStorage.getItem('_MENU') || '{}');
 
 export const ThemeSettings = {
 	layout: {

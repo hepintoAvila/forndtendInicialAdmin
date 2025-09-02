@@ -10,8 +10,10 @@ import AccountWrapper from '@/pages/account/Login/AccountWrapper';
  
 import { useEffect } from 'react';
 import { useAuth } from '@/hooks';
+import { useNotificationContext } from '@/common';
 
 const Login = () => {
+	const { showNotification } = useNotificationContext();
 	const { t } = useTranslation();
   const { isAuthenticated, login, loading} = useAuth();
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ const Login = () => {
 		try {
 			await login(formData);
 		} catch (error) {
-			console.error('Login failed:', error);
+			 showNotification({ message: 'Autenticación fallida', type: 'error' });
 		}
 	};
 	return (

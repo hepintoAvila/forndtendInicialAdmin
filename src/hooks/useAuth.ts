@@ -5,7 +5,7 @@ import { AuthData, Menu, MenuItem, Permiso } from '../pages/account/Login/type';
 import { AuthContext } from '@/common/context/AuthContext';
 
 export default function useAuth(){
-
+ 
  const authContext = useContext(AuthContext);
 
   if (!authContext) {
@@ -33,11 +33,6 @@ export default function useAuth(){
     
     if (token && userData) {
       try {
-        setUser(JSON.parse(userData));
-        const savedPermisos = localStorage.getItem('userPermisos');
-        if (savedPermisos) {
-          setPermisos(JSON.parse(savedPermisos));
-        }
       const savedMenu = localStorage.getItem('userMenu');
         if (savedMenu) {
           updateMenu(menu);
@@ -51,9 +46,11 @@ export default function useAuth(){
     }
     setLoading(false);
   };
+  
 
  
   const login = async (credentialsAuth: any) => {
+   
     setLoading(true);
     setError(null);
        const urlObjet = {
@@ -66,7 +63,7 @@ export default function useAuth(){
 
       if (result.status === 'success' && result.data) {
         setUser(result.data.auth);
-        setPermisos(result.data.permisos);
+        //setPermisos(result.data.permisos);
         setMenu(result.data.menu);
         updateMenu(result.data.menu);
          setIsAuthenticated(true);
@@ -82,8 +79,15 @@ export default function useAuth(){
         localStorage.setItem('userPermisos', JSON.stringify(result.data.permisos));
         localStorage.setItem('userMenu', JSON.stringify(result.data.menu));
         
+        const permisos = result.data.permisos.reduce((acc: { [key: string]: Permiso }, permiso) => {
+          acc[`${permiso.menu}-${permiso.submenu}`] = permiso;
+          return acc;
+        }, {});
+
+      setPermisos(permisos as any);
         return result.data;
       } else {
+       
         throw new Error(result.error || 'Autenticación fallida');
       }
     } catch (err) {
@@ -147,6 +151,9 @@ const logout = async () => {
       (menuItem.children && menuItem.children.length > 0)
     );
   };
+ 
+  
+//console.log('menu',menu);     
   return {
     loading,
     error,

@@ -9,7 +9,7 @@ export default defineConfig({
     proxy: {
       // Proxy específico para tu API
       '/api2025': {
-        target: 'https://biblioteca.unicesar.edu.co',
+        target: 'https://lacasadelbarbero.com.co',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api2025/, '/api2025'),

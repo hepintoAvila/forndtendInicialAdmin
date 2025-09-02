@@ -1,6 +1,10 @@
 import { ApiResponse, AuthData, AuthServiceInterface, AuthServiceResponse, UserProps } from "@/pages/account/Login/type";
+import config from "../helpers/config";
+ 
 const AuthService = (urlObjet: any): AuthServiceInterface => {
+  
   const Autentications = async (values: UserProps): Promise<AuthServiceResponse> => {
+     
     const credentials = {
       var_login: values.login,
       password: values.password,
@@ -17,7 +21,7 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
     });
 
     try {
-      const response = await fetch(`/api2025/?${params.toString()}`, {
+      const response = await fetch(`${/api2025/}?${params.toString()}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +88,9 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
           }
         };
       } else {
+        
         throw new Error(result.message || 'Error en la autenticación');
+        
       }
 
     } catch (error) {

@@ -50,7 +50,7 @@ export interface AuthServiceResponse {
 export interface AuthServiceInterface {
   Autentications: (values: UserProps) => Promise<AuthServiceResponse>;
 }
-
+ 
 export type Menu = {
 	key: string;
 	label: string;

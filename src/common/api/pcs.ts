@@ -24,7 +24,7 @@ const PcsService = (urlObjet: any,bodyData:any): PcsServiceInterface => {
 
     try {
 
-      const response = await fetch(`/api2025/?${params.toString()}`, {
+      const response = await fetch(`${/api2025/}?${params.toString()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
