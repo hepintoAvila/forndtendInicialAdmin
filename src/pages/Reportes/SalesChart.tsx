@@ -1,15 +1,22 @@
 import Chart from 'react-apexcharts';
 import { Card } from 'react-bootstrap';
 import { ApexOptions } from 'apexcharts';
-import { CardTitle } from '@/components';
 
-const SalesChart = () => {
+import { ChartWidgetData, Reporte } from './type';
+import getElemento from '@/common/helpers/getElementos';
+ 
+
+const SalesChart = ({ data }: { data: Reporte }) => {
+	
+		const primerElemento: ChartWidgetData = getElemento(data as any,0)!;
+		const apexBarChartDataColors: number[] =  primerElemento?.dataColors ?? ['#117a41', '#8cce6b', '#f6f601','#f6aa38'];
+
 	const apexDonutOpts: ApexOptions = {
 		chart: {
 			height: 340,
 			type: 'donut',
 		},
-		colors: ['#42a542', '#117a41', '#8cce6b', '#f6f601'],
+		colors: apexBarChartDataColors,
 		legend: {
 			show: false,
 		},
@@ -28,22 +35,13 @@ const SalesChart = () => {
 			},
 		],
 	};
-
-	const apexDonutData = [44, 55, 41, 17];
+ 
+ 
+const apexDonutData: number[] =  primerElemento?.dataTotales ?? [1, 1, 1, 3];
 
 	return (
 		<Card>
 			<Card.Body>
-				<CardTitle
-					containerClass="d-flex align-items-center justify-content-between"
-					title="Total Visitas"
-					menuItems={[
-						{ label: 'Sales Report' },
-						{ label: 'Export Report' },
-						{ label: 'Profit' },
-						{ label: 'Action' },
-					]}
-				/>
 
 				<Chart
 					options={apexDonutOpts}
@@ -54,22 +52,12 @@ const SalesChart = () => {
 				/>
 
 				<div className="chart-widget-list">
+					{(data as unknown as Reporte[]).slice(0, 4).map((reporte, index) => (
 					<p>
-						<i className="mdi mdi-square" style={{ color: '#42a542' }}></i> <span className="p-5">Manaña</span> 
-						<span className="float-end">300.56</span>
+						<i className="mdi mdi-square" style={{ color: `${apexBarChartDataColors[index]}` }}></i> <span className="p-5">{reporte.title}</span> 
+						<span className="float-end">{reporte.stats}</span>
 					</p>
-					<p>
-						<i className="mdi mdi-square" style={{ color: '#117a41' }}></i>  <span className="p-5">Tarde</span> 
-						<span className="float-end">135.18</span>
-					</p>
-					<p>
-						<i className="mdi mdi-square" style={{ color: '#8cce6b' }}></i> <span className="p-5">Nocturna</span> 
-						<span className="float-end">48.96</span>
-					</p>
-					<p className="mb-0">
-						<i className="mdi mdi-square" style={{ color: '#f6f601' }}></i> <span className="p-5">Totales</span>
-						<span className="float-end">154.02</span>
-					</p>
+					))}
 				</div>
 			</Card.Body>
 		</Card>

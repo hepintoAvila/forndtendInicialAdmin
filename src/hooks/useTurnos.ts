@@ -168,7 +168,7 @@ const authContext = useContext(AuthContext);
                 fecha_inicial: resultado.fecha_inicial.toISOString(),
               }
           }
-           console.log('urlObjet',urlObjet);
+           //console.log('urlObjet',urlObjet);
           const bodyData = generateBodyDataAsigTurno(urlObjet);
           sendTurno(credentialsUrl, bodyData);
     };

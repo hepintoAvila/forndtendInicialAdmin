@@ -32,13 +32,13 @@ const TabsVisitas = ({
   const tabContents = [
     {
       id: '1',
-      title: 'Prestamo',
+      title: 'Registra Visitas',
       icon: 'mdi mdi-home-variant',
       text: '',
     },
     {
       id: '2',
-      title: 'Registro Rapido',
+      title: 'Registrar Estudiante',
       icon: 'mdi mdi-account-circle',
       text: '',
     },

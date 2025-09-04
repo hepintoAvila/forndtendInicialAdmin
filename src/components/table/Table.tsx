@@ -312,7 +312,7 @@ const data = useMemo(() => props['data'] || [], [props['data']]);
 								<tr {...row.getRowProps()} key={index} className="table-bottom-columns">
 									{row.cells.map((cell) => {
 										return (
-											<td  className="text-center" {...cell.getCellProps()}>{cell.render('Cell')}</td>
+											<td  className="text-left" {...cell.getCellProps()}>{cell.render('Cell')}</td>
 										);
 									})}
 								</tr>

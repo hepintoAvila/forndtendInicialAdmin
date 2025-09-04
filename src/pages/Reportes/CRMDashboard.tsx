@@ -2,29 +2,37 @@ import { Row, Col } from 'react-bootstrap';
 import Statistics from './Statistics';
 import CampaignsChart from './CampaignsChart';
 import RevenueChart from './RevenueChart';
-import Products from './Products';
+import Programas from './Programas';
 import SalesChart from './SalesChart';
+import useReportes from '@/hooks/useReportes';
+import { useEffect } from 'react';
+ 
 
 const CRMDashboard = () => {
+	 const { sendReportsRequest, reportes } = useReportes();
+
+  useEffect(() => {
+    sendReportsRequest();
+  }, []);
 	return (
 		<>
-			<Statistics />
+			<Statistics data={reportes} />
 
 			<Row>
 				<Col lg={5}>
-					<CampaignsChart />
+					<CampaignsChart data={reportes} />
 				</Col>
 				<Col lg={7}>
-					<RevenueChart />
+					<RevenueChart  data={reportes}/>
 				</Col>
 			</Row>
 
 			<Row>
 				<Col xl={8} lg={12}>
-					 <Products />
+					 <Programas data={reportes} />
 				</Col>
 				<Col xl={4} lg={6}>
-					 <SalesChart />
+					 <SalesChart data={reportes}  />
 				</Col>
 			</Row>
 		</>

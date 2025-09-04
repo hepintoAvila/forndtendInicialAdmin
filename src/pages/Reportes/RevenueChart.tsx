@@ -2,8 +2,20 @@ import { ApexOptions } from 'apexcharts';
 import Chart from 'react-apexcharts';
 import { Card, Row, Col } from 'react-bootstrap';
 import { CardTitle } from '@/components';
+import getElemento from '@/common/helpers/getElementos';
+import { ChartWidgetData, Reporte } from './type';
 
-const RevenueChart = () => {
+const RevenueChart = ({ data }: { data: Reporte }) => {
+	const ceroElemento: ChartWidgetData = getElemento(data as any,0)!;
+	const primerElemento: ChartWidgetData = getElemento(data as any,1)!;
+	const dosElemento: ChartWidgetData = getElemento(data as any,2)!;
+	const tresElemento: ChartWidgetData = getElemento(data as any,3)!;
+
+	const apexBarChartData: number[] =  primerElemento?.data ?? [1, 1, 1, 3];
+	const dosData: number[] =  dosElemento?.data ?? [1, 1, 1, 3];
+	const tresData: number[] =  tresElemento?.data ?? [1, 1, 1, 3];
+ 
+
 	const apexLineChartWithLables: ApexOptions = {
 		chart: {
 			height: 336,
@@ -41,7 +53,7 @@ const RevenueChart = () => {
 		yaxis: [
 			{
 				title: {
-					text: 'Revenue (USD)',
+					text: '% Prestamos',
 				},
 				min: 0,
 			},
@@ -83,21 +95,21 @@ const RevenueChart = () => {
 
 	const apexLineChartWithLablesData = [
 		{
-			name: 'Total Visitas Mañana',
+			name: 'Visitas Mañana',
 			type: 'area',
-			data: [44, 55, 31, 47, 31, 43, 26, 41, 31, 47, 33, 43],
+			data: apexBarChartData,
 		},
 		{
-			name: 'Total Visitas Tarde',
+			name: 'Visitas Tarde',
 			type: 'line',
-			data: [55, 69, 45, 61, 43, 54, 37, 52, 44, 61, 43, 56],
+			data: dosData,
 		},{
-			name: 'Total Visitas Nocturna',
+			name: 'Visitas Nocturna',
 			type: 'line',
-			data: [55, 69, 45, 61, 43, 54, 37, 52, 44, 61, 43, 56],
+			data: tresData,
 		},
 	];
-
+const datos = ceroElemento.dataMeses as unknown as [{ [key: string]: string }];
 	return (
 		<Card>
 			<Card.Body>
@@ -113,19 +125,19 @@ const RevenueChart = () => {
 				/>
 
 				<div className="chart-content-bg">
-					<Row className="text-center">
-						<Col sm={6}>
-							<p className="text-muted mb-0 mt-3">Este Mes</p>
-							<h2 className="fw-normal mb-3">
-								<span>42</span>
-							</h2>
+					<Row>
+					 {Object.keys(datos[0]).map((mes, index) => (
+						<Col sm={6} key={index}>
+						<p className="text-muted mb-0 mt-3">
+							{mes === "8" ? "Mes Anterior" : "Este Mes"}
+						</p>
+						<h2 className="fw-normal mb-3">
+							<span>
+							 {datos[0][mes]??'0.0'}
+							</span>
+						</h2>
 						</Col>
-						<Col sm={6}>
-							<p className="text-muted mb-0 mt-3">Mes Anterior </p>
-							<h2 className="fw-normal mb-3">
-								<span>74</span>
-							</h2>
-						</Col>
+					))}
 					</Row>
 				</div>
 

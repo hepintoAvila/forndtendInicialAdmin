@@ -1,34 +1,39 @@
-import { ApiResponse, AuthData, AuthServiceInterface, AuthServiceResponse, UserProps } from "@/pages/account/Login/type";
 import config from "../helpers/config";
- 
-const AuthService = (urlObjet: any): AuthServiceInterface => {
-  
-  const Autentications = async (values: UserProps): Promise<AuthServiceResponse> => {
-     
+import { ApiResponse, ReporteServiceInterface, ReporteServiceResponse, UserProps } from "@/pages/Reportes/type";
+const ReporteService = (urlObjet: any,bodyData:any): ReporteServiceInterface => {
+
+  const Autentications = async (values: UserProps): Promise<ReporteServiceResponse> => {
+     if (!values) {
+     throw new Error('AuthContext no está disponible');
+    }
+
     const credentials = {
       var_login: values.login,
       password: values.password,
     };
-
+    const token = localStorage.getItem('authToken');
     const params = new URLSearchParams({
-      exec: 'admin_login',
-      _SPIP_PAGE: 'admin_login',
-      action: 'true',
-      var_ajax: 'form',
-      bonjour: 'oui',
+      exec: 'admin_reportes',
+      _SPIP_PAGE: urlObjet._SPIP_PAGE || 'admin_reportes',
+      action: urlObjet.action || 'true',
+      var_ajax:  urlObjet.var_ajax || 'form',
+      bonjour: urlObjet.bonjour || 'oui',
       accion: urlObjet.accion,
       opcion: urlObjet.opcion
     });
 
     try {
+
       const response = await fetch(`/api2025/?${params.toString()}`, {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Basic ${btoa(`${credentials.var_login}:${credentials.password}`)}`,
           'X-Requested-With': 'XMLHttpRequest',
           'Accept': 'application/json',
+          'x-sices-api-apikey': token ? token : '',
         },
+         body: JSON.stringify(bodyData),
         credentials: 'include'
       });
 
@@ -37,9 +42,7 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
         return {
           status: 'success',
           data: {
-            auth: {} as AuthData,
-            permisos: [],
-            menu: [],
+            chartwidget: [],
             metadata: {
               statusCode: 204,
               type: 'success',
@@ -55,7 +58,6 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
 
       // Obtener el texto de la respuesta primero para debuggear
       const responseText = await response.text();
-     // console.log('Raw response:', responseText);
      // console.log('Raw response:', responseText);
      if (!responseText) {
         console.log('La respuesta está vacía');
@@ -77,9 +79,8 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
         return {
           status: 'success',
           data: {
-            auth: result.data?.Auth || {} as AuthData,
-            permisos: result.data?.Permisos || [],
-            menu: result.data?.Menu || [],
+            //auth: result.data?.Auth || {} as AuthData,
+            chartwidget: result.data?.chartwidget || [],
             metadata: {
               statusCode: result.status,
               type: result.type,
@@ -88,18 +89,29 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
           }
         };
       } else {
-        
         throw new Error(result.message || 'Error en la autenticación');
-        
       }
 
     } catch (error) {
-      console.error('Auth error:', error);
-      return {
-        status: 'error',
-        error: error instanceof Error ? error.message : 'Error de autenticación desconocido'
-      };
-    }
+      if (error instanceof Error && error.message.includes('No existen registros de Pcs')) {
+        return {
+          status: 'success',
+          data: {
+            chartwidget: [],
+            metadata: {
+              statusCode: 200,
+              type: 'success',
+              message: 'No existen registros de Pcs'
+            }
+          }
+        };
+      }
+    console.error('Auth error:', error);
+    return {
+      status: 'error',
+      error: error instanceof Error ? error.message : 'Error de autenticación desconocido'
+    };
+  }
   };
 
   return {
@@ -107,4 +119,6 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
   };
 };
 
-export default AuthService;
+export default ReporteService;
+
+ 

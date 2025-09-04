@@ -29,7 +29,7 @@ const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> 
 
     try {
      
-      const response = await fetch(`${/api2025/}?${params.toString()}`, {
+      const response = await fetch(`/api2025/?${params.toString()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

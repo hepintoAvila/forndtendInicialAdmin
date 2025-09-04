@@ -57,10 +57,10 @@ const VisitasForm = ({
                 <option value="6">Consulta de tesis</option>
                 <option value="7">Estudio</option>
                 <option value="8">Leer</option>
-                <option value="2">Investigación</option>
-                <option value="3">Estudio</option>
-                <option value="4">Capacitación</option>
-                <option value="5">Otros</option>
+                <option value="9">Investigación</option>
+                <option value="10">Estudio</option>
+                <option value="11">Capacitación</option>
+                <option value="12">Otros</option>
                 </>
               </Form.Select>
               <Form.Control.Feedback type="invalid">Por favor, seleccione el tiempo préstamo</Form.Control.Feedback>
