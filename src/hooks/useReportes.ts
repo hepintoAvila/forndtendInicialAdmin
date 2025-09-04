@@ -1,6 +1,4 @@
 import { config, encodeBasicUrl, useNotificationContext} from '@/common';
- 
-import PcsService from '@/common/api/pcs';
 import { AuthContext } from '@/common/context/AuthContext';
  
 import { useContext, useState } from 'react';
@@ -61,9 +59,11 @@ const authContext = useContext(AuthContext);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
       setError(errorMessage);
+       showNotification({ message: '', type: 'loading' });
       throw err;
     } finally {
       setLoading(false);
+       showNotification({ message: '', type: 'loading' });
     }
   };
     const sendReportsRequest = async () => {
@@ -72,7 +72,7 @@ const authContext = useContext(AuthContext);
           opcion: encodeBasicUrl(config.API_OPCION_REPORTES),
         };
         const ObjetBodys = {
-          programa: '',
+          programa: 'INGENERIA DE SISTEMAS',
         };
         const BodyData = generateBodyData(ObjetBodys);
         await sendReports(credentialsUrlPc, BodyData)

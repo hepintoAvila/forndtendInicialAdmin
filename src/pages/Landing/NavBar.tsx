@@ -1,4 +1,4 @@
-import logoDark from '@/assets/images/logo-dark.jpg';
+import logoDark from '@/assets/images/logo-dark.png';
 import { ThemeSettings, useThemeContext } from '@/common';
 import useThemeCustomizer from '@/components/ThemeCustomizer/useThemeCustomizer';
 import { useAuth, useViewport } from '@/hooks';
@@ -8,7 +8,7 @@ import usernavrow from '@/assets/images/user-nav-row.png';
 import { Dropdown, Modal } from 'react-bootstrap';
 import avata1 from '@/assets/images/users/avatar-1.jpg';
 import Login from '../account/Login';
-
+ 
 
 type TopbarProps = {
 	topbarDark?: boolean;
@@ -100,7 +100,9 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 				<div className="d-flex align-items-center gap-lg-2 gap-1">
 
 					<div className="logo-light">
-						<img src={logoDark} width={55} alt="logo" />
+						 <a href="https://biblioteca.unicesar.edu.co/wp/" target="_blank">
+						<img src={logoDark} className="logo upc" alt="React logo" width={100}  />
+						</a> 
 					</div>
 					<button className="button-toggle-menu" onClick={handleLeftMenuCallBack}>
 						<i className="mdi mdi-menu" />

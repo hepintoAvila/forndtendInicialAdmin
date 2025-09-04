@@ -6,13 +6,13 @@ const Root = () => {
 	 
 	//console.log('AppRoutes-isAuthenticated',isAuthenticated, isLoading, error );
 	const getRootUrl = () => {
-		const url = '/dashboard/';
+		const url = 'login';
 		return url;
 	};
 
 	const url = getRootUrl();
 
-	return <Navigate to={`prestaSotf/${url}`} />;
+	return <Navigate to={`account/${url}`} />;
 };
 
 export default Root;

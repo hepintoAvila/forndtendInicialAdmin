@@ -6,7 +6,6 @@ import { Suspense} from 'react';
 import { PageLoader } from './components';
 import { AuthProvider  } from './common/context/AuthContext';
 import AppRoutes from './routes';
-import { HashRouter } from 'react-router-dom';
  
 //import { useAuth0 } from '@auth0/auth0-react';
 

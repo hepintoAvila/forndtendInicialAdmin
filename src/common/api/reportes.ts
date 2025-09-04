@@ -1,5 +1,5 @@
  
-import config from "../helpers/config";
+//import config from "../helpers/config";
  
 import { ApiResponse, ReporteServiceInterface, ReporteServiceResponse, UserProps } from "@/pages/Reportes/type";
 const ReporteService = (urlObjet: any,bodyData:any): ReporteServiceInterface => {
@@ -9,8 +9,9 @@ const ReporteService = (urlObjet: any,bodyData:any): ReporteServiceInterface => 
 
  
 const token = import.meta.env.VITE_API_TOKEN;
+const url = import.meta.env.VITE_API_URL;
 const credentials = {
-  var_login: import.meta.env.VITE_API_USERNAME,
+ var_login: import.meta.env.VITE_API_USERNAME,
   password: import.meta.env.VITE_API_PASSWORD,
 };
     const params = new URLSearchParams({
@@ -25,7 +26,7 @@ const credentials = {
 
     try {
 
-      const response = await fetch(`/api2025/?${params.toString()}`, {
+      const response = await fetch(`${url}/api2025/?${params.toString()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

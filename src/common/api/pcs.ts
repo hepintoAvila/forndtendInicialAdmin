@@ -1,12 +1,12 @@
 import { ApiResponse,PcsServiceInterface, PcsServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/type";
-import config from "../helpers/config";
+//import config from "../helpers/config";
 const PcsService = (urlObjet: any,bodyData:any): PcsServiceInterface => {
 
   const Autentications = async (values: UserProps): Promise<PcsServiceResponse> => {
      if (!values) {
      throw new Error('AuthContext no está disponible');
     }
-
+const url = import.meta.env.VITE_API_URL;
     const credentials = {
       var_login: values.login,
       password: values.password,
@@ -24,7 +24,7 @@ const PcsService = (urlObjet: any,bodyData:any): PcsServiceInterface => {
 
     try {
 
-      const response = await fetch(`/api2025/?${params.toString()}`, {
+      const response = await fetch(`${url}/api2025/?${params.toString()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

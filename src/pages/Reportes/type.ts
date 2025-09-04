@@ -42,17 +42,17 @@ export interface ApiResponse {
   data: {
     chartwidget: ChartWidget[];
   };
-  message: string;
+  message?: string;
 }
 export interface ReporteServiceResponse {
-  message: unknown;
+ message?: string;
   status: 'success' | 'error';
   data?: {
     chartwidget: ChartWidget[];
     metadata: {
       statusCode: number;
       type: string;
-      message: string;
+       message?: string;
     };
   };
   error?: string;

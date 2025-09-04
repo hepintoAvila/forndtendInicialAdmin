@@ -93,5 +93,5 @@ export interface ApiTurnoResponseData {
   status: number;
   type: string;
   data: TurnoResponseData;
-  message?: string;
+  message: string;
 }

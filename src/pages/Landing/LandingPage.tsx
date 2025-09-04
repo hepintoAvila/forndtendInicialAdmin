@@ -20,7 +20,7 @@ const LandingPage = ({onChangeUrl}:LandingPageProps) => {
 		<>
 			
 			{/*<PageBreadcrumb title="Landing" />*/}
-			<NavBar onChangeUrl={onChangeUrl}/>
+			<NavBar/>
 
 			{/* hero */}
 			<Hero onChangeUrl={onChangeUrl}/>

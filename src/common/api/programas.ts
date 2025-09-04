@@ -1,4 +1,4 @@
-import config from "../helpers/config";
+//import config from "../helpers/config";
 import { ApiProgramaResponse, ProgramaRequest, ProgramaServiceInterface, ProgramaServiceResponse, UserProps } from "../type/type._programas";
 
 
@@ -7,7 +7,7 @@ const ProgramaService = (urlObjet: ProgramaRequest,bodyData:any): ProgramaServic
   
 
 const Autentications = async (values: UserProps): Promise<ProgramaServiceResponse> => {
-   
+   const url = import.meta.env.VITE_API_URL;
     const credentials = {
       var_login: values.login,
       password: values.password,
@@ -25,7 +25,7 @@ const Autentications = async (values: UserProps): Promise<ProgramaServiceRespons
 
     try {
      
-      const response = await fetch(`/api2025/?${params.toString()}`, {
+      const response = await fetch(`${url}/api2025/?${params.toString()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

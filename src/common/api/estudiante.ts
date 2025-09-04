@@ -1,11 +1,12 @@
 import { ApiEstudianteResponse, EstudianteServiceInterface, EstudianteServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/typeEstudiante";
-import config from "../helpers/config";
+//import config from "../helpers/config";
 
 
 
 const EstudianteService = (urlObjet : any): EstudianteServiceInterface => {
 
 const Autentications = async (values: UserProps): Promise<EstudianteServiceResponse> => {
+  const url = import.meta.env.VITE_API_URL;
 const credentials = {
       var_login: values.login,
       password: values.password,
@@ -22,7 +23,7 @@ const credentials = {
     });
 
     try {
-      const response = await fetch(`/api2025/?${params.toString()}`, {
+      const response = await fetch(`${url}/api2025/?${params.toString()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
