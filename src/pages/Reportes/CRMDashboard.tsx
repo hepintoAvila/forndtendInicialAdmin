@@ -7,8 +7,17 @@ import SalesChart from './SalesChart';
 import useReportes from '@/hooks/useReportes';
 import { useEffect } from 'react';
  
+import Footer from '@/layouts/Footer';
+import NavBar from '../Landing/NavBar';
+import Layouts from '../Landing/Layouts';
+import { layouts } from '../Landing/data';
+import ContactUs from '../Landing/ContactUs';
+ 
+type LandingPageProps = {
+	onChangeUrl: (value: string) => void;
+}; 
 
-const CRMDashboard = () => {
+const CRMDashboard =({onChangeUrl}:LandingPageProps) => {
 	 const { sendReportsRequest, reportes } = useReportes();
 
   useEffect(() => {
@@ -16,6 +25,9 @@ const CRMDashboard = () => {
   }, []);
 	return (
 		<>
+			<NavBar/>
+			<Layouts layouts={layouts} />
+			
 			<Statistics data={reportes} />
 
 			<Row>
@@ -35,6 +47,8 @@ const CRMDashboard = () => {
 					 <SalesChart data={reportes}  />
 				</Col>
 			</Row>
+			<ContactUs />
+			<Footer />
 		</>
 	);
 };

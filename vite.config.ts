@@ -1,42 +1,39 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
 import path from "path";
 
-// https://vitejs.dev/config/
-export default defineConfig({
-	plugins: [react()],
-	server: {
-    proxy: {
-      // Proxy específico para tu API
-      '/api2025': {
-        target: 'https://lacasadelbarbero.com.co',
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api2025/, '/api2025'),
-        configure: (proxy) => {
-          proxy.on('proxyReq', (proxyReq, req, res) => {
-            console.log('Proxying to:', proxyReq.path);
-          });
-          proxy.on('proxyRes', (proxyRes, req, res) => {
-            console.log('Response status:', proxyRes.statusCode);
-          });
+export default defineConfig(({ mode }) => {
+ const env = loadEnv(mode, process.cwd(), '');
+  return {
+    plugins: [react()],
+    server: {
+      proxy: {
+        '/api2025': {
+          target: env.VITE_API_URL,
+          changeOrigin: true,
+          secure: false,
+          rewrite: (path) => path.replace(/^\/api2025/, '/api2025'),
+          configure: (proxy) => {
+            proxy.on('proxyReq', (proxyReq, req, res) => {
+              console.log('Proxying to:', proxyReq.path);
+            });
+            proxy.on('proxyRes', (proxyRes, req, res) => {
+              console.log('Response status:', proxyRes.statusCode);
+            });
+          }
         }
       }
-    }
-  	},
-	define: { "process.env": {} },
-	build: {
-		rollupOptions: {
-		external: ['pdfjs-dist/build/pdf.worker.entry'],
-		},
-	},
-	resolve: {
-		alias: {
-			"@": path.resolve(__dirname, "src"),
-		},
-		
-	},
+    },
+    resolve: {
+   alias: {
+        "@": path.resolve(__dirname, "src"),
+      },
+    },
+  define: {
+      __API_TOKEN__: JSON.stringify(env.VITE_API_TOKEN),
+      __API_USERNAME__: JSON.stringify(env.VITE_API_USERNAME),
+      __API_PASSWORD__: JSON.stringify(env.VITE_API_PASSWORD),
+    },
+    // ...
+  }
 });
-
-
- 

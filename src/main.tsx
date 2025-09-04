@@ -85,13 +85,13 @@ const providerConfig :Auth0ProviderOptions = {
     ...(config.audience ? { audience: config.audience } : null),
   },
 };
-
+ 
 const container = document.getElementById('hyper');
 if (container) {
 	const root = createRoot(container);
 
 	root.render(
-		<HashRouter basename={process.env.PUBLIC_URL}>
+	<HashRouter basename={import.meta.env.VITE_PUBLIC_URL || ''}>
 			<Auth0Provider
 				{...providerConfig}
 			>

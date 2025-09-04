@@ -1,17 +1,18 @@
+ 
 import config from "../helpers/config";
+ 
 import { ApiResponse, ReporteServiceInterface, ReporteServiceResponse, UserProps } from "@/pages/Reportes/type";
 const ReporteService = (urlObjet: any,bodyData:any): ReporteServiceInterface => {
 
   const Autentications = async (values: UserProps): Promise<ReporteServiceResponse> => {
-     if (!values) {
-     throw new Error('AuthContext no está disponible');
-    }
+ 
 
-    const credentials = {
-      var_login: values.login,
-      password: values.password,
-    };
-    const token = localStorage.getItem('authToken');
+ 
+const token = import.meta.env.VITE_API_TOKEN;
+const credentials = {
+  var_login: import.meta.env.VITE_API_USERNAME,
+  password: import.meta.env.VITE_API_PASSWORD,
+};
     const params = new URLSearchParams({
       exec: 'admin_reportes',
       _SPIP_PAGE: urlObjet._SPIP_PAGE || 'admin_reportes',

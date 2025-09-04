@@ -30,6 +30,7 @@
       }
     ],
     "typescript-config/consistent-casing": "off",
-    "button-type": "off"
+    "button-type": "off",
+    "typescript-config/strict": "off"
   }
 }

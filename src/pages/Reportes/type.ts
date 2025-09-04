@@ -45,6 +45,7 @@ export interface ApiResponse {
   message: string;
 }
 export interface ReporteServiceResponse {
+  message: unknown;
   status: 'success' | 'error';
   data?: {
     chartwidget: ChartWidget[];

@@ -1,4 +1,4 @@
-import { config, encodeBasicUrl} from '@/common';
+import { config, encodeBasicUrl, useNotificationContext} from '@/common';
  
 import PcsService from '@/common/api/pcs';
 import { AuthContext } from '@/common/context/AuthContext';
@@ -20,7 +20,7 @@ export default function useReportes(){
       }
       return bodyData;
     };
-
+  const { showNotification } = useNotificationContext();
 const authContext = useContext(AuthContext);
   if (!authContext) {
     throw new Error('AuthContext no está disponible');
@@ -30,7 +30,7 @@ const authContext = useContext(AuthContext);
   const [error, setError] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [reportes, setReportes] = useAtom(ApiEPcAtom);
-
+ const [message, setMessage] = useState('');
   const sendReports = async (credentialsUrl: any,BodyData:any) => {
     setLoading(true);
     setError(null);
@@ -51,6 +51,9 @@ const authContext = useContext(AuthContext);
       if (result.status === 'success' && result.data) {
          setIsAuthenticated(true);
          setReportes(result.data.chartwidget as any);
+         const message = result.message  as unknown as string;
+          setMessage(message);
+          showNotification({ message: '', type: 'loading' });
         return result.data;
       } else {
         throw new Error(result.error || 'Autenticación fallida');
@@ -83,7 +86,7 @@ const authContext = useContext(AuthContext);
         });
       };
 
-
+ console.log('message',message);
   return {
     loading,
     error,

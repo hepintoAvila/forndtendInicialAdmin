@@ -13,7 +13,7 @@ type AccountLayoutProps = {
 const AccountWrapper = ({ bottomLinks, children }: AccountLayoutProps) => {
 	useAccountLayout();
  	return (
-		<div className="auth-fluid">
+		<div className="auth-fluid bg-white">
 			<div className="auth-fluid-form-box">
 				<Card.Body className="d-flex flex-column h-100 gap-3">
 					<div className="my-auto">{children}</div>

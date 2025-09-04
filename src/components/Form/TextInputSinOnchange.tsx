@@ -39,7 +39,7 @@ export default function TextInputSinOnchange({
 			name={name}
 			control={control}
 			render={({ field, fieldState }) => (
-				<Form.Group className={containerClass ?? ''}>
+				<Form.Group className={containerClass ?? ''} style={{width:'80%'}}>
 					{label && <Form.Label>{label}</Form.Label>}
 					<Form.Control
 						id={id}
@@ -52,6 +52,7 @@ export default function TextInputSinOnchange({
 						}}
 						placeholder={placeholder}
 						className={className}
+						
 						isInvalid={Boolean(fieldState.error?.message)}
 					/>
 					{helpText && (

@@ -11,6 +11,7 @@ import AccountWrapper from '@/pages/account/Login/AccountWrapper';
 import { useEffect } from 'react';
 import { useAuth } from '@/hooks';
 import { useNotificationContext } from '@/common';
+ 
 
 const Login = () => {
 	const { showNotification } = useNotificationContext();
@@ -38,9 +39,7 @@ const Login = () => {
 	};
 	return (
 		<>
-		
-			
-			<AccountWrapper>
+			<AccountWrapper >
 			<div className="text-center mt-0">
 					<span>
 						<img src={LogoDark} alt="" height={100} />
@@ -59,8 +58,9 @@ const Login = () => {
 						type="text"
 						name="login"
 						placeholder={t('Enter your email')}
-						className="input-container-login text-center " // Padding y tamaño del texto
+						className="input-container-login text-center" // Padding y tamaño del texto
 					/>
+					 
 					<PasswordInput
 						label={''}
 						name="password"
@@ -72,7 +72,7 @@ const Login = () => {
 						</Link>
 					</PasswordInput>
 							
-				<Button variant="primary" type="submit" className="mb-3 input-container-login"  disabled={loading}>
+				<Button variant="primary" type="submit" className="mb-3 input-container-login" style={{width:'65%'}} disabled={loading}>
 					<i className="mdi mdi-login ms-0"></i> <small className="ms-3">{t('Log In')}</small>
 				</Button>
 				</Form>

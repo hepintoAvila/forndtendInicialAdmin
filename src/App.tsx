@@ -1,10 +1,13 @@
-import AppRoutes from '@/routes';
+ 
 import { NotificationProvider, ThemeProvider } from '@/common/context';
 //import { useLocation, useNavigate } from 'react-router-dom';
 import { Suspense} from 'react';
 //import LandingPage from './pages/Landing';
 import { PageLoader } from './components';
 import { AuthProvider  } from './common/context/AuthContext';
+import AppRoutes from './routes';
+import { HashRouter } from 'react-router-dom';
+ 
 //import { useAuth0 } from '@auth0/auth0-react';
 
  
@@ -65,7 +68,7 @@ const App = () => {
           </AuthProvider >
         </ThemeProvider>
          
-
+        
         </Suspense>
     </>
   );

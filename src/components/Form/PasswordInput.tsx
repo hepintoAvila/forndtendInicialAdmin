@@ -38,14 +38,14 @@ export default function PasswordInput({
 				name={name}
 				control={control}
 				render={({ field, fieldState }) => (
-					<Form.Group className={containerClass}>
+					<Form.Group className={containerClass} >
 						{label && (
 							<>
 								{children}
 								<Form.Label>{label}</Form.Label>
 							</>
 						)}
-						<InputGroup className="mb-0">
+						<InputGroup className="mb-0" style={{width:'85%'}}>
 							<Form.Control
 								{...props}
 								{...field}

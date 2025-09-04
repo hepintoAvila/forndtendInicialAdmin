@@ -109,7 +109,12 @@ const RevenueChart = ({ data }: { data: Reporte }) => {
 			data: tresData,
 		},
 	];
-const datos = ceroElemento.dataMeses as unknown as [{ [key: string]: string }];
+const datos = ceroElemento?.dataMeses as unknown as [{ [key: string]: string }]??[{
+                        "PROG_NOMBRE": "ADMINISTRACION DE EMPRESAS",
+                        "mes": "0",
+                        "turno_tipo": "Tarde",
+                        "cantidad": "0"
+                    }];
 	return (
 		<Card>
 			<Card.Body>
