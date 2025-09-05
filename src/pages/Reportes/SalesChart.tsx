@@ -2,14 +2,14 @@ import Chart from 'react-apexcharts';
 import { Card } from 'react-bootstrap';
 import { ApexOptions } from 'apexcharts';
 
-import { ChartWidgetData, Reporte } from './type';
+import { LibroVisitas, ReporteServiceResponse } from './type';
 import getElemento from '@/common/helpers/getElementos';
  
 
-const SalesChart = ({ data }: { data: Reporte }) => {
+const SalesChart = ({ data }: { data: ReporteServiceResponse }) => {
 	
-		const primerElemento: ChartWidgetData = getElemento(data as any,0)!;
-		const apexBarChartDataColors: number[] =  primerElemento?.dataColors ?? ['#117a41', '#8cce6b', '#f6f601','#f6aa38'];
+		const primerElemento: LibroVisitas = getElemento(data as any,0)!;
+		const apexBarChartDataColors: any[] =  primerElemento?.dataColors ?? ['#117a41', '#8cce6b', '#f6f601','#f6aa38'];
 
 	const apexDonutOpts: ApexOptions = {
 		chart: {
@@ -52,7 +52,7 @@ const apexDonutData: number[] =  primerElemento?.dataTotales ?? [1, 1, 1, 3];
 				/>
 
 				<div className="chart-widget-list">
-					{(data as unknown as Reporte[]).slice(0, 4).map((reporte, index) => (
+					{(data as unknown as LibroVisitas[]).slice(0, 4).map((reporte, index) => (
 					<p>
 						<i className="mdi mdi-square" style={{ color: `${apexBarChartDataColors[index]}` }}></i> <span className="p-5">{reporte.title}</span> 
 						<span className="float-end">{reporte.stats}</span>

@@ -4,14 +4,15 @@ import { AuthContext } from '@/common/context/AuthContext';
 import { useContext, useState } from 'react';
 
 import { atom, useAtom } from 'jotai';
-import { ChartWidgetData, Credentials, SendData } from '@/pages/Reportes/type';
+import { ApiResponse } from '@/pages/Reportes/type';
 import ReporteService from '@/common/api/reportes';
-const ApiEPcAtom = atom<ChartWidgetData>([] as unknown as ChartWidgetData);
+const ApiEPcAtom = atom<ApiResponse>([] as unknown as ApiResponse);
+const ApiVisitas = atom<ApiResponse>([] as unknown as ApiResponse);
 
 export default function useReportes(){
  
 
-    const generateBodyData = (ObjetBody: {  programa: string | undefined} ): SendData => {
+    const generateBodyData = (ObjetBody: {  programa: string | undefined} ): any => {
       const bodyData: any = {};
       if (ObjetBody) {
             bodyData.id_pc = ObjetBody.programa;
@@ -23,11 +24,12 @@ const authContext = useContext(AuthContext);
   if (!authContext) {
     throw new Error('AuthContext no está disponible');
   }
-  const {credentials} = authContext;
+ 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [reportes, setReportes] = useAtom(ApiEPcAtom);
+ const [reportes, setReportes] = useAtom<ApiResponse>(ApiEPcAtom);
+const [visitas, setVisitas] = useAtom<ApiResponse>(ApiVisitas);
  const [message, setMessage] = useState('');
   const sendReports = async (credentialsUrl: any,BodyData:any) => {
     setLoading(true);
@@ -44,12 +46,13 @@ const authContext = useContext(AuthContext);
   try {
       
       const reporteService = ReporteService(urlObjet,BodyData);
-      const result = await reporteService.Autentications(credentials as Credentials);
+      const result = await reporteService.Autentications();
 
       if (result.status === 'success' && result.data) {
          setIsAuthenticated(true);
          setReportes(result.data.chartwidget as any);
-         const message = result.message  as unknown as string;
+         setVisitas(result.data.libroVisitas as any);
+         const message = result?.message  as unknown as any;
           setMessage(message);
           showNotification({ message: '', type: 'loading' });
         return result.data;
@@ -78,6 +81,7 @@ const authContext = useContext(AuthContext);
         await sendReports(credentialsUrlPc, BodyData)
         .then((response) => {
           setReportes(response.chartwidget as any);
+          setVisitas(response.libroVisitas as any);
         })
         .catch((err) => {
           const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
@@ -92,6 +96,7 @@ const authContext = useContext(AuthContext);
     error,
     isAuthenticated,
     reportes,
+    visitas,
     sendReports,
     sendReportsRequest
   };

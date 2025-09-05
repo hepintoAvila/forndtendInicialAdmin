@@ -1,13 +1,13 @@
 import { Row, Col } from 'react-bootstrap';
 import { StatisticsChartWidget } from '@/components';
-import { Reporte } from './type';
+import { Response} from './type';
  
-const Statistics = ({ data }: { data: Reporte }) => {
+const Statistics = ({ data }: { data: Response }) => {
  
 
   return (
     <Row>
-      {(data as unknown as Reporte[]).slice(0, 4).map((reporte, index) => (
+      {(data as unknown as any).slice(0, 4).map((reporte: any, index:number) => (
         <Col key={index} md={6} xl={3}>
           <StatisticsChartWidget
             description={reporte.description}

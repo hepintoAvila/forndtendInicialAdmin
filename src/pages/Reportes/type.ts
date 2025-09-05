@@ -4,7 +4,7 @@ export type UserProps = {
   password?: string;
 };
 export type Credentials = {
-  login?: string;
+  var_login?: string;
   password?: string;
 };
 interface Trend {
@@ -13,76 +13,74 @@ interface Trend {
   value: string;
 }
 
-interface ChartWidget {
+interface DataPrograma {
+  PROG_NOMBRE: string;
+  mes: string;
+  turno_tipo: string;
+  cantidad: string;
+}
+
+interface DataMes {
+  [key: string]: string | number;
+}
+
+export interface ChartWidget {
   title: string;
   description: string;
   stats: string;
   trend: Trend;
   colors: string[];
-  data: [];
+  data: string[];
+  dataTotales: number[];
+  dataColors: string[];
+  dataMeses: DataMes[];
+  dataProgramas: DataPrograma[];
 }
-export interface ChartWidgetData {
+
+export interface LibroVisitas {
   title: string;
   description: string;
-  stats: string;
+  stats: number;
   trend: Trend;
   colors: string[];
-  data: [];
-  dataTotales: [];
-  dataColors: [];
-  dataMeses: [];
-  dataProgramas: [];
+  data: number[];
+  dataTotales?: number[];
+  dataColors?: string[];
+  dataMeses?: DataMes[];
+  dataProgramas?: DataPrograma[];
 }
-export interface SendData {
-  programa: string;
+
+interface ResponseData {
+  chartwidget: ChartWidget[];
+  libroVisitas: LibroVisitas[];
 }
+
+export interface Response {
+  status: number;
+  type: string;
+  data: ResponseData;
+  message?: string;
+}
+
 export interface ApiResponse {
   status: number;
   type: string;
-  data: {
-    chartwidget: ChartWidget[];
-  };
+  data: ResponseData;
   message?: string;
 }
+
 export interface ReporteServiceResponse {
- message?: string;
+  message?: string;
   status: 'success' | 'error';
   data?: {
     chartwidget: ChartWidget[];
+    libroVisitas?: LibroVisitas[];
     metadata: {
       statusCode: number;
       type: string;
-       message?: string;
+      message?: string;
     };
   };
   error?: string;
 }
 
-export interface ReporteServiceInterface {
-  Autentications: (values: UserProps) => Promise<ReporteServiceResponse>;
-}
- 
-
-export interface DataProgramas {
-  PROG_NOMBRE: string | null;
-  turno_tipo: string;
-  cantidad: string;
-  mes: string;
-}
-
-export interface Reporte {
-  title: string;
-  description: string;
-  stats: string;
-  trend: {
-    textClass: string;
-    icon: string;
-    value: string;
-  };
-  colors: string[];
-  data: [];
-  dataTotales: [];
-  dataColors: [];
-  dataMeses: [];
-  dataProgramas: [];
-}

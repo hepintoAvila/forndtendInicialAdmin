@@ -1,10 +1,11 @@
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { ChartWidgetData, Reporte } from './type';
+import { ReporteServiceResponse, LibroVisitas } from './type';
 import getElemento from '@/common/helpers/getElementos';
 import { Table } from '@/components';
-const Programas =({ data }: { data: Reporte }) => {
-	const ceroElemento: ChartWidgetData = getElemento(data as any,0)!;
+const Programas =({ data }: { data: ReporteServiceResponse }) => {
+	const ceroElemento: LibroVisitas = getElemento(data as any,0)!;
+
 	const datosprogramas: any=  ceroElemento?.dataProgramas ?? [{
                         "PROG_NOMBRE": null,
                         "turno_tipo": "Tarde",

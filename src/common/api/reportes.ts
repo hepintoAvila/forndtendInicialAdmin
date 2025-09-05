@@ -1,16 +1,19 @@
  
 //import config from "../helpers/config";
- 
-import { ApiResponse, ReporteServiceInterface, ReporteServiceResponse, UserProps } from "@/pages/Reportes/type";
-const ReporteService = (urlObjet: any,bodyData:any): ReporteServiceInterface => {
 
-  const Autentications = async (values: UserProps): Promise<ReporteServiceResponse> => {
+import { ApiResponse, ReporteServiceResponse,Credentials } from "@/pages/Reportes/type";
+
+ 
+
+const ReporteService = (urlObjet: any, bodyData: any): { Autentications: () => Promise<ReporteServiceResponse> } => {
+
+const Autentications = async (): Promise<ReporteServiceResponse> => {
  
 
  
 const token = import.meta.env.VITE_API_TOKEN;
 const url = import.meta.env.VITE_API_URL;
-const credentials = {
+const credentials:Credentials  = {
  var_login: import.meta.env.VITE_API_USERNAME,
   password: import.meta.env.VITE_API_PASSWORD,
 };
@@ -45,6 +48,7 @@ const credentials = {
           status: 'success',
           data: {
             chartwidget: [],
+            libroVisitas: [],
             metadata: {
               statusCode: 204,
               type: 'success',
@@ -83,6 +87,7 @@ const credentials = {
           data: {
             //auth: result.data?.Auth || {} as AuthData,
             chartwidget: result.data?.chartwidget || [],
+            libroVisitas: result.data?.libroVisitas || [],
             metadata: {
               statusCode: result.status,
               type: result.type,

@@ -3,13 +3,13 @@ import Chart from 'react-apexcharts';
 import { Card, Row, Col } from 'react-bootstrap';
 import { CardTitle } from '@/components';
 import getElemento from '@/common/helpers/getElementos';
-import { ChartWidgetData, Reporte } from './type';
+import { LibroVisitas, ReporteServiceResponse } from './type';
 
-const RevenueChart = ({ data }: { data: Reporte }) => {
-	const ceroElemento: ChartWidgetData = getElemento(data as any,0)!;
-	const primerElemento: ChartWidgetData = getElemento(data as any,1)!;
-	const dosElemento: ChartWidgetData = getElemento(data as any,2)!;
-	const tresElemento: ChartWidgetData = getElemento(data as any,3)!;
+const RevenueChart = ({ data }: { data: ReporteServiceResponse }) => {
+	const ceroElemento: LibroVisitas = getElemento(data as any,0)!;
+	const primerElemento: LibroVisitas = getElemento(data as any,1)!;
+	const dosElemento: LibroVisitas = getElemento(data as any,2)!;
+	const tresElemento: LibroVisitas = getElemento(data as any,3)!;
 
 	const apexBarChartData: number[] =  primerElemento?.data ?? [1, 1, 1, 3];
 	const dosData: number[] =  dosElemento?.data ?? [1, 1, 1, 3];

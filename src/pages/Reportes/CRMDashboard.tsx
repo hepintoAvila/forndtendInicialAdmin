@@ -19,7 +19,7 @@ import classnames from 'classnames';
 
 const CRMDashboard = () => {
   const { showNotification } = useNotificationContext();
-  const { sendReportsRequest, reportes, loading } = useReportes();
+  const { sendReportsRequest, reportes,visitas, loading } = useReportes();
 
   useEffect(() => {
     sendReportsRequest();
@@ -48,63 +48,97 @@ const CRMDashboard = () => {
       text: '',
     },
   ];
+  console.log('visitas',visitas);
   return (<>
      {reportes && Array.isArray(reportes) && reportes.length > 0 ? (
 		<>
     <NavBar />
     <Layouts layouts={layouts} />
     <Tab.Container defaultActiveKey="Virtualteca">
-        <Nav variant="tabs">
-          {tabContents.map((tab, index) => {
-            return (
-              <Nav.Item key={index.toString()}>
-                <Nav.Link eventKey={tab.title}>
-                  <i
-                    className={classnames(
-                      tab.icon,
-                      'd-md-none',
-                      'd-block',
-                      'me-1'
+  <Nav variant="tabs">
+    {tabContents.map((tab, index) => {
+      return (
+        <Nav.Item key={index.toString()}>
+          <Nav.Link eventKey={tab.title}>
+            <i
+              className={classnames(
+                tab.icon,
+                'd-md-none',
+                'd-block',
+                'me-1'
+              )}
+            ></i>
+            <span className="d-none d-md-block">{tab.title}</span>
+          </Nav.Link>
+        </Nav.Item>
+      );
+    })}
+  </Nav>
+  <Tab.Content>
+    {tabContents.map((tab, index) => {
+      return (
+        <Tab.Pane key={index.toString()} eventKey={tab.title}>
+          <div className="p-3">
+            <Row>
+              <Col lg={12}>
+                <Card>
+                  <Card.Body>
+                    {/* Aquí puedes agregar contenido específico para cada pestaña */}
+                    {tab.title === "Virtualteca" && (
+                      <>
+                        <Statistics data={reportes as any} />
+                        <Row>
+                          <Col lg={5}>
+                            <CampaignsChart data={reportes as any} />
+                          </Col>
+                          <Col lg={7}>
+                            <RevenueChart data={reportes as any} />
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col xl={8} lg={12}>
+                            <Programas data={reportes as any} />
+                          </Col>
+                          <Col xl={4} lg={6}>
+                            <SalesChart data={reportes as any} />
+                          </Col>
+                        </Row>
+                      </>
                     )}
-                  ></i>
-                  <span className="d-none d-md-block">{tab.title}</span>
-                </Nav.Link>
-              </Nav.Item>
-            );
-          })}
-        </Nav>
-        <Tab.Content>
-          <Tab.Pane eventKey="Virtualteca">
-            <div className="p-3">
-              <Row>
-                <Col lg={12}>
-                  <Card>
-                    <Card.Body>
-                      <Statistics data={reportes} />
-                      <Row>
-                        <Col lg={5}>
-                          <CampaignsChart data={reportes} />
-                        </Col>
-                        <Col lg={7}>
-                          <RevenueChart data={reportes} />
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col xl={8} lg={12}>
-                          <Programas data={reportes} />
-                        </Col>
-                        <Col xl={4} lg={6}>
-                          <SalesChart data={reportes} />
-                        </Col>
-                      </Row>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              </Row>
-            </div>
-          </Tab.Pane>
-        </Tab.Content>
-      </Tab.Container></>      
+                    {tab.title === "Hemeroteca" && (
+        <>
+                        <Statistics data={visitas as any} />
+                        <Row>
+                          <Col lg={5}>
+                            <CampaignsChart data={visitas as any} />
+                          </Col>
+                          <Col lg={7}>
+                            <RevenueChart data={visitas as any} />
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col xl={8} lg={12}>
+                            <Programas data={visitas as any} />
+                          </Col>
+                          <Col xl={4} lg={6}>
+                            <SalesChart data={visitas as any} />
+                          </Col>
+                        </Row>
+                      </>
+                    )}
+                    {tab.title === "Biblioteca" && (
+                      <div>Contenido de Biblioteca</div>
+                    )}
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          </div>
+        </Tab.Pane>
+      );
+    })}
+  </Tab.Content>
+</Tab.Container></>      
       ) : (
        <LayoutsEstadisticas layouts={layouts} /> 
       )}

@@ -1,12 +1,13 @@
 import { ApexOptions } from 'apexcharts';
 import Chart from 'react-apexcharts';
 import { Card, Row, Col } from 'react-bootstrap';
-import { ChartWidgetData, Reporte } from './type';
-import getElemento from '@/common/helpers/getElementos';
  
-const CampaignsChart = ({ data }: { data: Reporte }) => {
-	const primerElemento: ChartWidgetData = getElemento(data as any,0)!;
-	const apexBarChartDataColors: number[] =  primerElemento?.dataColors ?? ['#117a41', '#8cce6b', '#f6f601','#f6aa38'];
+import getElemento from '@/common/helpers/getElementos';
+import { ReporteServiceResponse,LibroVisitas } from './type';
+ 
+const CampaignsChart = ({ data }: { data: ReporteServiceResponse }) => {
+	const primerElemento: LibroVisitas = getElemento(data as any,0)!;
+	const apexBarChartDataColors: any[] =  primerElemento?.dataColors ?? ['#117a41', '#8cce6b', '#f6f601','#f6aa38'];
 	
 	const apexBarChartOpts: ApexOptions = {
 		grid: {
@@ -46,7 +47,7 @@ const CampaignsChart = ({ data }: { data: Reporte }) => {
 				/>
 
 				<Row className="text-center mt-3 mb-4">
-					{(data as unknown as Reporte[]).slice(0, 4).map((reporte, index) => (
+					{(data as unknown as LibroVisitas[]).slice(0, 4).map((reporte, index) => (
 
 					<Col sm={3}>
 						<i className="mdi mdi-flag-variant widget-icon rounded-circle bg-light-lighten text-muted"></i>
