@@ -60,7 +60,7 @@ export interface ProgramaServiceResponse {
 }
 
 export interface ProgramaServiceInterface {
-  Autentications: (values: UserProps) => Promise<ProgramaServiceResponse>;
+  Autentications: () => Promise<ProgramaServiceResponse>;
 }
 
 interface ProgramaResp {

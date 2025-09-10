@@ -1,5 +1,4 @@
 import { AuthContext } from '@/common/context/AuthContext';
-import { Credentials} from '@/pages/Aula/Aulavirtual/type';
 import { useContext, useState } from 'react';
  import { atom, useAtom } from 'jotai';
 import { config, encodeBasicUrl, useNotificationContext } from '@/common';
@@ -30,7 +29,7 @@ const authContext = useContext(AuthContext);
   if (!authContext) {
     throw new Error('AuthContext no está disponible');
   }
-  const {credentials} = authContext;
+ 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -43,7 +42,7 @@ const authContext = useContext(AuthContext);
   try {
       
       const programaService = ProgramaService(urlObjet,dataBody);
-      const result = await programaService.Autentications(credentials as Credentials);
+      const result = await programaService.Autentications();
       if (result.status === 'success' && result.data) {
          setIsAuthenticated(true);
          setProgramas(result.data.programas  as unknown as  ApiProgramaResponseData);

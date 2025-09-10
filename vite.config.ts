@@ -3,13 +3,14 @@ import react from '@vitejs/plugin-react';
 import path from "path";
 
 export default defineConfig(({ mode }) => {
- const env = loadEnv(mode, process.cwd(), '');
+ const env = loadEnv(mode, process.cwd(), 'lacasadelbarbero.com.co');
   return {
-    plugins: [react()],
+    plugins: [react()], 
     server: {
       proxy: {
         '/api2025': {
-          target: env.VITE_API_URL,
+          //target: env.VITE_API_URL,
+          target: 'https://lacasadelbarbero.com.co',
           changeOrigin: true,
           secure: false,
           rewrite: (path) => path.replace(/^\/api2025/, '/api2025'),

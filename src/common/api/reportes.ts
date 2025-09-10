@@ -1,5 +1,4 @@
  
-//import config from "../helpers/config";
 
 import { ApiResponse, ReporteServiceResponse,Credentials } from "@/pages/Reportes/type";
 
@@ -12,7 +11,6 @@ const Autentications = async (): Promise<ReporteServiceResponse> => {
 
  
 const token = import.meta.env.VITE_API_TOKEN;
-const url = import.meta.env.VITE_API_URL;
 const credentials:Credentials  = {
  var_login: import.meta.env.VITE_API_USERNAME,
   password: import.meta.env.VITE_API_PASSWORD,
@@ -29,7 +27,7 @@ const credentials:Credentials  = {
 
     try {
 
-      const response = await fetch(`${url}/api2025/?${params.toString()}`, {
+      const response = await fetch(`/api2025/?${params.toString()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,6 +103,7 @@ const credentials:Credentials  = {
           status: 'success',
           data: {
             chartwidget: [],
+            libroVisitas: [],
             metadata: {
               statusCode: 200,
               type: 'success',

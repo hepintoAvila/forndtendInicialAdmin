@@ -8,7 +8,7 @@ const VisitaService = (urlObjet: any,bodyData:any): VisitaServiceInterface => {
      if (!values) {
      throw new Error('values para AuthContext  no está disponible');
     }
-const url = import.meta.env.VITE_API_URL;
+//const url = import.meta.env.VITE_API_URL;
     const credentials = {
       var_login: values.login,
       password: values.password,
@@ -26,7 +26,7 @@ const url = import.meta.env.VITE_API_URL;
 
     try {
 
-      const response = await fetch(`${url}/api2025/?${params.toString()}`, {
+      const response = await fetch(`/api2025/?${params.toString()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -15,19 +15,26 @@ import ContactUs from '../Landing/ContactUs';
 import { useNotificationContext } from '@/common';
 import LayoutsEstadisticas from '../Landing/LayoutsEstadisticas';
 import classnames from 'classnames';
- 
+import BuscadorForm from './buscador/BuscadorForm';
+import useProgramas from "@/hooks/useProgramas"; 
+import EstadisticasGraficas from './EstadisticasGraficas/EstadisticasGraficas';
+import { ReporteServiceHistoResponse } from './type';
 
 const CRMDashboard = () => {
   const { showNotification } = useNotificationContext();
-  const { sendReportsRequest, reportes,visitas, loading } = useReportes();
-
+  const { sendReportsRequest, reportes,visitas, loading,sendReportsHistoRequest,historicos } = useReportes();
+  const {sendProgramasRequest,programas} = useProgramas();
   useEffect(() => {
     sendReportsRequest();
+     sendProgramasRequest();
   }, []);
 
-  if (loading) {
+  useEffect(() => {
+     if (loading) {
     showNotification({ message: 'Cargando...', type: 'loading' });
-  }
+    }
+  }, [loading]);
+
   const tabContents = [
     {
       id: '1',
@@ -43,12 +50,16 @@ const CRMDashboard = () => {
     },
     {
       id: '3',
-      title: 'Biblioteca',
+      title: 'Historicos',
       icon: 'mdi mdi-account-circle',
       text: '',
     },
   ];
-  console.log('visitas',visitas);
+ 
+
+ 
+  const historicosArray:ReporteServiceHistoResponse = historicos.historicos;
+  console.log('CRMDashboard-historicos',historicosArray);
   return (<>
      {reportes && Array.isArray(reportes) && reportes.length > 0 ? (
 		<>
@@ -86,48 +97,28 @@ const CRMDashboard = () => {
                     {/* Aquí puedes agregar contenido específico para cada pestaña */}
                     {tab.title === "Virtualteca" && (
                       <>
-                        <Statistics data={reportes as any} />
-                        <Row>
-                          <Col lg={5}>
-                            <CampaignsChart data={reportes as any} />
-                          </Col>
-                          <Col lg={7}>
-                            <RevenueChart data={reportes as any} />
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col xl={8} lg={12}>
-                            <Programas data={reportes as any} />
-                          </Col>
-                          <Col xl={4} lg={6}>
-                            <SalesChart data={reportes as any} />
-                          </Col>
-                        </Row>
+                        <EstadisticasGraficas datos={reportes as any} />
+                          
                       </>
                     )}
                     {tab.title === "Hemeroteca" && (
-        <>
-                        <Statistics data={visitas as any} />
-                        <Row>
-                          <Col lg={5}>
-                            <CampaignsChart data={visitas as any} />
-                          </Col>
-                          <Col lg={7}>
-                            <RevenueChart data={visitas as any} />
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col xl={8} lg={12}>
-                            <Programas data={visitas as any} />
-                          </Col>
-                          <Col xl={4} lg={6}>
-                            <SalesChart data={visitas as any} />
-                          </Col>
-                        </Row>
+                       <>
+                         <EstadisticasGraficas datos={visitas as any} />
                       </>
                     )}
-                    {tab.title === "Biblioteca" && (
-                      <div>Contenido de Biblioteca</div>
+                    {tab.title === "Historicos" && (
+                       <><div>Contenido de Biblioteca del 2017-2020</div>
+                      <Row>
+                      <Col xl={8} lg={12}>                   
+                          <BuscadorForm programas={programas as any} sendReportsHistoRequest={sendReportsHistoRequest}/>
+                      </Col> 
+                       </Row>
+                        {historicosArray && Array.isArray(historicosArray) && historicosArray.length > 0 ? (
+                        <EstadisticasGraficas datos={historicosArray as any} />
+                     ) : (
+                        <p>No hay datos históricos disponibles.</p>
+                     )}
+                      </>
                     )}
                   </Card.Body>
                 </Card>

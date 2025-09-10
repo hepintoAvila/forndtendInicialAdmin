@@ -4,7 +4,7 @@ import { ApiResponse, AuthData, AuthServiceInterface, AuthServiceResponse, UserP
 const AuthService = (urlObjet: any): AuthServiceInterface => {
   
   const Autentications = async (values: UserProps): Promise<AuthServiceResponse> => {
-     const url = import.meta.env.VITE_API_URL;
+    // const url = import.meta.env.VITE_API_URL;
     const credentials = {
       var_login: values.login,
       password: values.password,
@@ -21,7 +21,7 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
     });
 
     try {
-      const response = await fetch(`${url}/api2025/?${params.toString()}`, {
+      const response = await fetch(`/api2025/?${params.toString()}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

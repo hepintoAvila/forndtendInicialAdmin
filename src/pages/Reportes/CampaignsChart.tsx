@@ -32,12 +32,9 @@ const CampaignsChart = ({ data }: { data: ReporteServiceResponse }) => {
 	};
  
 	const apexBarChartData: number[] =  primerElemento?.dataTotales ?? [1, 1, 1, 3];
-	
-
 	return (
 		<Card>
 			<Card.Body>
-
 				<Chart
 					options={apexBarChartOpts}
 					series={apexBarChartData}
@@ -45,7 +42,6 @@ const CampaignsChart = ({ data }: { data: ReporteServiceResponse }) => {
 					className="apex-charts"
 					height={302}
 				/>
-
 				<Row className="text-center mt-3 mb-4">
 					{(data as unknown as LibroVisitas[]).slice(0, 4).map((reporte, index) => (
 

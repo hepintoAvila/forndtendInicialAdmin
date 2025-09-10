@@ -1,31 +1,32 @@
-//import config from "../helpers/config";
-import { Credentials } from "@/pages/Reportes/type";
-import { ApiProgramaResponse, ProgramaRequest, ProgramaServiceInterface, ProgramaServiceResponse, UserProps } from "../type/type._programas";
+ 
 
+import { ApiHistoResponse, ReporteServiceHistoResponse,Credentials } from "@/pages/Reportes/type";
 
-const ProgramaService = (urlObjet: ProgramaRequest,bodyData:any): ProgramaServiceInterface => {
+ 
 
-  
+const ReporteHistoService = (urlObjet: any, bodyData: any): { Autentications: () => Promise<ReporteServiceHistoResponse> } => {
 
-const Autentications = async (): Promise<ProgramaServiceResponse> => {
-   //const url = import.meta.env.VITE_API_URL;
+const Autentications = async (): Promise<ReporteServiceHistoResponse> => {
+ 
+
+ 
+const token = import.meta.env.VITE_API_TOKEN;
 const credentials:Credentials  = {
  var_login: import.meta.env.VITE_API_USERNAME,
   password: import.meta.env.VITE_API_PASSWORD,
 };
-    const token = localStorage.getItem('authToken');
     const params = new URLSearchParams({
-      exec: 'admin_programas',
-      _SPIP_PAGE: 'admin_programas',
-      action: 'true',
-      var_ajax:'form',
-      bonjour:'oui',
+      exec: 'admin_reportes',
+      _SPIP_PAGE: urlObjet._SPIP_PAGE || 'admin_reportes',
+      action: urlObjet.action || 'true',
+      var_ajax:  urlObjet.var_ajax || 'form',
+      bonjour: urlObjet.bonjour || 'oui',
       accion: urlObjet.accion,
       opcion: urlObjet.opcion
     });
 
     try {
-     
+
       const response = await fetch(`/api2025/?${params.toString()}`, {
         method: 'POST',
         headers: {
@@ -44,7 +45,7 @@ const credentials:Credentials  = {
         return {
           status: 'success',
           data: {
-            programas: [],
+            historicos: [],
             metadata: {
               statusCode: 204,
               type: 'success',
@@ -61,13 +62,13 @@ const credentials:Credentials  = {
       // Obtener el texto de la respuesta primero para debuggear
       const responseText = await response.text();
      // console.log('Raw response:', responseText);
-      if (!responseText) {
+     if (!responseText) {
         console.log('La respuesta está vacía');
         // Puedes manejar este caso según tus necesidades
         throw new Error('La respuesta está vacía');
       }
       // Intentar parsear como JSON
-      let result: ApiProgramaResponse;
+      let result: ApiHistoResponse;
       try {
         result = JSON.parse(responseText);
       } catch (parseError) {
@@ -82,7 +83,7 @@ const credentials:Credentials  = {
           status: 'success',
           data: {
             //auth: result.data?.Auth || {} as AuthData,
-            programas: result.data?.Programas || [],
+            historicos: result.data?.Historicos || [],
             metadata: {
               statusCode: result.status,
               type: result.type,
@@ -95,15 +96,15 @@ const credentials:Credentials  = {
       }
 
     } catch (error) {
-      if (error instanceof Error && error.message.includes('No existen registros de Turno')) {
+      if (error instanceof Error && error.message.includes('No existen registros de Pcs')) {
         return {
           status: 'success',
           data: {
-            programas: [],
+            historicos: [],
             metadata: {
               statusCode: 200,
               type: 'success',
-              message: 'No existen registros de Turno'
+              message: 'No existen registros de Pcs'
             }
           }
         };
@@ -115,9 +116,12 @@ const credentials:Credentials  = {
     };
   }
   };
+
   return {
-    Autentications,
+    Autentications
   };
 };
 
-export default ProgramaService;
+export default ReporteHistoService;
+
+ 

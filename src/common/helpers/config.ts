@@ -19,6 +19,7 @@ const config = {
 	API_OPCION_REPORTES: 'consulta_general',  
 	API_ADMIN_REPORTES: 'admin_reportes', 
 	API_OPCION_PROGRAMAS_REPORTES: 'consulta_programas', 
+	API_OPCION_REPORTES_CONSULTA_HISTORICOS: 'consulta_historicos', 
 	
 
 	API_ACCION_PCS: 'admin_pcs', 

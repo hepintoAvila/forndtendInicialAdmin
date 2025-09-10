@@ -48,6 +48,18 @@ export interface LibroVisitas {
   dataColors?: string[];
   dataMeses?: DataMes[];
   dataProgramas?: DataPrograma[];
+
+}export interface Historicos {
+  title: string;
+  description: string;
+  stats: number;
+  trend: Trend;
+  colors: string[];
+  data: [];
+  dataTotales?: number[];
+  dataColors?: string[];
+  dataMeses?: DataMes[];
+  dataProgramas?: DataPrograma[];
 }
 
 interface ResponseData {
@@ -83,4 +95,26 @@ export interface ReporteServiceResponse {
   };
   error?: string;
 }
-
+interface ResponseHistoData {
+  Historicos: Historicos[];
+}
+export interface ApiHistoResponse {
+  historicos: ReporteServiceHistoResponse;
+  status: number;
+  type: string;
+  data: ResponseHistoData;
+  message?: string;
+}
+export interface ReporteServiceHistoResponse {
+  message?: string;
+  status: 'success' | 'error';
+  data?: {
+    historicos?: Historicos[];
+    metadata: {
+      statusCode: number;
+      type: string;
+      message?: string;
+    };
+  };
+  error?: string;
+}
