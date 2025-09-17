@@ -80,7 +80,7 @@ const authContext = useContext(AuthContext);
       throw err;
     } finally {
       setLoading(false);
-       showNotification({ message: '', type: 'loading' });
+       //showNotification({ message: '', type: 'loading' });
     }
 };
 
@@ -124,7 +124,7 @@ const authContext = useContext(AuthContext);
 
       if (result.status === 'success' && result.data) {
          setIsAuthenticated(true);
-         setHistoriReportes(result.data.Historicos as any);
+         setHistoriReportes(result.data.historicos as any);
          const message = result?.message  as unknown as any;
           setMessage(message);
           showNotification({ message: '', type: 'loading' });
@@ -139,7 +139,7 @@ const authContext = useContext(AuthContext);
       throw err;
     } finally {
       setLoading(false);
-       showNotification({ message: '', type: 'loading' });
+      // showNotification({ message: '', type: 'loading' });
     }
 };
 

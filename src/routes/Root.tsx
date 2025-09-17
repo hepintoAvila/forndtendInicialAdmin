@@ -6,7 +6,7 @@ const Root = () => {
 	 
 	//console.log('AppRoutes-isAuthenticated',isAuthenticated, isLoading, error );
 	const getRootUrl = () => {
-		const url = 'login';
+		const url = 'start';
 		return url;
 	};
 

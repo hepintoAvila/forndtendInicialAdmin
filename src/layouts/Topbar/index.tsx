@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { notifications, profileMenus } from './data';
-import NotificationDropdown from './NotificationDropdown';
+import { profileMenus } from './data';
+//import NotificationDropdown from './NotificationDropdown';
 import ProfileDropdown from './ProfileDropdown';
 //import SearchDropdown from './SearchDropdown';
-import AppsDropdown from './AppsDropdown';
+//import AppsDropdown from './AppsDropdown';
 import MaximizeScreen from './MaximizeScreen';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
@@ -19,7 +19,13 @@ import { useAuth, useViewport } from '@/hooks';
 //import { Auth } from '@/types';
 import { useEffect } from 'react';
 //import { useAuth0 } from '@auth0/auth0-react';
- 
+  type AppConfig = {
+  Nom: string;
+  Email: string;
+  Rol: string;
+  status: string;
+  AppKey: string;
+}
 
 
 type TopbarProps = {
@@ -27,12 +33,13 @@ type TopbarProps = {
 	toggleMenu?: () => void;
 	navOpen?: boolean;
 	user?: any;
+	appConfig?: AppConfig;
 };
 
 
-const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
+const Topbar = ({ topbarDark, toggleMenu, navOpen,appConfig }: TopbarProps) => {
 	const { settings, updateSettings, updateSidebar,updateMenu } = useThemeContext();
-	const { user,isAuthenticated } = useAuth();
+	const { isAuthenticated } = useAuth();
 	//const { reset } = useThemeCustomizer();
 	const { sideBarType } = useThemeCustomizer();
 	const { width } = useViewport();
@@ -122,8 +129,8 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
  	*/
 
 		//const imag= user?.picture ? user?.picture:avata1;
-		const username= user?.Nom ? user?.Nom:'Invitado';
-		const rolUser= user?.Rol ? user?.Rol:'';
+		const username= appConfig?.Rol ? appConfig?.Rol:'Invitado';
+		const rolUser= appConfig?.Email ? appConfig?.Email:'';
 
 	return (
 		<div className={'navbar-custom'}>
@@ -159,22 +166,23 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 				</div>
 
 				<ul className="topbar-menu d-flex align-items-center gap-3">
-				 
+				 	{/*
 					<li className="dropdown notification-list">
 						<NotificationDropdown notifications={notifications} />
 					</li>
-					<li className="dropdown d-none d-sm-inline-block">
-						<AppsDropdown />
-					</li>
-					{/*<li className="d-none d-sm-inline-block">
+					
+					<li className="d-none d-sm-inline-block">
 						<button
 							className="nav-link dropdown-toggle end-bar-toggle arrow-none btn btn-link shadow-none"
 							onClick={handleRightSideBar}
 						>
 							<i className="ri-settings-3-line font-22"></i>
 						</button>
-					</li>*/}
-
+					</li>
+					<li className="dropdown d-none d-sm-inline-block">
+						<AppsDropdown />
+					</li>
+					*/}
 					<li className="d-none d-sm-inline-block">
 						<OverlayTrigger
 							placement="left"

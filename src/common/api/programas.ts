@@ -1,6 +1,6 @@
 //import config from "../helpers/config";
 import { Credentials } from "@/pages/Reportes/type";
-import { ApiProgramaResponse, ProgramaRequest, ProgramaServiceInterface, ProgramaServiceResponse, UserProps } from "../type/type._programas";
+import { ApiProgramaResponse, ProgramaRequest, ProgramaServiceInterface, ProgramaServiceResponse } from "../type/type._programas";
 
 
 const ProgramaService = (urlObjet: ProgramaRequest,bodyData:any): ProgramaServiceInterface => {

@@ -1,7 +1,7 @@
 // PrestamoForm.tsx
 import { ProgramaList } from '@/common/type/type._programas';
 import { Form, Row, Col, Button } from 'react-bootstrap';
-import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
 
 interface EstudianteFormProps {
   programas?: ProgramaList;
@@ -67,6 +67,7 @@ const BuscadorForm = ({ programas,sendReportsHistoRequest}: EstudianteFormProps)
                 <>
                 <option value="3">Virtualteca</option>
                 <option value="2">Hemeroteca</option>
+                <option value="1">Biblioteca</option>
                 </>
               </Form.Select>
               <Form.Control.Feedback type="invalid">Por favor, seleccione el tiempo préstamo</Form.Control.Feedback>

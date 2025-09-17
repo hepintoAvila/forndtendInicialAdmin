@@ -1,9 +1,4 @@
 import { Row, Col, Tab, Nav, Card } from 'react-bootstrap';
-import Statistics from './Statistics';
-import CampaignsChart from './CampaignsChart';
-import RevenueChart from './RevenueChart';
-import Programas from './Programas';
-import SalesChart from './SalesChart';
 import useReportes from '@/hooks/useReportes';
 import { useEffect } from 'react';
  
@@ -12,7 +7,7 @@ import NavBar from '../Landing/NavBar';
 import Layouts from '../Landing/Layouts';
 import { layouts } from '../Landing/data';
 import ContactUs from '../Landing/ContactUs';
-import { useNotificationContext } from '@/common';
+ 
 import LayoutsEstadisticas from '../Landing/LayoutsEstadisticas';
 import classnames from 'classnames';
 import BuscadorForm from './buscador/BuscadorForm';
@@ -21,19 +16,16 @@ import EstadisticasGraficas from './EstadisticasGraficas/EstadisticasGraficas';
 import { ReporteServiceHistoResponse } from './type';
 
 const CRMDashboard = () => {
-  const { showNotification } = useNotificationContext();
+
   const { sendReportsRequest, reportes,visitas, loading,sendReportsHistoRequest,historicos } = useReportes();
   const {sendProgramasRequest,programas} = useProgramas();
   useEffect(() => {
+    //
     sendReportsRequest();
      sendProgramasRequest();
   }, []);
 
-  useEffect(() => {
-     if (loading) {
-    showNotification({ message: 'Cargando...', type: 'loading' });
-    }
-  }, [loading]);
+   
 
   const tabContents = [
     {
@@ -59,7 +51,7 @@ const CRMDashboard = () => {
 
  
   const historicosArray:ReporteServiceHistoResponse = historicos.historicos;
-  console.log('CRMDashboard-historicos',historicosArray);
+ 
   return (<>
      {reportes && Array.isArray(reportes) && reportes.length > 0 ? (
 		<>
@@ -131,7 +123,7 @@ const CRMDashboard = () => {
   </Tab.Content>
 </Tab.Container></>      
       ) : (
-       <LayoutsEstadisticas layouts={layouts} /> 
+       loading && (<LayoutsEstadisticas layouts={layouts} loading={loading}/>)
       )}
       
       <ContactUs />

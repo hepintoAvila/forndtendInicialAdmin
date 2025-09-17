@@ -154,7 +154,7 @@
     float: left;
     display: none;
     line-height: $topbar-height;
-    padding: 0 $spacer * 0.5;
+    padding: 0 $spacer * 0.1;
 
     margin-left: -9.5rem;
 
@@ -173,7 +173,29 @@
         display: block;
     }
 }
+.upc {
+    float: left;
+    display: none;
+    line-height: $topbar-height;
+    padding: 0 $spacer * 0.1;
 
+    margin-left: -9.5rem;
+
+    .logo-sm {
+        display: none;
+
+    }
+
+    .logo-light {
+    float: left;
+    padding: 0 $spacer * 0.5;
+
+    }
+
+    .logo-dark {
+        display: block;
+    }
+}
 html[data-topbar-color="brand"],
 html[data-topbar-color="dark"],
 html[data-bs-theme="dark"] {

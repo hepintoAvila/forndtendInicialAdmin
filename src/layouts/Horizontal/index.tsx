@@ -4,25 +4,23 @@ import { Container } from 'react-bootstrap';
 import { useToggle } from '@/hooks';
 import { useThemeContext } from '@/common/context';
 import { changeHTMLAttribute } from '@/utils';
+import getUserFromSession from '@/common/helpers/getUserFromSession';
  
 // code splitting and lazy loading
 // https://blog.logrocket.com/lazy-loading-components-in-react-16-6-6cea535c0b52
 const Topbar = React.lazy(() => import('../Topbar/'));
 const Navbar = React.lazy(() => import('./Navbar'));
 const Footer = React.lazy(() => import('../Footer'));
-const RightSidebar = React.lazy(() => import('../RightSidebar'));
+//const RightSidebar = React.lazy(() => import('../RightSidebar'));
 
 const loading = () => <div className="text-center"></div>;
 
+ // Componente que usa el hook de permisos
 const HorizontalLayout = () => {
- 
+	const appConfig = getUserFromSession();
 	const { settings,updateMenu } = useThemeContext();
 	const [horizontalDropdownOpen, toggleMenu] = useToggle();
-	const auth = JSON.parse(sessionStorage.getItem('_AUTH') || '{}');
-	const isAdmin = auth.status === 'Inactivo';
-  
- 
-
+	const isAdmin = appConfig.status === 'Inactivo';
 	/*
 	 * layout defaults
 	 */
@@ -57,8 +55,6 @@ const HorizontalLayout = () => {
 	}, [settings.topbar.menu]);
 	 
 
-
-
 	//const cuMenu = JSON.parse(sessionStorage.getItem('_MENU') || '{}')
  
  	return (
@@ -70,6 +66,7 @@ const HorizontalLayout = () => {
 							toggleMenu={toggleMenu}
 							navOpen={horizontalDropdownOpen}
 							topbarDark={false}
+							appConfig={appConfig}
 						/>
 						</Suspense>
 						<Suspense fallback={loading()}>
@@ -90,10 +87,11 @@ const HorizontalLayout = () => {
 				<Suspense fallback={loading()}>
 					<Footer />
 				</Suspense>
-
+				{/*	
 				<Suspense fallback={loading()}>
 					<RightSidebar />
 				</Suspense>
+				*/}
 			</div>
 		</div>
 	);

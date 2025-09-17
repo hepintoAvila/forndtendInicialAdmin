@@ -20,8 +20,9 @@
 .logo {
     display: block;
     top: 0;
-    position: sticky;
-    text-align: center;
+    margin-left: -2rem;
+    position:relative;
+    text-align: center; 
     line-height: $topbar-height;
     padding: 0 calc($leftbar-width-sm * 0.5 - $logo-sm-height * 0.7);
     transition: $transition-base;

@@ -7,14 +7,8 @@ import { usePermissions } from '@/hooks';
 import { Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
- // Componente que usa el hook de permisos
-
-function getUserFromSession(){
-    const userData = localStorage.getItem('userData');
-    return userData;
-  };
   
-const Sidebar = () => {
+const Sidebar = ({appConfig}:any) => {
   const { getFilteredMenu} = usePermissions();
   const filteredMenu = getFilteredMenu();
   
@@ -54,15 +48,10 @@ const Sidebar = () => {
     </nav>
   );
 };
-
-
-
-const userData = getUserFromSession();
-console.log('userData',userData);
 const Dashboard = () => {
 	return  (
         <>
-         <Sidebar />
+         <Sidebar/>
         </>
       );
 };

@@ -1,11 +1,11 @@
 import logoDark from '@/assets/images/logo-dark.png';
 import { ThemeSettings, useThemeContext } from '@/common';
-import useThemeCustomizer from '@/components/ThemeCustomizer/useThemeCustomizer';
-import { useAuth, useViewport } from '@/hooks';
+//import useThemeCustomizer from '@/components/ThemeCustomizer/useThemeCustomizer';
+import { useAuth } from '@/hooks';
 import { useEffect, useState } from 'react';
 
 import usernavrow from '@/assets/images/user-nav-row.png';
-import { Dropdown, Modal } from 'react-bootstrap';
+import { Button, Dropdown, Modal } from 'react-bootstrap';
 import avata1 from '@/assets/images/users/avatar-1.jpg';
 import Login from '../account/Login';
  
@@ -20,11 +20,11 @@ type TopbarProps = {
 
 const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 
-	const { settings, updateSidebar, updateMenu } = useThemeContext();
+	const {  updateMenu } = useThemeContext();
 	const { user, isAuthenticated } = useAuth();
 	//const { reset } = useThemeCustomizer();
-	const { sideBarType } = useThemeCustomizer();
-	const { width } = useViewport();
+	//const { sideBarType } = useThemeCustomizer();
+	//const { width } = useViewport();
 	const [showLoginModal, setShowLoginModal] = useState(false);
 
 	const toggleDropdown = () => {
@@ -33,6 +33,7 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 	/**
 	 * Toggle the leftmenu when having mobile screen
 	 */
+	/**
 	const handleLeftMenuCallBack = () => {
 
 		if (width < 1140) {
@@ -58,9 +59,9 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 		}
 	};
 
-	/**
+	
 	 * creates backdrop for leftsidebar
-	 */
+	
 	function showLeftSideBarBackdrop() {
 		const backdrop = document.createElement('div');
 		backdrop.id = 'custom-backdrop';
@@ -80,7 +81,7 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 			document.body.style.removeProperty('overflow');
 		}
 	}
-
+ */
 
 	useEffect(() => {
 		if (isAuthenticated) {
@@ -97,19 +98,22 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 		<><div className={'navbar-custom bg-light'}>
 			<div className="topbar container-fluid">
 
-				<div className="d-flex align-items-center gap-lg-2 gap-1">
+				<div className="d-flex align-items-center gap-lg-2 gap-2">
+					 
+				<Button variant="success" type="submit" className="mb-1 input-container-login gap-3" style={{width:'28%'}}>
+					<a href="https://biblioteca.unicesar.edu.co/wp/" target="_blank" className="sm-0" style={{width:'inherit'}}>
+						<img src={logoDark} className="logo" alt="React logo" width={75}  />
+						</a> <h5>Consulte nuestra web Biblioteca</h5>  
+				</Button>
+					<Button variant="success" type="submit" className="mb-1 input-container-login gap-3" style={{width:'30%', marginLeft:'initial'}}>
+					<a href="https://koha.unicesar.edu.co" target="_blank"  className="sm-0" style={{width:'inherit'}}>
+						<img src={logoDark} className="logo" alt="React logo" width={75}  />
+					</a> <h5 className="mt-3">Consulte nuestra  Base de Datos Koha</h5> 
+				</Button>
+				 
 
-					<div className="logo-light">
-						 <a href="https://biblioteca.unicesar.edu.co/wp/" target="_blank">
-						<img src={logoDark} className="logo upc" alt="React logo" width={100}  />
-						</a> 
-					</div>
-					<button className="button-toggle-menu" onClick={handleLeftMenuCallBack}>
-						<i className="mdi mdi-menu" />
-					</button>
 
-
-
+ 
 				</div>
 
 				<ul className="topbar-menu d-flex align-items-center gap-3">

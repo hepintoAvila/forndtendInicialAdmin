@@ -11,7 +11,7 @@ export default function Account() {
 			<Route path="/*" element={<DefaultLayout />}>
 				
 				<Route index element={<CRMDashboard />} />
-				<Route path="login" element={<CRMDashboard />} />
+				<Route path="start" element={<CRMDashboard />} />
 				<Route path="logout" element={<Logout />} />
 			</Route>
 		</Routes>
