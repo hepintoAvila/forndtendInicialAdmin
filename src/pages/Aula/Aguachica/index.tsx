@@ -10,7 +10,7 @@ import useProgramas from "@/hooks/useProgramas";
  
 const Aguachica = () => {
 
-  const {sendComputadores, computadores,sendComputadorRequest} = usePcs();
+  const {sendComputadores, computadores,sendAguachicaRequest} = usePcs();
   const { resetEstudiantes,handleDocumentoChange,documentoAnterior,estudiantes,handleSubmitEstudent}  = useEstudiantes();
   const {generateBodyData,turnos,setTurno,handleSubmit} = useTurnos();
   const {sendProgramasRequest,programas} = useProgramas();
@@ -38,13 +38,13 @@ const Aguachica = () => {
         statut:""
       } as any
       );
-       sendComputadorRequest(); 
+       sendAguachicaRequest(); 
 
   };
 const changeState = (id_pc: any) => {
    const credentialsUrl = {
     accion: encodeBasicUrl(config.API_ACCION_PCS),
-    opcion: encodeBasicUrl(config.API_OPCION_UPDATE_PCS),
+    opcion: encodeBasicUrl(config.API_OPCION_UPDATE_PCS_AGUACHICA),
   };
     const ObjetBodys = {
       id_pc:id_pc,
@@ -57,7 +57,7 @@ const changeState = (id_pc: any) => {
   useEffect(() => {
       const credentialsUrl = {
         accion: encodeBasicUrl(config.API_ACCION_PCS),
-        opcion: encodeBasicUrl(config.API_OPCION_PCS),
+        opcion: encodeBasicUrl(config.API_OPCION_PCS_AGUACHICA),
       };
 
     const ObjetBodys = {

@@ -18,8 +18,8 @@ const ComputadorCard = ({ computador, handleShowModal }: ComputadorCardProps) =>
                             </span>
                         </div>
                         <div className="flex-grow-1 ms-3" >
-                            <h3 className="font-17 fw-bold">PC No.{computador.numero}</h3>
-                            <p className="font-12 fw-bold">{computador.ip}</p>
+                            <h3 className="font-17 fw-bold">{computador.tipo} </h3>
+                            <p className="font-17 fw-bold">No.{computador.numero}</p>
                             <p className="font-12 fw-bold">{computador.estado}</p>
                         </div>
                     </div>

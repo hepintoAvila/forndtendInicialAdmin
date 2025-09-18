@@ -44,7 +44,7 @@ const PrestamoForm = ({
                 type="hidden"
                 name="pc"
                 placeholder=""
-                defaultValue={selectedComputador.numero}
+                defaultValue={selectedComputador.id_pc}
               />
               <Form.Control.Feedback type="invalid">Por favor, digite el pc</Form.Control.Feedback>
             </Form.Group>

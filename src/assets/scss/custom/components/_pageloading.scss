@@ -18,4 +18,24 @@
     width: 100px;
     height: 100px;
   }
-  
+
+ .image-container-contactus {
+  position: relative;
+}
+
+.desktop-image-contactus {
+  display: block;
+}
+
+.mobile-image-contactus {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .desktop-image-contactus {
+    display: none;
+  }
+  .mobile-image-contactus {
+    display: block;
+  }
+}

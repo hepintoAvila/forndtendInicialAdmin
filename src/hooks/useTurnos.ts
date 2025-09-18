@@ -5,6 +5,8 @@ import { Credentials} from '@/pages/Aula/Aulavirtual/type';
 import { useContext, useState } from 'react';
  import { atom, useAtom } from 'jotai';
 import { config, encodeBasicUrl, useNotificationContext } from '@/common';
+import Swal from 'sweetalert2';
+import getUserFromSession from '@/common/helpers/getUserFromSession';
   interface Prestamo {
   tiempo_prestamo: string | number;
   fecha_inicial: Date;
@@ -141,11 +143,23 @@ const authContext = useContext(AuthContext);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+      let opcion = '';
+      const appConfig = getUserFromSession();
       const formData = new FormData(event.currentTarget);
       const documento = formData.get('documento');
       const pc = formData.get('pc');
       const tipo_prestamo = formData.get('tipo_prestamo'); //1,2,3,4
-     
+       
+     appConfig?.Rol === 'Aguachica' ? opcion = config.API_OPCION_ADD_TURNOS_AGUACHICA : opcion = config.API_OPCION_ADD_TURNOS;
+      if (!documento || !pc || !tipo_prestamo) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Por favor, complete todos los campos obligatorios.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+        });
+        return;
+      }
       const fechaInicial = new Date();
 
       const prestamo = {
@@ -157,7 +171,7 @@ const authContext = useContext(AuthContext);
       
       const credentialsUrl: TurnoRequest = {
           accion: encodeBasicUrl(config.API_ACCION_TURNOS),
-          opcion: encodeBasicUrl(config.API_OPCION_ADD_TURNOS),
+          opcion: encodeBasicUrl(opcion),
         };
           const urlObjet: any ={
             datos: {

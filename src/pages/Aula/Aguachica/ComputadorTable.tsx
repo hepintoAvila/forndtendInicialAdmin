@@ -8,8 +8,7 @@ const ComputadorTable = ({ selectedComputador, changeState }: any) => {
       <table className="table table-bordered table-striped">
         <thead>
           <tr className="bg-success" style={{ height: '5px' }}>
-            <th>PC No.</th>
-            <th>IP</th>
+            <th>{`${selectedComputador.tipo} No.`}</th>
             <th>Estado</th>
             <th></th>
           </tr>
@@ -17,7 +16,6 @@ const ComputadorTable = ({ selectedComputador, changeState }: any) => {
         <tbody>
           <tr className="w-100 my-1" style={{ height: '5px' }}>
             <td>{selectedComputador.numero}</td>
-            <td>{selectedComputador.ip}</td>
             <td>
               <span className={`${selectedComputador.estado === 'Ocupado' ? 'text-danger' : 'text-black'}`}>
                 {selectedComputador.estado}
@@ -28,7 +26,7 @@ const ComputadorTable = ({ selectedComputador, changeState }: any) => {
                 <Button
                   className={'position-relative mt-0 mb-4 button-rounded'}
                   type="submit"
-                  onClick={() => changeState(selectedComputador.numero as number)}
+                  onClick={() => changeState(selectedComputador.id_pc as number)}
                 >
                   <i className="ri-link-unlink-m"></i>
                 </Button>

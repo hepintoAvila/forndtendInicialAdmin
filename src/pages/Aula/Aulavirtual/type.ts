@@ -12,6 +12,7 @@ export interface Pc {
   numero?: number;
   ip: string;
   estado: 'Libre' | 'Ocupado';
+  tipo: 'Pc' | 'VideoBeam';
 }
 
 export type PcList = Pc[];
@@ -22,6 +23,7 @@ export interface PcsData {
   ip: string;
   estado: 'Libre' | 'Ocupado';
   status: 'Activo' | 'Inactivo';
+  tipo: 'Pc' | 'VideoBeam';
   maj: Date;
 }
 export interface ApiResponse {

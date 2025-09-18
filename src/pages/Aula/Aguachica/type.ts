@@ -11,6 +11,7 @@ export interface Pc {
   id_pc: string | undefined,
   numero?: number;
   ip: string;
+  tipo: 'Pc' | 'VideoBeam';
   estado: 'Libre' | 'Ocupado';
 }
 
@@ -20,6 +21,7 @@ export interface PcsData {
   id_pc: string | undefined,
    numero?: number;
   ip: string;
+  tipo: 'Pc' | 'VideoBeam';
   estado: 'Libre' | 'Ocupado';
   status: 'Activo' | 'Inactivo';
   maj: Date;

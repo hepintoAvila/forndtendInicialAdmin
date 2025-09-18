@@ -26,9 +26,12 @@ const config = {
 	API_OPCION_PCS: 'consulta_pcs',  
 	API_ADMIN_PCS: 'admin_pcs', 
 	API_OPCION_UPDATE_PCS: 'update_pcs', 
+	API_OPCION_UPDATE_PCS_AGUACHICA: 'update_pcs_aguachica', 
+	API_OPCION_PCS_AGUACHICA: 'consulta_pcs_aguachica', 
 	
 	API_ACCION_TURNOS: 'admin_turnos', 
 	API_OPCION_ADD_TURNOS: 'add_turno',  
+	API_OPCION_ADD_TURNOS_AGUACHICA: 'add_turno_aguachica',  
 	_SPIP_PAGE: 'admin_turnos',  
 	API_OPCION_QUERY_TURNOS: 'consulta_turnos_documento',  
 

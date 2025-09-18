@@ -85,7 +85,26 @@ const authContext = useContext(AuthContext);
         throw err;
         });
       };
-
+    const sendAguachicaRequest = async () => {
+        const credentialsUrlPc = {
+          accion: encodeBasicUrl(config.API_ACCION_PCS),
+          opcion: encodeBasicUrl(config.API_OPCION_PCS_AGUACHICA),
+        };
+        const ObjetBodys = {
+          id_pc: 0,
+          estado: 'Active',
+        };
+        const BodyData = generateBodyData(ObjetBodys);
+        await sendComputadores(credentialsUrlPc, BodyData)
+        .then((response) => {
+          setComputadores(response.pcs as any);
+        })
+        .catch((err) => {
+          const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+        setError(errorMessage);
+        throw err;
+        });
+      };
 
   return {
     loading,
@@ -93,6 +112,7 @@ const authContext = useContext(AuthContext);
     isAuthenticated,
     computadores,
     sendComputadores,
-    sendComputadorRequest
+    sendComputadorRequest,
+    sendAguachicaRequest
   };
 };
