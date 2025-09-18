@@ -36,6 +36,10 @@ const config = {
 	API_OPCION_USUARIOS: 'consultar_estudiantes',  
 	API_OPCION_ADD_ESTUDIANTE: 'add_estudiante',  
 	API_ADMIN_USUARIOS: 'admin_usuarios',  
+	API_ADMIN_USUARIOS_ACTUALIZAR_PASS: 'actualizapass',  
+
+
+
 
 	API_ACCION_VISITAS: 'admin_visitas', 
 	API_OPCION_QUERY_VISITAS: 'consulta_visitas',  

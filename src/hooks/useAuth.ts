@@ -3,7 +3,9 @@ import AuthService from '@/common/api/auth';
 import { useContext, useEffect,useState } from 'react';
 import { AuthData, Menu, MenuItem, Permiso } from '../pages/account/Login/type';
 import { AuthContext } from '@/common/context/AuthContext';
-
+import Swal from 'sweetalert2';
+import UsuarioService from '@/common/api/usuarios';
+ 
 export default function useAuth(){
  
  const authContext = useContext(AuthContext);
@@ -11,8 +13,9 @@ export default function useAuth(){
   if (!authContext) {
     throw new Error('AuthContext no está disponible');
   }
-
+   
   const {setCredentials, clearCredentials } = authContext;
+
   const { updateMenu } = useThemeContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -151,7 +154,55 @@ const logout = async () => {
       (menuItem.children && menuItem.children.length > 0)
     );
   };
- 
+   const sendPass = async (urlObjet: any) => {
+    
+      setLoading(true);
+      setError(null);
+    try {
+        
+      const userService = UsuarioService(urlObjet);
+      const result = await userService.SendData();
+  
+        if (result.status === 'success' && result.data) {
+          return result.data;
+        } else {
+          throw new Error(result.error || 'Autenticación fallida');
+        }
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+        setError(errorMessage);
+        throw err;
+      } finally {
+        setLoading(false);
+      }
+    };
+ const handleSubmitPass = (event: React.FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  const formData = new FormData(event.currentTarget);
+  const pass = formData.get('pass');
+
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: '¿Deseas enviar la solicitud?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, enviar',
+    cancelButtonText: 'Cancelar',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const urlObjet: any = {
+        accion: encodeBasicUrl(config.API_ACCION_USUARIOS),
+        opcion: encodeBasicUrl(config.API_ADMIN_USUARIOS_ACTUALIZAR_PASS),
+        datos: {
+          pass,
+        },
+      };
+      sendPass(urlObjet);
+    }
+  });
+};
   
 //console.log('menu',menu);     
   return {
@@ -167,6 +218,7 @@ const logout = async () => {
     hasPermission,
     canAccess,
     getFilteredMenu,
+    handleSubmitPass,
     menu
   };
 };

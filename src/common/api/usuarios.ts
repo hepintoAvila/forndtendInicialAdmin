@@ -1,0 +1,121 @@
+import { ApiEstudianteResponse, Credentials } from "@/pages/Aula/Aulavirtual/typeEstudiante";
+//import config from "../helpers/config";
+
+const UsuarioService = (urlObjet : any): any => {
+
+const SendData = async (value:Credentials): Promise<any> => {
+    const credentials:any  = {
+     var_login: value.login,
+      password: value.password,
+    };
+    const token = localStorage.getItem('authToken');
+    const params = new URLSearchParams({
+      exec: urlObjet._SPIP_PAGE || 'admin_usuarios',
+      _SPIP_PAGE: urlObjet._SPIP_PAGE || 'admin_usuarios',
+      action: urlObjet.action || 'true',
+      var_ajax:  urlObjet.var_ajax || 'form',
+      bonjour: urlObjet.bonjour || 'oui',
+      accion: urlObjet.accion,
+      opcion: urlObjet.opcion
+    });
+
+    try {
+      const response = await fetch(`/api2025/?${params.toString()}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${btoa(`${credentials.var_login}:${credentials.password}`)}`,
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'application/json',
+          'x-sices-api-apikey': token ? token : '',
+        },
+        body: JSON.stringify({
+         pass: urlObjet.datos.pass,
+      }),
+        credentials: 'include'
+      });
+
+      // Verificar si la respuesta está vacía
+      if (response.status === 204) {
+        return {
+          status: 'success',
+          data: {
+            estudiantes: [],
+            metadata: {
+              statusCode: 204,
+              type: 'success',
+              message: 'No content'
+            }
+          }
+        };
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Obtener el texto de la respuesta primero para debuggear
+      const responseText = await response.text();
+     // console.log('Raw response:', responseText);
+ 
+     if (!responseText) {
+        console.log('La respuesta está vacía');
+        // Puedes manejar este caso según tus necesidades
+        throw new Error('La respuesta está vacía');
+      }
+      // Intentar parsear como JSON
+      let result: ApiEstudianteResponse;
+      try {
+        result = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('JSON parse error:', parseError, 'Response text:', responseText);
+        throw new Error('La respuesta no es un JSON válido');
+      }
+
+      // Verificar la estructura de la respuesta
+      if (result.status === 200 && result.type === 'success') {
+        // Retornar los datos estructurados
+        return {
+          status: 'success',
+          data: {
+            //auth: result.data?.Auth || {} as AuthData,
+            estudiantes: result.data?.Estudiantes || [],
+            metadata: {
+              statusCode: result.status,
+              type: result.type,
+              message: result.message
+            }
+          }
+        };
+      } else {
+        throw new Error(result.message || 'Error en la autenticación');
+      }
+
+    } catch (error) {
+      if (error instanceof Error && error.message.includes('No existen registros de Estudiantes')) {
+        return {
+          status: 'success',
+          data: {
+            estudiantes: [],
+            metadata: {
+              statusCode: 200,
+              type: 'success',
+              message: 'No existen registros de Estudiantes'
+            }
+          }
+        };
+      }
+    console.error('Auth error:', error);
+    return {
+      status: 'error',
+      error: error instanceof Error ? error.message : 'Error de autenticación desconocido'
+    };
+  }
+  };
+
+  return {
+    SendData
+  };
+};
+
+export default UsuarioService;
