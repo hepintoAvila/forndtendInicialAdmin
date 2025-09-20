@@ -11,10 +11,6 @@ import { Link } from 'react-router-dom';
 const Sidebar = ({appConfig}:any) => {
   const { getFilteredMenu} = usePermissions();
   const filteredMenu = getFilteredMenu();
-  
-
-  
-
   return (
     <nav className="d-flex flex-wrap justify-content-around " >
 		<Row>

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 import Footer from '@/layouts/Footer';
 import NavBar from '../Landing/NavBar';
-import Layouts from '../Landing/Layouts';
 import { layouts } from '../Landing/data';
 import ContactUs from '../Landing/ContactUs';
 
@@ -93,7 +92,7 @@ const CRMDashboard = () => {
    
       <>
         <NavBar />
-        <Layouts layouts={layouts} />
+       
         <Tab.Container defaultActiveKey="Virtualteca" onSelect={handleTabChange}>
           <Nav variant="tabs">
             {tabContents.map((tab, index) => {
@@ -163,7 +162,7 @@ const CRMDashboard = () => {
         </Tab.Container>
       </>
     {reportes && Array.isArray(reportes) && reportes.length === 0 ? (
-    <ContactUs />):''}
+    <ContactUs layouts={layouts}/>):''}
     <Footer />
   </>
 );

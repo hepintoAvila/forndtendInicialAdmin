@@ -3,12 +3,11 @@ import { ThemeSettings, useThemeContext } from '@/common';
 //import useThemeCustomizer from '@/components/ThemeCustomizer/useThemeCustomizer';
 import { useAuth } from '@/hooks';
 import { useEffect, useState } from 'react';
-
-import usernavrow from '@/assets/images/user-nav-row.png';
-import { Button, Dropdown, Modal } from 'react-bootstrap';
+import { Dropdown, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import avata1 from '@/assets/images/users/avatar-1.jpg';
 import Login from '../account/Login';
- 
+ import menuBiblioteca from '@/assets/images/menuBiblioteca.png';
+ import menuKoha from '@/assets/images/menuKoha.png';
 
 type TopbarProps = {
 	topbarDark?: boolean;
@@ -21,7 +20,7 @@ type TopbarProps = {
 const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 
 	const {  updateMenu } = useThemeContext();
-	const { user, isAuthenticated } = useAuth();
+	const {isAuthenticated } = useAuth();
 	//const { reset } = useThemeCustomizer();
 	//const { sideBarType } = useThemeCustomizer();
 	//const { width } = useViewport();
@@ -88,39 +87,49 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 			updateMenu()
 		}
 	}, [ThemeSettings]);
-
-
-	//const imag= user?.picture ? user?.picture:avata1;
-	const username = user?.Nom ? user?.Nom : 'Iniciar Sesión';
-
-
 	return (
-		<><div className={'navbar-custom bg-light'}>
-			<div className="topbar container-fluid">
+		<><div className={'bg-success navbar-custom'}>
+			<div className=" bg-success topbar container-fluid">
 
 				<div className="d-flex align-items-center gap-lg-2 gap-2">
-					 
-				<Button variant="success" type="submit" className="mb-1 input-container-login gap-3" style={{width:'28%'}}>
-					<a href="https://biblioteca.unicesar.edu.co/wp/" target="_blank" className="sm-0" style={{width:'inherit'}}>
-						<img src={logoDark} className="logo" alt="React logo" width={75}  />
-						</a> <h5>Consulte nuestra web Biblioteca</h5>  
-				</Button>
-					<Button variant="success" type="submit" className="mb-1 input-container-login gap-3" style={{width:'30%', marginLeft:'initial'}}>
-					<a href="https://koha.unicesar.edu.co" target="_blank"  className="sm-0" style={{width:'inherit'}}>
-						<img src={logoDark} className="logo" alt="React logo" width={75}  />
-					</a> <h5 className="mt-3">Consulte nuestra  Base de Datos Koha</h5> 
-				</Button>
+					
+				<a href="https://biblioteca.unicesar.edu.co" target="_blank" className="sm-0" style={{width:'inherit'}}>
+				<img src={logoDark} className="logo" alt="React logo" width={100}  />
+				</a> 
+				<h5  className="text-center text-white text-muted fw-normal mt-0 text-truncate">Sistema de Información de Visitas y Préstamos de Equipos<br/>Universidad Popular del Cesar</h5> 
+				
 				 
-
-
- 
 				</div>
-
 				<ul className="topbar-menu d-flex align-items-center gap-3">
-
+				<li className="d-none d-sm-inline-block">
+						<OverlayTrigger
+							placement="left"
+							overlay={<Tooltip id="dark-mode-toggler">ir a la Biblioteca</Tooltip>}
+						>
+								<span className="account-user-avatar">
+									<a href="https://biblioteca.unicesar.edu.co/wp/" target="_blank" className="sm-0" style={{width:'inherit'}}>
+								<img className="rounded-circle" src={menuBiblioteca}  alt="" /></a>
+								</span>
+						 
+						</OverlayTrigger>
+					</li>
+					<li className="d-none d-sm-inline-block">
+						<OverlayTrigger
+							placement="left"
+							overlay={<Tooltip id="dark-mode-toggler">ir Koha</Tooltip>}
+						>
+								<span className="account-user-avatar">
+									<a href="https://koha.unicesar.edu.co/" target="_blank" className="sm-0" style={{width:'inherit'}}>
+								<img className="rounded-circle" src={menuKoha}  alt="" /></a>
+								</span>
+						 
+						</OverlayTrigger>
+					</li>
 					<li className="dropdown">
-
-
+						<OverlayTrigger
+							placement="left"
+							overlay={<Tooltip id="dark-mode-toggler">Iniciar Sesión</Tooltip>}
+						> 
 						<Dropdown.Toggle
 							variant="link"
 							id="dropdown-profile"
@@ -128,15 +137,11 @@ const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
 							onClick={toggleDropdown}
 							className="nav-link dropdown-toggle arrow-none nav-user px-2"
 						>
-
 							<span className="account-user-avatar">
-								<img src={avata1} className="rounded-circle" width={32} alt="user" />
+								<img src={avata1} className="rounded-circle" width={40} alt="user" />
 							</span>
-							<span className="d-lg-flex flex-column gap-1 d-none">
-								<h5 className="my-0">{username}</h5>
-							</span>
-							<img src={usernavrow} className="icon-header-navbar-row" />
 						</Dropdown.Toggle>
+						</OverlayTrigger>
 					</li>
 
 				</ul>

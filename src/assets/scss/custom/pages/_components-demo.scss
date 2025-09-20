@@ -1,7 +1,18 @@
 //
 // _components-demo.scss
 //
-
+.cta-box {
+    background-image: url(../images/logo-dark.png);
+    background-size: cover;
+    background-position:top;
+    background-repeat: no-repeat;
+}
+.bg-logo-rec {
+    background-image: url(../images/logo-dark_rec.png) !important;
+    background-size: cover !important;
+    background-position:top !important;
+    background-repeat: no-repeat;
+}
 // Scrollspy
 .scrollspy-example {
     position: relative;
