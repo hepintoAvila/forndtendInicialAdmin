@@ -2,6 +2,7 @@ import DefaultLayout from '@/layouts/Default';
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Aguachica from './Aguachica';
+import Labfisica from './Labfisica';
 const Hemeroteca = lazy(() => import('./Hemeroteca/'));
 const Aulavirtual = lazy(() => import('./Aulavirtual/'));
 //const Register = lazy(() => import('./Register'));
@@ -12,6 +13,7 @@ export default function Account() {
 				<Route path="hemeroteca" element={<Hemeroteca />} />
 				<Route path="aulavirtual" element={<Aulavirtual />} />
 				<Route path="aguachica" element={<Aguachica />} />
+				<Route path="labfisica" element={<Labfisica />} />
 			</Route>
 		</Routes>
 	);

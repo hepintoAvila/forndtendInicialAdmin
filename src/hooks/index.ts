@@ -6,6 +6,8 @@ import usePermissions from './usePermissions';
 import useAuth from './useAuth';
 import useLogout from './useLogout';
 import usePcs from './usePcs';
+import useAulas from './useAulas';
+import useEstudiantes from './useEstudiantes';
  
  
-export { useToggle, useQuery, useViewport,useToggleItems,usePermissions,useAuth,useLogout,usePcs };
+export { useToggle, useQuery, useViewport,useToggleItems,usePermissions,useAuth,useLogout,usePcs,useAulas,useEstudiantes };

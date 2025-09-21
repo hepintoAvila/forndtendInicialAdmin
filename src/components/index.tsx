@@ -23,6 +23,7 @@ export { default as Rating } from './Rating';
 export { default as Timeline } from './Timeline';
 export { default as TimelineItem } from './TimelineItem';
 export { default as DateInput } from './DateInput';
+export { default as SelectInput } from './SelectInput';
  
 
 

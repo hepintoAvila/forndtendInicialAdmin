@@ -17,7 +17,7 @@ const Navbar = ({navOpen }: NavbarProps) => {
 
 			<Container fluid>
 				<nav className="navbar navbar-expand-lg">
-					<Collapse in={true}>
+					<Collapse in={navOpen}>
 						<div className="navbar-collapse active">
 							<AppMenu/>
 						</div>

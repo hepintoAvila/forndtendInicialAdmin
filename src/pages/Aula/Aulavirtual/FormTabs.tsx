@@ -1,22 +1,22 @@
 import React from 'react';
 import { Tab, Nav } from 'react-bootstrap';
 import PrestamoForm from './PrestamoForm';
-import EstudianteForm from './EstudianteForm';
 import ComputadorTable from './ComputadorTable';
-import EstudianteTable from './EstudianteTable';
-import EmptyTable from './EmptyTable';
 import TurnoTable from './TurnoTable';
 import { ApiTurnoResponseData } from '@/common/type/type._turnos';
 import { Pc } from './type';
 import { ProgramaList } from '@/common/type/type._programas';
 import classnames from 'classnames';
+import EstudianteTable from '../components/EstudianteTable';
+import EmptyTable from '../components/EmptyTable';
+import EstudianteForm from '../components/EstudianteForm';
 
 interface FormTabsProps {
   selectedComputador: Pc;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   onChangeDocumento: (documento: string) => void;
   documentoAnterior: any;
-  estudiantes: any[];
+  estudiantes: { documento: string }[] | undefined;
   handleSubmitEstudent: (event: React.FormEvent<HTMLFormElement>) => void;
   programas: ProgramaList[];
   turnos: ApiTurnoResponseData;
@@ -75,11 +75,17 @@ const FormTabs = ({
           {selectedComputador && (
             <ComputadorTable selectedComputador={selectedComputador} changeState={changeState} />
           )}
-          {Array.isArray(estudiantes) && estudiantes.length > 0 ? (
-            <EstudianteTable estudiantes={estudiantes} />
-          ) : (
-            <EmptyTable mensaje="El Usuario no esta registrado" />
-          )}
+        {
+					Array.isArray(estudiantes) && estudiantes.length > 0 ? (
+						(estudiantes.length > 0 && estudiantes[0]?.documento === '00000000') ? (
+						<EmptyTable mensaje="El Usuario no esta registrado" />
+						) : (
+						<EstudianteTable estudiantes={estudiantes} />
+						)
+					) : (
+						<EmptyTable mensaje="No hay estudiantes registrados" />
+					)
+					}
           <p></p>
           <p></p>
           <PrestamoForm
@@ -88,7 +94,7 @@ const FormTabs = ({
             onChangeDocumento={onChangeDocumento}
             documentoAnterior={documentoAnterior}
             selectedComputador={selectedComputador}
-            estudiantes={estudiantes}
+            estudiantes={estudiantes ?? []}
           />
           {Array.isArray(turnos) && turnos?.length > 0 ? (
             <TurnoTable turnos={turnos} />

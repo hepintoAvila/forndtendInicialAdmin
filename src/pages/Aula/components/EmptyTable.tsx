@@ -11,17 +11,11 @@ const EmptyTable = ({ mensaje }: EmptyTableProps) => {
         <thead>
           <tr className="bg-success" style={{ height: '5px' }}>
             <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr className="w-100 my-1" style={{ height: '5px' }}>
-            <td></td>
-            <td></td>
             <td>{mensaje}</td>
-            <td></td>
           </tr>
         </tbody>
       </table>

@@ -19,7 +19,7 @@ const loading = () => <div className="text-center"></div>;
 const HorizontalLayout = () => {
 	const appConfig = getUserFromSession();
 	const { settings,updateMenu } = useThemeContext();
-	const [horizontalDropdownOpen, toggleMenu] = useToggle();
+	const [isOpen, toggleMenu] = useToggle();
 	const isAdmin = appConfig.status === 'Inactivo';
 	/*
 	 * layout defaults
@@ -64,13 +64,13 @@ const HorizontalLayout = () => {
 						<Suspense fallback={loading()}>
 						<Topbar
 							toggleMenu={toggleMenu}
-							navOpen={horizontalDropdownOpen}
+							navOpen={isOpen}
 							topbarDark={false}
 							appConfig={appConfig}
 						/>
 						</Suspense>
 						<Suspense fallback={loading()}>
-						<Navbar navOpen={horizontalDropdownOpen}/>
+						<Navbar navOpen={isOpen}/>
 						</Suspense>
 					</>
 					)}

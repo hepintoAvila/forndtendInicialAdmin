@@ -22,6 +22,12 @@ const config = {
 	API_OPCION_REPORTES_CONSULTA_HISTORICOS: 'consulta_historicos', 
 	
 
+	API_ADMIN_AULAS: 'admin_aulas', 
+	API_OPCION_AULAS_CONSULTA: 'consulta_aulas',  
+	API_OPCION_ADD_AULAS: 'add_aulas',  
+	API_OPCION_UPDATE_AULAS: 'update_aulas',
+
+
 	API_ACCION_PCS: 'admin_pcs', 
 	API_OPCION_PCS: 'consulta_pcs',  
 	API_ADMIN_PCS: 'admin_pcs', 
