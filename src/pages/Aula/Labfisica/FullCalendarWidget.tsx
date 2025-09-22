@@ -6,21 +6,30 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import BootstrapTheme from '@fullcalendar/bootstrap';
 import esLocale from '@fullcalendar/core/locales/es';
-
+function convertirFechaATimestamp(eventos:any) {
+  return eventos.map((evento: { start: string | number | Date; end: string | number | Date; }) => ({
+    ...evento,
+    start: new Date(evento.start).getTime(),
+    end: new Date(evento.end).getTime(),
+  }));
+}
 type FullCalendarWidgetProps = {
 	onDateClick: (value: DateClickArg) => void;
 	onEventClick: (value: EventClickArg) => void;
 	onEventDrop: (value: EventDropArg) => void;
 	onDrop: (value: DropArg) => void;
 	events: Array<EventInput> ;
+	aulasPrestamos: any ;
 };
 const FullCalendarWidget = ({
 	onDateClick,
 	onEventClick,
 	onDrop,
 	onEventDrop,
-	events,
+	events,aulasPrestamos
 }: FullCalendarWidgetProps) => {
+const eventosConTimestamp = convertirFechaATimestamp(aulasPrestamos);
+console.log(eventosConTimestamp);
 	return (
 		<>
 			{/* full calendar control */}
@@ -54,7 +63,7 @@ const FullCalendarWidget = ({
 					editable={true}
 					selectable={true}
 					droppable={true}
-					events={events}
+					events={eventosConTimestamp}
 					dateClick={(arg: DateClickArg) => onDateClick(arg)}
 					eventClick={(arg: EventClickArg) => onEventClick(arg)}
 					drop={(arg: DropArg) => onDrop(arg)}

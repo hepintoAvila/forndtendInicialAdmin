@@ -1,31 +1,34 @@
-import { ApiAulaResponse, AulaServiceInterface, AulaServiceResponse, UserProps } from "../type/type_aulas";
-
- 
 //import config from "../helpers/config";
-const AulaService = (urlObjet: any,bodyData:any): AulaServiceInterface => {
+import { ApiTurnoResponse, TurnoRequest, TurnoServiceInterface, TurnoServiceResponse, UserProps } from "../type/type._turnos";
 
-  const Autentications = async (values: UserProps): Promise<AulaServiceResponse> => {
-     if (!values) {
+
+const TurnosService = (urlObjet: TurnoRequest,bodyData:any): TurnoServiceInterface => {
+
+  
+
+const Autentications = async (values: UserProps): Promise<TurnoServiceResponse> => {
+   
+    if (!values) {
      throw new Error('AuthContext no está disponible');
     }
-  //const url = import.meta.env.VITE_API_URL;
+//const url = import.meta.env.VITE_API_URL;
     const credentials = {
       var_login: values.login,
       password: values.password,
     };
     const token = localStorage.getItem('authToken');
     const params = new URLSearchParams({
-      exec: 'admin_aulas',
-      _SPIP_PAGE: urlObjet._SPIP_PAGE || 'admin_aulas',
-      action: urlObjet.action || 'true',
-      var_ajax:  urlObjet.var_ajax || 'form',
-      bonjour: urlObjet.bonjour || 'oui',
+      exec: 'admin_turnos',
+      _SPIP_PAGE: 'admin_turnos',
+      action: 'true',
+      var_ajax:'form',
+      bonjour:'oui',
       accion: urlObjet.accion,
       opcion: urlObjet.opcion
     });
 
     try {
-
+     
       const response = await fetch(`/api2025/?${params.toString()}`, {
         method: 'POST',
         headers: {
@@ -44,8 +47,7 @@ const AulaService = (urlObjet: any,bodyData:any): AulaServiceInterface => {
         return {
           status: 'success',
           data: {
-            aulas: [],
-            prestamos: [],
+            turno: [],
             metadata: {
               statusCode: 204,
               type: 'success',
@@ -62,13 +64,13 @@ const AulaService = (urlObjet: any,bodyData:any): AulaServiceInterface => {
       // Obtener el texto de la respuesta primero para debuggear
       const responseText = await response.text();
      // console.log('Raw response:', responseText);
-     if (!responseText) {
+      if (!responseText) {
         console.log('La respuesta está vacía');
         // Puedes manejar este caso según tus necesidades
         throw new Error('La respuesta está vacía');
       }
       // Intentar parsear como JSON
-      let result: ApiAulaResponse;
+      let result: ApiTurnoResponse;
       try {
         result = JSON.parse(responseText);
       } catch (parseError) {
@@ -83,8 +85,7 @@ const AulaService = (urlObjet: any,bodyData:any): AulaServiceInterface => {
           status: 'success',
           data: {
             //auth: result.data?.Auth || {} as AuthData,
-            aulas: result.data?.Aulas || [],
-            prestamos: result.data?.Prestamos || [],
+            turno: result.data?.Turno || [],
             metadata: {
               statusCode: result.status,
               type: result.type,
@@ -97,16 +98,15 @@ const AulaService = (urlObjet: any,bodyData:any): AulaServiceInterface => {
       }
 
     } catch (error) {
-      if (error instanceof Error && error.message.includes('No existen registros de Pcs')) {
+      if (error instanceof Error && error.message.includes('No existen registros de Turno')) {
         return {
           status: 'success',
           data: {
-            aulas: [],
-            prestamos: [],
+            turno: [],
             metadata: {
               statusCode: 200,
               type: 'success',
-              message: 'No existen registros de Pcs'
+              message: 'No existen registros de Turno'
             }
           }
         };
@@ -118,12 +118,9 @@ const AulaService = (urlObjet: any,bodyData:any): AulaServiceInterface => {
     };
   }
   };
-
   return {
-    Autentications
+    Autentications,
   };
 };
 
-export default AulaService;
-
- 
+export default TurnosService;

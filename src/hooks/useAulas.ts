@@ -1,12 +1,13 @@
-import { config, encodeBasicUrl} from '@/common';
+import { config} from '@/common';
 import { AuthContext } from '@/common/context/AuthContext';
 import { useContext, useState } from 'react';
 import { atom, useAtom } from 'jotai';
-import { Aula, AulaData, Credentials } from '@/common/type/type_aulas';
+import { Aula, ApiAulaResponse, Credentials, AulaPrestamo, AulaPrestamoList } from '@/common/type/type_aulas';
 import AulaService from '@/common/api/aulas';
 
-const ApiAulasAtom = atom<AulaData>([] as unknown as AulaData);
-
+const ApiAulasAtom = atom<ApiAulaResponse>([] as unknown as ApiAulaResponse);
+const ApiAulasprest = atom<AulaPrestamoList>([] as unknown as AulaPrestamoList);
+ 
 export default function useAulas(){
 
     const generateBodyDataAula = (ObjetBody: {  id: number, title: string, className: string, textClass: string, } ): Aula => {
@@ -29,6 +30,7 @@ const authContext = useContext(AuthContext);
   const [error, setError] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [aulas, setAulas] = useAtom(ApiAulasAtom);
+  const [aulasPrestamos, setAulasPrestamos] = useAtom(ApiAulasprest);
 
   const sendAulas = async (credentialsUrl: any,BodyData:any) => {
     setLoading(true);
@@ -50,6 +52,7 @@ const authContext = useContext(AuthContext);
       if (result.status === 'success' && result.data) {
          setIsAuthenticated(true);
          setAulas(result.data.aulas as any);
+          setAulasPrestamos(result.data.prestamos as any);
         return result.data;
       } else {
         throw new Error(result.error || 'Autenticación fallida');
@@ -62,16 +65,15 @@ const authContext = useContext(AuthContext);
       setLoading(false);
     }
   };
-    const sendAulasRequest = async ({ObjetBodys}: { ObjetBodys: { id: number, title: string, className: string, textClass: string } }) => {
-        const credentialsUrlPc = {
-          accion: encodeBasicUrl(config.API_ADMIN_AULAS),
-          opcion: encodeBasicUrl(config.API_OPCION_AULAS_CONSULTA),
-        };
-    
-        const BodyData = generateBodyDataAula(ObjetBodys);
-        await sendAulas(credentialsUrlPc, BodyData)
+    const sendAulasRequest = async ({ObjetBodys,opcionesAulas}: { 
+      ObjetBodys:{ id: number, title: string, className: string, textClass: string },
+      opcionesAulas:{accion:string,opcion:string} }) => {
+            const BodyData = generateBodyDataAula(ObjetBodys);
+        await sendAulas(opcionesAulas, BodyData)
         .then((response) => {
+          console.log("response",response);
           setAulas(response.aulas as any);
+          
         })
         .catch((err) => {
           const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
@@ -79,12 +81,13 @@ const authContext = useContext(AuthContext);
         throw err;
         });
       };
-
+ 
   return {
     loading,
     error,
     isAuthenticated,
     aulas,
+    aulasPrestamos,
     sendAulasRequest,
     sendAulas,
   };

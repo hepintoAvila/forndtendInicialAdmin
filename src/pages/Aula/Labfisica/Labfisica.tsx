@@ -7,6 +7,7 @@ import SidePanel from './SidePanel';
 import { useAulas, useEstudiantes } from '@/hooks';
 import { useEffect, useState } from 'react';
 import { SendEvent } from './types';
+import { config, encodeBasicUrl } from '@/common/helpers';
 
 
 const Labfisica = () => {
@@ -27,7 +28,7 @@ const Labfisica = () => {
 		onRemoveEvent,
 		onAddEvent,
 	} = useCalendar();
-  	const {aulas,sendAulasRequest} = useAulas();
+  	const {aulas,aulasPrestamos,sendAulasRequest} = useAulas();
   	const { getDatosEstudiantesVisitas,documentoAnterior,estudiantes}  = useEstudiantes();
 	const [datosform, setDatosForm] = useState<SendEvent>({} as unknown as SendEvent);
 
@@ -38,13 +39,19 @@ const Labfisica = () => {
                 className: "className",
                 textClass: "textClass"
             }
-		sendAulasRequest(aulasDatos as any);
+		const opcionesAulas = {
+			accion: encodeBasicUrl(config.API_ADMIN_AULAS),
+			opcion: encodeBasicUrl(config.API_OPCION_AULAS_CONSULTA),
+			};
+		 sendAulasRequest({ ObjetBodys: aulasDatos, opcionesAulas });
 	  }, []);
     
 	  const onChangeDocumento = (e: any) => {
  	    getDatosEstudiantesVisitas(e.target.value as any);
   	};
-		
+
+    
+ 
 	
 	useEffect(() => {
 		
@@ -95,6 +102,7 @@ const Labfisica = () => {
 										onDrop={onDrop}
 										onEventDrop={onEventDrop}
 										events={events}
+										aulasPrestamos={aulasPrestamos}
 									/>
 								</Col>
 							</Row>
@@ -118,9 +126,7 @@ const Labfisica = () => {
 				onChangeDocumento={onChangeDocumento}
 				documentoAnterior={documentoAnterior as any}
 				estudiantes={estudiantes as any}
-
 				/>
-				
 			</>
 			) : null}
 		</>

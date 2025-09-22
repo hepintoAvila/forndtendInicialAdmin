@@ -146,7 +146,7 @@ setInicial(dataInicial as string);
 							value={inicialFecha as string}
 							 onChange={(date) => {
 								setStar(date);
-								if (end && date > end) {
+							if (end && date > end) {
 								setEnd(null);
 								Swal.fire({
 									icon: 'error',
@@ -176,7 +176,7 @@ setInicial(dataInicial as string);
 							title="Fecha y Hora Final"
 							value={finalFecha as string}
 							onChange={(date) => {
-								if (start && date <= start) {
+							 if (start && date <= start) {
 								Swal.fire({
 									icon: 'error',
 									title: 'Error',
@@ -218,6 +218,7 @@ setInicial(dataInicial as string);
 									</Form.Group>
 						</Col>
 					</Row>
+					<br/>
 					<Row>
 						<Col xs={4}>
 							{isEditable ? (
@@ -227,11 +228,25 @@ setInicial(dataInicial as string);
 							) : null}
 						</Col>
 						<Col xs={8} className="text-end">
-							<Button variant="success" type="submit" className="btn btn-success">
-								Guardar
-							</Button>
+						<Button 
+							variant="success" 
+							type="submit" 
+							className="btn btn-success" 
+							disabled={
+							(Array.isArray(estudiantes) && 
+							estudiantes.length > 0 && 
+							estudiantes[0]?.documento === '00000000') ||
+							(Array.isArray(estudiantes) && estudiantes.length > 0 && !(estudiantes?.length > 0 && estudiantes[0]?.documento !== '00000000')) ||
+							!start ||
+							!end ||
+							start > end
+							}
+						>
+							Guardar
+						</Button>
 						</Col>
 					</Row>
+					<br/>
 				</Form>
 					{
 					Array.isArray(estudiantes) && estudiantes.length > 0 ? (

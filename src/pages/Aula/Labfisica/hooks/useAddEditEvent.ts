@@ -30,8 +30,9 @@ const { handleSubmit} = useForm({
 });
 */
   const onSubmitEvent = ( data: SendEvent) => {
-console.log(data);
-  //isEditable ? onUpdateEvent(data) : onAddEvent(data);
+	console.log(data);
+  	isEditable ? onUpdateEvent(data) : onAddEvent(data);
+	
 };
 
 	return {

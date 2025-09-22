@@ -7,6 +7,14 @@ export type Credentials = {
   login?: string;
   password?: string;
 };
+export interface AulaPrestamo {
+  id: number;
+  title: string;
+  start?: Date | string | string[] | undefined;
+  end?: Date | string | string[]| undefined;
+  documento?: number | string | string[]| undefined;
+  className: string;
+}  
 export interface Aula {
   id: number;
   title: string;
@@ -14,6 +22,7 @@ export interface Aula {
   textClass: string;
 }
 export type AulaList = Aula[];
+export type AulaPrestamoList = AulaPrestamo[];
 
 export interface AulaData {
   id: number;
@@ -27,6 +36,7 @@ export interface ApiAulaResponse {
   message: string;
   data: {
     Aulas: AulaData[];
+    Prestamos: AulaPrestamo[];
   };
 }
 export interface AuthData {
@@ -53,6 +63,7 @@ export interface AulaServiceResponse {
   error?: string;
   data?: {
     aulas: AulaData[];
+    prestamos: AulaPrestamo[];
     metadata: {
       statusCode: number;
       type: string;
@@ -75,6 +86,7 @@ interface AulaResp {
 
 interface AulaResponseData {
   aulas: AulaResp[];
+  prestamos: AulaPrestamo[];
 }
 
 export interface ApiAulaResponseData {
