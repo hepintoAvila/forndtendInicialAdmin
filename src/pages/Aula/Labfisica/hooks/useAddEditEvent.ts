@@ -2,13 +2,21 @@ import { useState } from 'react';
 //import * as yup from 'yup';
 import { EventInput } from '@fullcalendar/core';
 import { SendEvent } from '../types';
-//import { useForm } from 'react-hook-form';
-//import { yupResolver } from '@hookform/resolvers/yup';
+//import { config, encodeBasicUrl } from '@/common/helpers';
+type AulaDatos = {
+  id: number;
+  title: string;
+  start: Date | string;
+  end: Date | string;
+  documento: string;
+};
+ 
 export default function useAddEditEvent(
 	eventData: EventInput | undefined,
 	isEditable: boolean,
 	onUpdateEvent: (value: SendEvent) => void,
-	onAddEvent: (value: SendEvent) => void
+	onAddEvent: (value: SendEvent) => void,
+	addAulasRequest: (arg:AulaDatos,arg2:boolean) => void
 ) {
 	// event state
 	const [event] = useState<any>({
@@ -17,26 +25,14 @@ export default function useAddEditEvent(
 		end: eventData?.end,
 		identificacion: eventData?.identificacion,
 	});
-/*
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-	const schema = yup.object().shape({
-		title: yup.string().required('Please select Aula'),
-		start: yup.string().required('Please select Fecha y Hora Inicial'),
-		end: yup.string().required('Please select Fecha y Hora Final'),
-		identificacion: yup.string().required('Please select identificacion'),
-	});
-const { handleSubmit} = useForm({
-  resolver: yupResolver(schema),
-});
-*/
-  const onSubmitEvent = ( data: SendEvent) => {
-	console.log(data);
-  	isEditable ? onUpdateEvent(data) : onAddEvent(data);
-	
-};
-
+const onSubmitEvent = (SendEvent: SendEvent) => {
+		
+	addAulasRequest(SendEvent as any,isEditable as boolean);
+    isEditable ? onUpdateEvent(SendEvent) : onAddEvent(SendEvent);
+}
 	return {
 		event,
 		onSubmitEvent,
 	};
 }
+ 

@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 import { DateClickArg, Draggable, DropArg } from '@fullcalendar/interaction';
 import { DateInput, EventClickArg, EventDropArg, EventInput } from '@fullcalendar/core';
 import { useToggle } from '@/hooks';
-import { Event } from '../types';
-import { defaultEvents } from '../data';
+import { Event, SendEvent,Aulas } from '../types';
+import formatoFecha from '@/common/helpers/formatoFecha';
+//import { defaultEvents } from '../data';
 
 export default function useCalendar() {
+ 
+	
 	/*
 	 * modal handling
 	 */
@@ -21,7 +24,9 @@ export default function useCalendar() {
 	/*
 	 * event data
 	 */
-	const [events, setEvents] = useState<EventInput[]>([...defaultEvents]);
+		const aulaDataPrestamos = localStorage.getItem('Prestamos');
+	    let aulasPrestamos: EventInput[] = aulaDataPrestamos ? JSON.parse(aulaDataPrestamos) : [];
+	const [events, setEvents] = useState<EventInput[]>([...aulasPrestamos]);
 	const [eventData, setEventData] = useState<EventInput>({});
 	const [dateInfo, setDateInfo] = useState<DateClickArg>({} as DateClickArg);
 
@@ -82,7 +87,7 @@ export default function useCalendar() {
 	const onAddEvent = (data: Event) => {
 		let modifiedEvents = [...events];
 		const event = {
-			id: String(modifiedEvents.length + 1),
+			id: String(aulasPrestamos.length + 1),
 			title: data.title,
 			start: Object.keys(dateInfo).length !== 0 ? dateInfo.date : new Date(),
 			end: Object.keys(dateInfo).length !== 0 ? dateInfo.date : new Date(),
@@ -94,16 +99,32 @@ export default function useCalendar() {
 	};
 
 	//  on update event
-	const onUpdateEvent = (data: Event) => {
-		const modifiedEvents = [...events];
-		const idx = modifiedEvents.findIndex((e) => e['id'] === eventData.id);
-		modifiedEvents[idx]['title'] = data.title;
-		modifiedEvents[idx]['className'] = data.className;
-		modifiedEvents[idx]['start'] = data.start;
-		modifiedEvents[idx]['end'] = data.end;
-		setEvents(modifiedEvents);
-		onCloseModal();
-	};
+			const onUpdateEvent = (data: SendEvent) => {
+			//console.log('onUpdateEvent', data);
+
+			const modifiedEvents = [...events];
+			const idx = modifiedEvents.findIndex((e) => e['id'] === eventData.id);
+			  if (idx === -1) {
+					onCloseModal();
+					return; // Si no se encuentra el evento, no hacer nada
+				}
+
+			const aulaData = localStorage.getItem('Aulas');
+			let appConfig: Aulas = aulaData ? JSON.parse(aulaData) : [];
+			const datosAulas = appConfig.find((e) => e['id'] === eventData.id);
+
+			 if (!datosAulas) {
+					onCloseModal();
+					return; // Si no se encuentra el objeto en appConfig, no hacer nada
+				}
+
+			modifiedEvents[idx]['title'] = datosAulas.title;
+			modifiedEvents[idx]['className'] = data?.className;
+			modifiedEvents[idx]['start'] = formatoFecha(data?.start as any);
+			modifiedEvents[idx]['end'] = formatoFecha(data?.end as any);
+			setEvents(modifiedEvents);
+			onCloseModal();
+			};
 
 	// on remove event
 	const onRemoveEvent = () => {

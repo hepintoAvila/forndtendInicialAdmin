@@ -6,30 +6,25 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import BootstrapTheme from '@fullcalendar/bootstrap';
 import esLocale from '@fullcalendar/core/locales/es';
-function convertirFechaATimestamp(eventos:any) {
-  return eventos.map((evento: { start: string | number | Date; end: string | number | Date; }) => ({
-    ...evento,
-    start: new Date(evento.start).getTime(),
-    end: new Date(evento.end).getTime(),
-  }));
-}
+ 
+
+
 type FullCalendarWidgetProps = {
 	onDateClick: (value: DateClickArg) => void;
 	onEventClick: (value: EventClickArg) => void;
 	onEventDrop: (value: EventDropArg) => void;
 	onDrop: (value: DropArg) => void;
-	events: Array<EventInput> ;
-	aulasPrestamos: any ;
+	aulasPrestamos: EventInput[] ;
 };
 const FullCalendarWidget = ({
 	onDateClick,
 	onEventClick,
 	onDrop,
 	onEventDrop,
-	events,aulasPrestamos
+	aulasPrestamos
 }: FullCalendarWidgetProps) => {
-const eventosConTimestamp = convertirFechaATimestamp(aulasPrestamos);
-console.log(eventosConTimestamp);
+ 
+ console.log('aulasPrestamos',aulasPrestamos);
 	return (
 		<>
 			{/* full calendar control */}
@@ -63,11 +58,23 @@ console.log(eventosConTimestamp);
 					editable={true}
 					selectable={true}
 					droppable={true}
-					events={eventosConTimestamp}
+					events={aulasPrestamos}
 					dateClick={(arg: DateClickArg) => onDateClick(arg)}
 					eventClick={(arg: EventClickArg) => onEventClick(arg)}
 					drop={(arg: DropArg) => onDrop(arg)}
 					eventDrop={(arg: EventDropArg) => onEventDrop(arg)}
+					 eventContent={(arg) => {
+						 const start = new Date(arg.event.start as any);
+    					 const end = new Date(arg.event.end as any);
+						return {
+						html: `
+							<div class="text-white text-center">
+							<strong class="text-center">${arg.event.title}</strong>
+							<p class="text-center">${start.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}</p>
+							</div>
+						`,
+						};
+					}}
 				/>
 			</div>
 		</>

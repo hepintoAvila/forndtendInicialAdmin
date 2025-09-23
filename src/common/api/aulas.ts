@@ -23,7 +23,7 @@ const AulaService = (urlObjet: any,bodyData:any): AulaServiceInterface => {
       accion: urlObjet.accion,
       opcion: urlObjet.opcion
     });
-
+console.log('AulaService',bodyData);
     try {
 
       const response = await fetch(`/api2025/?${params.toString()}`, {

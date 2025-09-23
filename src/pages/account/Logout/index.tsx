@@ -26,6 +26,8 @@ const Logout = () => {
 						localStorage.removeItem('userData');
 						localStorage.removeItem('userPermisos');
 						localStorage.removeItem('userMenu');
+						localStorage.removeItem('Aulas');
+						localStorage.removeItem('Prestamos');
                 navigate('/account/login', { replace: true });
             }, 2000); // 2 segundos después de mostrar el mensaje
         }

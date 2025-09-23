@@ -11,7 +11,9 @@ import { config, encodeBasicUrl } from '@/common/helpers';
 
 
 const Labfisica = () => {
-	
+		const { getDatosEstudiantesVisitas,documentoAnterior,estudiantes}  = useEstudiantes();
+		const {aulas,aulasPrestamos,sendAulasRequest,addAulasRequest} = useAulas();
+	const [datosform, setDatosForm] = useState<SendEvent>({} as unknown as SendEvent);
 	const {
 		isOpen,
 		dateInfo,
@@ -19,7 +21,6 @@ const Labfisica = () => {
 		onCloseModal,
 		isEditable,
 		eventData,
-		events,
 		onDateClick,
 		onEventClick,
 		onDrop,
@@ -28,9 +29,6 @@ const Labfisica = () => {
 		onRemoveEvent,
 		onAddEvent,
 	} = useCalendar();
-  	const {aulas,aulasPrestamos,sendAulasRequest} = useAulas();
-  	const { getDatosEstudiantesVisitas,documentoAnterior,estudiantes}  = useEstudiantes();
-	const [datosform, setDatosForm] = useState<SendEvent>({} as unknown as SendEvent);
 
  	useEffect(() => {
 		const aulasDatos ={
@@ -50,9 +48,6 @@ const Labfisica = () => {
  	    getDatosEstudiantesVisitas(e.target.value as any);
   	};
 
-    
- 
-	
 	useEffect(() => {
 		
 		if (isEditable) {
@@ -101,7 +96,6 @@ const Labfisica = () => {
 										onEventClick={onEventClick}
 										onDrop={onDrop}
 										onEventDrop={onEventDrop}
-										events={events}
 										aulasPrestamos={aulasPrestamos}
 									/>
 								</Col>
@@ -124,8 +118,10 @@ const Labfisica = () => {
 				onAddEvent={onAddEvent as any}
 				aulas={aulas as any}
 				onChangeDocumento={onChangeDocumento}
+				addAulasRequest={addAulasRequest as any}
 				documentoAnterior={documentoAnterior as any}
 				estudiantes={estudiantes as any}
+				aulasPrestamos={aulasPrestamos as any}
 				/>
 			</>
 			) : null}

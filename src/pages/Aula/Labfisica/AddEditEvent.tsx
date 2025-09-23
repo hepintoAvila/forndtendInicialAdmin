@@ -1,7 +1,7 @@
 import { Modal, Row, Col, Button,Form } from 'react-bootstrap';
 import { EventInput } from '@fullcalendar/core';
 import { CustomDatePicker } from '@/components';
-import { SendEvent } from './types';
+import { Aulas, SendEvent } from './types';
 import { useAddEditEvent } from './hooks';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
@@ -28,8 +28,10 @@ type AddEditEventProps = {
 	eventData: EventInput | SendEvent;
 	onRemoveEvent: () => void;
 	onUpdateEvent: (value: SendEvent) => void;
+	addAulasRequest: (arg:any,arg2:boolean) => void
 	onAddEvent: (value: SendEvent) => void;
 	aulas: any;
+	aulasPrestamos: [];
 	onChangeDocumento: (documento: number) => void;
 	documentoAnterior: number;
 	estudiantes: { documento: string }[] | undefined;
@@ -47,6 +49,8 @@ const AddEditEvent = ({
 	onChangeDocumento,
 	documentoAnterior,
 	estudiantes,
+	addAulasRequest,
+	aulasPrestamos
 }: AddEditEventProps) => {
 	const [start, setStar] = useState<Date | null>(null);
 	const [end, setEnd] = useState<Date | null>(null);
@@ -56,7 +60,8 @@ const AddEditEvent = ({
 		eventData as any,
 		isEditable,
 		onUpdateEvent,
-		onAddEvent
+		onAddEvent,
+		addAulasRequest as any,
 	);
 	const [selectedAula, setSelectedAula] = useState('');
  
@@ -88,6 +93,13 @@ setInicial(dataInicial as string);
 }, [start, end]);
 
 
+const aulaData = localStorage.getItem('Aulas');
+let appConfig: Aulas = aulaData ? JSON.parse(aulaData) : [];
+const datosAulas:any = appConfig.find((e) => e['title'] === eventData.title);
+
+const datosDocument: any = aulasPrestamos?.find((e: any) => e['id'] == eventData.id);
+//console.log('document',document);
+
 	return (
 		<Modal show={isOpen} onHide={onClose} backdrop="static" keyboard={false}>
 			<Modal.Header className="pb-2 px-4 border-bottom-0" closeButton>
@@ -101,6 +113,7 @@ setInicial(dataInicial as string);
 					e.preventDefault();
 					const formData = new FormData(e.currentTarget);
 					const sendEvent: SendEvent = {
+						id: eventData.id as number,
 						title: formData.get('title') as string,
 						start: start ? start : new Date(
 							Array.isArray(eventData.start)
@@ -123,8 +136,9 @@ setInicial(dataInicial as string);
 								required
 								 onChange={(e) => setSelectedAula(e.target.value)}
 							>
-								 
-								{isEditable ? <option key={eventData.id} value={eventData.id}>{eventData.title}</option>:null}
+								{isEditable ? (
+									<option key={eventData.id} value={datosAulas?.id}>{datosAulas?.title}</option>
+									) : null}
 								{(aulas || []).map((event: any, index: number) => {
 									return (
 									<option key={index.toString()} value={event.id} className={event.className}>
@@ -209,7 +223,7 @@ setInicial(dataInicial as string);
 										name="documento"
 										key="documento"
 										placeholder=""
-										defaultValue={documentoAnterior}
+										 defaultValue={documentoAnterior || datosDocument?.documento}
 										onChange={onChangeDocumento as any}
 									  />
 									  <Form.Control.Feedback type="invalid">

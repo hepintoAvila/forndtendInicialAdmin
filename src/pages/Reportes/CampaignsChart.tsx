@@ -47,7 +47,7 @@ const CampaignsChart = ({ data }: { data: ReporteServiceResponse }) => {
 
 					<Col sm={3}>
 						<i className="mdi mdi-flag-variant widget-icon rounded-circle bg-light-lighten text-muted"></i>
-						<h3 className="fw-normal mt-3">
+						<h3 className="fw-normal  mt-3">
 							<span>{reporte.stats}</span>
 						</h3>
 						<p className="text-muted mb-0 mb-2">

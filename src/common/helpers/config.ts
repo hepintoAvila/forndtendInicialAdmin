@@ -25,6 +25,8 @@ const config = {
 	API_ADMIN_AULAS: 'admin_aulas', 
 	API_OPCION_AULAS_CONSULTA: 'consulta_aulas',  
 	API_OPCION_AULAS_PRESTAMO_CONSULTA: 'consulta_turno_aulas',  
+	API_OPCION_UPDATE_AULAS_PRESTAMO: 'update_turno_aulas',  
+	API_OPCION_ADD_AULAS_PRESTAMO: 'add_turno_aulas',  
 	API_OPCION_ADD_AULAS: 'add_aulas',  
 	API_OPCION_UPDATE_AULAS: 'update_aulas',
 
