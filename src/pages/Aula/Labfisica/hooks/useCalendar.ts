@@ -1,13 +1,39 @@
 import { useEffect, useState } from 'react';
 import { DateClickArg, Draggable, DropArg } from '@fullcalendar/interaction';
 import { DateInput, EventClickArg, EventDropArg, EventInput } from '@fullcalendar/core';
-import { useToggle } from '@/hooks';
-import { Event, SendEvent,Aulas } from '../types';
-import formatoFecha from '@/common/helpers/formatoFecha';
-//import { defaultEvents } from '../data';
+import { useAulas, useToggle } from '@/hooks';
+import { SendEvent,Aulas } from '../types';
+import Swal from 'sweetalert2';
 
+function formatDateYearMonth(dateInput: Date | string | null) {
+  if (!dateInput) return new Date();
+  const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput;
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${month}/${day}/${year}`;
+}
+function formatHoursMinutes(fecha: number) {
+
+  const date = new Date(fecha);
+  const hours = date.getHours() % 12 === 0 ? 12 : date.getHours() % 12;
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const ampm = date.getHours() < 12 ? 'AM' : 'PM';
+
+  return `${hours}:${minutes} ${ampm}`;
+}
+ function obtenerAulasPrestamos(): EventInput[] {
+  const aulaDataPrestamos = localStorage.getItem('Prestamos');
+  return aulaDataPrestamos ? JSON.parse(aulaDataPrestamos) : [];
+}
+function obtenerAulaPorId(id: number): Aulas | undefined {
+  const aulaData = localStorage.getItem('Aulas');
+  const appConfig: Aulas[] = aulaData ? JSON.parse(aulaData) : [];
+  return appConfig.find((e:any) => e['id'] === id);
+} 
 export default function useCalendar() {
- 
+const {updateAulasRequest,addAulasRequest,deleteAulasRequest} = useAulas();
 	
 	/*
 	 * modal handling
@@ -24,8 +50,7 @@ export default function useCalendar() {
 	/*
 	 * event data
 	 */
-		const aulaDataPrestamos = localStorage.getItem('Prestamos');
-	    let aulasPrestamos: EventInput[] = aulaDataPrestamos ? JSON.parse(aulaDataPrestamos) : [];
+	let aulasPrestamos: EventInput[] = obtenerAulasPrestamos();
 	const [events, setEvents] = useState<EventInput[]>([...aulasPrestamos]);
 	const [eventData, setEventData] = useState<EventInput>({});
 	const [dateInfo, setDateInfo] = useState<DateClickArg>({} as DateClickArg);
@@ -44,6 +69,7 @@ export default function useCalendar() {
 
 	// on date click
 	const onDateClick = (arg: DateClickArg) => {
+		//console.log('onDateClick',arg)
 		setDateInfo(arg);
 		onOpenModal();
 		setIsEditable(false);
@@ -51,7 +77,7 @@ export default function useCalendar() {
 
 	// on event click
 	const onEventClick = (arg: EventClickArg) => {
-		
+		//console.log('onEventClick',arg)
 		const event = {
 			id: String(arg.event.id),
 			title: arg.event.title,
@@ -84,67 +110,107 @@ export default function useCalendar() {
 	};
 
 	// on add event
-	const onAddEvent = (data: Event) => {
+	const onAddEvent = (data: SendEvent) => {
+		const datosAulas:any = obtenerAulaPorId(data.title as any);	
+		
+		if (!datosAulas || !datosAulas.title) {
+			Swal.fire({
+			icon: 'error',
+			title: 'Error',
+			text: 'No se encontró información de la aula',
+			});
+			return;
+		}
 		let modifiedEvents = [...events];
 		const event = {
-			id: String(aulasPrestamos.length + 1),
-			title: data.title,
-			start: Object.keys(dateInfo).length !== 0 ? dateInfo.date : new Date(),
-			end: Object.keys(dateInfo).length !== 0 ? dateInfo.date : new Date(),
-			className: data.className,
+			id: String(events.length + 1),
+			title: datosAulas.title,
+			start: data.start,
+			end: data.end,
+			className: datosAulas.className,
+			documento: datosAulas.documento,
 		};
+		addAulasRequest(event as any)	
 		modifiedEvents = [...modifiedEvents, event];
 		setEvents(modifiedEvents);
 		onCloseModal();
 	};
 
 	//  on update event
-			const onUpdateEvent = (data: SendEvent) => {
-			//console.log('onUpdateEvent', data);
+	const onUpdateEvent = (data: SendEvent) => {
+		let aulasPrestamos: EventInput[] = obtenerAulasPrestamos();
+		const idx = Number(data.id) - 1;
+		const datosAulas: any = obtenerAulaPorId(data?.title as any);
 
-			const modifiedEvents = [...events];
-			const idx = modifiedEvents.findIndex((e) => e['id'] === eventData.id);
-			  if (idx === -1) {
-					onCloseModal();
-					return; // Si no se encuentra el evento, no hacer nada
-				}
+		if (!datosAulas || !datosAulas.title) {
+			Swal.fire({
+			icon: 'error',
+			title: 'Error',
+			text: 'No se encontró información de la aula',
+			});
+			return;
+		}
 
-			const aulaData = localStorage.getItem('Aulas');
-			let appConfig: Aulas = aulaData ? JSON.parse(aulaData) : [];
-			const datosAulas = appConfig.find((e) => e['id'] === eventData.id);
+		const datosactual = aulasPrestamos[idx];
+		const eventSend = {
+			id: data.id,
+			title: datosAulas.title,
+			start: data.start,
+			end: data.end,
+			documento: data.documento,
+			idPrestamo: datosactual?.idPrestamo,
+		};
 
-			 if (!datosAulas) {
-					onCloseModal();
-					return; // Si no se encuentra el objeto en appConfig, no hacer nada
-				}
-
-			modifiedEvents[idx]['title'] = datosAulas.title;
-			modifiedEvents[idx]['className'] = data?.className;
-			modifiedEvents[idx]['start'] = formatoFecha(data?.start as any);
-			modifiedEvents[idx]['end'] = formatoFecha(data?.end as any);
-			setEvents(modifiedEvents);
-			onCloseModal();
-			};
+		updateAulasRequest(eventSend as any, true);
+		onCloseModal();
+		};
 
 	// on remove event
-	const onRemoveEvent = () => {
-		var modifiedEvents = [...events];
-		const idx = modifiedEvents.findIndex((e) => e['id'] === eventData.id);
-		modifiedEvents.splice(idx, 1);
-		setEvents(modifiedEvents);
+	const onRemoveEvent = (id:any) => {
+		let aulasPrestamos: EventInput[] = obtenerAulasPrestamos();
+		const datosactual =aulasPrestamos[id-1];
+		deleteAulasRequest(datosactual.idPrestamo)
 		onCloseModal();
 	};
 
 	// on event drop
 	const onEventDrop = (arg: EventDropArg) => {
-		const modifiedEvents = [...events];
-		const idx = modifiedEvents.findIndex((e) => e['id'] === String(arg.event.id!));
-		modifiedEvents[idx]['title'] = arg.event.title;
+	const modifiedEvents = [...events];	
+	const idx = modifiedEvents.findIndex((e) => e['id'] === eventData.id);	
+	const dropEventData = arg;
+	const fecha:any = formatDateYearMonth(dropEventData.event.endStr);
+	const id = idx === -1 ? Number(arg.event.id)-1 : idx-1;
+	const start =formatHoursMinutes(arg.event.startStr as any);
+	const end =formatHoursMinutes(arg.event.endStr as any);
+	let aulasPrestamos: EventInput[] = obtenerAulasPrestamos();
+	const datosactual =aulasPrestamos[id as number];
+	const eventSend = {
+			id:datosactual.id,
+			title: modifiedEvents[idx]?.title?? arg.event.title,
+			start:`${fecha} ${start}`,
+			end: `${fecha} ${end}`,
+			documento: datosactual.documento,
+			idPrestamo: datosactual.idPrestamo,
+		};	
+
+		updateAulasRequest(eventSend as any,true)	
+			  if (idx === -1) {
+					return; // Si no se encuentra el evento, no hacer nada
+				}
+
+		const datosAulas:any = obtenerAulaPorId(eventData.title as any);
+
+			 if (!datosAulas) {
+					return; // Si no se encuentra el objeto en appConfig, no hacer nada
+			}
+
+		modifiedEvents[idx]['title'] = datosAulas.title;
 		modifiedEvents[idx]['className'] = arg.event.classNames;
 		modifiedEvents[idx]['start'] = arg.event.start as DateInput;
 		modifiedEvents[idx]['end'] = arg.event.end as DateInput;
 		setEvents(modifiedEvents);
 		setIsEditable(false);
+		
 	};
 
 	return {

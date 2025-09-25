@@ -7,6 +7,7 @@ export type Event = {
 export type SendEvent = {
 	id?: number;
 	title?: string;
+	idPrestamos?: number;
 	start?: Date;
 	end?: Date;
 	documento?:  number;
@@ -14,13 +15,15 @@ export type SendEvent = {
 };
 export type sendAulaPrestamos = {
 	id?: number;
+	idPrestamos?: number;
 	title?: string;
-	start?: string;
-	end?: string;
+	start?: string |Date;
+	end?: string |Date;
 	documento?:  number;
 };
 export type Aulas = {
 	id?: number;
+	idPrestamos?: number;
 	title?: string;
 	end: Date;
 	start: Date;
@@ -28,6 +31,7 @@ export type Aulas = {
 }[];
 export type datosAulas = {
 	id: number;
+	idPrestamos?: number;
 	title?: string;
 	end: Date;
 	start: Date;

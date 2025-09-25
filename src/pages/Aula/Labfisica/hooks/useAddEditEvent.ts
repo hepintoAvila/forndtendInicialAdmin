@@ -2,21 +2,13 @@ import { useState } from 'react';
 //import * as yup from 'yup';
 import { EventInput } from '@fullcalendar/core';
 import { SendEvent } from '../types';
-//import { config, encodeBasicUrl } from '@/common/helpers';
-type AulaDatos = {
-  id: number;
-  title: string;
-  start: Date | string;
-  end: Date | string;
-  documento: string;
-};
+import Swal from 'sweetalert2';
  
 export default function useAddEditEvent(
 	eventData: EventInput | undefined,
 	isEditable: boolean,
 	onUpdateEvent: (value: SendEvent) => void,
 	onAddEvent: (value: SendEvent) => void,
-	addAulasRequest: (arg:AulaDatos,arg2:boolean) => void
 ) {
 	// event state
 	const [event] = useState<any>({
@@ -26,10 +18,35 @@ export default function useAddEditEvent(
 		identificacion: eventData?.identificacion,
 	});
 const onSubmitEvent = (SendEvent: SendEvent) => {
-		
-	addAulasRequest(SendEvent as any,isEditable as boolean);
-    isEditable ? onUpdateEvent(SendEvent) : onAddEvent(SendEvent);
-}
+console.log('onSubmitEvent',SendEvent);
+  if (new Date(SendEvent.start as Date).getTime() > new Date(SendEvent.end as Date).getTime()) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'La fecha y hora inicial no puede ser mayor que la fecha y hora final',
+    });
+    return;
+  }
+if (Number(SendEvent.documento) <= 0) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Seleccione el documento',
+    });
+    return;
+  }
+  if (!SendEvent.start || !SendEvent.end) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'La fecha y hora inicial y final son requeridas',
+    });
+    return;
+  }
+
+  //console.log('SendEvent', isEditable);
+  isEditable ? onUpdateEvent(SendEvent) : onAddEvent(SendEvent);
+};
 	return {
 		event,
 		onSubmitEvent,

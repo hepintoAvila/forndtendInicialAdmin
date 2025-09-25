@@ -26,9 +26,9 @@ type AddEditEventProps = {
 	onClose: () => void;
 	isEditable: boolean;
 	eventData: EventInput | SendEvent;
-	onRemoveEvent: () => void;
+	onRemoveEvent: (value: SendEvent) => void;
 	onUpdateEvent: (value: SendEvent) => void;
-	addAulasRequest: (arg:any,arg2:boolean) => void
+	updateAulasRequest: (arg:any,arg2:boolean) => void
 	onAddEvent: (value: SendEvent) => void;
 	aulas: any;
 	aulasPrestamos: [];
@@ -49,19 +49,18 @@ const AddEditEvent = ({
 	onChangeDocumento,
 	documentoAnterior,
 	estudiantes,
-	addAulasRequest,
 	aulasPrestamos
 }: AddEditEventProps) => {
 	const [start, setStar] = useState<Date | null>(null);
 	const [end, setEnd] = useState<Date | null>(null);
 	const [inicialFecha, setInicial] = useState<string | null>('');
 	const [finalFecha, setFinal] = useState<string | null>('');
+	const [totalesPrestamos, setTotalPrestamo] = useState<number | null>(0);
 	const {onSubmitEvent } = useAddEditEvent(
 		eventData as any,
 		isEditable,
 		onUpdateEvent,
 		onAddEvent,
-		addAulasRequest as any,
 	);
 	const [selectedAula, setSelectedAula] = useState('');
  
@@ -88,9 +87,12 @@ useEffect(() => {
 	const dataInicial = start ? formatDate(start as Date) : formatDate(new Date());
 setFinal(dataFinal as string);
 setInicial(dataInicial as string);
-
-
 }, [start, end]);
+
+useEffect(() => {
+  const isPrestamos = isEditable ? eventData.id : aulasPrestamos?.length ?? 0;
+  setTotalPrestamo(isPrestamos as number);
+}, [isEditable, eventData.id, aulasPrestamos]);
 
 
 const aulaData = localStorage.getItem('Aulas');
@@ -98,7 +100,7 @@ let appConfig: Aulas = aulaData ? JSON.parse(aulaData) : [];
 const datosAulas:any = appConfig.find((e) => e['title'] === eventData.title);
 
 const datosDocument: any = aulasPrestamos?.find((e: any) => e['id'] == eventData.id);
-//console.log('document',document);
+//console.log('document',totalesPrestamos);
 
 	return (
 		<Modal show={isOpen} onHide={onClose} backdrop="static" keyboard={false}>
@@ -113,13 +115,17 @@ const datosDocument: any = aulasPrestamos?.find((e: any) => e['id'] == eventData
 					e.preventDefault();
 					const formData = new FormData(e.currentTarget);
 					const sendEvent: SendEvent = {
-						id: eventData.id as number,
-						title: formData.get('title') as string,
+						id: totalesPrestamos ??aulasPrestamos?.length,
+						title: selectedAula??formData.get('title'),
 						start: start ? start : new Date(
-							Array.isArray(eventData.start)
-								? eventData.start.join('-')
-								: eventData.start ?? Date.now()
-						),
+						Array.isArray(eventData.start)
+							? eventData.start.join('-')
+							: eventData.start ?? Date.now()
+						).getTime() > new Date().getTime() ? new Date(
+						Array.isArray(eventData.start)
+							? eventData.start.join('-')
+							: eventData.start ?? Date.now()
+						) : new Date(),
 						end: end ? end : new Date(),
 						documento: Number(formData.get('documento')),
 					};
@@ -236,7 +242,7 @@ const datosDocument: any = aulasPrestamos?.find((e: any) => e['id'] == eventData
 					<Row>
 						<Col xs={4}>
 							{isEditable ? (
-								<Button variant="danger" onClick={onRemoveEvent}>
+								<Button variant="danger" onClick={()=>onRemoveEvent(totalesPrestamos as any)}>
 									Delete
 								</Button>
 							) : null}
@@ -250,10 +256,7 @@ const datosDocument: any = aulasPrestamos?.find((e: any) => e['id'] == eventData
 							(Array.isArray(estudiantes) && 
 							estudiantes.length > 0 && 
 							estudiantes[0]?.documento === '00000000') ||
-							(Array.isArray(estudiantes) && estudiantes.length > 0 && !(estudiantes?.length > 0 && estudiantes[0]?.documento !== '00000000')) ||
-							!start ||
-							!end ||
-							start > end
+							(Array.isArray(estudiantes) && estudiantes.length > 0 && !(estudiantes?.length > 0 && estudiantes[0]?.documento !== '00000000')) 
 							}
 						>
 							Guardar

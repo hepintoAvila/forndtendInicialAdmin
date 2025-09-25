@@ -12,7 +12,7 @@ import { config, encodeBasicUrl } from '@/common/helpers';
 
 const Labfisica = () => {
 		const { getDatosEstudiantesVisitas,documentoAnterior,estudiantes}  = useEstudiantes();
-		const {aulas,aulasPrestamos,sendAulasRequest,addAulasRequest} = useAulas();
+		const {aulas,aulasPrestamos,sendAulasRequest,updateAulasRequest} = useAulas();
 	const [datosform, setDatosForm] = useState<SendEvent>({} as unknown as SendEvent);
 	const {
 		isOpen,
@@ -118,7 +118,7 @@ const Labfisica = () => {
 				onAddEvent={onAddEvent as any}
 				aulas={aulas as any}
 				onChangeDocumento={onChangeDocumento}
-				addAulasRequest={addAulasRequest as any}
+				updateAulasRequest={updateAulasRequest as any}
 				documentoAnterior={documentoAnterior as any}
 				estudiantes={estudiantes as any}
 				aulasPrestamos={aulasPrestamos as any}

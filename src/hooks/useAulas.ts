@@ -14,9 +14,10 @@ type SendAulasRequestParams = {
   };
 };
 //start: new Date().setDate(new Date().getDate() + 2),
-function convertirFechaATimestamp(eventos:any) {
-  return eventos?.map((evento: { start: string | number | Date; end: string | number | Date; }) => ({
+function convertirFechaATimestamp(eventos: any) {
+  return eventos?.map((evento: { start: string | number | Date; end: string | number | Date; }, index: number) => ({
     ...evento,
+    id: index + 1,
     start: new Date(evento.start).getTime(),
     end: new Date(evento.end).getTime(),
   }));
@@ -98,7 +99,7 @@ const authContext = useContext(AuthContext);
         const BodyData = generateBodyDataAula(ObjetBodys);
         await sendAulas(opcionesAulas, BodyData)
         .then((response) => {
-          console.log("response",response);
+         // console.log("response",response);
           //setAulas(response.aulas as any);
           
         })
@@ -108,34 +109,91 @@ const authContext = useContext(AuthContext);
         throw err;
         });
       };
-    const addAulasRequest= async (data:any,isEditable:boolean) => {
+    const updateAulasRequest= async (data:any,isEditable:boolean) => {
     //const dataDatos = convertirFechaATimestamp(data);
+        
         const BodyData: sendAulaPrestamos = {
-          id: data?.id,
+          id: data?.idPrestamo,
           title: data?.title,
-          start: formatoFecha(data?.start),
-          end: formatoFecha(data?.end),
+          start:formatoFecha(new Date(data.start).getTime()as any),
+          end: formatoFecha(new Date(data.end).getTime()as any),
           documento: data?.documento,
         }
+ 
+          if (BodyData && BodyData.id !== undefined && Number(BodyData.id) > 1) {
+            console.log('BodyData',BodyData);
+            try {
+              const ObjetBodys = generateBodyPrestamo(BodyData as any);
+              const opcionesAulas = {
+                accion: encodeBasicUrl(config.API_ADMIN_AULAS),
+                opcion: isEditable ? encodeBasicUrl(config.API_OPCION_UPDATE_AULAS_PRESTAMO) : encodeBasicUrl(config.API_OPCION_ADD_AULAS_PRESTAMO),
+              };
 
-        const ObjetBodys = generateBodyPrestamo(BodyData as any);
-        const opcionesAulas = {
-          accion: encodeBasicUrl(config.API_ADMIN_AULAS),
-          opcion: isEditable ? encodeBasicUrl(config.API_OPCION_UPDATE_AULAS_PRESTAMO) : encodeBasicUrl(config.API_OPCION_ADD_AULAS_PRESTAMO),
-        };
-        
-       await sendAulas(opcionesAulas, ObjetBodys)
-        .then((response) => {
-         console.log("response",response);
-         // setAulas(response.aulas as any);
-          
-        })
-        .catch((err) => {
-          const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
-        setError(errorMessage);
-        throw err;
-        });
+              const response = await sendAulas(opcionesAulas, ObjetBodys);
+              console.log("response", response);
+              // setAulas(response.aulas);
+            } catch (error) {
+              const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+              setError(errorMessage);
+              console.error(error);
+            }
+          }
+      
     }
+     const addAulasRequest= async (data:any) => {
+
+        const BodyData: sendAulaPrestamos = {
+          id:2,
+          title: data?.title,
+          start:formatoFecha(new Date(data.start).getTime()as any),
+          end: formatoFecha(new Date(data.end).getTime()as any),
+          documento: data?.documento,
+        }
+ 
+          if (BodyData && BodyData.title !== undefined) {
+            try {
+              const ObjetBodys = generateBodyPrestamo(BodyData as any);
+              const opcionesAulas = {
+                accion: encodeBasicUrl(config.API_ADMIN_AULAS),
+                opcion: encodeBasicUrl(config.API_OPCION_ADD_AULAS_PRESTAMO),
+              };
+
+              const response = await sendAulas(opcionesAulas, ObjetBodys);
+              console.log("response", response);
+            } catch (error) {
+              const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+              setError(errorMessage);
+              console.error(error);
+            }
+          }
+      
+    }   
+       const deleteAulasRequest= async (idPrestamo:number) => {
+            try {
+
+            const BodyData: sendAulaPrestamos = {
+                  id:idPrestamo,
+                  title: 'title',
+                  start:'0000-00-00 00:00',
+                  end: '0000-00-00 00:00',
+                  documento: 1111111,
+                }
+              const ObjetBodys = generateBodyPrestamo(BodyData as any);
+              const opcionesAulas = {
+                accion: encodeBasicUrl(config.API_ADMIN_AULAS),
+                opcion: encodeBasicUrl(config.API_OPCION_DELETE_AULAS_PRESTAMO),
+              };
+
+              const response = await sendAulas(opcionesAulas, ObjetBodys);
+              console.log("response", response);
+            } catch (error) {
+              const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+              setError(errorMessage);
+              console.error(error);
+            }
+          
+      
+    } 
  const aulasPrestamos = convertirFechaATimestamp(Prestamos);
    localStorage.setItem('Aulas', JSON.stringify(aulas));
    localStorage.setItem('Prestamos', JSON.stringify(aulasPrestamos));
@@ -147,6 +205,8 @@ const authContext = useContext(AuthContext);
     aulasPrestamos,
     sendAulasRequest,
     sendAulas,
+    updateAulasRequest,
     addAulasRequest,
+    deleteAulasRequest
   };
 };

@@ -24,7 +24,7 @@ const FullCalendarWidget = ({
 	aulasPrestamos
 }: FullCalendarWidgetProps) => {
  
- console.log('aulasPrestamos',aulasPrestamos);
+// console.log('aulasPrestamos',aulasPrestamos);
 	return (
 		<>
 			{/* full calendar control */}
@@ -63,14 +63,15 @@ const FullCalendarWidget = ({
 					eventClick={(arg: EventClickArg) => onEventClick(arg)}
 					drop={(arg: DropArg) => onDrop(arg)}
 					eventDrop={(arg: EventDropArg) => onEventDrop(arg)}
-					 eventContent={(arg) => {
+					eventContent={(arg) => {
 						 const start = new Date(arg.event.start as any);
     					 const end = new Date(arg.event.end as any);
+						 console.log('arg',aulasPrestamos[Number(arg.event.id)-1].documento)
 						return {
 						html: `
-							<div class="text-white text-center">
+							<div class="text-white" style="margin:auto; margin:auto; line-height: 1em;">
 							<strong class="text-center">${arg.event.title}</strong>
-							<p class="text-center">${start.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}</p>
+							<p class="text-center" style="font-size: 10px;">${start.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })} </br><small class="text-center" style="font-size:9px;">Asignado: ${aulasPrestamos[Number(arg.event.id)-1].documento}</small></p>
 							</div>
 						`,
 						};

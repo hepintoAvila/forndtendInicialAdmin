@@ -10,6 +10,7 @@ export type Credentials = {
 export interface AulaPrestamo {
   id: number;
   title: string;
+  idPrestamos?: number;
   start?: Date | string | string[] | undefined;
   end?: Date | string | string[]| undefined;
   documento?: number | string | string[]| undefined;
