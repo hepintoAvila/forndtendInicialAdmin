@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { DateClickArg, Draggable, DropArg } from '@fullcalendar/interaction';
 import { DateInput, EventClickArg, EventDropArg, EventInput } from '@fullcalendar/core';
 import { useAulas, useToggle } from '@/hooks';
-import { SendEvent,Aulas } from '../types';
+import { SendEvent} from '../types';
 import Swal from 'sweetalert2';
 
 function formatDateYearMonth(dateInput: Date | string | null) {
@@ -23,17 +23,10 @@ function formatHoursMinutes(fecha: number) {
 
   return `${hours}:${minutes} ${ampm}`;
 }
- function obtenerAulasPrestamos(): EventInput[] {
-  const aulaDataPrestamos = localStorage.getItem('Prestamos');
-  return aulaDataPrestamos ? JSON.parse(aulaDataPrestamos) : [];
-}
-function obtenerAulaPorId(id: number): Aulas | undefined {
-  const aulaData = localStorage.getItem('Aulas');
-  const appConfig: Aulas[] = aulaData ? JSON.parse(aulaData) : [];
-  return appConfig.find((e:any) => e['id'] === id);
-} 
+
+
 export default function useCalendar() {
-const {updateAulasRequest,addAulasRequest,deleteAulasRequest} = useAulas();
+const {updateAulasRequest,addAulasRequest,deleteAulasRequest,obtenerAulasPrestamos,obtenerAulaPorId} = useAulas();
 	
 	/*
 	 * modal handling
@@ -91,8 +84,11 @@ const {updateAulasRequest,addAulasRequest,deleteAulasRequest} = useAulas();
 	};
 
 	// on drop
-	const onDrop = (arg: DropArg) => {
+	const onDrop = (arg: DropArg) => { 
 		const dropEventData = arg;
+		let aulasPrestamos: EventInput[] = obtenerAulasPrestamos();
+console.log('onDrop',aulasPrestamos);
+		 
 		const title = dropEventData.draggedEl.title;
 		if (title == null) {
 		} else {
@@ -107,6 +103,7 @@ const {updateAulasRequest,addAulasRequest,deleteAulasRequest} = useAulas();
 			setEvents(modifiedEvents);
 			onOpenModal();
 		}
+		 
 	};
 
 	// on add event
@@ -184,8 +181,9 @@ const {updateAulasRequest,addAulasRequest,deleteAulasRequest} = useAulas();
 	const end =formatHoursMinutes(arg.event.endStr as any);
 	let aulasPrestamos: EventInput[] = obtenerAulasPrestamos();
 	const datosactual =aulasPrestamos[id as number];
+	//console.log('onEventDrop',aulasPrestamos);
 	const eventSend = {
-			id:datosactual.id,
+			id:datosactual.id?? id,
 			title: modifiedEvents[idx]?.title?? arg.event.title,
 			start:`${fecha} ${start}`,
 			end: `${fecha} ${end}`,

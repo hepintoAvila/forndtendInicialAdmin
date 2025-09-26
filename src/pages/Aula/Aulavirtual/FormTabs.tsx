@@ -70,7 +70,7 @@ const FormTabs = ({
           );
         })}
       </Nav>
-      <Tab.Content>
+      <Tab.Content className="mt-0">
         <Tab.Pane eventKey="Prestamo">
           {selectedComputador && (
             <ComputadorTable selectedComputador={selectedComputador} changeState={changeState} />
@@ -104,7 +104,8 @@ const FormTabs = ({
             </>
           )}
         </Tab.Pane>
-        <Tab.Pane eventKey="Registro Rapido">
+        <Tab.Pane eventKey="Registro Rapido" >
+          <br/>
           <EstudianteForm
             onChangeDocumento={onChangeDocumento}
             handleSubmitEstudent={handleSubmitEstudent}

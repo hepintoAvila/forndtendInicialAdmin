@@ -70,3 +70,15 @@
         --#{$prefix}table-border-color: var(--#{$prefix}border-color);
     }
 }
+
+.table th, .table td {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .table th, .table td {
+    padding: 0.2rem;
+    font-size: 0.8rem;
+  }
+}

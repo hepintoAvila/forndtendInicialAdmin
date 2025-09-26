@@ -66,7 +66,7 @@ const FullCalendarWidget = ({
 					eventContent={(arg) => {
 						 const start = new Date(arg.event.start as any);
     					 const end = new Date(arg.event.end as any);
-						 console.log('arg',aulasPrestamos[Number(arg.event.id)-1].documento)
+						 //console.log('arg',aulasPrestamos[Number(arg.event.id)-1].documento)
 						return {
 						html: `
 							<div class="text-white" style="margin:auto; margin:auto; line-height: 1em;">

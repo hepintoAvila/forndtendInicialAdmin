@@ -4,14 +4,14 @@
 
 // Form-control light
 .input-container-login {
-    display: flex;
-    justify-content: center; 
-    align-items: center;    
-    height: 2.5rem;
-    width: 100%; 
-    line-height: calc(2.5rem - 2px);
-    border: 0.025rem solid #5ec003 !important;
-    margin: 0.8rem auto; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  width: 75%; /* ajusta el ancho según tus necesidades */
+  line-height: calc(2.5rem - 2px);
+  border: 0.025rem solid #5ec003 !important;
+  margin: 0.8rem auto;
 }
 .input-container-edit {
     font-family: Google Sans;
@@ -172,16 +172,30 @@ text-align: left;
     }
 }
 
-// Ajustes para pantallas muy grandes (pantallas anchas) 
+/* Ajustes para pantallas de escritorio */
+@media (min-width: 992px) {
+  .input-container-login, .input-container-password {
+    max-width: 100% !important; /* ajusta el ancho máximo */
+    margin-left: auto; /* centra horizontalmente */
+    margin-right: auto; /* centra horizontalmente */
+    margin-bottom: 1.5em;
+  }
+  .input-group {
+    width: 100% !important; /* ajusta el ancho del input group */
+  }
+}
+/* Ajustes para pantallas muy grandes (pantallas anchas) */
 @media (min-width: 1367px) {
-    .input-container-login, .input-container-password {
-        max-width:  80% !important; 
-        margin-left: 6em;
-        margin-bottom: 1.5em;
-    }
-    .input-group-text {
-        margin-right: 0rem; 
-    }
+  .input-container-login, .input-container-password {
+    max-width: 100% !important; /* ajusta el ancho máximo */
+    margin-left: auto; /* centra horizontalmente */
+    margin-right: auto; /* centra horizontalmente */
+    margin-bottom: 1.5em;
+  }
+  .input-group {
+    width: 100%; /* ajusta el ancho del input group */
+  }
+  /* otros estilos que ya tienes */
 }
 
 .form-control-light {
@@ -250,4 +264,14 @@ select.form-control-sm {
             content: "\F06D1";
         }
     }
+}
+.desktop-input-group {
+  width: 50%; /* ajusta el ancho según tus necesidades */
+  margin-left: 0; /* ajusta el margen según tus necesidades */
+}
+@media (min-width: 768px) {
+  .input-group {
+    width: 50%; /* ajusta el ancho según tus necesidades */
+    margin-left: 0; /* ajusta el margen según tus necesidades */
+  }
 }

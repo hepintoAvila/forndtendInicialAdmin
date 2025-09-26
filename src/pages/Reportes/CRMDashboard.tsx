@@ -12,9 +12,14 @@ import classnames from 'classnames';
 import BuscadorForm from './buscador/BuscadorForm';
 import useProgramas from "@/hooks/useProgramas";
 import EstadisticasGraficas from './EstadisticasGraficas/EstadisticasGraficas';
-//import { ReporteServiceHistoResponse } from './type';
+import FooterMobile from '@/layouts/FooterMobile';
+import { useViewport } from '@/hooks';
+import ContactUsMobile from '../Landing/ContactUsMobile';
+
 
 const CRMDashboard = () => {
+  
+  const { width } = useViewport();
   const [activeTab, setActiveTab] = useState('Virtualteca');
   const [estadisticas, setEstadisticas] = useState({
     Virtualteca: '' as any,
@@ -84,15 +89,17 @@ const CRMDashboard = () => {
       text: '',
     },
   ];
-
+ 
   //const historicosArray: ReporteServiceHistoResponse = historicos?.historicos;
 
   return (
+   
   <>
    
       <>
+  
         <NavBar />
-       
+     
         <Tab.Container defaultActiveKey="Virtualteca" onSelect={handleTabChange}>
           <Nav variant="tabs">
             {tabContents.map((tab, index) => {
@@ -161,9 +168,13 @@ const CRMDashboard = () => {
     )}
         </Tab.Container>
       </>
-    {reportes && Array.isArray(reportes) && reportes.length === 0 ? (
-    <ContactUs layouts={layouts}/>):''}
-    <Footer />
+    {width > 1140 ? 
+    reportes && Array.isArray(reportes) && reportes.length === 0 ? (
+    <ContactUs layouts={layouts}/>)
+     :'': <ContactUsMobile layouts={layouts}/>} 
+    {width > 1140 ? 
+    <Footer />:
+    <FooterMobile />}
   </>
 );
 };

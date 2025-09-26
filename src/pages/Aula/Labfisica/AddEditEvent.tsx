@@ -103,13 +103,13 @@ const datosDocument: any = aulasPrestamos?.find((e: any) => e['id'] == eventData
 //console.log('document',totalesPrestamos);
 
 	return (
-		<Modal show={isOpen} onHide={onClose} backdrop="static" keyboard={false}>
+		<Modal show={isOpen} onHide={onClose}  keyboard={false}>
 			<Modal.Header className="pb-2 px-4 border-bottom-0" closeButton>
 				<Modal.Title>
 					<h5> {isEditable ? 'Editar Préstamo' : 'Adjuntar Nuevo Préstamo'} </h5>
 				</Modal.Title>
 			</Modal.Header>
-			<Modal.Body className="px-4 pb-4 pt-0">
+			<Modal.Body className="px-1 pb-1 pt-0">
 				 
 				<Form validated onSubmit={(e) => {
 					e.preventDefault();

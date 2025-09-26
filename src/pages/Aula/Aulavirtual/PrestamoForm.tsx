@@ -64,17 +64,17 @@ const PrestamoForm = ({
           </Col>
         </Row>
         <Row>
-          <Col lg={8}></Col>
-          <Col lg={3} className={'button-position ms-5'}>
+          <Col lg={6}></Col>
+          <Col lg={6} className={'button-position ms-0'}>
             {estado==='Libre' ? <Button
              className={'position-relative mt-0 mb-4 button-rounded'}
               type="submit"
               disabled={estudiantes?.length < 1}
             >
-              <i className="ri-calendar-check-line"></i>
+              <i className="ri-calendar-check-line"></i>Registrar Visita
             </Button>:''}
           </Col>
-          <Col lg={1}></Col>
+           
         </Row>
       </Form>
     </div>

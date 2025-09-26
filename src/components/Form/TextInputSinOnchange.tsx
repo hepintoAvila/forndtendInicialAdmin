@@ -39,7 +39,7 @@ export default function TextInputSinOnchange({
 			name={name}
 			control={control}
 			render={({ field, fieldState }) => (
-				<Form.Group className={containerClass ?? ''} style={{width:'80%'}}>
+				<Form.Group className={containerClass ?? ''}>
 					{label && <Form.Label>{label}</Form.Label>}
 					<Form.Control
 						id={id}

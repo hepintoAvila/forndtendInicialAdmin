@@ -82,7 +82,7 @@ const VisitasForm = ({
               type="submit"
               disabled={estudiantes?.length < 1}
             >
-              <i className="ri-calendar-check-line"></i>
+              <i className="ri-calendar-check-line"></i> Registrar Visita
             </Button>
           </Col>
         </Row>

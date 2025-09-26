@@ -1,11 +1,12 @@
 import { config, encodeBasicUrl} from '@/common';
 import { AuthContext } from '@/common/context/AuthContext';
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { atom, useAtom } from 'jotai';
 import { Aula, ApiAulaResponse, Credentials, AulaPrestamoList } from '@/common/type/type_aulas';
 import AulaService from '@/common/api/aulas';
-import { sendAulaPrestamos } from '@/pages/Aula/Labfisica/types';
+import { Aulas, sendAulaPrestamos } from '@/pages/Aula/Labfisica/types';
 import formatoFecha from '@/common/helpers/formatoFecha';
+import { EventInput } from '@fullcalendar/core/index.js';
 type SendAulasRequestParams = {
   ObjetBodys: any;
   opcionesAulas: {
@@ -194,6 +195,18 @@ const authContext = useContext(AuthContext);
           
       
     } 
+    const obtenerAulasPrestamos = useCallback((): EventInput[] => {
+      const aulaDataPrestamos = localStorage.getItem('Prestamos');
+     // console.log('obtenerAulasPrestamos', aulaDataPrestamos);
+      return aulaDataPrestamos ? JSON.parse(aulaDataPrestamos) : [];
+  }, []);
+
+    const obtenerAulaPorId = useCallback((id: number): Aulas | undefined => {
+    const aulaData = localStorage.getItem('Aulas');
+    const appConfig: Aulas[] = aulaData ? JSON.parse(aulaData) : [];
+    return appConfig.find((e: any) => e['id'] === id);
+  }, []);
+
  const aulasPrestamos = convertirFechaATimestamp(Prestamos);
    localStorage.setItem('Aulas', JSON.stringify(aulas));
    localStorage.setItem('Prestamos', JSON.stringify(aulasPrestamos));
@@ -207,6 +220,8 @@ const authContext = useContext(AuthContext);
     sendAulas,
     updateAulasRequest,
     addAulasRequest,
-    deleteAulasRequest
+    deleteAulasRequest,
+    obtenerAulasPrestamos,
+    obtenerAulaPorId
   };
 };

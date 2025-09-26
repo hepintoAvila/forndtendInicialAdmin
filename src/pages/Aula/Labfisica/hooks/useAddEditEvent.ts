@@ -19,7 +19,10 @@ export default function useAddEditEvent(
 	});
 const onSubmitEvent = (SendEvent: SendEvent) => {
 console.log('onSubmitEvent',SendEvent);
-  if (new Date(SendEvent.start as Date).getTime() > new Date(SendEvent.end as Date).getTime()) {
+
+
+
+if (new Date(SendEvent.start as Date).getTime() > new Date(SendEvent.end as Date).getTime()) {
     Swal.fire({
       icon: 'error',
       title: 'Error',
