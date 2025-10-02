@@ -42,9 +42,9 @@ interface Auth0ProviderOptions {
 }
 const configJson ={
 	"domain": "dev-twjztmiqhzxp7q86.us.auth0.com",
-	"clientId": "PWRk5jrUhNW8zlKCG3RX5OosTTP54Mb9",
-	"audience": "https://api.certificados.com",
-  "redirectUri": window.location.origin + '/dashboard/tarjetas/callback',
+	"clientId": "DvwDqYaekoZPlr4GbQSAYkbFIikygxLM",
+	"audience": "https://api.livisoft.com",
+  "redirectUri": window.location.origin + '/aula/Estudiante/callback',
   }
 export function getConfig() {
   // Configure the audience here. By default, it will take whatever is in the config
@@ -54,7 +54,7 @@ export function getConfig() {
   // If this resolves to `null`, the API page changes to show some helpful info about what to do
   // with the audience.
   const audience =
-    configJson.audience && configJson.audience !== "https://api.certificados.com"
+    configJson.audience && configJson.audience !== "https://api.livisoft.com"
       ? configJson.audience
       : null;
 

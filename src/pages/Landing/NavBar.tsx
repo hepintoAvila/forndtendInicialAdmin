@@ -3,38 +3,38 @@ import { ThemeSettings, useThemeContext } from '@/common';
 //import useThemeCustomizer from '@/components/ThemeCustomizer/useThemeCustomizer';
 import { useAuth, useViewport } from '@/hooks';
 import { useEffect, useState } from 'react';
-import {Modal} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import avata1 from '@/assets/images/users/avatar-1.jpg';
 import Login from '../account/Login';
- import menuBiblioteca from '@/assets/images/menuBiblioteca.png';
- import menuKoha from '@/assets/images/menuKoha.png';
+import menuBiblioteca from '@/assets/images/menuBiblioteca.png';
+import menuKoha from '@/assets/images/menuKoha.png';
 import NavBarEscritorio from './NavBarEscritorio';
 import NavBarMobile from './NavBarMobile';
 
 type TopbarProps = {
-	topbarDark?: boolean;
-	toggleMenu?: () => void;
-	navOpen?: boolean;
-	user?: any;
+    topbarDark?: boolean;
+    toggleMenu?: () => void;
+    navOpen?: boolean;
+    user?: any;
 };
 
-
 const Topbar = ({ topbarDark, toggleMenu, navOpen }: TopbarProps) => {
-console.log(topbarDark,navOpen,toggleMenu);
-	const {  updateMenu } = useThemeContext();
-	const {isAuthenticated } = useAuth();
-	//const { reset } = useThemeCustomizer();
-	//const { sideBarType } = useThemeCustomizer();
-	const { width } = useViewport();
-	const [showLoginModal, setShowLoginModal] = useState(false);
+    console.log(topbarDark, navOpen, toggleMenu);
 
-	const toggleDropdown = () => {
-		setShowLoginModal(!showLoginModal);
-	};
-	/**
-	 * Toggle the leftmenu when having mobile screen
-	 */
-	/**
+    const { updateMenu } = useThemeContext();
+    const { isAuthenticated } = useAuth();
+    //const { reset } = useThemeCustomizer();
+    //const { sideBarType } = useThemeCustomizer();
+    const { width } = useViewport();
+    const [showLoginModal, setShowLoginModal] = useState(false);
+
+    const toggleDropdown = () => {
+        setShowLoginModal(!showLoginModal);
+    };
+    /**
+     * Toggle the leftmenu when having mobile screen
+     */
+    /**
 	const handleLeftMenuCallBack = () => {
 
 		if (width < 1140) {
@@ -84,27 +84,47 @@ console.log(topbarDark,navOpen,toggleMenu);
 	}
  */
 
-	useEffect(() => {
-		if (isAuthenticated) {
-			updateMenu()
-		}
-	}, [ThemeSettings]);
-	return (
-		<>
-			{ width > 1140 ?
-			<NavBarEscritorio logoDark={logoDark} menuBiblioteca={menuBiblioteca} menuKoha={menuKoha} avata1={avata1} toggleDropdown={toggleDropdown}/>
-			:<NavBarMobile logoDark={logoDark} menuBiblioteca={menuBiblioteca} menuKoha={menuKoha} avata1={avata1} toggleDropdown={toggleDropdown}/>}
-			{showLoginModal && <Modal show={showLoginModal} onHide={toggleDropdown} centered={true} contentClassName="topnav navbar-border" fullscreen={'sm-down'}>
-				<Modal.Header closeButton>
-					<Modal.Title>Iniciar Sesión</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<Login />
-				</Modal.Body>
-			</Modal>}
-
-		</>
-	);
+    useEffect(() => {
+        if (isAuthenticated) {
+            updateMenu();
+        }
+    }, [ThemeSettings]);
+    return (
+        <>
+            {width > 1140 ? (
+                <NavBarEscritorio
+                    logoDark={logoDark}
+                    menuBiblioteca={menuBiblioteca}
+                    menuKoha={menuKoha}
+                    avata1={avata1}
+                    toggleDropdown={toggleDropdown}
+                />
+            ) : (
+                <NavBarMobile
+                    logoDark={logoDark}
+                    menuBiblioteca={menuBiblioteca}
+                    menuKoha={menuKoha}
+                    avata1={avata1}
+                    toggleDropdown={toggleDropdown}
+                />
+            )}
+            {showLoginModal && (
+                <Modal
+                    show={showLoginModal}
+                    onHide={toggleDropdown}
+                    centered={true}
+                    contentClassName="topnav navbar-border"
+                    fullscreen={'sm-down'}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Iniciar Sesión</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Login />
+                    </Modal.Body>
+                </Modal>
+            )}
+        </>
+    );
 };
 
 export default Topbar;

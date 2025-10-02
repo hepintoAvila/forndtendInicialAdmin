@@ -20,7 +20,7 @@
 
 .navbar-custom {
     
-    background: $topbar-bg;
+    //background: $topbar-bg;
     min-height: $topbar-height;
     //margin-left: $leftbar-width;
     position: sticky;
@@ -525,7 +525,57 @@ html[data-bs-theme="dark"] {
         vertical-align: middle;
     }
 }
+.profile-dropdown-mobile {
+    min-width: 260px;
+    padding: 1rem 1.5rem;
+    background-color: #70b71f !important; 
+    width: 33rem;
+    a,i,
+    span {
+        vertical-align: middle;
+        font-size: 22px;
+        font-weight: 400;
+        color:#ffff;
+        background-color: #70b71f !important; 
+       
+    } 
+    &.span:hover {
+                color:#13192A1F !important;
+            }
+        
+       .dropdown-menu,.show .dropdown-menu-end{
+        padding: 10px 20px;
 
+        &.dropdown-menu {
+            background-color: rgba(var(--#{$prefix}primary-rgb), 0.1) !important;
+        }
+
+        &.show{
+            background-color: transparent;
+            border: $border-width solid var(--#{$prefix}border-color-custom);
+            transition: all 0.2s ease-in-out;
+            color:#13192A1F !important;
+
+            &:hover {
+                background-color: rgba(var(--#{$prefix}primary-rgb), 0.1) !important;
+               color:#13192A1F !important;
+
+            }
+        }
+        &.dropdown-menu-end{
+            background-color: transparent;
+            border: $border-width solid var(--#{$prefix}border-color-custom);
+            transition: all 0.2s ease-in-out;
+           color:#13192A1F !important;
+
+            &:hover {
+                background-color: rgba(var(--#{$prefix}primary-rgb), 0.1) !important;
+               color:#13192A1F !important;  
+
+            }
+        }
+        }
+}
 .nav-user {
     display: flex;
     align-items: center;

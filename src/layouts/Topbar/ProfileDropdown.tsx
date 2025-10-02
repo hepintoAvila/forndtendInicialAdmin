@@ -32,7 +32,7 @@ const ProfileDropdown = ({ userTitle, username, menuItems, picture }: ProfileDro
     const handleLogout = async () => {
         await logout();
     };
-
+ 
 
     return (
         <>
@@ -42,12 +42,12 @@ const ProfileDropdown = ({ userTitle, username, menuItems, picture }: ProfileDro
                     id="dropdown-profile"
                     as={'button'}
                     onClick={toggleDropdown}
-                    className="nav-link dropdown-toggle arrow-none nav-user px-2">
+                    className="nav-link dropdown-toggle arrow-none nav-user px-0">
                     <div className="nav-user-line"></div>
                     <span className="account-user-avatar">
                         <img src={picture} className="rounded-circle" width={32} alt="user" />
                     </span>
-                    <span className="d-lg-flex flex-column gap-1 d-none">
+                    <span className="d-lg-flex flex-column gap-1">
                         <h5 className="my-0">{username}</h5>
                         <h6 className="my-0 fw-normal align-self-start">{userTitle}</h6>
                     </span>

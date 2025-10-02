@@ -6,25 +6,29 @@ import { Suspense} from 'react';
 import { PageLoader } from './components';
 import { AuthProvider  } from './common/context/AuthContext';
 import AppRoutes from './routes';
- 
 //import { useAuth0 } from '@auth0/auth0-react';
 
  
 
 const App = () => {
+  
+
+
   /*
-  const { isLoading, error } = useAuth0();
-
-  if (error) {
-    return <div>Oops... {error.message}</div>;
-  }
-
+if (!isAuthenticated) {
+  return (
+    <div className="auth-container">
+      <h2>No estás autenticado</h2>
+      <p>Por favor, inicia sesión para acceder a la aplicación.</p>
+      <button className="btn-login" onClick={() => loginWithRedirect()}>
+        Iniciar sesión
+      </button>
+    </div>
+  );
+}
   if (isLoading) {
     return <PageLoader />;
   }
-*/
-  /*
-
   const ALLOWED_ROUTES = [
   'Account',
   'dashboard/tarjetas',

@@ -30,7 +30,6 @@ export default function ProtectedRoutes() {
         <Route path="administrador/*" element={<Administrador />} />
         <Route path="aula/*" element={<Aula />} />
         <Route path="dashboard/*" element={<Dashboard />} />
-        
         <Route path="*" element={<Error404Alt />} />
       </Route>
     </ReactRoutes>

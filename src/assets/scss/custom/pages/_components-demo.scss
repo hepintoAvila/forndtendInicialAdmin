@@ -2,7 +2,14 @@
 // _components-demo.scss
 //
 .cta-box {
-    background-image: url(../images/logo-dark.png);
+  position: relative;
+  background-image: url(../images/logo-dark.png);
+  background-size: cover;
+  background-position: center 60% !important; /* La imagen se posicionará al 80% desde la parte superior */
+  background-repeat: no-repeat;
+}
+.cta-box-mobile {
+    background-image: url(../images/apple-iphone-13-pro-2021-medium.png);
     background-size: cover;
     background-position:top;
     background-repeat: no-repeat;
@@ -27,6 +34,13 @@
 }
 .button-visitas {
     margin-top: 2.9rem !important;
+}
+.button-visitas-mobile {
+    margin-top: 0.1rem !important;
+    margin-left: 0.5rem !important;
+    background: #c7e7ad;
+    width: 100%;
+    padding: 0.8rem;
 }
 .button-position {
   display:grid;   

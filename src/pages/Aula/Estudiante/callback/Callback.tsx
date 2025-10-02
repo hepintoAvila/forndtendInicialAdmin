@@ -1,18 +1,17 @@
-//import { useEffect, useState } from 'react';
-//import { useAuth0 } from '@auth0/auth0-react';
-//import useAuth from '@/pages/account/Login/useAuth';
+import { useEffect, useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+//import {useAuth} from '@/hooks/';
 const Callback = () => {
 
-	/*
-		const {login } = useAuth();
-	//const { user, isAuthenticated, getAccessTokenSilently, isLoading, error } = useAuth0();
+	//const {login } = useAuth();
+	const { user, isAuthenticated, getAccessTokenSilently, isLoading, error } = useAuth0();
 	const [permissions] = useState([]);
 	useEffect(() => {
 	  const fetchPermissions = async () => {
 		try {
-		  //const token = await getAccessTokenSilently();
+		  const token = await getAccessTokenSilently();
 		  //const formData={login:user?.email,password:user?.nickname}
-		 // login(formData)
+		 //login(formData)
 			console.log('Callback-token',token)
 		} catch (error) {
 		  console.error('Error fetching permissions:', error);
@@ -32,14 +31,14 @@ const Callback = () => {
 	console.log('isAuthenticated-Callback',isAuthenticated)
 	console.log('token',user,permissions)
 	console.log('Callback-window.location.origin', window.location.origin)
-*/
+ 
   return (
     <div>
-      {/*isAuthenticated ? (
+      {isAuthenticated ? (
         <div>Error de autenticación: {isAuthenticated}</div>
       ) : (
         <div>Autenticando...</div>
-      )*/}
+      )}
     </div>
   );
 };

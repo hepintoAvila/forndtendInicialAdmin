@@ -275,3 +275,10 @@ select.form-control-sm {
     margin-left: 0; /* ajusta el margen según tus necesidades */
   }
 }
+@media (max-width: 768px) {
+  .mobile-form-group {
+    /* Agrega tus estilos para dispositivos móviles aquí */
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+}

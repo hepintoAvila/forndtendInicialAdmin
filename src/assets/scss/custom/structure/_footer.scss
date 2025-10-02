@@ -3,7 +3,7 @@
 //
 
 .footer {
-    background-color: #E8E8E8 !important;
+    background-color: #70b71f !important; 
     position: fixed;
     z-index: 9999;
     right: 0;
@@ -13,7 +13,6 @@
     display: flex;
     align-items: center;
     padding: 0 $spacer;
-    color:  #343131;
     transition: $transition-base;
     border-top: 1px solid $card-border-color;
     //height: 7rem !important;
@@ -30,7 +29,8 @@
             &:first-of-type {
                 margin-left: 0;
             }
-        }
+          }
+           
     }
 }
 
@@ -39,6 +39,8 @@
     border: none;
     text-align: center;
     justify-content: center;
+    font-size: '12px';
+    color: aliceblue !important;
 }
 
 
@@ -56,4 +58,14 @@ html[data-layout-mode="detached"]:not([data-layout="topnav"]) {
     .footer {
         text-align: center;
     }
+}
+@media (max-width: 768px) {
+    .footer-mobile{
+        background-color: #70b71f !important; 
+        border: none;
+        text-align: center;
+        justify-content: center;
+         height: $footer-height;
+    }
+
 }

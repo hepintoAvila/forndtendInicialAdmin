@@ -37,10 +37,8 @@ const Login = () => {
           <Col xs={12} sm={8} md={6} lg={4} className="text-center">
             <img src={LogoDark} alt="" height={100} className="mt-0" />
             <h4 className="mt-3 text-bold">{t('LiviSoft')}</h4>
-            <h4 className="mt-0 text-bold">{t('Universidad Popular del Cesar')}</h4>
+            <h4 className="mt-0 text-bold" style={{ width: 'max-content', marginLeft: '-4rem' }}>{t('Universidad Popular del Cesar')}</h4>
             <Form onSubmit={onSubmit} defaultValues={{ login: '', password: '' }}>
-              <SocialLogin />
-
               <TextInputSinOnchange
                 label={''}
                 type="text"

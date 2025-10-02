@@ -47,7 +47,13 @@ body.auth-fluid-pages[data-sidenav-size="condensed"] {
 
 // Logout page
 .logout-icon {
+        display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
     width: 140px;
+
 }
 
 // Authentication fluid
@@ -118,6 +124,7 @@ body.auth-fluid-pages[data-sidenav-size="condensed"] {
         .auth-fluid-form-box {
             max-width: 100%;
             min-height: 100vh;
+            margin-top: 11rem;
         }
 
         .auth-fluid-right {

@@ -5,9 +5,16 @@ import { AuthData, Menu, MenuItem, Permiso } from '../pages/account/Login/type';
 import { AuthContext } from '@/common/context/AuthContext';
 import Swal from 'sweetalert2';
 import UsuarioService from '@/common/api/usuarios';
- 
-export default function useAuth(){
- 
+ export default function useAuth(){
+ const deleteCookies = () => {
+  const cookies = document.cookie.split("; ");
+  cookies.forEach((cookie) => {
+    const parts = cookie.split("=");
+    const name = parts.shift();
+    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=${window.location.hostname}`;
+  });
+};
+   
  const authContext = useContext(AuthContext);
 
   if (!authContext) {
@@ -109,10 +116,12 @@ const logout = async () => {
 		setIsAuthenticated(false);
     clearCredentials();
     setMenu([]);
+
 		localStorage.removeItem('authToken');
 		localStorage.removeItem('userData');
 		localStorage.removeItem('userPermisos');
 		localStorage.removeItem('userMenu');
+    deleteCookies();
 		// Aquí puedes agregar llamadas a API de logout si es necesario
 		// await api.post('/logout');
 	};

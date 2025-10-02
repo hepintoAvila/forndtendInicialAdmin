@@ -1,13 +1,22 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import AccountWrapper from '../Login/AccountWrapper';
-
+import { useViewport } from '@/hooks';
+const getRootUrl = (width: number) => {
+    
+     const url = width < 1140 ? '/aula/estudiante' :'/#/account/logout';
+    return url;
+};
+ 
 const BottomLink = () => {
+   const { width } = useViewport(); 
+   const url= getRootUrl(width);
+
     return (
         <footer className="footer footer-alt">
             <p className="text-muted">
-                <Link to="/account/start" className="text-muted ms-1">
-                    <b>{'Iniciar Sesión'}</b>
+                <Link to={url} className="text-muted ms-1 py-2 ">
+                    <b className="text-white" style={{fontSize:'xx-large',marginTop:'2rem'}}>{'Iniciar Sesión'}</b>
                 </Link>
             </p>
         </footer>
@@ -15,9 +24,8 @@ const BottomLink = () => {
 };
 
 const Logout = () => {
-    //const { logout, isAuthenticated } = useAuth();
     const [redirect] = useState(false);
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     useEffect(() => {
         if (redirect) {
@@ -28,10 +36,11 @@ const Logout = () => {
 						localStorage.removeItem('userMenu');
 						localStorage.removeItem('Aulas');
 						localStorage.removeItem('Prestamos');
-                navigate('/account/login', { replace: true });
+       
+
             }, 2000); // 2 segundos después de mostrar el mensaje
         }
-    }, [redirect, navigate]);
+    }, [redirect]);
 
     return (
         <>

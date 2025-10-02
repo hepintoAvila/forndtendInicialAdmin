@@ -58,7 +58,20 @@
 @media (min-width: 576px) {
     .dropdown-lg {
         width: $dropdown-lg-width;
-    }
+        
+        &::before {
+        content: "";
+            position: absolute;
+            background-color: rgba($dark, .08);
+            top: -1px;
+            bottom: -1px;
+            right: -1px;
+            left: 0;
+            border-radius: 0 $btn-border-radius $btn-border-radius 0;
+            color: #0000;
+        }
+    } 
+    
 }
 
 // Dropdown with Icons
@@ -111,7 +124,9 @@
     }
 }
 
-.dropcover {}
+.dropcover {
+     background: #c7e7ad;
+}
 
 .dropstart {
     .dropdown-toggle-split {

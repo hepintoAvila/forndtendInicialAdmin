@@ -5,22 +5,27 @@ import { useToggle } from '@/hooks';
 import { useThemeContext } from '@/common/context';
 import { changeHTMLAttribute } from '@/utils';
 import getUserFromSession from '@/common/helpers/getUserFromSession';
- 
+import { useAuth0 } from "@auth0/auth0-react";
 // code splitting and lazy loading
 // https://blog.logrocket.com/lazy-loading-components-in-react-16-6-6cea535c0b52
 const Topbar = React.lazy(() => import('../Topbar/'));
 const Navbar = React.lazy(() => import('./Navbar'));
 const Footer = React.lazy(() => import('../Footer'));
+const FooterMobile = React.lazy(() => import('@/layouts/FooterMobile'));
 //const RightSidebar = React.lazy(() => import('../RightSidebar'));
 
 const loading = () => <div className="text-center"></div>;
+import { useViewport } from '@/hooks';
 
+import ProfileMobile from '@/pages/Landing/ProfileMobile';
  // Componente que usa el hook de permisos
 const HorizontalLayout = () => {
+	const { isAuthenticated } = useAuth0();
+	 const { width } = useViewport();
 	const appConfig = getUserFromSession();
 	const { settings,updateMenu } = useThemeContext();
-	const [isOpen, toggleMenu] = useToggle();
-	const isAdmin = appConfig.status === 'Inactivo';
+	const [isOpen, toggleMenu] = useToggle(); 
+	//const isAdmin = appConfig.status === 'Inactivo';
 	/*
 	 * layout defaults
 	 */
@@ -56,42 +61,46 @@ const HorizontalLayout = () => {
 	 
 
 	//const cuMenu = JSON.parse(sessionStorage.getItem('_MENU') || '{}')
- 
+	//content-page cta-box
  	return (
-		<div className="wrapper">
-					{!isAdmin && (
+		<div className={`content`}>
+					{!isAuthenticated &&
+					 (
 					<>
-						<Suspense fallback={loading()}>
-						<Topbar
+					<Suspense fallback={loading()}>
+							<Topbar
 							toggleMenu={toggleMenu}
 							navOpen={isOpen}
 							topbarDark={false}
 							appConfig={appConfig}
 						/>
-						</Suspense>
-						<Suspense fallback={loading()}>
 						<Navbar navOpen={isOpen}/>
 						</Suspense>
 					</>
 					)}
- 
-			<div className="content-page ">
-				<div className="content">
-					<Container fluid>
+			{width < 1140 && !isAuthenticated &&
+				<Suspense fallback={loading()}>
+					<ProfileMobile />
+				</Suspense>}
+			<div className="ml-0" style={{marginTop:'4rem'}}>
+				<div className={width > 1140 ? `content`:`content mt-5` } >
+				<div className="cta-box">
+					<Container fluid >
 						<Suspense fallback={loading()}>
 							<Outlet />
 						</Suspense>
 					</Container>
 				</div>
+				</div>
 
 				<Suspense fallback={loading()}>
-					<Footer />
+					{width > 1140 ? <Footer />:<FooterMobile />}
 				</Suspense>
 				{/*	
 				<Suspense fallback={loading()}>
 					<RightSidebar />
 				</Suspense>
-				*/}
+				*/} 
 			</div>
 		</div>
 	);

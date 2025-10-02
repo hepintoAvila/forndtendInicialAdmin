@@ -79,50 +79,59 @@
         max-width: 20rem;
     }
 
-    .social-list-item .whatsapp-icon,
+    .social-list-item .whatsapp-icon,.facebook-icon,
     .social-list-item .google-icon {
         width: 1.25rem;
         height: 1.25rem;
     }
 
-    .social-list-item .whatsapp-icon-text,
+    .social-list-item .whatsapp-icon-text,.facebook-icon-text,
     .social-list-item .google-icon-text {
         font-size: 1rem;
     }
 }
 
 @media (max-width: 768px) {
+    .container-mobile{
+      background-color: #2ea746 !important; 
+       max-width: 24rem;
+    }
+
+}
+@media (max-width: 768px) {
     .social-list-item {
-        max-width: 18rem;
+      background-color: #70b71f !important; 
     }
 
-    .social-list-item .whatsapp-icon,
+    .social-list-item .whatsapp-icon,.facebook-icon,
     .social-list-item .google-icon {
-        width: 1rem;
-        height: 1rem;
+        width: 2.5rem;
+        height: 2.5rem;
     }
 
-    .social-list-item .whatsapp-icon-text,
+    .social-list-item .whatsapp-icon-text,.facebook-icon-text,
     .social-list-item .google-icon-text {
-        font-size: 0.9rem;
+        font-size:1.9rem;
     }
 }
 
 @media (max-width: 480px) {
     .social-list-item {
-        max-width: 15rem;
-        height: 2rem;
+        max-width: 24rem;
+        height: 6rem;
         line-height: calc(2rem - 2px);
+        margin-right: 30.9rem;
     }
 
-    .social-list-item .whatsapp-icon,
+    .social-list-item .whatsapp-icon,.facebook-icon,
     .social-list-item .google-icon {
-        width: 0.9rem;
-        height: 0.9rem;
+        width: 2.5rem;
+        height:2.5rem;
     }
 
-    .social-list-item .whatsapp-icon-text,
+    .social-list-item .whatsapp-icon-text,.facebook-icon-text,
     .social-list-item .google-icon-text {
-        font-size: 0.8rem;
+       font-size:1.9rem;
+        
     }
 }
