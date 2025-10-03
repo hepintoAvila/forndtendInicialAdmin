@@ -44,7 +44,7 @@ const configJson ={
 	"domain": "dev-twjztmiqhzxp7q86.us.auth0.com",
 	"clientId": "DvwDqYaekoZPlr4GbQSAYkbFIikygxLM",
 	"audience": "https://api.livisoft.com",
-  "redirectUri": window.location.origin + '/aula/Estudiante/callback',
+  "redirectUri": window.location.origin + '/aula/Mobile/callback',
   }
 export function getConfig() {
   // Configure the audience here. By default, it will take whatever is in the config

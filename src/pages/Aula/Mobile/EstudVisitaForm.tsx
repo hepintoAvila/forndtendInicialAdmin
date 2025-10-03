@@ -2,7 +2,7 @@ import { Card, Col, Modal, Row } from 'react-bootstrap';
 import { useState } from 'react';
 import EmptyTable from '../components/EmptyTable';
 import EstudianteTable from '../components/EstudianteTable'; 
-import { ProgramaList } from '@/common/type/type._programas';
+import { ProgramaList } from '@/common/type/type_loginemail';
 import VisitasForm from './VisitasForm';
 import { useLogout } from '@/hooks';
 

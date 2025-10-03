@@ -14,6 +14,7 @@ const config = {
 	API_ACCION_PROGRAMAS: 'admin_programas', 
 	API_OPCION_QUERY_PROGRAMAS: 'consultar_programas', 
 	API_OPCION_ADD_PROGRAMAS: 'add_programas', 
+	API_OPCION_CONSULTA_EMAIL: 'consultar_email', 
 	
 	API_ACCION_REPORTES: 'admin_reportes',
 	API_OPCION_REPORTES: 'consulta_general',  
@@ -50,6 +51,7 @@ const config = {
 	API_OPCION_ADD_ESTUDIANTE: 'add_estudiante',  
 	API_ADMIN_USUARIOS: 'admin_usuarios',  
 	API_ADMIN_USUARIOS_ACTUALIZAR_PASS: 'actualizapass',  
+	API_ADMIN_USUARIOS_LOGIN_AUTH0: 'admin_login_auth0',  
 
 
 

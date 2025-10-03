@@ -1,7 +1,8 @@
 import React from 'react';
-import { ProgramaList } from '@/common/type/type._programas';
+ 
 import { ApiVisitaResponseData } from '@/common/type/type._visitas';
 import EstudVisitaForm from './EstudVisitaForm';
+import { ProgramaList } from '@/common/type/type._programas';
  
 interface FormTabsProps {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;

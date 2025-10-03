@@ -3,7 +3,7 @@
 import {Modal} from "react-bootstrap";
 import { Pc } from "./type";
 import { ApiTurnoResponseData } from "@/common/type/type._turnos";
-import { ProgramaList } from "@/common/type/type._programas";
+import { ProgramaList } from "@/common/type/type_loginemail";
 import FormTabs from "./FormTabs";
 import { useViewport } from "@/hooks";
 import SliderDesktop from "./SliderDesktop";

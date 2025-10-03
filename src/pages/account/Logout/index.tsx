@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import AccountWrapper from '../Login/AccountWrapper';
 import { useViewport } from '@/hooks';
+import LoginEstudiante from '../LoginEstudiante';
 const getRootUrl = (width: number) => {
     
-     const url = width < 1140 ? '/aula/estudiante' :'/#/account/logout';
+     const url = width < 1140 ? '/aula/login' :'/#/account/logout';
     return url;
 };
  
@@ -44,7 +45,7 @@ const Logout = () => {
 
     return (
         <>
-            <AccountWrapper bottomLinks={<BottomLink />}>
+            <AccountWrapper bottomLinks={<LoginEstudiante />}>
                 <div className="my-auto">
                     <div className="text-center">
                         <h4 className="mt-0">{'Hasta pronto!'}</h4>

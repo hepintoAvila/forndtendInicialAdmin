@@ -1,5 +1,5 @@
 // PrestamoForm.tsx
-import { ProgramaList } from '@/common/type/type._programas';
+import { ProgramaList } from '@/common/type/type_loginemail';
 import React from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';

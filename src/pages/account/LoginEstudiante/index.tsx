@@ -13,7 +13,7 @@ const LoginEstudiante = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/dashboard', { replace: true });
+      navigate('/aula', { replace: true });
     }
   }, [isAuthenticated, navigate]);
 

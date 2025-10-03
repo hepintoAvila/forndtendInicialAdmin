@@ -2,7 +2,7 @@ import { Card, Modal, Row } from 'react-bootstrap';
 import { Pc } from './type';
 import { ApiTurnoResponseData } from '@/common/type/type._turnos';
 import ComputadorCard from './ComputadorCard';
-import { ProgramaList } from '@/common/type/type._programas';
+import { ProgramaList } from '@/common/type/type_loginemail';
 import FormTabs from './FormTabs';
 
 const SidebarPcs = ({

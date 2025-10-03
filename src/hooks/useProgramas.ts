@@ -2,12 +2,16 @@ import { AuthContext } from '@/common/context/AuthContext';
 import { useContext, useState } from 'react';
  import { atom, useAtom } from 'jotai';
 import { config, encodeBasicUrl, useNotificationContext } from '@/common';
-import { ApiProgramaResponseData, Programa, ProgramaRequest } from '@/common/type/type._programas';
+import { ApiProgramaResponseData, Programa, ProgramaRequest } from '@/common/type/type_loginemail';
 import ProgramaService from '@/common/api/programas';
 
   interface BodyData {
               id?: number | undefined ;
               programa?: string | undefined ;
+
+      }
+        interface BodyDataEmail {
+              email?: string | undefined ;
 
       }
 const ApiProgramasAtom = atom<ApiProgramaResponseData>([] as unknown as ApiProgramaResponseData);
@@ -23,6 +27,14 @@ export default function useProgramas(){
       return bodyData;
     };
 
+    //urlObjet: { datos?: { id: number | any, programa: number | any } }
+    const generateBodyDataEmail = (urlObjet: {  datos?: {email: string | undefined }} ): BodyDataEmail => {
+      const bodyData: BodyDataEmail = {email:''};
+     if (urlObjet.datos) {
+      bodyData.email = urlObjet.datos.email;
+    }
+      return bodyData;
+    };
 
 const { showNotification } = useNotificationContext();
 const authContext = useContext(AuthContext);
@@ -95,11 +107,25 @@ const authContext = useContext(AuthContext);
           const bodyData = generateBodyDataAsigPrograma(urlObjet);
           sendProgramas(credentialsUrl, bodyData);
     };
+  const handleSubmitEmail = (email:string) => {
 
+      const credentialsUrl: ProgramaRequest = {
+          accion: encodeBasicUrl(config.API_ACCION_PROGRAMAS),
+          opcion: encodeBasicUrl(config.API_OPCION_CONSULTA_EMAIL),
+        };
+          const urlObjet: any ={
+            datos: {
+                email
+              }
+          }
+          //console.log('urlObjet',urlObjet);
+          const bodyData = generateBodyDataEmail(urlObjet);
+          sendProgramas(credentialsUrl, bodyData as any);
+    };
     const sendProgramasRequest = async () => {
         const credentialsUrlPc = {
              accion: encodeBasicUrl(config.API_ACCION_PROGRAMAS),
-            opcion: encodeBasicUrl(config.API_OPCION_QUERY_PROGRAMAS),
+             opcion: encodeBasicUrl(config.API_OPCION_QUERY_PROGRAMAS),
         };
         const ObjetBodys: any= {
           id: 0,
@@ -123,6 +149,7 @@ const authContext = useContext(AuthContext);
     isAuthenticated,
     programas,
     sendProgramasRequest,
-    handleSubmit
+    handleSubmit,
+    handleSubmitEmail,
   };
 };

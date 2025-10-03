@@ -8,7 +8,7 @@ import EmptyTable from '../components/EmptyTable';
 import TurnoTable from './TurnoTable';
 import { ApiTurnoResponseData } from '@/common/type/type._turnos';
 import { Pc } from './type';
-import { ProgramaList } from '@/common/type/type._programas';
+import { ProgramaList } from '@/common/type/type_loginemail';
 import classnames from 'classnames';
 
 interface FormTabsProps {

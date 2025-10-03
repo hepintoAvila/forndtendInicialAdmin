@@ -93,3 +93,14 @@
         transition: all 0.2s;
     }
 }
+@media (min-width: 768px) {
+    .mobile-only {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .desktop-only {
+        display: none;
+    }
+}

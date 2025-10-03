@@ -59,7 +59,7 @@ const handleLogout = async () => {
                                     className="dropdown-item notify-item"
                                     key={i + '-profile-menu'}>
                                     <i className={classNames(item.icon, 'me-4')}></i>
-                                    <span>{item.label}</span>
+                                    <span style={{color:'#ffff'}}>{item.label}</span>
                                 </Link>
                             );
                         })}

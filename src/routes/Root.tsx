@@ -3,12 +3,12 @@ import { Navigate } from 'react-router-dom';
 const getRootUrl = (isAuthenticated: boolean) => {
     let urlBase = '';
     let url = '';
-    if (isAuthenticated) {
-        url = 'estudents';
+    if (!isAuthenticated) {
+        url = 'login';
         urlBase = 'aula';
     } else {
-        url = 'start';
-        urlBase = 'account';
+        url = 'mobile';
+        urlBase = 'aula';
     }
     return { url, urlBase };
 };

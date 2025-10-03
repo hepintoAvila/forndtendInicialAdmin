@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tab, Nav, Row, Col, Card } from 'react-bootstrap';
 
-import { ProgramaList } from '@/common/type/type._programas';
+import { ProgramaList } from '@/common/type/type_loginemail';
 import classnames from 'classnames';
 import { ApiVisitaResponseData } from '@/common/type/type._visitas';
 import VisitasTable from './VisitasTable';
