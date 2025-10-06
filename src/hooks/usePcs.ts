@@ -6,6 +6,7 @@ import { Credentials, PcsData } from '@/pages/Aula/Aulavirtual/type';
 import { useContext, useState } from 'react';
 
 import { atom, useAtom } from 'jotai';
+import mobileServicio from '@/common/api/mobileServicio';
 const ApiEPcAtom = atom<PcsData>([] as unknown as PcsData);
 
 export default function usePcs(){
@@ -49,6 +50,38 @@ const authContext = useContext(AuthContext);
       
       const pcService = PcsService(urlObjet,BodyData);
       const result = await pcService.Autentications(credentials as Credentials);
+
+      if (result.status === 'success' && result.data) {
+         setIsAuthenticated(true);
+         setComputadores(result.data.pcs as any);
+        return result.data;
+      } else {
+        throw new Error(result.error || 'Autenticación fallida');
+      }
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+    const sendComputadoresMobile = async (credentialsUrl: any,BodyData:any) => {
+    setLoading(true);
+    setError(null);
+       const urlObjet = {
+        accion: credentialsUrl.accion,
+        opcion: credentialsUrl.opcion,
+        _SPIP_PAGE: config.API_ADMIN_PCS,
+        var_ajax: 'form',
+        bonjour: 'oui', 
+        action: 'true'
+      }; 
+
+  try {
+      
+      const pcMobile = mobileServicio(urlObjet,BodyData);
+      const result = await pcMobile.Autentications();
 
       if (result.status === 'success' && result.data) {
          setIsAuthenticated(true);
@@ -113,6 +146,7 @@ const authContext = useContext(AuthContext);
     computadores,
     sendComputadores,
     sendComputadorRequest,
-    sendAguachicaRequest
+    sendAguachicaRequest,
+    sendComputadoresMobile
   };
 };

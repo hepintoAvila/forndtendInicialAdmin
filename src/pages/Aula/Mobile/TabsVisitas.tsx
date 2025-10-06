@@ -1,9 +1,17 @@
 import React from 'react';
  
-import { ApiVisitaResponseData } from '@/common/type/type._visitas';
+
 import EstudVisitaForm from './EstudVisitaForm';
 import { ProgramaList } from '@/common/type/type._programas';
- 
+type Usuario = {
+  Nom: string;
+  Email: string;
+  Rol: string;
+  status: string;
+  AppKey: string;
+};
+
+type Usuarios = Usuario[];
 interface FormTabsProps {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   onChangeDocumento: (documento: string) => void;
@@ -11,7 +19,8 @@ interface FormTabsProps {
   estudiantes: { documento: string }[] | undefined;
   handleSubmitEstudent: (event: React.FormEvent<HTMLFormElement>) => void;
   programas: ProgramaList[];
-  visitas: ApiVisitaResponseData;
+  usuario: Usuarios;
+  computadores: any;
 }
 
 const TabsVisitas = ({
@@ -19,18 +28,21 @@ const TabsVisitas = ({
   onChangeDocumento,
   documentoAnterior,
   estudiantes,
-  handleSubmitEstudent,
+  computadores,
   programas,
-  visitas,
+  usuario
 }: FormTabsProps) => {
   return (
-      <EstudVisitaForm
-            handleSubmit={handleSubmit}
-            onChangeDocumento={onChangeDocumento}
-            documentoAnterior={documentoAnterior}
-            estudiantes={estudiantes}
-            programas={programas as any}
-          />
+     <>
+     <EstudVisitaForm
+      handleSubmit={handleSubmit}
+      onChangeDocumento={onChangeDocumento}
+      documentoAnterior={documentoAnterior}
+      estudiantes={estudiantes}
+      usuario={usuario as any}
+      computadores={computadores as any}
+      programas={programas as any} />
+      </>
   );
 };
 

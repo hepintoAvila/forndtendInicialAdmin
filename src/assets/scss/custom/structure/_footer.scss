@@ -61,6 +61,7 @@ html[data-layout-mode="detached"]:not([data-layout="topnav"]) {
 }
 @media (max-width: 768px) {
     .footer-mobile{
+         max-width: 100%;
         background-color: #70b71f !important; 
         border: none;
         text-align: center;

@@ -526,17 +526,17 @@ html[data-bs-theme="dark"] {
     }
 }
 .profile-dropdown-mobile {
-    min-width: 260px;
-    padding: 1rem 1.5rem;
-    background-color: #70b71f !important; 
-    width: 24rem;
+    background-color: #c9c6c6 !important; 
+    min-width: 20px;
+    padding: 0.2rem 0.2rem;
+    width: 16rem;
     a,i,
     span {
         vertical-align: middle;
         font-size: 22px;
         font-weight: 400;
-        color:#ffff;
-        background-color: #70b71f !important; 
+        color:#070707 !important; 
+        background-color: #ffffff !important; 
        
     } 
     &.span:hover {

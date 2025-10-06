@@ -111,14 +111,14 @@
 
     .social-list-item .whatsapp-icon-text,.facebook-icon-text,
     .social-list-item .google-icon-text {
-        font-size:1.9rem;
+        font-size:1.2rem;
     }
 }
 
 @media (max-width: 480px) {
     .social-list-item {
-        max-width: 24rem;
-        height: 6rem;
+        max-width: 23rem;
+        height: 3.5rem;
         line-height: calc(2rem - 2px);
         margin-right: 30.9rem;
     }
@@ -131,7 +131,16 @@
 
     .social-list-item .whatsapp-icon-text,.facebook-icon-text,
     .social-list-item .google-icon-text {
-       font-size:1.9rem;
+       font-size:1.2rem;
         
     }
+}
+@media (max-width: 480px) {
+    .logout-mobile{
+        margin-top: -2rem !important;
+        margin-bottom: 12rem !important;
+        margin-left: -5rem;
+    }
+
+    
 }

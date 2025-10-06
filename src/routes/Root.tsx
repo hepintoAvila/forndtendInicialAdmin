@@ -1,36 +1,25 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { Navigate } from 'react-router-dom';
-const getRootUrl = (isAuthenticated: boolean) => {
-    let urlBase = '';
-    let url = '';
-    if (!isAuthenticated) {
-        url = 'login';
-        urlBase = 'aula';
-    } else {
-        url = 'mobile';
-        urlBase = 'aula';
-    }
-    return { url, urlBase };
-};
+
 const Root = () => {
-    const { isAuthenticated, isLoading, error } = useAuth0();
+  const { isAuthenticated, isLoading, error, loginWithRedirect } = useAuth0();
 
-    if (isLoading) {
-        return <div>Cargando...</div>; // o un componente de carga
-    }
+  if (error && error.message.includes('Invalid state')) {
+    loginWithRedirect();
+    return null;
+  }
 
-    const { url, urlBase } = getRootUrl(isAuthenticated);
-    if (url && urlBase) {
+  if (error) {
+    return <div>Error Root: {error.message}</div>;
+  }
 
-        return <Navigate to={`${urlBase}/${url}`} />;
-        
-    } else {
-        if (error) {
-        // Puedes manejar el error de alguna manera, por ejemplo:
-        return <div>Error_1: {error.message}</div>;
-        }
-        
-    }
+  if (isLoading) {
+    return <div>Cargando...</div>;
+  }
+
+  const url = isAuthenticated ? '/aula/mobile' : '/aula/login';
+
+  return <Navigate to={url} />;
 };
 
 export default Root;

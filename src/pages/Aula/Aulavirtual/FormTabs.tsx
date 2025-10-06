@@ -5,11 +5,11 @@ import ComputadorTable from './ComputadorTable';
 import TurnoTable from './TurnoTable';
 import { ApiTurnoResponseData } from '@/common/type/type._turnos';
 import { Pc } from './type';
-import { ProgramaList } from '@/common/type/type_loginemail';
 import classnames from 'classnames';
 import EstudianteTable from '../components/EstudianteTable';
 import EmptyTable from '../components/EmptyTable';
 import EstudianteForm from '../components/EstudianteForm';
+import { ProgramaList } from '@/common/type/type._programas';
 
 interface FormTabsProps {
   selectedComputador: Pc;

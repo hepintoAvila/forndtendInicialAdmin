@@ -1,31 +1,18 @@
 import React, { Suspense, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import { useToggle } from '@/hooks';
 import { useThemeContext } from '@/common/context';
 import { changeHTMLAttribute } from '@/utils';
-import getUserFromSession from '@/common/helpers/getUserFromSession';
-import { useAuth0 } from '@auth0/auth0-react';
+
 // code splitting and lazy loading
 // https://blog.logrocket.com/lazy-loading-components-in-react-16-6-6cea535c0b52
-const Topbar = React.lazy(() => import('../Topbar/'));
-const Navbar = React.lazy(() => import('./Navbar'));
-const Footer = React.lazy(() => import('../Footer'));
-const FooterMobile = React.lazy(() => import('@/layouts/FooterMobile'));
 //const RightSidebar = React.lazy(() => import('../RightSidebar'));
 
 const loading = () => <div className="text-center"></div>;
-import { useViewport } from '@/hooks';
-
-import ProfileMobile from '@/pages/Landing/ProfileMobile';
 // Componente que usa el hook de permisos
 const HorizontalLayout = () => {
-    const { isAuthenticated } = useAuth0();
-    const { width } = useViewport();
-    const appConfig = getUserFromSession();
     const { settings, updateMenu } = useThemeContext();
-    const [isOpen, toggleMenu] = useToggle();
-    //const isAdmin = appConfig.status === 'Inactivo';
+
     /*
      * layout defaults
      */
@@ -60,29 +47,24 @@ const HorizontalLayout = () => {
     }, [settings.topbar.menu]);
     return (
         <div className={`content`}>
-            <>
-                <Suspense fallback={loading()}>
-                    <Topbar toggleMenu={toggleMenu} navOpen={isOpen} topbarDark={false} appConfig={appConfig} />
-                    <Navbar navOpen={isOpen} />
-                </Suspense>
-            </>
-            <Suspense fallback={loading()}>
-                <ProfileMobile />
-            </Suspense>
-            <div className="ml-0" style={{ marginTop: '4rem' }}>
-                <div>
-                    <div className="cta-box">
-                        <Container fluid>
+           
+            <div className="ml-0" style={{ marginTop: '17rem' }}>
+                <div className="cta-box">
+                    <div style={{marginTop: "-6rem"}}>
+           
+                        <Container fluid className={`content`} style={{height: "26rem",display:"flex",flexWrap: "wrap",flexDirection: "row-reverse",alignContent: "center",justifyContent: "space-evenly"}}>
                             <Suspense fallback={loading()}>
+                                    <div style={{ marginTop: '11rem' }} className="desktop-only">
+                                        <h2>Solo disponible en dispositivos móviles</h2>
+                                        <p>Por favor, acceda a esta página desde un dispositivo móvil.</p>
+                                    </div>
                                 <Outlet />
-                            </Suspense>
+	                            </Suspense>
                         </Container>
                     </div>
                 </div>
 
-                <Suspense fallback={loading()}>
-                    <FooterMobile />
-                </Suspense>
+                
             </div>
         </div>
     );

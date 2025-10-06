@@ -2,8 +2,8 @@ import { AuthContext } from '@/common/context/AuthContext';
 import { useContext, useState } from 'react';
  import { atom, useAtom } from 'jotai';
 import { config, encodeBasicUrl, useNotificationContext } from '@/common';
-import { ApiProgramaResponseData, Programa, ProgramaRequest } from '@/common/type/type_loginemail';
 import ProgramaService from '@/common/api/programas';
+import { ApiProgramaResponseData, Programa, ProgramaRequest } from '@/common/type/type._programas';
 
   interface BodyData {
               id?: number | undefined ;

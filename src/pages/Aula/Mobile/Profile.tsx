@@ -16,7 +16,7 @@ const profileMenus: ProfileOption[] = [
         id: 1,
         label: 'Salir',
         icon: 'mdi mdi-logout',
-        redirectTo: '/account/logout',
+        redirectTo: '/aula/logout',
     },
 ];
 const handleLogout = async () => {
@@ -24,14 +24,14 @@ const handleLogout = async () => {
     };
   return (
     isAuthenticated && (
-      <Container fluid className="pl-0 " style={{marginLeft:'0rem', width: '100%', height: '5rem'}}>
+      <Container fluid className="pl-0" style={{marginLeft:'-5rem',height: '2rem',marginBottom:'1rem'}}>
          <Dropdown show={isOpen} onToggle={toggleDropdown}>
                 <Dropdown.Toggle
                     variant="link"
                     id="dropdown-profile"
                     as={'button'}
                     onClick={toggleDropdown}
-                    className="nav-link dropdown-toggle arrow-none nav-user px-2">
+                    className="nav-link dropdown-toggle arrow-none nav-user px-0 bg-light" style={{width: '22rem'}}>
                     <div className="nav-user-line"></div>
                     <span className="account-user-avatar" onClick={toggleDropdown}>
                          {
@@ -55,14 +55,14 @@ const handleLogout = async () => {
                             )
                             }
                     </span>
-                    <span className="d-lg-flex flex-column gap-1">
+                    <span className="d-lg-flex flex-column gap-1 ">
                         <h5 className="my-0">{user?.name}</h5>
                         <h6 className="my-0 fw-normal align-self-start">{user?.email}</h6>
                     </span>
                     <img src={usernavrow} className="icon-header-navbar-row" />
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu align={'end'} className="dropdown-menu-animated profile-dropdown-mobile bg-light">
+                <Dropdown.Menu align={'end'} className="dropdown-menu-animated profile-dropdown-mobile ">
                     <div onClick={toggleDropdown}>
                         {profileMenus?.map((item, i) => {
                             return (

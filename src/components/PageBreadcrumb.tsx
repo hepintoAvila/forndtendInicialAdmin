@@ -18,7 +18,7 @@ const PageBreadcrumb = ({ bottomLinks, children}: AccountLayoutProps) => {
 	useAccountLayout();
  
 	return (
-		<div className="auth-fluid">
+		<div className="auth-fluid mt-5">
 			<div className="auth-fluid-form-box">
 				<Card.Body className="d-flex flex-column  gap-3">
 					<div className="auth-brand text-center text-lg-start">

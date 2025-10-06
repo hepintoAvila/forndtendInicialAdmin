@@ -32,6 +32,7 @@ export default function useReportes(){
       return bodyData;
     };    
   const { showNotification } = useNotificationContext();
+  
 const authContext = useContext(AuthContext);
   if (!authContext) {
     throw new Error('AuthContext no está disponible');

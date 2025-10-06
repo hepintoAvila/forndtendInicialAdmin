@@ -1,5 +1,5 @@
 import { AuthContext } from '@/common/context/AuthContext';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
  import { atom, useAtom } from 'jotai';
 import { config, encodeBasicUrl, useNotificationContext } from '@/common';
 
@@ -78,7 +78,23 @@ const authContext = useContext(AuthContext);
           const bodyData = generateBodyDataEmail(urlObjet);
           sendEmail(credentialsUrl, bodyData as any);
     };
- console.log('message',message);
+      useEffect(() => {
+        if (error) {
+          const timer = setTimeout(() => {
+            setError(null);
+          }, 5000);
+          return () => clearTimeout(timer);
+        }
+      }, [error]);
+
+      useEffect(() => {
+        if (message) {
+          const timer = setTimeout(() => {
+            setMessage('');
+          }, 5000);
+          return () => clearTimeout(timer);
+        }
+      }, [message]);
   return {
     loading,
     error,

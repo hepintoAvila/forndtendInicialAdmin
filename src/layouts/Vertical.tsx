@@ -104,7 +104,7 @@ export default function VerticalLayout() {
 						hideUserProfile={true}
 					/>
 				</Suspense>
-
+				<Suspense fallback={<PageLoader />}>
 				<div className="content-pages">
 					<div className="content">
 						<Suspense fallback={<PageLoader />}>
@@ -113,8 +113,8 @@ export default function VerticalLayout() {
 							</Container>
 						</Suspense>
 					</div>
-
 				</div>
+				</Suspense>
 				<Suspense fallback={<PageLoader />}>
 						<Footer />
 					</Suspense>

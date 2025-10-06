@@ -4,9 +4,10 @@ import TabsVisitas from './TabsVisitas';
 import { useEffect } from 'react';
 import useEstudiantes from '@/hooks/useEstudiantes';
 import useProgramas from '@/hooks/useProgramas';
-import useVisitas from '@/hooks/useVisitas';
 import useLoginEmail from '@/hooks/useLoginEmail';
-//import { useViewport } from '@/hooks';
+import usePcs from '@/hooks/usePcs';
+import { config, encodeBasicUrl } from '@/common/helpers';
+
 interface User {
   nickname: string;
   name: string;
@@ -16,67 +17,75 @@ interface User {
   email_verified: boolean;
   sub: string;
 }
+
 const PagInicio = () => {
-    const { documentoAnterior, estudiantes, handleSubmitEstudent, getDatosEstudiantesVisitas } = useEstudiantes();
-    const { programas, sendProgramasRequest } = useProgramas();
-    const {usuario,handleSubmitEmail } = useLoginEmail();
+  const { documentoAnterior, estudiantes, handleSubmitEstudent, getDatosEstudiantesVisitas } = useEstudiantes();
+  const { programas, sendProgramasRequest } = useProgramas();
+  const { usuario, handleSubmitEmail } = useLoginEmail();
+  const {sendComputadoresMobile, computadores} = usePcs();
+  //const { sendVisitasRequest, visitas } = useVisitas();
 
-    const { sendVisitasRequest, visitas } = useVisitas();
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        console.log('event', event);
-    };
-    useEffect(() => {
-        sendVisitasRequest();
-        sendProgramasRequest();
-    }, []);
-    const onChangeDocumento = (e: any) => {
-        getDatosEstudiantesVisitas(e.target.value as any);
-    };
+  const { isLoading, user, loginWithRedirect, error, isAuthenticated } = useAuth0();
 
-    const { isLoading,user,loginWithRedirect, logout, isAuthenticated } = useAuth0();
-    if (isLoading) {
-        return <div>Loading ...</div>;
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      loginWithRedirect();
+    } else if (isAuthenticated) {
+      //sendVisitasRequest();
+      sendProgramasRequest();
     }
-/*
-	const {  } = useAuth0();
+  }, [isLoading, isAuthenticated]);
 
-		const handleLogin = () => {
-			if (isAuthenticated) {
-				logout({ logoutParams: { returnTo: window.location.origin } });
-			} else {
-				loginWithRedirect();
-			}
-		};
-*/
-const auth: User = user as User;
-    useEffect(() => {
-         if (!user) {
-                console.log('No autenticado');
-            }else{
-               // console.log('auth', estudiantes);
-                handleSubmitEmail(auth.email)
-            }
-    }, [auth]);
-console.log('usuario', usuario);
-    return (
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('event', event);
+  };
 
-        
-            <Container fluid className="pl-0" style={{ marginLeft: '0rem', width: '80%', marginTop: '0rem' }}>
-              
-                    <TabsVisitas
-                        handleSubmit={handleSubmit}
-                        onChangeDocumento={onChangeDocumento}
-                        documentoAnterior={documentoAnterior}
-                        estudiantes={estudiantes as any}
-                        handleSubmitEstudent={handleSubmitEstudent}
-                        programas={programas as any}
-                        visitas={visitas}
-                    />
-             
-            </Container>
-        
-    );
+  const onChangeDocumento = (e: any) => {
+    getDatosEstudiantesVisitas(e.target.value as any);
+  };
+
+  const auth: User = user as User;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      handleSubmitEmail(auth.email);
+        const credentialsUrl = {
+          accion: encodeBasicUrl(config.API_ACCION_PCS),
+          opcion: encodeBasicUrl(config.API_OPCION_PCS),
+        };
+   
+   
+      const BodyData = {
+            id_pc:0,
+            estado:'Active',
+          }
+   
+          sendComputadoresMobile(credentialsUrl,BodyData);
+    }
+  }, [isAuthenticated]);
+ 
+  if (error) {
+    return <div>Error PagInicio: {error.message}</div>;
+  }
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+  return (
+    <Container fluid className="pl-0" style={{ marginLeft: '0rem', width: '80%', marginTop: '0rem' }}>
+
+      <TabsVisitas
+        handleSubmit={handleSubmit}
+        onChangeDocumento={onChangeDocumento}
+        documentoAnterior={documentoAnterior}
+        estudiantes={estudiantes as any}
+        computadores={computadores as any}
+        handleSubmitEstudent={handleSubmitEstudent}
+        programas={programas as any}
+        usuario={usuario as any}
+      />
+    </Container>
+  );
 };
 
 export default PagInicio;

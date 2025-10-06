@@ -14,7 +14,7 @@ const profileMenus: ProfileOption[] = [
         id: 1,
         label: 'Salir',
         icon: 'mdi mdi-logout',
-        redirectTo: '/account/logout',
+        redirectTo: '/aula/logout',
     },
 ];
 const handleLogout = async () => {

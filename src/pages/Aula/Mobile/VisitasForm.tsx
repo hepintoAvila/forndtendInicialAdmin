@@ -57,7 +57,7 @@ const VisitasForm = ({
             <Col sm={4} >
               <Form.Group className="mobile-form-group bg-light"  controlId="validation">
                 <Form.Label>2. Motivo de la Visita</Form.Label>
-                <Form.Select required name="tipo_visita" onChange={handleSelectChange}   className="bg-white">
+                <Form.Select required name="tipo_visita" onChange={handleSelectChange}   className="bg-white select-programa">
                   <>
                     <option value="6">Consulta de tesis</option>
                     <option value="7">Estudio</option>
@@ -72,18 +72,19 @@ const VisitasForm = ({
               </Form.Group>
             </Col>
           <Col xs={12} md={6}>
-            <Form.Group className="mobile-form-group bg-light" controlId="validationPrograma">
+            <Form.Group className="select-programa bg-light" controlId="validationPrograma">
               <Form.Label >3. Programas</Form.Label>
               <Form.Select
                 required
                 name="programa"
-                 className="bg-white"
+                 className="bg-white select-programa"
               >
-                <option value="">Seleccione un programa</option>
-                {programas?.map((prog) => (
-                  <option key={prog.id} value={prog.programa}   className="bg-white">
-                    {prog.programa}
+                <option value="" className="select-programa option">Seleccione un programa</option>
+                {programas?.map((prog:any) => (
+                  <option key={prog.id} value={prog.programa}   className="select-programa option" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content={prog.programa} title={prog.programa}>
+                     {prog.programa.length > 15 ? prog.programa.substring(0, 15) + '...' : prog.programa}
                   </option>
+ 
                 ))}
               </Form.Select>
               <Form.Control.Feedback type="invalid"  className="bg-white">

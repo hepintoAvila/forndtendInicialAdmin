@@ -53,6 +53,3 @@ export interface PcsServiceResponse {
 export interface PcsServiceInterface {
   Autentications: (values: UserProps) => Promise<PcsServiceResponse>;
 }
-export interface PcsMobileInterface {
-  Autentications: () => Promise<PcsServiceResponse>;
-}

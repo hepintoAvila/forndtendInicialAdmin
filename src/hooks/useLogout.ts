@@ -9,7 +9,7 @@ export default function useLogout(){
 	const performLogout = async () => {
 		try {
 			await logout();
-			navigate('/account/logout', { replace: true });
+			navigate('/aula/logout', { replace: true });
 			return true;
 		} catch (error) {
 			console.error('Error durante logout:', error);

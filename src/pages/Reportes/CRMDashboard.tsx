@@ -12,7 +12,7 @@ import classnames from 'classnames';
 import BuscadorForm from './buscador/BuscadorForm';
 import useProgramas from "@/hooks/useProgramas";
 import EstadisticasGraficas from './EstadisticasGraficas/EstadisticasGraficas';
-import FooterMobile from '@/layouts/FooterMobile';
+import FooterMobile from '@/pages/Aula/Mobile/Components/FooterMobile';
 import { useViewport } from '@/hooks';
 import ContactUsMobile from '../Landing/ContactUsMobile';
 
@@ -168,13 +168,7 @@ const CRMDashboard = () => {
     )}
         </Tab.Container>
       </>
-    {width > 1140 ? 
-    reportes && Array.isArray(reportes) && reportes.length === 0 ? (
-    <ContactUs layouts={layouts}/>)
-     :'': <ContactUsMobile layouts={layouts}/>} 
-    {width > 1140 ? 
-    <Footer />:
-    <FooterMobile />}
+   
   </>
 );
 };
