@@ -19,7 +19,7 @@ const LoginEstudiante = () => {
 
  
 
-  return (
+  return (<>
     <AccountWrapperEstudinte>
       <Container fluid className="p-0">
         <Row className="justify-content-center">
@@ -31,7 +31,7 @@ const LoginEstudiante = () => {
         </Row>
       </Container>
     </AccountWrapperEstudinte>
-  );
+  </>);
 };
 
 export default LoginEstudiante;

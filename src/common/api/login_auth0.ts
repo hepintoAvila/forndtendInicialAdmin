@@ -1,22 +1,22 @@
 //import config from "../helpers/config";
 import { Credentials } from "@/pages/Reportes/type";
-import { ApiResponse, AuthServiceInterface, AuthServiceResponse, EmailRequest, SendEmail } from "../type/type_loginemail";
+import { ApiResponse, AuthServiceInterface, AuthServiceResponse, EmailRequest } from "../type/type_loginemail";
  
 
-const LoginAuth0Service = (urlObjet: EmailRequest, bodyData: SendEmail): AuthServiceInterface => {
+const LoginAuth0Service = (urlObjet: EmailRequest, bodyData: any): AuthServiceInterface => {
   const Autentications = async (): Promise<AuthServiceResponse> => {
 
 const credentials:Credentials  = {
  var_login: import.meta.env.VITE_API_USERNAME,
   password: import.meta.env.VITE_API_PASSWORD,
 };
-    const token = localStorage.getItem('authToken');
+    const token = import.meta.env.VITE_API_PASSWORD_APIKEY;
     const params = new URLSearchParams({
       exec: 'admin_login',
       _SPIP_PAGE: 'admin_login',
       action: 'true',
-      var_ajax:'form',
-      bonjour:'oui',
+      var_ajax: 'form',
+      bonjour: 'oui',
       accion: urlObjet.accion,
       opcion: urlObjet.opcion
     });

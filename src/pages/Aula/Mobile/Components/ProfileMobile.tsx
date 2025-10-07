@@ -20,7 +20,7 @@ const profileMenus: ProfileOption[] = [
 const handleLogout = async () => {
         await logout();
     };
-  return (
+  return (<>
       <Container fluid className="pl-0 container-mobile">
          <Dropdown show={isOpen} onToggle={toggleDropdown}>
                 <Dropdown.Toggle
@@ -68,7 +68,7 @@ const handleLogout = async () => {
             </Dropdown>
       </Container>
   
-  );
+  </>);
 };
 
 export default ProfileMobile;

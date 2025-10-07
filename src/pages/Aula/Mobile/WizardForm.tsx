@@ -6,7 +6,7 @@ import Bienvenida from './Bienvenida';
 import ComputadoresCard from './Components/ComputadoresCard';
 import useFormState from './hook/useFormState';
 
-const WizardWithProgressbar = ({ computadores }: any) => {
+const WizardWithProgressbar = ({ computadores,usuario }: any) => {
     const {
         ubicacion,
         setUbicacion,
@@ -17,10 +17,10 @@ const WizardWithProgressbar = ({ computadores }: any) => {
         handleSelectComputador,
         handleFormChange,
         handleSubmitForm,
-    } = useFormState();
+    } = useFormState(usuario);
 
-    console.log('bienvenido', bienvenido);
-    return (
+   // console.log('bienvenido', bienvenido);
+    return (<>
         <Card>
             <Card.Body>
                 <Wizard
@@ -74,6 +74,7 @@ const WizardWithProgressbar = ({ computadores }: any) => {
                                                         }
                                                     }}
                                                     motivo={motivo}
+                                                    ubicacion={ubicacion}
                                                     setMotivo={setMotivo}
                                                 />
                                             )}
@@ -122,15 +123,28 @@ const WizardWithProgressbar = ({ computadores }: any) => {
                 />
             </Card.Body>
         </Card>
-    );
+    </>);
+};
+type Usuario = {
+  Nom?: string;
+  Email?: string;
+  Rol?: string;
+  status?: string | undefined;
+  AppKey: string;
 };
 
-const WizardForm = ({ computadores }: any) => {
+type Usuarios = Usuario[];
+interface FormTabsProps {
+  usuario: Usuarios; // Cambia Usuarios a Usuario
+  computadores: [] | undefined;
+}
+
+const WizardForm = ({ computadores,usuario }: FormTabsProps) => {
     return (
         <>
             <Row>
                 <Col xl={12}>
-                    <WizardWithProgressbar computadores={computadores} />
+                    <WizardWithProgressbar computadores={computadores} usuario={usuario} />
                 </Col>
             </Row>
         </>

@@ -13,7 +13,7 @@ const ComputadoresCard = ({ computadores,handleSelectComputador}: ComputadorCard
       <div className="text-center">
         <Loader isLoader={true} toggleLoader={() => {}} />
       </div>
-    ) : computadores.length > 0 ? (
+    ) : computadores.length > 0 ? (<>
    <Carousel>
       {computadores?.map((computador, index) => (
         <Carousel.Item key={index}>
@@ -37,9 +37,9 @@ const ComputadoresCard = ({ computadores,handleSelectComputador}: ComputadorCard
           </div>
         </Carousel.Item>
       ))}
-    </Carousel> )  : (
+    </Carousel> </>)  : (<>
       <div>No hay computadores disponibles</div>
-    )
+    </>)
     )
   
   

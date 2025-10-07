@@ -11,7 +11,7 @@ interface SidebarPcsProps {
 
 const SliderMobile: React.FC<SidebarPcsProps> = ({ columnas, handleShowModal }) => {
     
-  return (
+  return (<>
     <Row className="gx-2 gy-2">
       {columnas.map((columna, indexColumna) => (
         <Col xs={6} sm={4} md={2} key={indexColumna}>
@@ -29,7 +29,7 @@ const SliderMobile: React.FC<SidebarPcsProps> = ({ columnas, handleShowModal }) 
         </Col>
       ))}
     </Row>
-  );
+  </>);
 };
 
 export default SliderMobile;

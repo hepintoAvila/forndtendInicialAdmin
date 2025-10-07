@@ -19,7 +19,7 @@ const SocialLogout = () => {
 			}
 		};
 
-	return (
+	return (<>
 		<div className="text-center mt-4 bg-transparent ">
 			<ul
 				className="social-list d-flex flex-column align-items-center mt-3 "
@@ -35,7 +35,7 @@ const SocialLogout = () => {
 				</li>			 
 			</ul>
 		</div>
-	);
+	</>);
 };
 
 export default SocialLogout;

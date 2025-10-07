@@ -12,7 +12,7 @@ type AccountLayoutProps = {
 
 const AccountWrapperEstudinte = ({ bottomLinks, children }: AccountLayoutProps) => {
 	useAccountLayout();
- 	return (
+ 	return (<>
 		<div className="auth-fluid">
 			 
 				<Card.Body className="d-flex flex-column h-100 gap-3">
@@ -24,7 +24,7 @@ const AccountWrapperEstudinte = ({ bottomLinks, children }: AccountLayoutProps) 
 		 
 			 
 		</div>
-	);
+	</>);
 };
 
 export default AccountWrapperEstudinte;

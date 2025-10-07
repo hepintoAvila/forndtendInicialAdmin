@@ -1,6 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 export default function FooterMobile() {
-    return (
+    return (<>
        
       <div className="container-fluid-profesionales cta-box">
         <Row className="justify-content-center">
@@ -16,5 +16,5 @@ export default function FooterMobile() {
         </Row>
         </div>
        
-    );
+   </> );
 }

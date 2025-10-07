@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Container, Dropdown } from "react-bootstrap";
-import avata1 from '@/assets/images/users/avatar-1.jpg';
+import avata1 from '@/assets/images/users/avatar-1.jpg'; 
 import { useLogout, useToggle } from '@/hooks';
 import usernavrow from '@/assets/images/user-nav-row.png';
 import { ProfileOption } from "@/layouts/Topbar/types";
@@ -22,8 +22,8 @@ const profileMenus: ProfileOption[] = [
 const handleLogout = async () => {
         await logout();
     };
-  return (
-    isAuthenticated && (
+  return (<>
+    {isAuthenticated && (
       <Container fluid className="pl-0" style={{marginLeft:'-5rem',height: '2rem',marginBottom:'1rem'}}>
          <Dropdown show={isOpen} onToggle={toggleDropdown}>
                 <Dropdown.Toggle
@@ -82,6 +82,7 @@ const handleLogout = async () => {
             </Dropdown>
       </Container>
     )
+}</>
   );
 };
 

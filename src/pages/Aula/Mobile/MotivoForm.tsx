@@ -5,18 +5,26 @@ interface MotivoFormProps {
   handleSubmit: (data: { motivo: string }) => void;
   setMotivo: (motivo: string ) => void;
   motivo:string;
+  ubicacion:string;
 }
 
-const MotivoForm = ({ handleSubmit,motivo, setMotivo }: MotivoFormProps) => {
+const MotivoForm = ({ handleSubmit,motivo, setMotivo,ubicacion }: MotivoFormProps) => {
   
-  const [motivos, setMotivos] = useState([
-    { value: '1', label: 'Consulta de tesis' },
-    { value: '2', label: 'Estudio' },
-    { value: '3', label: 'Leer' },
-    { value: '4', label: 'Investigación' },
-    { value: '5', label: 'Capacitación' },
-    { value: '6', label: 'Otros' },
-  ]);
+const [motivos] = useState([
+  { value: '1', label: 'Consulta bases de datos', sala: 'Aula Virtual-Virtualteca' },
+  { value: '2', label: 'Investigación', sala: 'Aula Virtual-Virtualteca' },
+  { value: '3', label: 'Estudio', sala: 'Aula Virtual-Virtualteca' },
+  { value: '4', label: 'Capacitación', sala: 'Aula Virtual-Virtualteca' },
+  { value: '5', label: 'Otros', sala: 'Aula Virtual-Virtualteca' },
+  { value: '6', label: 'Consulta de tesis', sala: 'Hemeroteca' },
+  { value: '7', label: 'Estudio', sala: 'Hemeroteca' },
+  { value: '8', label: 'Leer', sala: 'Hemeroteca' },
+  { value: '9', label: 'Investigación', sala: 'Hemeroteca' },
+  { value: '10', label: 'Estudio', sala: 'Hemeroteca' },
+  { value: '11', label: 'Capacitación', sala: 'Hemeroteca' },
+  { value: '12', label: 'Otros', sala: 'Hemeroteca' },
+]);
+  const filteredMotivos = motivos.filter((m) => m.sala.includes(ubicacion));
 
   const handleCheckChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMotivo(event.target.value);
@@ -27,7 +35,7 @@ const MotivoForm = ({ handleSubmit,motivo, setMotivo }: MotivoFormProps) => {
     handleSubmit({ motivo });
   };
 
-  return (
+  return (<>
     <section className="py-0 px-0 border-top border-bottom border-light" id="contact-us-landing">
       <nav className="flex-column flex-sm-row">
         <Form noValidate onSubmit={onSubmit} className="position-relative mb-5">
@@ -36,7 +44,7 @@ const MotivoForm = ({ handleSubmit,motivo, setMotivo }: MotivoFormProps) => {
               <Form.Group className="mobile-form-group bg-light" controlId="validation">
                 <Form.Label>Cual es el Motivo de tu Visita</Form.Label>
                 <div>
-                  {motivos.map((m) => (
+                  {filteredMotivos.map((m) => (
                     <Form.Check
                       key={m.value}
                       type="radio"
@@ -55,7 +63,7 @@ const MotivoForm = ({ handleSubmit,motivo, setMotivo }: MotivoFormProps) => {
         </Form>
       </nav>
     </section>
-  );
+  </>);
 };
 
 export default MotivoForm;

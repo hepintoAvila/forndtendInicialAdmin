@@ -33,7 +33,7 @@ const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   }
 };
 
-  return (
+  return (<>
     <section className="py-0 px-0 border-top border-bottom border-light" id="contact-us-landing">
       <nav className="flex-column flex-sm-row">
         <Form noValidate validated={validated} onSubmit={onSubmit} className="position-relative mb-5">
@@ -70,7 +70,7 @@ const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         </Form>
       </nav>
     </section>
-  );
+  </>);
 };
 
 export default UbicacionForm;

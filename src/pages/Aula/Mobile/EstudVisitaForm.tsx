@@ -1,14 +1,12 @@
 import { Card, Col, Modal, Row } from 'react-bootstrap';
 import { useState } from 'react';
-import EmptyTable from '../components/EmptyTable';
-import EstudianteTable from '../components/EstudianteTable'; 
 import VisitasForm from './VisitasForm';
 import { useLogout } from '@/hooks';
 import { ProgramaList } from '@/common/type/type._programas';
 import Profile from './Profile';
 import FooterMobile from './Components/FooterMobile';
-import MotivoForm from './MotivoForm';
 import { WizardForm } from './WizardForm';
+import useLoginEmail from '@/hooks/useLoginEmail';
 type Usuario = {
   Nom?: string;
   Email?: string;
@@ -17,14 +15,13 @@ type Usuario = {
   AppKey: string;
 };
 
-type Usuarios = Usuario[];
 interface FormTabsProps {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   onChangeDocumento: (documento: string) => void;
+  handleSelectChangeRol: (event: any) => void;
+  handleSelectPrograma: (event: any) => void;
   documentoAnterior: any;
-  estudiantes: { documento: string }[] | undefined;
   programas: ProgramaList[];
-  usuario: Usuarios; // Cambia Usuarios a Usuario
   computadores: [] | undefined;
 }
 
@@ -32,57 +29,55 @@ const EstudVisitaForm = ({
   handleSubmit,
   onChangeDocumento,
   documentoAnterior,
-  usuario,
   programas,
-  estudiantes,
   computadores,
+  handleSelectChangeRol,
+  handleSelectPrograma,
 }: FormTabsProps) => {
-  const [showModal, setShowModal] = useState(true); 
+  const { usuario } = useLoginEmail();
+
+  const [showModal, setShowModal] = useState(true);
   const handleCloseModal = () => setShowModal(false);
-const logout = useLogout();
-const handleLogout = async () => {
+  const logout = useLogout();
+  const handleLogout = async () => {
     handleCloseModal()
-        await logout();
-    };
-  return (
+    await logout();
+  };
+
+
+  const statusList: (string | undefined)[] = usuario?.data?.auth?.map((item: Usuario) => item.status) || [];
+  const isActivo = statusList.some(s => s === 'Activo');
+  //console.log('isActivo', isActivo);
+  return (<>
     <Modal show={showModal} onHide={handleLogout} size="sm" fullscreen={true}>
-     <Profile />
-     <br/>
-     <br/>
+      <Profile />
       <Modal.Header>
-        <Modal.Title>Registra tu Visita</Modal.Title>
+        <Modal.Title>{isActivo ? 'Registra tu Visita' : 'Registra tus datos personales'}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Row>
           <Col lg={12}>
             <Card>
               <Card.Body>
-                 {usuario[0]?.status === 'Activo' ? (
-                  <WizardForm computadores={computadores as any}/>):(<VisitasForm
-                  handleSubmit={handleSubmit}
-                  onChangeDocumento={onChangeDocumento}
-                  documentoAnterior={documentoAnterior}
-                  estudiantes={estudiantes}
-                  programas={programas as any}
-                  
-                />)}
-                {Array.isArray(estudiantes) && estudiantes.length > 0 ? (
-                  estudiantes.length > 0 && estudiantes[0]?.documento === '00000000' ? (
-                    <EmptyTable mensaje="El Usuario no esta registrado" />
-                  ) : (
-                    <EstudianteTable estudiantes={estudiantes} />
-                  )
-                ) : (
-                  <EmptyTable mensaje="No hay estudiantes registrados" />
-                )}
+                {isActivo ? (
+                  <WizardForm computadores={computadores as any} usuario={usuario as any} />) : (<VisitasForm
+                    handleSubmit={handleSubmit}
+                    onChangeDocumento={onChangeDocumento}
+                    handleSelectPrograma={handleSelectPrograma}
+                    handleSelectChangeRol={handleSelectChangeRol as any}
+                    documentoAnterior={documentoAnterior}
+                    programas={programas as any}
+
+                  />)}
               </Card.Body>
             </Card>
           </Col>
         </Row>
       </Modal.Body>
+
       <FooterMobile />
     </Modal>
-  );
+  </>);
 };
 
 export default EstudVisitaForm;
