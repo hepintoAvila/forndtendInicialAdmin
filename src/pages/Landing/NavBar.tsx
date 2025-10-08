@@ -5,11 +5,11 @@ import { useAuth, useViewport } from '@/hooks';
 import { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import avata1 from '@/assets/images/users/avatar-1.jpg';
-import Login from '../account/Login';
 import menuBiblioteca from '@/assets/images/menuBiblioteca.png';
 import menuKoha from '@/assets/images/menuKoha.png';
 import NavBarEscritorio from './NavBarEscritorio';
 import NavBarMobile from './NavBarMobile';
+import Login from '../Aula/Mobile/Login';
 
 type TopbarProps = {
     topbarDark?: boolean;

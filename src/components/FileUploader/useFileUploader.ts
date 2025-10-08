@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FileType } from './index';
+import { FileType } from './mobile/assets/index';
 
 export default function useFileUploader(showPreview: boolean = true) {
 	const [selectedFiles, setSelectedFiles] = useState<FileType[]>([]);

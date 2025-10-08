@@ -1,10 +1,12 @@
 import { config, encodeBasicUrl, useThemeContext } from '@/common';
 import AuthService from '@/common/api/auth';
 import { useContext, useEffect,useState } from 'react';
-import { AuthData, Menu, MenuItem, Permiso } from '../pages/account/Login/type';
+ 
 import { AuthContext } from '@/common/context/AuthContext';
 import Swal from 'sweetalert2';
 import UsuarioService from '@/common/api/usuarios';
+import { AuthData, Menu, Permiso } from '@/common/type/type_loginemail';
+import { MenuItem } from '@/pages/Aula/Mobile/Components/LoginEstudiante/type';
  export default function useAuth(){
  const deleteCookies = () => {
   const cookies = document.cookie.split("; ");

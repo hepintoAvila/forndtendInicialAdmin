@@ -2,24 +2,18 @@ import { Row, Col, Tab, Nav, Card } from 'react-bootstrap';
 import useReportes from '@/hooks/useReportes';
 import { useEffect, useState } from 'react';
 
-import Footer from '@/layouts/Footer';
 import NavBar from '../Landing/NavBar';
 import { layouts } from '../Landing/data';
-import ContactUs from '../Landing/ContactUs';
-
 import LayoutsEstadisticas from '../Landing/LayoutsEstadisticas';
 import classnames from 'classnames';
 import BuscadorForm from './buscador/BuscadorForm';
 import useProgramas from "@/hooks/useProgramas";
 import EstadisticasGraficas from './EstadisticasGraficas/EstadisticasGraficas';
-import FooterMobile from '@/pages/Aula/Mobile/Components/FooterMobile';
-import { useViewport } from '@/hooks';
-import ContactUsMobile from '../Landing/ContactUsMobile';
 
 
 const CRMDashboard = () => {
   
-  const { width } = useViewport();
+  
   const [activeTab, setActiveTab] = useState('Virtualteca');
   const [estadisticas, setEstadisticas] = useState({
     Virtualteca: '' as any,

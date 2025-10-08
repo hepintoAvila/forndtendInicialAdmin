@@ -1,4 +1,5 @@
-import { ProgramaList } from '@/common/type/type_loginemail';
+
+import { ProgramaList } from '@/common/type/type._programas';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 
 interface EstudianteFormProps {

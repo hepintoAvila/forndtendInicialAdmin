@@ -1,4 +1,6 @@
-import { ApiResponse, AuthData, AuthServiceInterface, AuthServiceResponse, UserProps } from "@/pages/account/Login/type";
+import { AuthServiceInterface, AuthServiceResponse } from "@/pages/Aula/Mobile/Components/LoginEstudiante/type";
+import { UserProps } from "@/pages/Aula/Mobile/Components/type/type";
+import { ApiResponse, AuthData } from "../type/type_loginemail";
  
  
 const AuthService = (urlObjet: any): AuthServiceInterface => {
@@ -37,7 +39,7 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
         return {
           status: 'success',
           data: {
-            auth: {} as AuthData,
+            auth: [] as unknown as AuthData,
             permisos: [],
             menu: [],
             metadata: {
@@ -63,7 +65,7 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
         throw new Error('La respuesta está vacía');
       }
       // Intentar parsear como JSON
-      let result: ApiResponse;
+      let result:  ApiResponse;
       try {
         result = JSON.parse(responseText);
       } catch (parseError) {
@@ -77,7 +79,7 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
         return {
           status: 'success',
           data: {
-            auth: result.data?.Auth || {} as AuthData,
+            auth: result.data?.Auth || [],
             permisos: result.data?.Permisos || [],
             menu: result.data?.Menu || [],
             metadata: {

@@ -1,5 +1,5 @@
 // hooks/usePermissions.ts
-import { MenuItem, MenuItemChild } from '@/pages/account/Login/type';
+import { MenuItem, MenuItemChild } from '@/pages/Aula/Mobile/Components/LoginEstudiante/type';
 import useAuth from './useAuth';
  
 

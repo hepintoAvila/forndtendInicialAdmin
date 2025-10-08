@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
  
 import { useAccountLayout } from '@/components/BGCircles';
 

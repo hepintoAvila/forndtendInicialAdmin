@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useCallback, useContext, useState } from 'react';
 import i18n, { isValidLanguage, Languages } from '@/common/languages/i18n';
-import { MenuItem } from '@/pages/account/Login/type';
+import { MenuItem } from '@/pages/Aula/Mobile/Components/LoginEstudiante/type';
  
 const ThemeContext = createContext<any>({});
 

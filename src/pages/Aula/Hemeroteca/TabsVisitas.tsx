@@ -1,7 +1,5 @@
 import React from 'react';
 import { Tab, Nav, Row, Col, Card } from 'react-bootstrap';
-
-import { ProgramaList } from '@/common/type/type_loginemail';
 import classnames from 'classnames';
 import { ApiVisitaResponseData } from '@/common/type/type._visitas';
 import VisitasTable from './VisitasTable';
@@ -9,6 +7,7 @@ import VisitasForm from './VisitasForm';
 import EstudianteTable from '../components/EstudianteTable';
 import EmptyTable from '../components/EmptyTable';
 import EstudianteForm from '../components/EstudianteForm';
+import { ProgramaList } from '@/common/type/type._programas';
 
 interface FormTabsProps {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;

@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import google from '@/assets/images/google.png'
-import facebook from '@/assets/images/facebook.png'
+
 //import whatsapp from '@/assets/images/whatsapp.png'
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -13,7 +12,7 @@ const SocialLogout = () => {
 
 		const handleLogin = () => {
 			if (isAuthenticated) {
-				logout({ logoutParams: { returnTo: window.location.origin } });
+				logout({ logoutParams: { returnTo: 'https://biblioteca.unicesar.edu.co/mobile/#/aula/login/callback'} });
 			} else {
 				loginWithRedirect();
 			}

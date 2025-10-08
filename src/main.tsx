@@ -44,7 +44,7 @@ const configJson ={
 	"domain": "dev-twjztmiqhzxp7q86.us.auth0.com",
 	"clientId": "DvwDqYaekoZPlr4GbQSAYkbFIikygxLM",
 	"audience": "https://api.livisoft.com",
-  "redirectUri": window.location.origin + '/aula/Mobile/callback',
+  "redirectUri": 'https://biblioteca.unicesar.edu.co/mobile/#/aula/login/callback',
   }
 export function getConfig() {
   // Configure the audience here. By default, it will take whatever is in the config
@@ -81,7 +81,7 @@ const providerConfig :Auth0ProviderOptions = {
   clientId: config.clientId,
   onRedirectCallback,
   authorizationParams: {
-    redirect_uri: window.location.origin,
+    redirect_uri: 'https://biblioteca.unicesar.edu.co/mobile/#/aula/login/callback',
     ...(config.audience ? { audience: config.audience } : null),
   },
 };
