@@ -12,7 +12,7 @@ const SocialLogout = () => {
 
 		const handleLogin = () => {
 			if (isAuthenticated) {
-				logout({ logoutParams: { returnTo: 'https://biblioteca.unicesar.edu.co/mobile/#/aula/login/callback'} });
+				logout({ logoutParams: { returnTo: window.location.origin } });
 			} else {
 				loginWithRedirect();
 			}

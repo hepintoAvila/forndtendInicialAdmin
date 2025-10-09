@@ -81,7 +81,7 @@ const providerConfig :Auth0ProviderOptions = {
   clientId: config.clientId,
   onRedirectCallback,
   authorizationParams: {
-    redirect_uri: 'https://biblioteca.unicesar.edu.co/mobile/#/aula/login/callback',
+    redirect_uri: window.location.origin,
     ...(config.audience ? { audience: config.audience } : null),
   },
 };
