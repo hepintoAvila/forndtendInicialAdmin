@@ -45,7 +45,7 @@ export default function PasswordInput({
 								<Form.Label>{label}</Form.Label>
 							</>
 						)}
-						<InputGroup className={`mb-0 ${window.innerWidth > 768 ? 'desktop-input-group' : 'mobile-input-group'}`} style={window.innerWidth > 768 ?{ marginLeft:'0rem'}:{width:'80%',marginLeft:'2rem'}}>
+						<InputGroup className={`mb-0 ${window.innerWidth > 768 ? 'desktop-input-group' : 'mobile-input-group'}`} style={window.innerWidth > 768 ?{ marginLeft:'0rem'}:{width:'100%',marginLeft:'0rem'}}>
 							<Form.Control
 								{...props}
 								{...field}

@@ -31,7 +31,7 @@ const Form = <TFormValues extends Record<string, any> = Record<string, any>>({
 
   return (
     <FormProvider {...methods}>
-      <BSForm onSubmit={methods.handleSubmit(onSubmit)} {...props}>
+      <BSForm onSubmit={methods.handleSubmit(onSubmit as any)} {...props}>
         {children}
       </BSForm>
     </FormProvider>

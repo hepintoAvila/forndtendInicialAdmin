@@ -54,6 +54,7 @@ const config = {
 	API_ADMIN_USUARIOS_LOGIN_AUTH0: 'admin_login_auth0',  
 	API_ADMIN_DATOS_PERSONALES_AUTH0: 'registrar_datos_personales',  
 	API_ADMIN_USUARIOS_LOGIN_AUTH0_SOLICITUD: 'registrar_datos_auth0_solicitud',  
+	API_ADMIN_USUARIOS_LOGIN_DOCUMENTO_SOLICITUD: 'consulta_documento_usuario_solicitud',  
 
 	API_ACCION_VISITAS: 'admin_visitas', 
 	API_OPCION_QUERY_VISITAS: 'consulta_visitas',  

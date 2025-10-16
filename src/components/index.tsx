@@ -5,7 +5,6 @@ export * from './VectorMap';
 export * from './ChatList';
 export * from './FAQs';
 export * from './PricingCard';
-export * from './FileUploader';
 export * from './TodoList';
 export * from './StatsWidgets';
 export * from './Messages';

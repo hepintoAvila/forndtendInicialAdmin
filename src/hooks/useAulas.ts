@@ -4,7 +4,6 @@ import { useCallback, useContext, useState } from 'react';
 import { atom, useAtom } from 'jotai';
 import { Aula, ApiAulaResponse, Credentials, AulaPrestamoList } from '@/common/type/type_aulas';
 import AulaService from '@/common/api/aulas';
-import { Aulas, sendAulaPrestamos } from '@/pages/Aula/Labfisica/types';
 import formatoFecha from '@/common/helpers/formatoFecha';
 import { EventInput } from '@fullcalendar/core/index.js';
 type SendAulasRequestParams = {
@@ -113,16 +112,16 @@ const authContext = useContext(AuthContext);
     const updateAulasRequest= async (data:any,isEditable:boolean) => {
     //const dataDatos = convertirFechaATimestamp(data);
         
-        const BodyData: sendAulaPrestamos = {
+        const BodyData: { id: number; title: string; start: string; end: string; documento: number } = {
           id: data?.idPrestamo,
           title: data?.title,
-          start:formatoFecha(new Date(data.start).getTime()as any),
-          end: formatoFecha(new Date(data.end).getTime()as any),
+          start: formatoFecha(new Date(data.start).getTime() as any),
+          end: formatoFecha(new Date(data.end).getTime() as any),
           documento: data?.documento,
         }
  
           if (BodyData && BodyData.id !== undefined && Number(BodyData.id) > 1) {
-            console.log('BodyData',BodyData);
+           // console.log('BodyData',BodyData);
             try {
               const ObjetBodys = generateBodyPrestamo(BodyData as any);
               const opcionesAulas = {
@@ -143,11 +142,11 @@ const authContext = useContext(AuthContext);
     }
      const addAulasRequest= async (data:any) => {
 
-        const BodyData: sendAulaPrestamos = {
-          id:2,
+        const BodyData: { id: number; title: string; start: string; end: string; documento: number } = {
+          id: 2,
           title: data?.title,
-          start:formatoFecha(new Date(data.start).getTime()as any),
-          end: formatoFecha(new Date(data.end).getTime()as any),
+          start: formatoFecha(new Date(data.start).getTime() as any),
+          end: formatoFecha(new Date(data.end).getTime() as any),
           documento: data?.documento,
         }
  
@@ -172,10 +171,10 @@ const authContext = useContext(AuthContext);
        const deleteAulasRequest= async (idPrestamo:number) => {
             try {
 
-            const BodyData: sendAulaPrestamos = {
-                  id:idPrestamo,
+            const BodyData: { id: number; title: string; start: string; end: string; documento: number } = {
+                  id: idPrestamo,
                   title: 'title',
-                  start:'0000-00-00 00:00',
+                  start: '0000-00-00 00:00',
                   end: '0000-00-00 00:00',
                   documento: 1111111,
                 }
@@ -201,9 +200,9 @@ const authContext = useContext(AuthContext);
       return aulaDataPrestamos ? JSON.parse(aulaDataPrestamos) : [];
   }, []);
 
-    const obtenerAulaPorId = useCallback((id: number): Aulas | undefined => {
+    const obtenerAulaPorId = useCallback((id: number): Aula | undefined => {
     const aulaData = localStorage.getItem('Aulas');
-    const appConfig: Aulas[] = aulaData ? JSON.parse(aulaData) : [];
+    const appConfig: Aula[] = aulaData ? JSON.parse(aulaData) : [];
     return appConfig.find((e: any) => e['id'] === id);
   }, []);
 

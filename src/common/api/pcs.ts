@@ -1,4 +1,6 @@
-import { ApiResponse,PcsServiceInterface, PcsServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/type";
+import { ApiResponse, PcsServiceInterface, PcsServiceResponse, UserProps } from "@/pages/Aula/type/type";
+
+ 
 //import config from "../helpers/config";
 const PcsService = (urlObjet: any,bodyData:any): PcsServiceInterface => {
 

@@ -1,7 +1,7 @@
 import TurnosService from '@/common/api/turnos';
 import { AuthContext } from '@/common/context/AuthContext';
-import { ApiTurnoResponseData, TurnoRequest } from '@/common/type/type._turnos';
-import { Credentials} from '@/pages/Aula/Aulavirtual/type';
+import { ApiTurnoResponseData, Credentials, TurnoRequest } from '@/common/type/type._turnos';
+ 
 import { useContext, useState } from 'react';
  import { atom, useAtom } from 'jotai';
 import { config, encodeBasicUrl, useNotificationContext } from '@/common';

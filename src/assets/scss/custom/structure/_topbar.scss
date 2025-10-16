@@ -526,10 +526,12 @@ html[data-bs-theme="dark"] {
     }
 }
 .profile-dropdown-mobile {
+    position: relative;
     background-color: #c9c6c6 !important; 
-    min-width: 20px;
+    min-width: 25px;
     padding: 0.2rem 0.2rem;
-    width: 16rem;
+    width: 22rem;
+    margin-right: 5rem;
     a,i,
     span {
         vertical-align: middle;

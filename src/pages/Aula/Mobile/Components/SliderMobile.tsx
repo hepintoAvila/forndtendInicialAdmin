@@ -1,12 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Pc } from './type/type';
-import ComputadorCard from '../../Aulavirtual/ComputadorCard';
+import ComputadoresCard from './ComputadoresCard';
+ 
 
 
 interface SidebarPcsProps {
   columnas: Pc[][];
-  handleShowModal: (computador: Pc) => void;
+  handleShowModal: (computador: Pc ) => void;
 }
 
 const SliderMobile: React.FC<SidebarPcsProps> = ({ columnas, handleShowModal }) => {
@@ -18,10 +19,10 @@ const SliderMobile: React.FC<SidebarPcsProps> = ({ columnas, handleShowModal }) 
           {columna.map((computador, indexFila) => (
             <div className="mb-3" key={indexFila + 1}>
               <div onClick={() => handleShowModal(computador)}>
-                <ComputadorCard
+                <ComputadoresCard
                   key={indexFila}
-                  computador={computador}
-                  handleShowModal={handleShowModal}
+                  computadores={computador as any}
+                  handleSelectComputador={handleShowModal}
                 />
               </div>
             </div>

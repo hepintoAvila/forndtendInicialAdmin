@@ -1,5 +1,5 @@
-import { ApiResponse, PcsMobileInterface} from "@/pages/Aula/Aulavirtual/type";
-const mobileServicio = (urlObjet: any,bodyData:any): PcsMobileInterface => {
+import { ApiResponse} from "@/pages/Aula/type/type";
+const mobileServicio = (urlObjet: any,bodyData:any): any => {
 
   const Autentications = async (): Promise<any> => {
 

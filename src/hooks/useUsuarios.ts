@@ -3,8 +3,9 @@ import { useContext,useState } from 'react';
 import { AuthContext } from '@/common/context/AuthContext';
 import Swal from 'sweetalert2';
 import UsuarioService from '@/common/api/usuarios';
-import { Credentials } from '@/pages/Aula/Aulavirtual/typeEstudiante';
+ 
 import useLogout from './useLogout';
+import { Credentials } from '@/common/type/type_loginemail';
  
 export default function useUsuarios(){
  

@@ -1,29 +1,36 @@
-import LoginEstudiante from '@/pages/Aula/Mobile/Components/LoginEstudiante';
-import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
+import AccountWrapper from '@/pages/account/Login/AccountWrapper';
+//import { useEffect } from 'react';
+import { useAuth } from '@/hooks';
 
+import { useEffect } from 'react';
+import { WizardLogin } from './WizardLogin';
 const Login = () => {
-    const [isMobile, setIsMobile] = useState(false);
 
-    useEffect(() => {
-        const userAgent = navigator.userAgent.toLowerCase();
-        const mobileDevices = ['android', 'iphone', 'ipad', 'ipod'];
-        const isMobileDevice = mobileDevices.some(device => userAgent.includes(device));
-        setIsMobile(isMobileDevice);
-    }, []);
+const { isAuthenticated } = useAuth();
+const navigate = useNavigate();
 
-    const InicioLogin = () => {
-        if (isMobile) {
-            return (
-                <section className="py-0 px-0 border-top border-bottom border-light" id="contact-us-landing">
-                    <div className="mobile-only">
-                        <LoginEstudiante />
-                    </div>
-                </section>
-            );
-        }
-    };
+  useEffect(() => {
+    if (isAuthenticated) {
+        navigate('/aula/mobile', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
-    return <><InicioLogin /></>;
+
+  return (
+    <AccountWrapper>
+      <Container fluid className={`cta-box`}>
+         
+        <Row className="justify-content-center">
+
+          <Col xs={12} sm={8} md={6} lg={4} className="text-center">
+             <WizardLogin />
+          </Col>
+        </Row>
+      </Container>
+    </AccountWrapper>
+  );
 };
 
 export default Login;

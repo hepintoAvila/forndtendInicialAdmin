@@ -1,12 +1,13 @@
 import { config, encodeBasicUrl} from '@/common';
 import EstudianteService from '@/common/api/estudiante';
 import { AuthContext } from '@/common/context/AuthContext';
-import { Credentials, EstudianteServiceResponse } from '@/pages/Aula/Aulavirtual/typeEstudiante';
+ 
 import { debounce } from 'lodash';
  
 import { useContext,useState } from 'react';
 import useTurnos from './useTurnos';
 import { atom, useAtom } from 'jotai';
+import { Credentials, EstudianteServiceResponse } from '@/pages/Aula/type/typeEstudiante';
 		  interface BodyData {
 			  documento?: number | undefined ;
 			}

@@ -137,7 +137,7 @@ text-align: left;
 // Ajustes específicos para pantallas más pequeñas 
 @media (max-width: 768px) {
     .input-container-login, .input-container-password {
-        width: 80% !important; 
+        width: 100% !important; 
         margin: 0.5rem auto; 
         padding: 0 1rem;
         justify-content: center; /* Centra horizontalmente en pantallas pequeñas */
@@ -151,7 +151,7 @@ text-align: left;
 // Ajustes para pantallas medianas (tablet y pantallas pequeñas) 
 @media (min-width: 769px) and (max-width: 1024px) {
     .input-container-login, .input-container-password {
-        max-width:80% !important; 
+        max-width:100% !important; 
         margin: 2rem auto;
     }
 
@@ -163,7 +163,7 @@ text-align: left;
 // Ajustes para pantallas grandes (escritorio) 
 @media (min-width: 1025px) and (max-width: 1366px) {
     .input-container-login, .input-container-password {
-        max-width: 80% !important; 
+        max-width: 100% !important; 
         margin: 0.7rem auto;
     }
 

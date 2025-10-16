@@ -8,7 +8,9 @@ import LoginAuth0Service from '@/common/api/login_auth0';
 interface BodyDataEmail {
   email: string;
 }
-
+interface BodyDataDocumento {
+  documento: number;
+}
 interface Usuario {
   documento: string;
   rol: string;
@@ -57,6 +59,9 @@ export default function useLoginEmail() {
 
   const generateBodyDataEmail = useCallback((email: string): BodyDataEmail => {
     return { email };
+  }, []);
+  const generateBodyDataDocument = useCallback((documento: number): BodyDataDocumento => {
+    return { documento };
   }, []);
 
 const generateBodyPersonales = useCallback((dataBody: any): Usuario => {
@@ -141,6 +146,16 @@ const generateBodySolicitud = useCallback((dataBody: any): Visita => {
   }, [generateBodyDataEmail, sendRequest]);
 
 
+  const handleSubmitSolicitudDocumento = useCallback((value: BodyDataDocumento) => {
+    const credentialsUrl: EmailRequest = {
+      accion: encodeBasicUrl(config.API_ACCION_USUARIOS),
+      opcion: encodeBasicUrl(config.API_ADMIN_USUARIOS_LOGIN_DOCUMENTO_SOLICITUD),
+    };
+    const bodyData = generateBodyDataDocument(value as unknown as number);
+    sendRequest(credentialsUrl, bodyData);
+    
+  }, [generateBodyDataDocument, sendRequest]);
+
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => {
@@ -158,7 +173,7 @@ const generateBodySolicitud = useCallback((dataBody: any): Visita => {
       return () => clearTimeout(timer);
     }
   }, [message]);
-console.log('usuario', usuario);
+//console.log('usuario', usuario);
   return {
     loading,
     error,
@@ -167,5 +182,6 @@ console.log('usuario', usuario);
     handleSubmitEmail,
     sendDatosPersonales,
     handleSubmitSolicitud,
+    handleSubmitSolicitudDocumento,
   };
 }

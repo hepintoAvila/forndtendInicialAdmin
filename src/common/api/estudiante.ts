@@ -1,4 +1,4 @@
-import { ApiEstudianteResponse, EstudianteServiceInterface, EstudianteServiceResponse, UserProps } from "@/pages/Aula/Aulavirtual/typeEstudiante";
+import { ApiEstudianteResponse, EstudianteServiceInterface, EstudianteServiceResponse, UserProps } from "@/pages/Aula/type/typeEstudiante";
 //import config from "../helpers/config";
 
 

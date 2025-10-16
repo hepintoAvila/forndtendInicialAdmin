@@ -62,17 +62,16 @@ import { MenuItem } from '@/pages/Aula/Mobile/Components/LoginEstudiante/type';
 
  
   const login = async (credentialsAuth: any) => {
-   
+    setIsAuthenticated(false);
     setLoading(true);
     setError(null);
        const urlObjet = {
         accion: encodeBasicUrl(config.API_ACCION_AUTH),
         opcion: encodeBasicUrl(config.API_OPCION_AUTH),
-      };  
-  try {
-      const authService = AuthService(urlObjet);
-      const result = await authService.Autentications(credentialsAuth);
+      }; 
 
+  try {
+       const result = await AuthService(urlObjet).Autentications(credentialsAuth);
       if (result.status === 'success' && result.data) {
         setUser(result.data.auth);
         //setPermisos(result.data.permisos);
@@ -98,8 +97,16 @@ import { MenuItem } from '@/pages/Aula/Mobile/Components/LoginEstudiante/type';
 
       setPermisos(permisos as any);
         return result.data;
+      } else if(result.status === 'error'){
+            Swal.fire({
+              title: 'Error',
+              text: 'Error de autenticación',  
+              icon: 'error',
+              timer: 2000,
+            }); 
+            setIsAuthenticated(false);
       } else {
-       
+        setIsAuthenticated(false);
         throw new Error(result.error || 'Autenticación fallida');
       }
     } catch (err) {
@@ -109,6 +116,7 @@ import { MenuItem } from '@/pages/Aula/Mobile/Components/LoginEstudiante/type';
     } finally {
       setLoading(false);
     }
+
   };
 const logout = async () => {
 		// Simular un delay para operaciones async si es necesario

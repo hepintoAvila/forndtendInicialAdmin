@@ -21,9 +21,11 @@ const Logout = () => {
     }, [redirect]);
     return (
         <>
+        
             <LogoutWrapper bottomLinks={<SocialLogout />} >
 
             </LogoutWrapper>
+             
         </>
     );
 };

@@ -2,11 +2,12 @@ import { config, encodeBasicUrl} from '@/common';
  
 import PcsService from '@/common/api/pcs';
 import { AuthContext } from '@/common/context/AuthContext';
-import { Credentials, PcsData } from '@/pages/Aula/Aulavirtual/type';
+ 
 import { useContext, useState } from 'react';
 
 import { atom, useAtom } from 'jotai';
 import mobileServicio from '@/common/api/mobileServicio';
+import { Credentials, PcsData } from '@/pages/Aula/type/type';
 const ApiEPcAtom = atom<PcsData>([] as unknown as PcsData);
 
 export default function usePcs(){

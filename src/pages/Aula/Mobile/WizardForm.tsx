@@ -19,7 +19,7 @@ const WizardWithProgressbar = ({ computadores,usuario }: any) => {
         handleSubmitForm,
     } = useFormState(usuario);
 
-   // console.log('bienvenido', bienvenido);
+console.log('computadores', computadores);
     return (<>
         <Card>
             <Card.Body>
@@ -38,29 +38,27 @@ const WizardWithProgressbar = ({ computadores,usuario }: any) => {
                                 <Step
                                     id="ubicacion"
                                     render={({ next }) => (
-                                        <Form>
-                                            <UbicacionForm
-                                                ubicacion={ubicacion}
-                                                setUbicacion={setUbicacion as any}
-                                                handleSubmit={(data) => {
-                                                    handleFormChange('ubicacion', data.ubicacion);
-                                                    next();
-                                                }}
-                                            />
-
-                                            <ul className="list-inline wizard mb-0">
-                                                <li className="next list-inline-item float-end">
-                                                    <Button variant="success" onClick={next} disabled={!ubicacion}>
-                                                        Siguiente
-                                                    </Button>
-                                                </li>
-                                            </ul>
-                                        </Form>
+                                        
+                                            <><UbicacionForm
+                                            ubicacion={ubicacion}
+                                            setUbicacion={setUbicacion as any}
+                                            handleSubmit={(data) => {
+                                                handleFormChange('ubicacion', data.ubicacion);
+                                                next();
+                                            } } /><Form>
+                                                <ul className="list-inline wizard mb-0">
+                                                    <li className="next list-inline-item float-end">
+                                                        <Button className="submit-button rounded-pill" onClick={next} disabled={!ubicacion}>
+                                                            Siguiente
+                                                        </Button>
+                                                    </li>
+                                                </ul>
+                                            </Form></>
                                     )}
                                 />
                                 <Step
                                     id="motivo"
-                                    render={({ next, previous }) => (
+                                    render={({ next }) => (
                                         <Form>
                                             {bienvenido ? (
                                                 <Bienvenida />
@@ -81,7 +79,7 @@ const WizardWithProgressbar = ({ computadores,usuario }: any) => {
                                             <ul className="list-inline wizard mb-0">
                                                 <li className="next list-inline-item float-end">
                                                     <Button
-                                                        variant="success"
+                                                        className="submit-button rounded-pill"
                                                         onClick={() => {
                                                             next();
                                                             if (ubicacion === 'Hemeroteca') {
@@ -98,7 +96,7 @@ const WizardWithProgressbar = ({ computadores,usuario }: any) => {
                                 />
                                 <Step
                                     id="dumbledore"
-                                    render={({ previous }) => (
+                                    render={() => (
                                         <Row>
                                             {ubicacion === 'Hemeroteca' ? (
                                                 <Bienvenida />

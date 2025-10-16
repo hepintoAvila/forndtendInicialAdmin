@@ -40,7 +40,7 @@ const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
           <Row>
             <Col sm={12} className="mt-5">
               <Form.Group className="mobile-form-group bg-light" controlId="validation">
-                <Form.Label>Donde estas ubicado?</Form.Label>
+                <Form.Label><h3>Donde estas ubicado?</h3></Form.Label>
                 <div>
                   <Form.Check
                     type="radio"

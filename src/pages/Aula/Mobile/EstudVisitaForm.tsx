@@ -1,12 +1,12 @@
 import { Card, Col, Modal, Row } from 'react-bootstrap';
 import { useState } from 'react';
-import VisitasForm from './VisitasForm';
+//import VisitasForm from './VisitasForm';
 import { useLogout } from '@/hooks';
-import { ProgramaList } from '@/common/type/type._programas';
 import Profile from './Profile';
 import FooterMobile from './Components/FooterMobile';
 import { WizardForm } from './WizardForm';
 import useLoginEmail from '@/hooks/useLoginEmail';
+ 
 type Usuario = {
   Nom?: string;
   Email?: string;
@@ -16,23 +16,23 @@ type Usuario = {
 };
 
 interface FormTabsProps {
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  onChangeDocumento: (documento: string) => void;
-  handleSelectChangeRol: (event: any) => void;
-  handleSelectPrograma: (event: any) => void;
-  documentoAnterior: any;
-  programas: ProgramaList[];
+  //handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  //setDocumento: (documento: string) => void;
+  //handleSelectChangeRol: (event: any) => void;
+  //handleSelectPrograma: (event: any) => void;
+  //documentoAnterior: any;
+  //programas: ProgramaList[];
   computadores: [] | undefined;
 }
 
 const EstudVisitaForm = ({
-  handleSubmit,
-  onChangeDocumento,
-  documentoAnterior,
-  programas,
+ // handleSubmit,
+  //onChangeDocumento,
+  //documentoAnterior,
+  //programas,
   computadores,
-  handleSelectChangeRol,
-  handleSelectPrograma,
+  //handleSelectChangeRol,
+ // handleSelectPrograma,
 }: FormTabsProps) => {
   const { usuario } = useLoginEmail();
 
@@ -50,8 +50,9 @@ const EstudVisitaForm = ({
   //console.log('isActivo', isActivo);
   return (<>
     <Modal show={showModal} onHide={handleLogout} size="sm" fullscreen={true}>
-      <Profile />
+       <Profile />
       <Modal.Header>
+       
         <Modal.Title>{isActivo ? 'Registra tu Visita' : 'Registra tus datos personales'}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -60,15 +61,7 @@ const EstudVisitaForm = ({
             <Card>
               <Card.Body>
                 {isActivo ? (
-                  <WizardForm computadores={computadores as any} usuario={usuario as any} />) : (<VisitasForm
-                    handleSubmit={handleSubmit}
-                    onChangeDocumento={onChangeDocumento}
-                    handleSelectPrograma={handleSelectPrograma}
-                    handleSelectChangeRol={handleSelectChangeRol as any}
-                    documentoAnterior={documentoAnterior}
-                    programas={programas as any}
-
-                  />)}
+                  <WizardForm computadores={computadores as any} usuario={usuario as any} />) : 'Cargando...'}
               </Card.Body>
             </Card>
           </Col>

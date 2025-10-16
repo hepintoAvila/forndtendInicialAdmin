@@ -42,18 +42,28 @@ const [motivos] = useState([
           <Row>
             <Col sm={12} className="mt-5">
               <Form.Group className="mobile-form-group bg-light" controlId="validation">
-                <Form.Label>Cual es el Motivo de tu Visita</Form.Label>
+                <Form.Label><h3>Cual es el Motivo de tu Visita</h3></Form.Label>
                 <div>
                   {filteredMotivos.map((m) => (
-                    <Form.Check
-                      key={m.value}
-                      type="radio"
-                      name="motivo"
-                      value={m.value}
-                      label={m.label}
-                      onChange={handleCheckChange}
-                      checked={motivo === m.label}
-                    />
+                    <div key={m.value} className="d-flex align-items-center" style={{ marginBottom: '10px' }}>
+                      <Form.Check
+                        type="radio"
+                        name="motivo"
+                        value={m.label}
+                        onChange={handleCheckChange}
+                        checked={motivo === m.label}
+                        id={m.value}
+                        className="form-check-input"
+                        style={{ width: '25px', height: '25px', cursor: 'pointer' }}
+                      />
+                      <Form.Label
+                        htmlFor={m.value}
+                        className="ms-2"
+                        style={{ fontSize: '1.2rem', cursor: 'pointer' }}
+                      >
+                        {m.label}
+                      </Form.Label>
+                    </div>
                   ))}
                 </div>
                 <Form.Control.Feedback type="invalid">Por favor, seleccione el motivo</Form.Control.Feedback>

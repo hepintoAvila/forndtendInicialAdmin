@@ -1,5 +1,8 @@
-import { ApiEstudianteResponse, Credentials } from "@/pages/Aula/Aulavirtual/typeEstudiante";
+ 
 //import config from "../helpers/config";
+
+import { Credentials } from "@/pages/Aula/type/type";
+import { ApiEstudianteResponse } from "@/pages/Aula/type/typeEstudiante";
 
 const UsuarioService = (urlObjet : any): any => {
 

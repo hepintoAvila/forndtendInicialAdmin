@@ -1,10 +1,10 @@
 
 import { AuthContext } from '@/common/context/AuthContext';
-import { Credentials} from '@/pages/Aula/Aulavirtual/type';
+ 
 import { useContext, useState } from 'react';
  import { atom, useAtom } from 'jotai';
 import { config, encodeBasicUrl, useNotificationContext } from '@/common';
-import { ApiVisitaResponseData, VisitaRequest } from '@/common/type/type._visitas';
+import { ApiVisitaResponseData, Credentials, VisitaRequest } from '@/common/type/type._visitas';
 import VisitaService from '@/common/api/visitas';
 
 const ApiVisitaAtom = atom<ApiVisitaResponseData>([] as unknown as ApiVisitaResponseData);

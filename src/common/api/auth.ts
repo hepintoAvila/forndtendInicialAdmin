@@ -1,12 +1,11 @@
 import { AuthServiceInterface, AuthServiceResponse } from "@/pages/Aula/Mobile/Components/LoginEstudiante/type";
 import { UserProps } from "@/pages/Aula/Mobile/Components/type/type";
 import { ApiResponse, AuthData } from "../type/type_loginemail";
- 
- 
+
 const AuthService = (urlObjet: any): AuthServiceInterface => {
-  
+ 
   const Autentications = async (values: UserProps): Promise<AuthServiceResponse> => {
-    // const url = import.meta.env.VITE_API_URL;
+  
     const credentials = {
       var_login: values.login,
       password: values.password,
@@ -23,7 +22,7 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
     });
 
     try {
-      const response = await fetch(`/api2025/?${params.toString()}`, {
+      const response: Response = await fetch(`/api2025/?${params.toString()}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +32,6 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
         },
         credentials: 'include'
       });
-
       // Verificar si la respuesta está vacía
       if (response.status === 204) {
         return {
@@ -52,7 +50,20 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
       }
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+            return {
+          status: 'error',
+          data: {
+            auth: [] as unknown as AuthData,
+            permisos: [],
+            menu: [],
+            metadata: {
+              statusCode: 500,
+              type: 'error',
+              message: `HTTP error! status: ${response.status}`
+            }
+          }
+        };
+        //throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       // Obtener el texto de la respuesta primero para debuggear
@@ -62,7 +73,7 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
      if (!responseText) {
         console.log('La respuesta está vacía');
         // Puedes manejar este caso según tus necesidades
-        throw new Error('La respuesta está vacía');
+          throw new Error('La respuesta está vacía');
       }
       // Intentar parsear como JSON
       let result:  ApiResponse;
@@ -71,6 +82,7 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
       } catch (parseError) {
         console.error('JSON parse error:', parseError, 'Response text:', responseText);
         throw new Error('La respuesta no es un JSON válido');
+        
       }
 
       // Verificar la estructura de la respuesta
@@ -94,7 +106,12 @@ const AuthService = (urlObjet: any): AuthServiceInterface => {
         throw new Error(result.message || 'Error en la autenticación');
         
       }
-
+      
+      // If the code reaches here, return a default error response
+      return {
+        status: 'error',
+        error: 'No se pudo autenticar. No se recibió respuesta válida.'
+      };
     } catch (error) {
       console.error('Auth error:', error);
       return {

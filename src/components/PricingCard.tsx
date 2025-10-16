@@ -49,7 +49,7 @@ const PricingCard = ({ plans, containerClass }: PricingCardProps) => {
 										return <li key={index1.toString()}>{feature}</li>;
 									})}
 								</ul>
-								<button className="btn btn-primary mt-4 mb-2 rounded-pill">
+								<button className="btn btn-primary mt-4 mb-2 rounded-pill"> 
 									Choose Plan
 								</button>
 							</Card.Body>

@@ -23,7 +23,7 @@ const BuscadorForm = ({ programas,sendReportsHistoRequest}: EstudianteFormProps)
                 fecha
               }
           }
-       console.log('urlObjet',urlObjet);
+      // console.log('urlObjet',urlObjet);
       sendReportsHistoRequest(urlObjet);
     /*
       if (estudiantes?.length < 1) {

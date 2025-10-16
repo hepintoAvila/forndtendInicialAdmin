@@ -6,6 +6,7 @@ import { groupByFields } from '@/utils';
 
 type TopbarSearchProps = {
 	options: SearchOption[];
+	handleSelectPrograma: (event: any) => void;
 };
 
 /*
@@ -13,55 +14,14 @@ type TopbarSearchProps = {
  */
 const optionGetter = (option: SearchOption) => {
 	switch (option.type) {
-		case 'report':
+		case 'programa':
 			return (
 				<Link to="" className={classNames('dropdown-item', 'notify-item', 'p-0')}>
 					<i className={classNames(option.icon, 'font-16', 'me-1')}></i>
 					<span>{option.label}</span>
 				</Link>
 			);
-		case 'help':
-			return (
-				<Link to="" className={classNames('dropdown-item', 'notify-item', 'p-0')}>
-					<i className={classNames(option.icon, 'font-16', 'me-1')}></i>
-					<span>{option.label}</span>
-				</Link>
-			);
-		case 'settings':
-			return (
-				<Link to="" className={classNames('dropdown-item', 'notify-item', 'p-0')}>
-					<i className={classNames(option.icon, 'font-16', 'me-1')}></i>
-					<span>{option.label}</span>
-				</Link>
-			);
-		case 'title':
-			return (
-				<div className="noti-title">
-					<h6 className="text-overflow mb-2 text-uppercase">Users</h6>
-				</div>
-			);
-		case 'users':
-			return (
-				<Link to="" className="dropdown-item notify-item p-0">
-					<div className="d-flex">
-						<img
-							src={option.userDetails?.avatar}
-							alt=""
-							className="d-flex me-2 rounded-circle"
-							height="32"
-						/>
-						<div className="w-100">
-							<h5 className="drop-username m-0 font-14">
-								{option.userDetails?.firstname} {option.userDetails?.lastname}
-							</h5>
-							<span className="user-subinfo font-12 mb-0">
-								{option.userDetails?.position}
-							</span>
-						</div>
-					</div>
-				</Link>
-			);
-
+	
 		default:
 			return;
 	}
@@ -80,9 +40,9 @@ const formatOptions = (options: SearchOption[]) => {
 
 	for (let i = 0; i < grouppedData.length; i++) {
 		for (let j = 0; j < grouppedData[i].length; j++) {
-			if (grouppedData[i][j].type === 'users' && count === 0) {
+			if (grouppedData[i][j].type === 'programa' && count === 0) {
 				grouppedData[i].splice(j, 0, {
-					label: 'Users',
+					label: 'programa',
 					value: 'title',
 					type: 'title',
 				});
@@ -97,12 +57,6 @@ const formatOptions = (options: SearchOption[]) => {
 /* custom control */
 const Control = (props: any) => {
 	const { handleClick } = props.selectProps;
-
-	// Estilos en línea para el icono
-
-
-
-
 	return (
 		<components.Control {...props} >
 
@@ -115,17 +69,6 @@ const Control = (props: any) => {
 		</components.Control>
 	);
 };
-
-/* custon indicator 
-const IndicatorsContainer = (props: any) => {
-	const { handleClick } = props.selectProps;
-	return (
-		<div>
-
-		</div>
-	);
-};
-*/
 /* custom menu list */
 const MenuList = (props: any) => {
 	const { options } = props.selectProps;
@@ -135,7 +78,7 @@ const MenuList = (props: any) => {
 			{/* menu header */}
 			<div className="dropdown-header noti-title">
 				<h5 className="text-overflow px-3 mb-2">
-					Found <span className="text-danger">{options.length}</span> results
+					resultados <span className="text-danger">{options.length}</span> encontrados
 				</h5>
 			</div>
 			{props.children}
@@ -149,7 +92,8 @@ const handleFormatOptionLabel = (option: SearchOption) => {
 	return <div>{formattedOption}</div>;
 };
 
-const TopbarSearch = ({ options }: TopbarSearchProps) => {
+const TopbarSearch = ({ options,handleSelectPrograma }: TopbarSearchProps) => {
+ 
 	return (
 		<Select
 			components={{ Control, MenuList }}
@@ -160,8 +104,8 @@ const TopbarSearch = ({ options }: TopbarSearchProps) => {
 			maxMenuHeight={350}
 			isSearchable
 			isClearable
-			name="search-app"
-			className="app-search dropdown d-none d-lg-block"
+			name="programas"
+			onChange={handleSelectPrograma}
 			classNamePrefix="react-select"
 		/>
 	);

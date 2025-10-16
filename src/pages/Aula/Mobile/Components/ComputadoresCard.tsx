@@ -1,23 +1,21 @@
 import { Loader } from "@/components";
 import { Pc } from "./type/type";
-import { Carousel } from 'react-bootstrap';
 
 interface ComputadorCardProps {
   computadores: Pc[];
-   handleSelectComputador: (computador: Pc) => void;
+  handleSelectComputador: (computador: Pc) => void;
 }
 
-const ComputadoresCard = ({ computadores,handleSelectComputador}: ComputadorCardProps) => {
+const ComputadoresCard = ({ computadores, handleSelectComputador }: ComputadorCardProps) => {
   return (
     computadores === undefined || computadores === null ? (
       <div className="text-center">
         <Loader isLoader={true} toggleLoader={() => {}} />
       </div>
-    ) : computadores.length > 0 ? (<>
-   <Carousel>
-      {computadores?.map((computador, index) => (
-        <Carousel.Item key={index}>
-          <div className="mb-3">
+    ) : computadores.length > 0 ? (
+      <div className="row">
+        {computadores?.map((computador, index) => (
+          <div key={index} className="col-md-6 mb-4">
             <div className={`card h-100 p-4 py-4 ${computador.estado === 'Libre' ? 'bg-light text-black' : 'bg-danger text-white'}`} onClick={() => handleSelectComputador(computador)}>
               <div className={`card-body ${computador.estado === 'Libre' ? 'bg-success' : 'bg-danger'}  shadow-sm rounded-2 h-100 ms-3 border-top border-bottom border-light`}>
                 <div className={`${computador.estado === 'Libre' ? 'bg-success' : 'bg-danger'} d-flex justify-content-between mb-3`}>
@@ -35,14 +33,12 @@ const ComputadoresCard = ({ computadores,handleSelectComputador}: ComputadorCard
               </div>
             </div>
           </div>
-        </Carousel.Item>
-      ))}
-    </Carousel> </>)  : (<>
+        ))}
+      </div>
+    ) : (
       <div>No hay computadores disponibles</div>
-    </>)
     )
-  
-  
+  );
 };
 
 export default ComputadoresCard;
