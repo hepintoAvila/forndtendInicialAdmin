@@ -3,6 +3,8 @@ import Swal from 'sweetalert2';
 import { useNotificationContext } from '@/common';
 import useLoginEmail from '@/hooks/useLoginEmail';
 import { useLogout } from '@/hooks';
+import io from 'socket.io-client';
+
 
 const useFormState = (usuario: any) => {
     const logout = useLogout();
@@ -72,24 +74,62 @@ const useFormState = (usuario: any) => {
         };
     };
 
-    const handleSelectComputador = (computador: any) => {
+ const handleSelectComputador = (computador: any) => {
+    
+    if (computador.estado === 'Libre') {
+        Swal.fire({
+            title: 'Confirmar selección de PC',
+            text: `¿Desea tomar el turno del PC No. ${computador.numero}?`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, tomar turno',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const formData = validateForm(computador, ubicacion, motivo, usuario);
+                if (formData) {
+                    handleSubmitSolicitud(formData);
+                    setBienvenido(true);
+                    setTimeout(async () => {
+                        await logout();
+                    }, 2000); // 2000 milisegundos = 2 segundos
+                }
+                Swal.fire({
+                    title: 'PC seleccionado',
+                    text: `Se seleccionó el PC No. ${computador.numero}`,
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar',
+                    timer: 2000,
+                });
+            } else {
+                Swal.fire({
+                    title: 'Selección cancelada',
+                    text: 'No se seleccionó el PC',
+                    icon: 'info',
+                    confirmButtonText: 'Aceptar',
+                    timer: 2000,
+                });
+            }
+        });
+                const socket = io('http://localhost:3000');
+
+                // Cuando se envía la solicitud
+                socket.emit('nueva-solicitud', {
+                    id: Date.now(),
+                    usuario: 'Usuario que selecciona el PC',
+                    pc: 'PC seleccionado',
+                    estado: 'pendiente',
+                });
+    } else {
         Swal.fire({
             title: 'PC seleccionado',
-            text: `Se seleccionó el PC No. ${computador.numero}`,
-            icon: 'success',
+            text: `El computador No. ${computador.numero} seleccionado no está disponible. Por favor, elija otro.`,
+            icon: 'error',
             confirmButtonText: 'Aceptar',
             timer: 2000,
         });
-
-        const formData = validateForm(computador, ubicacion, motivo, usuario);
-         if (formData) {
-            handleSubmitSolicitud(formData);
-            setBienvenido(true);
-            setTimeout(async () => {
-                await logout();
-            }, 2000); // 2000 milisegundos = 2 segundos
-        }
-    };
+    }
+};
 
     const handleFormChange = (step: any, data: any) => {
         setFormData((prevFormData) => ({ ...prevFormData, [step]: data }));
