@@ -48,6 +48,7 @@ const changeState = (id_pc: any) => {
   };
     const ObjetBodys = {
       id_pc:id_pc,
+      pcselect:id_pc,
       estado:'Libre',
     }
     const BodyData = generateBodyData(ObjetBodys);
@@ -62,6 +63,7 @@ const changeState = (id_pc: any) => {
 
     const ObjetBodys = {
           id_pc:0,
+          pcselect:0,
           estado:'Active',
         }
         const BodyData = generateBodyData(ObjetBodys);

@@ -59,13 +59,15 @@ const calcularFechaFinal = (prestamo: Prestamo): PrestamoResponse => {
 export default function useTurnos(){
  interface BodyData {
         id_pc?: number | undefined ;
+        pcselect?: number | undefined ;
         estado?: string | undefined ;
 
 }
-    const generateBodyData = (ObjetBody: {  id_pc: number | undefined, estado: string | undefined } ): BodyData => {
+    const generateBodyData = (ObjetBody: {  id_pc: number | undefined, pcselect: number | undefined, estado: string | undefined } ): BodyData => {
       const bodyData: BodyData = {};
       if (ObjetBody) {
             bodyData.id_pc = ObjetBody.id_pc;
+            bodyData.pcselect = ObjetBody.pcselect;
             bodyData.estado = ObjetBody.estado;
       }
       return bodyData;

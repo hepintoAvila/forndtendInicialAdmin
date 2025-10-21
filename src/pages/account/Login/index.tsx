@@ -2,7 +2,6 @@ import { Form, PasswordInput } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button, Container, Row, Col } from 'react-bootstrap';
-import SocialLogin from '../SocialLogin';
 import TextInputSinOnchange from '@/components/Form/TextInputSinOnchange';
 import LogoDark from '@/assets/images/logo-dark.jpg';
 import AccountWrapper from '@/pages/account/Login/AccountWrapper';

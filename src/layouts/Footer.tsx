@@ -6,7 +6,7 @@ export default function Footer() {
             <div className="container-fluid">
                 <Row> 
                     <Col md={12}>
-                        <div className="text-md-end footer-links d-none d-md-block">
+                        <div className="text-md-end footer-links d-none d-md-block text-white">
                             <span>LiviSoft - Universidad Popular del Cesar  
                               - Desarrollado por: Ing. Holmes Elias Pinto Avila @2025</span>
                         </div>

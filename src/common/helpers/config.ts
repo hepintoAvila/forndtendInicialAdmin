@@ -1,9 +1,9 @@
 const config = {
 	 
-    API_URL_WEB: "https://lacasadelbarbero.com.co",
-    //API_URL_WEB: "https://biblioteca.unicesar.edu.co",
-    API_URL: "https://lacasadelbarbero.com.co/api2025/",
-   //API_URL: "https://biblioteca.unicesar.edu.co/api2025/",
+    //API_URL_WEB: "https://lacasadelbarbero.com.co",
+    API_URL_WEB: "https://biblioteca.unicesar.edu.co",
+   // API_URL: "https://lacasadelbarbero.com.co/api2025/",
+    API_URL: "https://biblioteca.unicesar.edu.co/api2025/",
    //API_URL: "https://biblioteca.unicesar.edu.co/plugins-dist${config.API_URL_WEB}/api2025/?",
 	API_URL_AUTH : '/dashboard/tarjetas', 
 	API_ACCION_AUTH  :  'auteur', 
@@ -38,10 +38,12 @@ const config = {
 	API_OPCION_UPDATE_PCS: 'update_pcs', 
 	API_OPCION_UPDATE_PCS_AGUACHICA: 'update_pcs_aguachica', 
 	API_OPCION_PCS_AGUACHICA: 'consulta_pcs_aguachica', 
+	API_OPCION_PCS_PENDIENTES: 'consulta_notificaciones_mobile', 
 	
 	API_ACCION_TURNOS: 'admin_turnos', 
 	API_OPCION_ADD_TURNOS: 'add_turno',  
 	API_OPCION_ADD_TURNOS_AGUACHICA: 'add_turno_aguachica',  
+	API_OPCION_ADD_TURNOS_MOBILE: 'add_turno_mobile',  
 	_SPIP_PAGE: 'admin_turnos',  
 	API_OPCION_QUERY_TURNOS: 'consulta_turnos_documento',  
 

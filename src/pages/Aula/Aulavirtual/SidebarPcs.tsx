@@ -5,9 +5,9 @@ import { Pc } from "./type";
 import { ApiTurnoResponseData } from "@/common/type/type._turnos";
 import { ProgramaList } from "@/common/type/type._programas";
 import FormTabs from "./FormTabs";
-import { useViewport } from "@/hooks";
+ 
 import SliderDesktop from "./SliderDesktop";
-import SliderMobile from "./SliderMobile";
+ 
 
 const SidebarPcs = ({
   turnos,
@@ -22,6 +22,7 @@ const SidebarPcs = ({
   selectedComputador,
   handleDocumentoChange,
   changeState,
+  consultState,
   programas
 }: {
   turnos: ApiTurnoResponseData;
@@ -30,7 +31,8 @@ const SidebarPcs = ({
   estudiantes: any;
   handleShowModal: (computador: Pc) => void;
   handleDocumentoChange: (arg1: string) => void;
-  changeState: (arg: number) => void;
+  changeState: (arg1: number,arg2: number,arg3:string) => void;
+  consultState: () => void;
   handleCloseModal: () => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   handleSubmitEstudent: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -48,10 +50,12 @@ const SidebarPcs = ({
   const onChangeDocumento = (e: any) => {
     handleDocumentoChange(e.target.value);
   };
-  const { width } = useViewport();
+ // const { width } = useViewport();
+  
+  const pcLibres = computadores?.filter(pc => pc.estado === 'Libre').sort((a, b) => parseInt(a.id_pc || '0') - parseInt(b.id_pc || '0'));
   return (
     <nav className="flex-column flex-sm-row">
-      { width > 1140 ? <SliderDesktop columnas={columnas} handleShowModal={handleShowModal} />:<SliderMobile columnas={columnas} handleShowModal={handleShowModal} />}
+      <SliderDesktop columnas={columnas} handleShowModal={handleShowModal} consultState={consultState}/>
       <Modal show={showModal} onHide={handleCloseModal} >
         <Modal.Header closeButton>
           <Modal.Title>Asignar PC </Modal.Title>
@@ -59,6 +63,7 @@ const SidebarPcs = ({
         <Modal.Body>
           <FormTabs
             selectedComputador={selectedComputador}
+            pcLibres={pcLibres as any}
             handleSubmit={handleSubmit}
             onChangeDocumento={onChangeDocumento}
             documentoAnterior={documentoAnterior}

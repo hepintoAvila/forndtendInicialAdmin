@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row } from 'react-bootstrap';
 import { Pc } from './type';
 import ComputadorCard from './ComputadorCard';
@@ -6,13 +6,32 @@ import ComputadorCard from './ComputadorCard';
 interface SidebarPcsProps {
   columnas: Pc[][];
   handleShowModal: (computador: Pc) => void;
+  consultState: () => void;
 }
+ 
   let fila = 0;
-const SliderDesktop: React.FC<SidebarPcsProps> = ({ columnas, handleShowModal }) => {
+const SliderDesktop: React.FC<SidebarPcsProps> = ({ columnas, handleShowModal,consultState }) => {
+ 	const handleOtherClick = (e: MouseEvent) => {
+    const menuNodeRef = document.getElementById('SliderDesktop');
+		if (menuNodeRef && menuNodeRef.contains(e.target as Node))
+			return;
+		// else hide the menubar
+		if (document.body) {
+     consultState();
+			document.body.classList.remove('sidebar-enable');
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('mousedown', handleOtherClick, false);
+		return () => {
+			document.removeEventListener('mousedown', handleOtherClick, false);
+		};
+	}, []);
   return (
       <Row>
-        {columnas.map((columna, indexColumna) => (
-          <div className="col-2" key={indexColumna}>
+        {columnas?.map((columna, indexColumna) => (
+           <div className="col-2" key={indexColumna} id='SliderDesktop'>
             {columna.map((computador, indexFila) => {
               fila++;
               return (
@@ -39,3 +58,4 @@ const SliderDesktop: React.FC<SidebarPcsProps> = ({ columnas, handleShowModal })
 };
 
 export default SliderDesktop;
+ 

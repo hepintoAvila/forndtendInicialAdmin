@@ -1,11 +1,7 @@
-import { Link } from 'react-router-dom';
 import { profileMenus } from './data';
 //import NotificationDropdown from './NotificationDropdown';
-import ProfileDropdown from './ProfileDropdown';
 //import SearchDropdown from './SearchDropdown';
 //import AppsDropdown from './AppsDropdown';
-import MaximizeScreen from './MaximizeScreen';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 // assets
 import logo from '@/assets/images/logo.png';
@@ -19,7 +15,6 @@ import { useAuth, useViewport } from '@/hooks';
 //import { Auth } from '@/types';
 import { useEffect } from 'react';
 import DesktopNavbar from './DesktopNavbar';
-import Profile from '@/pages/Aula/Estudiante/Profile';
 
 //import { useAuth0 } from '@auth0/auth0-react';
   type AppConfig = {

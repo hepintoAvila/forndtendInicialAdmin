@@ -10,9 +10,9 @@ import classnames from 'classnames';
 import EstudianteTable from '../components/EstudianteTable';
 import EmptyTable from '../components/EmptyTable';
 import EstudianteForm from '../components/EstudianteForm';
-
 interface FormTabsProps {
   selectedComputador: Pc;
+  pcLibres: Pc;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   onChangeDocumento: (documento: string) => void;
   documentoAnterior: any;
@@ -20,7 +20,7 @@ interface FormTabsProps {
   handleSubmitEstudent: (event: React.FormEvent<HTMLFormElement>) => void;
   programas: ProgramaList[];
   turnos: ApiTurnoResponseData;
-  changeState: (numero: number) => void;
+  changeState: (arg1: number,arg2: number,arg3:string) => void;
 }
 
 const FormTabs = ({
@@ -33,6 +33,7 @@ const FormTabs = ({
   programas,
   turnos,
   changeState,
+  pcLibres,
 }: FormTabsProps) => {
   const tabContents = [
     {
@@ -48,6 +49,9 @@ const FormTabs = ({
       text: '',
     },
   ];
+
+  
+
 
   return (
     <Tab.Container defaultActiveKey="Prestamo">
@@ -73,7 +77,7 @@ const FormTabs = ({
       <Tab.Content className="mt-0">
         <Tab.Pane eventKey="Prestamo">
           {selectedComputador && (
-            <ComputadorTable selectedComputador={selectedComputador} changeState={changeState} />
+            <ComputadorTable selectedComputador={selectedComputador} changeState={changeState} pcLibres={pcLibres} />
           )}
         {
 					Array.isArray(estudiantes) && estudiantes.length > 0 ? (
