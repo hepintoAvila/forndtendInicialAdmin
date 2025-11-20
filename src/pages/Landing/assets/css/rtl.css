@@ -1,0 +1,100 @@
+body{
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: embed;
+ }
+ .section-heading.heading-layout4 {
+    text-align: right;
+}
+.service-box-layout1 .content-box {
+    text-align: right;
+}
+.pricing-box-layout1,
+.pricing-box-layout2 {
+    text-align: right;
+}
+.call-to-action-box-layout1{
+	text-align: right;
+}
+.section-heading.heading-layout1 h2.heading-title {
+    text-align: right;
+}
+.section-heading.heading-layout1 .heading-description {
+    text-align: right;
+}
+.testimonial-box-layout1 {
+    text-align: right;
+}
+.blog-box-layout2 .item-content .entry-title {
+    text-align: right;
+}
+.blog-box-layout1 .item-content .entry-title {
+    text-align: right;
+}
+.footer-layout1 .footer-logo {
+    text-align: right;
+}
+.footer-layout1 .footer-widget-heading.heading-light {
+    text-align: right;
+}
+.footer-layout1 .footer-posts .footer-post .entry-content {
+    text-align: right;
+}
+.footer-layout1 .footer-widgets ul li {
+    text-align: right;
+}
+.footer-layout1 .footer-widgets ul li a:before{
+	content: "\f053";
+}
+.about-box-layout2 {
+    text-align: right;
+}
+.testimonial-box-layout2 {
+    text-align: right;
+}
+.newsletter-box-layout2 {
+    text-align: right;
+}
+.sidebar-widget .widget .widget-section-heading {
+    text-align: right;
+}
+.sidebar-widget ul li {
+    text-align: right;
+}
+.sidebar-widget ul li:before{
+    content: "\f053";
+}
+.widget_tag_cloud .tagcloud {
+    text-align: right;
+}
+.single-service-box-layout1 .list-item li {
+    text-align: right;
+}
+.single-service-box-layout1 .contact-form-box .comment-respond{
+    text-align: right;
+}
+.inner-banner-wrap .inner-banner-box ul li:before{
+    content: "\f053";
+}
+.single-portfolio-box-layout1{
+    text-align: right;
+}
+.single-portfolio-box-layout2 {
+    text-align: right;
+}
+.single-portfolio-box-layout3 {
+    text-align: right;
+}
+.what-we-do-box-layout1 {
+    text-align: right;
+}
+.info-box .list-item {
+    text-align: right;
+}
+.widget-more-team .list-item li.menu-item:before{
+    content: "";
+}
+.widget-search .form-control{
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+} 

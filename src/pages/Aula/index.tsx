@@ -1,0 +1,24 @@
+import DefaultLayout from '@/layouts/Default';
+import { lazy } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Aguachica from './Aguachica';
+import Labfisica from './Labfisica';
+import Estudiante from './Estudiante';
+const Hemeroteca = lazy(() => import('./Hemeroteca/'));
+const Aulavirtual = lazy(() => import('./Aulavirtual/'));
+const Virtualteca = lazy(() => import('./Estudiante/Virtualteca'));
+//const Register = lazy(() => import('./Register'));
+export default function Account() {
+	return (
+		<Routes>
+			<Route path="/*" element={<DefaultLayout />}>
+				<Route path="hemeroteca" element={<Hemeroteca />} />
+				<Route path="aulavirtual" element={<Aulavirtual />} />
+				<Route path="aguachica" element={<Aguachica />} />
+				<Route path="labfisica" element={<Labfisica />} />
+				<Route path="estudiante" element={<Estudiante />} />
+				<Route path="estudents" element={<Virtualteca />} />
+			</Route>
+		</Routes>
+	);
+}

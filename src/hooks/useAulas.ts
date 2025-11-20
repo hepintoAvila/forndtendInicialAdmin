@@ -1,0 +1,227 @@
+import { config, encodeBasicUrl} from '@/common';
+import { AuthContext } from '@/common/context/AuthContext';
+import { useCallback, useContext, useState } from 'react';
+import { atom, useAtom } from 'jotai';
+import { Aula, ApiAulaResponse, Credentials, AulaPrestamoList } from '@/common/type/type_aulas';
+import AulaService from '@/common/api/aulas';
+import { Aulas, sendAulaPrestamos } from '@/pages/Aula/Labfisica/types';
+import formatoFecha from '@/common/helpers/formatoFecha';
+import { EventInput } from '@fullcalendar/core/index.js';
+type SendAulasRequestParams = {
+  ObjetBodys: any;
+  opcionesAulas: {
+    accion: string;
+    opcion: string;
+  };
+};
+//start: new Date().setDate(new Date().getDate() + 2),
+function convertirFechaATimestamp(eventos: any) {
+  return eventos?.map((evento: { start: string | number | Date; end: string | number | Date; }, index: number) => ({
+    ...evento,
+    id: index + 1,
+    start: new Date(evento.start).getTime(),
+    end: new Date(evento.end).getTime(),
+  }));
+}
+const ApiAulasAtom = atom<ApiAulaResponse>([] as unknown as ApiAulaResponse);
+const ApiAulasprest = atom<AulaPrestamoList>([] as unknown as AulaPrestamoList);
+ 
+export default function useAulas(){
+
+    const generateBodyDataAula = (ObjetBody: {  id: number, title: string, className: string, textClass: string, } ): Aula => {
+      const bodyData: any = {};
+      if (ObjetBody) {
+            bodyData.id = ObjetBody.id;
+            bodyData.title = ObjetBody.title;
+            bodyData.className = ObjetBody.className;
+            bodyData.textClass = ObjetBody.textClass;
+      }
+      return bodyData;
+    };
+    const generateBodyPrestamo = (ObjetBody: {  id: number, title: string, start: Date, end: Date,documento:number } ): AulaPrestamoList => {
+      const bodyData: any = {};
+      if (ObjetBody) {
+            bodyData.id = ObjetBody.id;
+            bodyData.title = ObjetBody.title;
+            bodyData.start = ObjetBody.start;
+            bodyData.end = ObjetBody.end;
+            bodyData.documento = ObjetBody.documento;
+      }
+      return bodyData;
+    };
+const authContext = useContext(AuthContext);
+  if (!authContext) {
+    throw new Error('AuthContext no está disponible');
+  }
+  const {credentials} = authContext;
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [aulas, setAulas] = useAtom(ApiAulasAtom);
+  const [Prestamos, setAulasPrestamos] = useAtom(ApiAulasprest);
+
+  const sendAulas = async (credentialsUrl: any,BodyData:any) => {
+
+    setLoading(true);
+    setError(null);
+       const urlObjet = {
+        accion: credentialsUrl.accion,
+        opcion: credentialsUrl.opcion,
+        _SPIP_PAGE: config.API_ADMIN_AULAS,
+        var_ajax: 'form',
+        bonjour: 'oui', 
+        action: 'true'
+      }; 
+
+  try {
+ 
+      const aulasService = AulaService(urlObjet,BodyData);
+      const result = await aulasService.Autentications(credentials as Credentials);
+
+      if (result.status === 'success' && result.data) {
+         setIsAuthenticated(true);
+          setAulas(result.data.aulas as any);
+          setAulasPrestamos(result.data.prestamos as any);
+          
+        return result.data;
+      } else {
+        throw new Error(result.error || 'Autenticación fallida');
+      }
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+    const sendAulasRequest = async ({ ObjetBodys, opcionesAulas }: SendAulasRequestParams) => {
+      
+        const BodyData = generateBodyDataAula(ObjetBodys);
+        await sendAulas(opcionesAulas, BodyData)
+        .then((response) => {
+         // console.log("response",response);
+          //setAulas(response.aulas as any);
+          
+        })
+        .catch((err) => {
+          const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+        setError(errorMessage);
+        throw err;
+        });
+      };
+    const updateAulasRequest= async (data:any,isEditable:boolean) => {
+    //const dataDatos = convertirFechaATimestamp(data);
+        
+        const BodyData: sendAulaPrestamos = {
+          id: data?.idPrestamo,
+          title: data?.title,
+          start:formatoFecha(new Date(data.start).getTime()as any),
+          end: formatoFecha(new Date(data.end).getTime()as any),
+          documento: data?.documento,
+        }
+ 
+          if (BodyData && BodyData.id !== undefined && Number(BodyData.id) > 1) {
+            console.log('BodyData',BodyData);
+            try {
+              const ObjetBodys = generateBodyPrestamo(BodyData as any);
+              const opcionesAulas = {
+                accion: encodeBasicUrl(config.API_ADMIN_AULAS),
+                opcion: isEditable ? encodeBasicUrl(config.API_OPCION_UPDATE_AULAS_PRESTAMO) : encodeBasicUrl(config.API_OPCION_ADD_AULAS_PRESTAMO),
+              };
+
+              const response = await sendAulas(opcionesAulas, ObjetBodys);
+              console.log("response", response);
+              // setAulas(response.aulas);
+            } catch (error) {
+              const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+              setError(errorMessage);
+              console.error(error);
+            }
+          }
+      
+    }
+     const addAulasRequest= async (data:any) => {
+
+        const BodyData: sendAulaPrestamos = {
+          id:2,
+          title: data?.title,
+          start:formatoFecha(new Date(data.start).getTime()as any),
+          end: formatoFecha(new Date(data.end).getTime()as any),
+          documento: data?.documento,
+        }
+ 
+          if (BodyData && BodyData.title !== undefined) {
+            try {
+              const ObjetBodys = generateBodyPrestamo(BodyData as any);
+              const opcionesAulas = {
+                accion: encodeBasicUrl(config.API_ADMIN_AULAS),
+                opcion: encodeBasicUrl(config.API_OPCION_ADD_AULAS_PRESTAMO),
+              };
+
+              const response = await sendAulas(opcionesAulas, ObjetBodys);
+              console.log("response", response);
+            } catch (error) {
+              const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+              setError(errorMessage);
+              console.error(error);
+            }
+          }
+      
+    }   
+       const deleteAulasRequest= async (idPrestamo:number) => {
+            try {
+
+            const BodyData: sendAulaPrestamos = {
+                  id:idPrestamo,
+                  title: 'title',
+                  start:'0000-00-00 00:00',
+                  end: '0000-00-00 00:00',
+                  documento: 1111111,
+                }
+              const ObjetBodys = generateBodyPrestamo(BodyData as any);
+              const opcionesAulas = {
+                accion: encodeBasicUrl(config.API_ADMIN_AULAS),
+                opcion: encodeBasicUrl(config.API_OPCION_DELETE_AULAS_PRESTAMO),
+              };
+
+              const response = await sendAulas(opcionesAulas, ObjetBodys);
+              console.log("response", response);
+            } catch (error) {
+              const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+              setError(errorMessage);
+              console.error(error);
+            }
+          
+      
+    } 
+    const obtenerAulasPrestamos = useCallback((): EventInput[] => {
+      const aulaDataPrestamos = localStorage.getItem('Prestamos');
+     // console.log('obtenerAulasPrestamos', aulaDataPrestamos);
+      return aulaDataPrestamos ? JSON.parse(aulaDataPrestamos) : [];
+  }, []);
+
+    const obtenerAulaPorId = useCallback((id: number): Aulas | undefined => {
+    const aulaData = localStorage.getItem('Aulas');
+    const appConfig: Aulas[] = aulaData ? JSON.parse(aulaData) : [];
+    return appConfig.find((e: any) => e['id'] === id);
+  }, []);
+
+ const aulasPrestamos = convertirFechaATimestamp(Prestamos);
+   localStorage.setItem('Aulas', JSON.stringify(aulas));
+   localStorage.setItem('Prestamos', JSON.stringify(aulasPrestamos));
+  return {
+    loading,
+    error,
+    isAuthenticated,
+    aulas,
+    aulasPrestamos,
+    sendAulasRequest,
+    sendAulas,
+    updateAulasRequest,
+    addAulasRequest,
+    deleteAulasRequest,
+    obtenerAulasPrestamos,
+    obtenerAulaPorId
+  };
+};

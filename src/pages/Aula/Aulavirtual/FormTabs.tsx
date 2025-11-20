@@ -1,0 +1,125 @@
+import React from 'react';
+import { Tab, Nav } from 'react-bootstrap';
+import PrestamoForm from './PrestamoForm';
+import ComputadorTable from './ComputadorTable';
+import TurnoTable from './TurnoTable';
+import { ApiTurnoResponseData } from '@/common/type/type._turnos';
+import { Pc } from './type';
+import { ProgramaList } from '@/common/type/type._programas';
+import classnames from 'classnames';
+import EstudianteTable from '../components/EstudianteTable';
+import EmptyTable from '../components/EmptyTable';
+import EstudianteForm from '../components/EstudianteForm';
+import { v4 as uuidv4 } from 'uuid';
+interface FormTabsProps {
+  selectedComputador: Pc;
+  pcLibres: Pc;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onChangeDocumento: (documento: string) => void;
+  documentoAnterior: any;
+  estudiantes: { documento: string }[] | undefined;
+  handleSubmitEstudent: (event: React.FormEvent<HTMLFormElement>) => void;
+  programas: ProgramaList[];
+  turnos: ApiTurnoResponseData;
+  changeState: (arg1: number,arg2: number,arg3:string) => void;
+}
+
+const FormTabs = ({
+  selectedComputador,
+  handleSubmit,
+  onChangeDocumento,
+  documentoAnterior,
+  estudiantes,
+  handleSubmitEstudent,
+  programas,
+  turnos,
+  changeState,
+  pcLibres,
+}: FormTabsProps) => {
+  const tabContents = [
+    {
+      id: '1',
+      title: 'Prestamo',
+      icon: 'mdi mdi-home-variant',
+      text: '',
+    },
+    {
+      id: '2',
+      title: 'Registro Rapido',
+      icon: 'mdi mdi-account-circle',
+      text: '',
+    },
+  ];
+
+  
+
+
+  return (
+    <Tab.Container defaultActiveKey="Prestamo">
+      <Nav variant="tabs">
+        {tabContents?.map((tab, index) => {
+          return (
+            <Nav.Item key={uuidv4()}>
+              <Nav.Link eventKey={tab.title}>
+                <i
+                  className={classnames(
+                    tab.icon,
+                    'd-md-none',
+                    'd-block',
+                    'me-1'
+                  )}
+                ></i>
+                <span className="d-none d-md-block">{tab.title}</span>
+              </Nav.Link>
+            </Nav.Item>
+          );
+        })}
+      </Nav>
+      <Tab.Content className="mt-0">
+        <Tab.Pane eventKey="Prestamo">
+          {selectedComputador && (
+            <ComputadorTable selectedComputador={selectedComputador} changeState={changeState} pcLibres={pcLibres} />
+          )}
+        {
+					Array.isArray(estudiantes) && estudiantes.length > 0 ? (
+						(estudiantes.length > 0 && estudiantes[0]?.documento === '00000000') ? (
+						<EmptyTable mensaje="El Usuario no esta registrado" />
+						) : (
+						<EstudianteTable estudiantes={estudiantes} />
+						)
+					) : (
+						<EmptyTable mensaje="No hay estudiantes registrados" />
+					)
+					}
+          <p></p>
+          <p></p>
+          <PrestamoForm
+            estado={selectedComputador.estado}
+            handleSubmit={handleSubmit}
+            onChangeDocumento={onChangeDocumento}
+            documentoAnterior={documentoAnterior}
+            selectedComputador={selectedComputador}
+            estudiantes={estudiantes ?? []}
+          />
+          {Array.isArray(turnos) && turnos?.length > 0 ? (
+            <TurnoTable turnos={turnos} />
+          ) : (
+            <>
+              <EmptyTable mensaje="No existen Turnos asignados" />
+            </>
+          )}
+        </Tab.Pane>
+        <Tab.Pane eventKey="Registro Rapido" >
+          <br/>
+          <EstudianteForm
+            onChangeDocumento={onChangeDocumento}
+            handleSubmitEstudent={handleSubmitEstudent}
+            programas={programas as any}
+          />
+        </Tab.Pane>
+      </Tab.Content>
+    </Tab.Container>
+  );
+};
+
+export default FormTabs;

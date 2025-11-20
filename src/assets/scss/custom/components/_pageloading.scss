@@ -1,0 +1,41 @@
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 9999;
+  }
+  
+  .preloader-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('../../../images/preloader.gif');
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+  }
+
+ .image-container-contactus {
+  position: relative;
+}
+
+.desktop-image-contactus {
+  display: block;
+}
+
+.mobile-image-contactus {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .desktop-image-contactus {
+    display: none;
+  }
+  .mobile-image-contactus {
+    display: block;
+  }
+}

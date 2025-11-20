@@ -1,0 +1,111 @@
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import AccountWrapper from '../Login/AccountWrapper';
+import { useViewport } from '@/hooks';
+const getRootUrl = (width: number) => {
+    
+     const url = width < 1140 ? '/aula/estudiante' :'/#/account/logout';
+    return url;
+};
+ 
+const BottomLink = () => {
+   const { width } = useViewport(); 
+   const url= getRootUrl(width);
+
+    return (
+        <footer className="footer footer-alt">
+            <p className="text-muted">
+                <Link to={url} className="text-muted ms-1 py-2 ">
+                    <b className="text-white" style={{fontSize:'xx-large',marginTop:'2rem'}}>{'Iniciar Sesión'}</b>
+                </Link>
+            </p>
+        </footer>
+    );
+};
+
+const Logout = () => {
+    const [redirect] = useState(false);
+    //const navigate = useNavigate();
+
+    useEffect(() => {
+        if (redirect) {
+            setTimeout(() => {
+						localStorage.removeItem('authToken');
+						localStorage.removeItem('userData');
+						localStorage.removeItem('userPermisos');
+						localStorage.removeItem('userMenu');
+						localStorage.removeItem('Aulas');
+						localStorage.removeItem('Prestamos');
+       
+
+            }, 2000); // 2 segundos después de mostrar el mensaje
+        }
+    }, [redirect]);
+
+    return (
+        <>
+            <AccountWrapper bottomLinks={<BottomLink />}>
+                <div className="my-auto">
+                    <div className="text-center">
+                        <h4 className="mt-0">{'Hasta pronto!'}</h4>
+                        <p className="text-muted mb-4">{'Cerrando sesión...'}</p>
+                        <p className="text-muted">{'Gracias por usar nuestro sistema'}</p>
+                    </div>
+                    <div className="logout-icon m-auto">
+                        <svg
+                            version="1.1"
+                            id="Layer_1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                            x="0px"
+                            y="0px"
+                            viewBox="0 0 161.2 161.2"
+                            enableBackground="new 0 0 161.2 161.2"
+                            xmlSpace="preserve"
+                            style={{ width: '100px', height: '100px' }}>
+                            <path
+                                className="path"
+                                fill="none"
+                                stroke="#0acf97"
+                                strokeMiterlimit={10}
+                                d="M425.9,52.1L425.9,52.1c-2.2-2.6-6-2.6-8.3-0.1l-42.7,46.2l-14.3-16.4 c-2.3-2.7-6.2-2.7-8.6-0.1c-1.9,2.1-2,5.6-0.1,7.7l17.6,20.3c0.2,0.3,0.4,0.6,0.6,0.9c1.8,2,4.4,2.5,6.6,1.4c0.7-0.3,1.4-0.8,2-1.5 c0.3-0.3,0.5-0.6,0.7-0.9l46.3-50.1C427.7,57.5,427.7,54.2,425.9,52.1z"
+                            />
+                            <circle
+                                className="path"
+                                fill="none"
+                                stroke="#0acf97"
+                                strokeWidth={4}
+                                strokeMiterlimit={10}
+                                cx="80.6"
+                                cy="80.6"
+                                r="62.1"
+                            />
+                            <polyline
+                                className="path"
+                                fill="none"
+                                stroke="#0acf97"
+                                strokeWidth={6}
+                                strokeLinecap="round"
+                                strokeMiterlimit={10}
+                                points="113,52.8 74.1,108.4 48.2,86.4 "
+                            />
+                            <circle
+                                className="spin"
+                                fill="none"
+                                stroke="#0acf97"
+                                strokeWidth={4}
+                                strokeMiterlimit={10}
+                                strokeDasharray="12.2175,12.2175"
+                                cx="80.6"
+                                cy="80.6"
+                                r="73.9"
+                            />
+                        </svg>
+                    </div>
+                </div>
+            </AccountWrapper>
+        </>
+    );
+};
+
+export default Logout;
